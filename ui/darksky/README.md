@@ -93,7 +93,7 @@ entity_summary_3: sensor.dark_sky_summary_3
 entity_summary_4: sensor.dark_sky_summary_4
 entity_summary_5: sensor.dark_sky_summary_5
 tooltips: true
-animated_icons: true
+static_icons: true
 ~~~~
 
 **Flags**
@@ -101,6 +101,6 @@ animated_icons: true
 | Flag            | Values           | Usage                                                             |
 |-----------------|------------------|-------------------------------------------------------------------|
 | tooltips        | true / **false** | Enables tooltips that show daily forecast summary                 |
-| animated_icons  | true / **false** | Switches between animated (true) and static (false) icons         |
+| static_icons    | true / **false** | Switches between animated (true) and static (false) icons         |
 |                 |                  |                                                    |
 
