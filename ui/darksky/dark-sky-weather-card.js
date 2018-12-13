@@ -120,7 +120,7 @@ class DarkSkyWeatherCard extends HTMLElement {
 //  Configuration Flag assignments
     var fcastclass = this.config.tooltips ? "day fcasttooltip" : "day"
     var tooltip = this.config.tooltips ? `` : ""
-    var icons = this.config.animated_icons ? "animated" : "static"
+    var icons = this.config.static_icons ? "static" : "animated"
 
 //  Card HTML
     this.content.innerHTML = `
