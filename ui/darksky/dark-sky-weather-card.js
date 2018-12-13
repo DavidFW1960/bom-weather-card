@@ -117,9 +117,14 @@ class DarkSkyWeatherCard extends HTMLElement {
 
 		const forecast = [forecast1,forecast2,forecast3,forecast4,forecast5];
 
+//  Configuration Flag assignments
+    var fcastclass = this.config.tooltips ? "day fcasttooltip" : "day"
+    var tooltip = this.config.tooltips ? `` : ""
+    var icons = this.config.animated_icons ? "animated" : "static"
 
+//  Card HTML
     this.content.innerHTML = `
-      <span class="icon bigger" style="background: none, url(/local/icons/weather_icons/animated/${weatherIcons[currentConditions]}.svg) no-repeat; background-size: contain;">${currentConditions}</span>
+      <span class="icon bigger" style="background: none, url(/local/icons/weather_icons/${icons}/${weatherIcons[currentConditions]}.svg) no-repeat; background-size: contain;">${currentConditions}</span>
       <span class="temp">${temperature}</span><span class="tempc"> ${getUnit('temperature')}</span>
       <span>
         <ul class="variations right">
@@ -133,12 +138,12 @@ class DarkSkyWeatherCard extends HTMLElement {
       </span>
       <div class="forecast clear">
           ${forecast.map(daily => `
-              <div class="day fcasttooltip">
+              <div class="${fcastclass}">
                   <span class="dayname">${(daily.date).toString().split(' ')[0]}</span>
-                  <br><i class="icon" style="background: none, url(/local/icons/weather_icons/animated/${weatherIcons[hass.states[daily.condition].state]}.svg) no-repeat; background-size: contain;"></i>
+                  <br><i class="icon" style="background: none, url(/local/icons/weather_icons/${icons}/${weatherIcons[hass.states[daily.condition].state]}.svg) no-repeat; background-size: contain;"></i>
                   <br><span class="highTemp">${Math.round(hass.states[daily.temphigh].state)}${getUnit('temperature')}</span>
                   <br><span class="lowTemp">${Math.round(hass.states[daily.templow].state)}${getUnit('temperature')}</span>
-                  <span class="fcasttooltiptext">${hass.states[daily.summary].state}</span>
+                  <span class="fcasttooltiptext">${ this.config.tooltips ? hass.states[daily.summary].state : ""}</span>
               </div>`).join('')}
       </div>
         <br><span class="unit">${hass.states[this.config.entity_daily_summary].state}</span></br>`;
