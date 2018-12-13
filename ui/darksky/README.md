@@ -10,7 +10,7 @@ the card's capabilities through configuration flags.
 (this is your first custom card), you will need to create the directories.
 
 2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in **www/icons/weather_icons**.  Create 
-the directories if necessary.  You should end up with an **animated** directory and a **static** directory inside the **weather_icons** directory.
+the directories if necessary. You should end up with an **animated** directory and a **static** directory inside the **weather_icons** directory.
 
 **Configuration**
 ------------------------------
