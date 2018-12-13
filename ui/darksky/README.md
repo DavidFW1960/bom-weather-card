@@ -101,6 +101,6 @@ static_icons: true
 | Flag            | Values           | Usage                                                             |
 |-----------------|------------------|-------------------------------------------------------------------|
 | tooltips        | true / **false** | Enables tooltips that show daily forecast summary                 |
-| static_icons    | true / **false** | Switches between animated (true) and static (false) icons         |
+| static_icons    | true / **false** | Switches between static (true) and animated (false) icons         |
 |                 |                  |                                                    |
 
