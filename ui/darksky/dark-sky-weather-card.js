@@ -81,7 +81,7 @@ class DarkSkyWeatherCard extends HTMLElement {
     var forecastDate5 = new Date();
     forecastDate5.setDate(forecastDate5.getDate()+5);
     
-    
+
     const currentConditions = hass.states[this.config.entity_current_conditions].state;
     const humidity = hass.states[this.config.entity_humidity].state;
     const pressure = Math.round(hass.states[this.config.entity_pressure].state);
@@ -129,7 +129,7 @@ class DarkSkyWeatherCard extends HTMLElement {
       sunLeft = `<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span>${nextSunSet}</li>`;
       sunRight = `<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-up"></ha-icon></span>${nextSunRise}</li>`;
     } else {
-      if (new Date().getDate() != nextSunRise.getDate()) {
+      if (new Date().getDate() != new Date(hass.states[this.config.entity_sun].attributes.next_rising).getDate()) {
         nextSunRise = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunRise;
         nextSunSet = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunSet;
       } 
