@@ -6,11 +6,11 @@ the card's capabilities through configuration flags.
 
 **Installation**
 ------------------------------
-1. Add **dark-sky-weather-card.js** and **dark-sky-weather-card.css** to your **www\custom_ui\** directory.  If you don't have one of these 
+1. Add **dark-sky-weather-card.js** and **dark-sky-weather-card.css** to your **www/custom_ui/** directory.  If you don't have one of these 
 (this is your first custom card), you will need to create the directories.
 
-2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in **www\icons\weather_icons**.  Create 
-the directories if necessary.  You should end up with an **animated** directory and a **static** directory inside the **weather_icons** directory.
+2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in **www/icons/weather_icons**.  Create 
+the directories if necessary. You should end up with an **animated** directory and a **static** directory inside the **weather_icons** directory.
 
 **Configuration**
 ------------------------------
@@ -93,7 +93,7 @@ entity_summary_3: sensor.dark_sky_summary_3
 entity_summary_4: sensor.dark_sky_summary_4
 entity_summary_5: sensor.dark_sky_summary_5
 tooltips: true
-animated_icons: true
+static_icons: true
 ~~~~
 
 **Flags**
@@ -101,6 +101,6 @@ animated_icons: true
 | Flag            | Values           | Usage                                                             |
 |-----------------|------------------|-------------------------------------------------------------------|
 | tooltips        | true / **false** | Enables tooltips that show daily forecast summary                 |
-| animated_icons  | true / **false** | Switches between animated (true) and static (false) icons         |
+| static_icons    | true / **false** | Switches between static (true) and animated (false) icons         |
 |                 |                  |                                                    |
 
