@@ -94,6 +94,8 @@ entity_summary_4: sensor.dark_sky_summary_4
 entity_summary_5: sensor.dark_sky_summary_5
 tooltips: true
 static_icons: true
+sunset: true
+locale: en
 ~~~~
 
 **Flags**
