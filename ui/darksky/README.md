@@ -102,5 +102,5 @@ static_icons: true
 |-----------------|------------------|-------------------------------------------------------------------|
 | tooltips        | true / **false** | Enables tooltips that show daily forecast summary                 |
 | static_icons    | true / **false** | Switches between static (true) and animated (false) icons         |
-|                 |                  |                                                    |
-
+| sunset          | true / **false** | Enables display of sunset and sunrise indicators                  |
+| locale          | **en** / fr / de / it / etc. | Sets locale display of day names and time formats     |
