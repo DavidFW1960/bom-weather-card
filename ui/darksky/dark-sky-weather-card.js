@@ -117,11 +117,33 @@ class DarkSkyWeatherCard extends HTMLElement {
 
 		const forecast = [forecast1,forecast2,forecast3,forecast4,forecast5];
 
+// Sun set and rise
+    var nextSunSet = new Date(hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
+    var nextSunRise = new Date(hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
+    var sunLeft;
+    var sunRight;
+    var nextDate = new Date();
+    nextDate.setDate(nextDate.getDate() + 1);
+    if ( hass.states[this.config.entity_sun].state == "above_horizon" ) {
+      nextSunRise = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunRise;
+      sunLeft = `<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span>${nextSunSet}</li>`;
+      sunRight = `<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-up"></ha-icon></span>${nextSunRise}</li>`;
+    } else {
+      if (new Date().getDate() != nextSunRise.getDate()) {
+        nextSunRise = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunRise;
+        nextSunSet = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunSet;
+      } 
+      sunLeft = `<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-up"></ha-icon></span>${nextSunRise}</li>`;
+      sunRight = `<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span>${nextSunSet}</li>`;
+    }
+
+
 //  Configuration Flag assignments
     var fcastclass = this.config.tooltips ? "day fcasttooltip" : "day"
-    var tooltip = this.config.tooltips ? `` : ""
     var icons = this.config.static_icons ? "static" : "animated"
-
+    sunLeft = this.config.sunset ? sunLeft : "";
+    sunRight = this.config.sunset ? sunRight : "";
+    
 //  Card HTML
     this.content.innerHTML = `
       <span class="icon bigger" style="background: none, url(/local/icons/weather_icons/${icons}/${weatherIcons[currentConditions]}.svg) no-repeat; background-size: contain;">${currentConditions}</span>
@@ -130,16 +152,18 @@ class DarkSkyWeatherCard extends HTMLElement {
         <ul class="variations right">
             <li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span>${humidity}<span class="unit"> %</span></li>
             <li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span>${pressure}<span class="unit"> ${getUnit('air_pressure')}</span></li>
+            ${sunRight}
         </ul>
         <ul class="variations">
             <li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span>${windBearing} ${windSpeed}<span class="unit"> ${getUnit('length')}/h</span></li>
             <li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span>${visibility}<span class="unit"> ${getUnit('length')}</span></li>
+            ${sunLeft}
         </ul>
       </span>
       <div class="forecast clear">
           ${forecast.map(daily => `
               <div class="${fcastclass}">
-                  <span class="dayname">${(daily.date).toString().split(' ')[0]}</span>
+                  <span class="dayname">${(daily.date).toLocaleDateString(this.config.locale,{weekday: 'short'})}</span>
                   <br><i class="icon" style="background: none, url(/local/icons/weather_icons/${icons}/${weatherIcons[hass.states[daily.condition].state]}.svg) no-repeat; background-size: contain;"></i>
                   <br><span class="highTemp">${Math.round(hass.states[daily.temphigh].state)}${getUnit('temperature')}</span>
                   <br><span class="lowTemp">${Math.round(hass.states[daily.templow].state)}${getUnit('temperature')}</span>
