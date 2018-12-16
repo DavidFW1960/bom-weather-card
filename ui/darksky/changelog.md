@@ -1,3 +1,6 @@
+# 0.2.3
+- Updated dark-sky-animated-weather.css file to align the color scheme of the tooltips with the icon colors.
+
 # 0.2.2
 - Fixed bug in Sunrise / Sunset code where invalid onject as calling getDate
 
