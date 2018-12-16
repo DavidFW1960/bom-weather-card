@@ -50,7 +50,7 @@ class DarkSkyWeatherCard extends HTMLElement {
       'exceptional': '!!',
     }
 
-    const windDirections = [
+    const windDirections_en = [
       'N',
       'NNE',
       'NE',
@@ -69,7 +69,60 @@ class DarkSkyWeatherCard extends HTMLElement {
       'NNW',
       'N'
     ];
+
+    const windDirections_fr = [
+      'N',
+      'NNE',
+      'NE',
+      'ENE',
+      'E',
+      'ESE',
+      'SE',
+      'SSE',
+      'S',
+      'SSO',
+      'SO',
+      'OSO',
+      'O',
+      'ONO',
+      'NO',
+      'NNO',
+      'N'
+    ];
+
+    const windDirections_de = [
+      'N',
+      'NNO',
+      'NO',
+      'ONO',
+      'O',
+      'OSO',
+      'SO',
+      'SSO',
+      'S',
+      'SSW',
+      'SW',
+      'WSW',
+      'W',
+      'WNW',
+      'NW',
+      'NNW',
+      'N'
+    ];
     
+    var windDirections;
+    switch (this.config.locale) {
+      case "it" :
+      case "fr" :
+        windDirections = windDirections_fr;
+        break;
+      case "de" :
+        windDirections = windDirections_de;
+        break;
+      default :
+        windDirections = windDirections_en;
+    }
+        
     var forecastDate1 = new Date();
     forecastDate1.setDate(forecastDate1.getDate()+1);
     var forecastDate2 = new Date();
@@ -139,11 +192,12 @@ class DarkSkyWeatherCard extends HTMLElement {
 
 
 //  Configuration Flag assignments
-    var fcastclass = this.config.tooltips ? "day fcasttooltip" : "day"
-    var icons = this.config.static_icons ? "static" : "animated"
+    var fcastclass = this.config.tooltips ? "day fcasttooltip" : "day";
+    var icons = this.config.static_icons ? "static" : "animated";
     sunLeft = this.config.sunset ? sunLeft : "";
     sunRight = this.config.sunset ? sunRight : "";
     
+
 //  Card HTML
     this.content.innerHTML = `
       <span class="icon bigger" style="background: none, url(/local/icons/weather_icons/${icons}/${weatherIcons[currentConditions]}.svg) no-repeat; background-size: contain;">${currentConditions}</span>
@@ -171,8 +225,11 @@ class DarkSkyWeatherCard extends HTMLElement {
               </div>`).join('')}
       </div>
         <br><span class="unit">${hass.states[this.config.entity_daily_summary].state}</span></br>`;
-  }
 
+  }
+  
+   
+   
   setConfig(config) {
     if (!config.entity_current_conditions || 
     		!config.entity_humidity ||
@@ -188,6 +245,9 @@ class DarkSkyWeatherCard extends HTMLElement {
 
   // @TODO: This requires more intelligent logic
   getCardSize() {
+    
+//    alert("In getCardize");
+    
     return 3;
   }
 }
