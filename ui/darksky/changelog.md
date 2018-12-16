@@ -1,3 +1,6 @@
+# 0.3.1
+- added localization for wind direction.  Currently available for en, fr, it and de locales.
+
 # 0.2.3
 - Updated dark-sky-animated-weather.css file to align the color scheme of the tooltips with the icon colors.
 
