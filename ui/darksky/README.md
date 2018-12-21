@@ -6,8 +6,8 @@ the card's capabilities through configuration flags.
 
 **Installation**
 ------------------------------
-1. Add **dark-sky-weather-card.js** and **dark-sky-weather-card.css** to your **www/custom_ui/** directory.  If you don't have one of these 
-(this is your first custom card), you will need to create the directories.
+1. Add **dark-sky-weather-card.js** to your **www/custom_ui/** directory.  If you don't have this directory (this is your first
+custom card), you will need to create it.
 
 2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in **www/icons/weather_icons**.  Create 
 the directories if necessary. You should end up with an **animated** directory and a **static** directory inside the **weather_icons** directory.
@@ -53,14 +53,18 @@ the directories if necessary. You should end up with an **animated** directory a
       minutes: 5
 ~~~~
 
-2. Add the card reference to the top of your ui-lovelace.yaml file.  Make sure to increase the v= number each time you update the dark-sky-weather-card.js file.
+The next two steps are completed differently based on the version of HA you are using:
+- Pre 0.84 or if using yaml mode in 0.84 or above : Add to your ui-lovelace.yaml file.
+- Using storage mode in 0.84 or above use the "Raw Config Editor" to add the reference and definition to the config.
+
+2. Add the card reference at the top of the configuration
 ~~~~
 resources:
   - url: /local/custom_ui/dark-sky-weather-card.js?v=7.1
-    type: js
+    type: module
 ~~~~
 
-3. Add the card definition to your ui-lovelace.yaml file
+3. Add the card definition:
 ~~~~
 type: custom:dark-sky-weather-card
 entity_sun: sun.sun
@@ -92,17 +96,31 @@ entity_summary_2: sensor.dark_sky_summary_2
 entity_summary_3: sensor.dark_sky_summary_3
 entity_summary_4: sensor.dark_sky_summary_4
 entity_summary_5: sensor.dark_sky_summary_5
-tooltips: true
-static_icons: true
-sunset: true
 locale: en
+static_icons: false
+sunset: true
+tooltips: true
+tooltip_bg_color: 'rgb( 75,155,239)'
+tooltip_border_color: orange
+tooltip_border_width: 3
+tooltip_caret_size: 10
+tooltip_fg_color: '#fff'
+tooltip_left_offset: -5
+tooltip_width: 100
 ~~~~
 
 **Flags**
 --------------------------
-| Flag            | Values           | Usage                                                             |
-|-----------------|------------------|-------------------------------------------------------------------|
-| tooltips        | true / **false** | Enables tooltips that show daily forecast summary                 |
-| static_icons    | true / **false** | Switches between static (true) and animated (false) icons         |
-| sunset          | true / **false** | Enables display of sunset and sunrise indicators                  |
-| locale          | **en** / fr / de / it / etc. | Sets locale display of day names and time formats     |
+| Flag                 | Values                       | Usage                                                                         |
+|----------------------|------------------------------|-------------------------------------------------------------------------------|
+| locale               | **en** / fr / de / it / etc. | Sets locale display of day names and time formats                             |
+| static_icons         | true / **false**             | Switches between static (true) and animated (false) icons                     |
+| sunset               | true / **false**             | Enables display of sunset and sunrise indicators                              |
+| tooltips             | true / **false**             | Enables tooltips that show daily forecast summary                             |
+| tooltip_width        | **110**                      | Sets the width of the tooltip in px                                           |
+| tooltip_bg_color     | **rgb( 75,155,239)**         | Sets the background color of the tooltip (rgb / # / color)                    |
+| tooltip_fg_color     | **#fff**                     | Sets the foreground color of the tooltip                                      |
+| tooltip_border_color | **rgb(255,161,0)**           | Sets the color of the tooltip border including the caret                      |
+| tooltip_border_width | **1**                        | Sets the width of the tooltip border in px                                    |
+| tooltip_caret_size   | **5**                        | Sets the size of the caret (the little arrowoe pointing down) in px           |
+| tooltip_left_offset  | **-12**                      | Sets the offset of the left edge of the tooltip. Specified in negative (-) px |
