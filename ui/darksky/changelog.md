@@ -1,6 +1,6 @@
 # 0.4.1
 - Refactored card to use LitElement instead fo HTMLElement
-- Moved all CSS style entries into card .js file.  .css file is no longer needed
+- Moved all CSS style entries into card .js file  .css file is no longer needed
 - Added config entries for styling tooltips
 
 # 0.3.1
