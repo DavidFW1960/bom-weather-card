@@ -119,8 +119,8 @@ tooltip_width: 100
 | tooltips             | true / **false**             | Enables tooltips that show daily forecast summary                             |
 | tooltip_width        | **110**                      | Sets the width of the tooltip in px                                           |
 | tooltip_bg_color     | **rgb( 75,155,239)**         | Sets the background color of the tooltip (rgb / # / color)                    |
-| tooltip_fg_color     | **#fff**                     | Sets the foreground color of the tooltip                                      |
-| tooltip_border_color | **rgb(255,161,0)**           | Sets the color of the tooltip border including the caret                      |
+| tooltip_fg_color     | **#fff**                     | Sets the foreground color of the tooltip (rgb / # / color)                    |
+| tooltip_border_color | **rgb(255,161,0)**           | Sets the color of the tooltip border including the caret (rgb / # / color)    |
 | tooltip_border_width | **1**                        | Sets the width of the tooltip border in px                                    |
-| tooltip_caret_size   | **5**                        | Sets the size of the caret (the little arrowoe pointing down) in px           |
+| tooltip_caret_size   | **5**                        | Sets the size of the caret (the little arrow pointing down) in px             |
 | tooltip_left_offset  | **-12**                      | Sets the offset of the left edge of the tooltip. Specified in negative (-) px |
