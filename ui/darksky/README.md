@@ -66,7 +66,7 @@ resources:
 
 3. Add the card definition:  There are required / optional and flag entries.  
 
-Required entries must be presnt 
+Required entries must be present 
 in your configuration.  The card will not work at all if any of these lines are missing. 
 ~~~~
 type: 'custom:dark-sky-weather-card'
