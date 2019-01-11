@@ -57,7 +57,7 @@ The next two steps are completed differently based on the version of HA you are 
 - Pre 0.84 or if using yaml mode in 0.84 or above : Add to your ui-lovelace.yaml file.
 - Using storage mode in 0.84 or above use the "Raw Config Editor" to add the reference and definition to the config.
 
-2. Add the card reference at the top of the configuration ***Note the use of type: module and not js)
+2. Add the card reference at the top of the configuration ***Note the use of type: module and not js
 ~~~~
 resources:
   - url: /local/custom_ui/dark-sky-weather-card.js?v=7.1
