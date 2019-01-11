@@ -209,7 +209,7 @@ class DarkSkyWeatherCard extends LitElement {
 
   get current() {
     var conditions = this.hass.states[this.config.entity_current_conditions].state;
-    var humidity = this.config.entity_apparent_humidity ? this.hass.states[this.config.entity_humidity].state : 0;
+    var humidity = this.config.entity_humidity ? this.hass.states[this.config.entity_humidity].state : 0;
     var pressure = this.config.entity_pressure ? Math.round(this.hass.states[this.config.entity_pressure].state) : 0;
     var temperature = Math.round(this.hass.states[this.config.entity_temperature].state);
     var visibility = this.config.entity_visibility ? this.hass.states[this.config.entity_visibility].state : 0;
