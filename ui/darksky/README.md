@@ -144,4 +144,4 @@ old_daily_format: false
 | tooltip_border_width | **1**                        | Sets the width of the tooltip border in px                                    |
 | tooltip_caret_size   | **5**                        | Sets the size of the caret (the little arrow pointing down) in px             |
 | tooltip_left_offset  | **-12**                      | Sets the offset of the left edge of the tooltip. Specified in negative (-) px |
-| old_daily_format     | true / **false**             | Sets the format of the daily forecast high & low temps to be above and below  |
+| old_daily_format     | true / **false**             | Sets the format of the daily high & low temps to be stacked (old format)      |
