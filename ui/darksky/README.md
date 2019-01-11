@@ -57,7 +57,7 @@ The next two steps are completed differently based on the version of HA you are 
 - Pre 0.84 or if using yaml mode in 0.84 or above : Add to your ui-lovelace.yaml file.
 - Using storage mode in 0.84 or above use the "Raw Config Editor" to add the reference and definition to the config.
 
-2. Add the card reference at the top of the configuration
+2. Add the card reference at the top of the configuration ***Note the use of type: module and not js
 ~~~~
 resources:
   - url: /local/custom_ui/dark-sky-weather-card.js?v=7.1
@@ -66,7 +66,7 @@ resources:
 
 3. Add the card definition:  There are required / optional and flag entries.  
 
-Required entries must be presnt 
+Required entries must be present 
 in your configuration.  The card will not work at all if any of these lines are missing. 
 ~~~~
 type: 'custom:dark-sky-weather-card'
@@ -144,4 +144,4 @@ old_daily_format: false
 | tooltip_border_width | **1**                        | Sets the width of the tooltip border in px                                    |
 | tooltip_caret_size   | **5**                        | Sets the size of the caret (the little arrow pointing down) in px             |
 | tooltip_left_offset  | **-12**                      | Sets the offset of the left edge of the tooltip. Specified in negative (-) px |
-| old_daily_format     | true / **false**             | Sets the format of the daily forecast high & low temps to be above and below  |
+| old_daily_format     | true / **false**             | Sets the format of the daily high & low temps to be stacked (old format)      |
