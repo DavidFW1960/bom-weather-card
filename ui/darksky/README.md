@@ -64,49 +64,70 @@ resources:
     type: module
 ~~~~
 
-3. Add the card definition:
+3. Add the card definition:  There are required / optional and flag entries.  
+
+Required entries must be presnt 
+in your configuration.  The card will not work at all if any of these lines are missing. 
 ~~~~
-type: custom:dark-sky-weather-card
-entity_sun: sun.sun
-entity_daily_summary: sensor.dark_sky_daily_summary
+type: 'custom:dark-sky-weather-card'
 entity_current_conditions: sensor.dark_sky_icon
-entity_humidity: sensor.dark_sky_humidity
-entity_pressure: sensor.dark_sky_pressure
 entity_temperature: sensor.dark_sky_temperature
-entity_visibility: sensor.dark_sky_visibility
-entity_wind_bearing: sensor.dark_sky_wind_bearing
-entity_wind_speed: sensor.dark_sky_wind_speed
 entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1
 entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2
 entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3
 entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4
 entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5
-entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_0
-entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1
-entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2
-entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3
-entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4
 entity_forecast_icon_1: sensor.dark_sky_icon_1
 entity_forecast_icon_2: sensor.dark_sky_icon_2
 entity_forecast_icon_3: sensor.dark_sky_icon_3
 entity_forecast_icon_4: sensor.dark_sky_icon_4
 entity_forecast_icon_5: sensor.dark_sky_icon_5
+entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_0
+entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1
+entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2
+entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3
+entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4
 entity_summary_1: sensor.dark_sky_summary_1
 entity_summary_2: sensor.dark_sky_summary_2
 entity_summary_3: sensor.dark_sky_summary_3
 entity_summary_4: sensor.dark_sky_summary_4
 entity_summary_5: sensor.dark_sky_summary_5
+~~~~
+
+Optional entries add components to the card. 
+***Please note entity_pop_1 to 5 lines must all be included for daily pop (probability of precip) to show in forecast
+~~~~
+entity_sun: sun.sun
+entity_visibility: sensor.dark_sky_visibility
+entity_daytime_high: sensor.dark_sky_daytime_high_temperature_0
+entity_wind_bearing: sensor.dark_sky_wind_bearing
+entity_wind_speed: sensor.dark_sky_wind_speed
+entity_humidity: sensor.dark_sky_humidity
+entity_pressure: sensor.dark_sky_pressure
+entity_apparent_temp: sensor.dark_sky_apparent_temperature
+entity_daily_summary: sensor.dark_sky_daily_summary
+entity_pop: sensor.dark_sky_precip_probability
+entity_pop_1: sensor.dark_sky_precip_probability_1
+entity_pop_2: sensor.dark_sky_precip_probability_2
+entity_pop_3: sensor.dark_sky_precip_probability_3
+entity_pop_4: sensor.dark_sky_precip_probability_4
+entity_pop_5: sensor.dark_sky_precip_probability_5
+~~~~
+
+Flags are used to control the look and feel of the card (See below for details)
+~~~~
 locale: en
 static_icons: false
 sunset: true
-tooltips: true
 tooltip_bg_color: 'rgb( 75,155,239)'
 tooltip_border_color: orange
 tooltip_border_width: 3
 tooltip_caret_size: 10
 tooltip_fg_color: '#fff'
-tooltip_left_offset: -5
+tooltip_left_offset: -12
 tooltip_width: 100
+tooltips: true
+old_daily_format: false
 ~~~~
 
 **Flags**
@@ -115,7 +136,6 @@ tooltip_width: 100
 |----------------------|------------------------------|-------------------------------------------------------------------------------|
 | locale               | **en** / fr / de / it / etc. | Sets locale display of day names and time formats                             |
 | static_icons         | true / **false**             | Switches between static (true) and animated (false) icons                     |
-| sunset               | true / **false**             | Enables display of sunset and sunrise indicators                              |
 | tooltips             | true / **false**             | Enables tooltips that show daily forecast summary                             |
 | tooltip_width        | **110**                      | Sets the width of the tooltip in px                                           |
 | tooltip_bg_color     | **rgb( 75,155,239)**         | Sets the background color of the tooltip (rgb / # / color)                    |
@@ -124,3 +144,4 @@ tooltip_width: 100
 | tooltip_border_width | **1**                        | Sets the width of the tooltip border in px                                    |
 | tooltip_caret_size   | **5**                        | Sets the size of the caret (the little arrow pointing down) in px             |
 | tooltip_left_offset  | **-12**                      | Sets the offset of the left edge of the tooltip. Specified in negative (-) px |
+| old_daily_format     | true / **false**             | Sets the format of the daily forecast high & low temps to be above and below  |

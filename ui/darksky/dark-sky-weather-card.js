@@ -17,8 +17,16 @@ class DarkSkyWeatherCard extends LitElement {
 
 //  Handle Configuration Flags 
     var icons = this.config.static_icons ? "static" : "animated";
-    var sunLeft = this.config.sunset ? this.sunSet.left : "";
-    var sunRight = this.config.sunset ? this.sunSet.right : "";
+    var sunLeft = this.config.entity_sun ? this.sunSet.left : "";
+    var sunRight = this.config.entity_sun ? this.sunSet.right : "";
+    var apparentTemp =  this.config.entity_apparent_temp ? html`<span class="apparent">${this.feelsLikeText} ${this.current.apparent} ${this.getUOM("temperature")}</span>` : ``;
+    var daytimeHigh = this.config.entity_daytime_high ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer"></ha-icon></span>${Math.round(this.hass.states[this.config.entity_daytime_high].state)}<span> ${this.getUOM('temperature')}</span></li>` : ``;
+    var pop = this.config.entity_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${Math.round(this.hass.states[this.config.entity_pop].state)} %</li>` : ``;
+    var visibility = this.config.entity_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span>${this.current.visibility}<span class="unit"> ${this.getUOM('length')}</span></li>` : ``;
+    var windBearing = this.config.entity_wind_bearing && this.config.entity_wind_speed ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span>${this.current.windBearing} ${this.current.windSpeed}<span class="unit"> ${this.getUOM('length')}/h</span></li>` : ``;
+    var humidity = this.config.entity_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span>${this.current.humidity}<span class="unit"> %</span></li>` : ``;
+    var pressure = this.config.entity_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span>${this.current.pressure}<span class="unit"> ${this.getUOM('air_pressure')}</span></li>` : ``;
+    var summary = this.config.entity_daily_summary ? html`<br><span class="unit">${hass.states[this.config.entity_daily_summary].state}</span></br>` : ``;
 
 // Build HTML    
     return html`
@@ -28,15 +36,18 @@ class DarkSkyWeatherCard extends LitElement {
       <ha-card class = "card">  
         <span class="icon bigger" style="background: none, url(/local/icons/weather_icons/${icons}/${this.weatherIcons[this.current.conditions]}.svg) no-repeat; background-size: contain;">${this.current.conditions}</span>
         <span class="temp">${this.current.temperature}</span><span class="tempc">${this.getUOM('temperature')}</span>
+        ${apparentTemp}
         <span>
           <ul class="variations right">
-              <li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span>${this.current.humidity}<span class="unit"> %</span></li>
-              <li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span>${this.current.pressure}<span class="unit"> ${this.getUOM('air_pressure')}</span></li>
+              ${pop}
+              ${humidity}
+              ${pressure}
               ${sunRight}
           </ul>
           <ul class="variations">
-              <li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span>${this.current.windBearing} ${this.current.windSpeed}<span class="unit"> ${this.getUOM('length')}/h</span></li>
-              <li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span>${this.current.visibility}<span class="unit"> ${this.getUOM('length')}</span></li>
+              ${daytimeHigh} 
+              ${windBearing}
+              ${visibility}
               ${sunLeft}
           </ul>
         </span>
@@ -45,12 +56,14 @@ class DarkSkyWeatherCard extends LitElement {
                 <div class="day fcasttooltip">
                   <span class="dayname">${(daily.date).toLocaleDateString(this.config.locale,{weekday: 'short'})}</span>
                   <br><i class="icon" style="background: none, url(/local/icons/weather_icons/${icons}/${this.weatherIcons[this.hass.states[daily.condition].state]}.svg) no-repeat; background-size: contain;"></i>
-                  <br><span class="highTemp">${Math.round(this.hass.states[daily.temphigh].state)}${this.getUOM('temperature')}</span>
-                  <br><span class="lowTemp">${Math.round(this.hass.states[daily.templow].state)}${this.getUOM('temperature')}</span>
+                  ${this.config.old_daily_format ? html`<br><span class="highTemp">${Math.round(this.hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>
+                                                        <br><span class="lowTemp">${Math.round(this.hass.states[daily.templow].state)}${this.getUOM("temperature")}</span>` : 
+                                                   html`<br><span class="lowTemp">${Math.round(this.hass.states[daily.templow].state)}</span> / <span class="highTemp">${Math.round(this.hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>`}
+                  ${this.config.entity_pop_1 && this.config.entity_pop_2 && this.config.entity_pop_3 && this.config.entity_pop_4 && this.config.entity_pop_5 ? html`<br><span class="pop">${Math.round(this.hass.states[daily.pop].state)} %</span>` : ``}
                   <div class="fcasttooltiptext">${ this.config.tooltips ? this.hass.states[daily.summary].state : ""}</div>
                 </div>`)}
               </div>
-        <br><span class="unit">${hass.states[this.config.entity_daily_summary].state}</span></br>
+        ${summary}
       </ha-card>
     `;
   }
@@ -64,18 +77,45 @@ class DarkSkyWeatherCard extends LitElement {
     const windDirections_en = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'];
     const windDirections_fr = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO','N'];
     const windDirections_de = ['N','NNO','NO','ONO','O','OSO','SO','SSO','S','SSW','SW','WSW','W','WNW','NW','NNW','N'];
+    const windDirections_nl = ['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW','N'];
+    
     switch (this.config.locale) {
       case "it" :
       case "fr" :
         return windDirections_fr;
       case "de" :
         return windDirections_de;
+      case "nl" :
+        return windDirections_nl;
       default :
         return windDirections_en;
     }
   }
 
+// #####
+// ##### feelsLikeText returns set of possible "Feels Like" text by specified language
+// #####
 
+  get feelsLikeText() {
+    const feelsLike_en = "Feels like";
+    const feelsLike_fr = "Se sent comme";
+    const feelslike_it = "Si sente come";
+    const feelsLike_de = "Fühlt sich an wie";
+    const feelsLike_nl = "Voelt als";
+
+    switch (this.config.locale) {
+      case "it" :
+        return feelslike_it;
+      case "fr" :
+        return feelsLike_fr;
+      case "de" :
+        return feelsLike_de;
+      case "nl" :
+        return feelsLike_nl;
+      default :
+        return feelsLike_en;
+    }
+  }
   
 // #####
 // ##### dayOrNight : returns day or night depending opn the position of the sun.
@@ -105,7 +145,7 @@ class DarkSkyWeatherCard extends LitElement {
       'hail': 'rainy-7',
       'lightning': 'thunder',
       'thunderstorm': 'thunder',
-      'windy-variant': `cloudy-${this.dayOrNight}-3`,
+      'windy-variant': `cloudy-day-3`,
       'exceptional': '!!',
     }
   }
@@ -131,27 +171,32 @@ class DarkSkyWeatherCard extends LitElement {
     const forecast1 = { date: forecastDate1,
   	                  condition: this.config.entity_forecast_icon_1,
   										temphigh: this.config.entity_forecast_high_temp_1,
-  										templow:  this.config.entity_forecast_low_temp_1, 
+  										templow:  this.config.entity_forecast_low_temp_1,
+  										pop: this.config.entity_pop_1,
   										summary: this.config.entity_summary_1, };
     const forecast2 = { date: forecastDate2,
   	                  condition: this.config.entity_forecast_icon_2,
   										temphigh: this.config.entity_forecast_high_temp_2,
   										templow:  this.config.entity_forecast_low_temp_2,
+  										pop: this.config.entity_pop_2,
   										summary: this.config.entity_summary_2,  };
     const forecast3 = { date: forecastDate3,
   	                  condition: this.config.entity_forecast_icon_3,
   										temphigh: this.config.entity_forecast_high_temp_3,
   										templow:  this.config.entity_forecast_low_temp_3,
+  										pop: this.config.entity_pop_3,
   										summary: this.config.entity_summary_3, };
     const forecast4 = { date: forecastDate4,
   	                  condition: this.config.entity_forecast_icon_4,
   										temphigh: this.config.entity_forecast_high_temp_4,
   										templow:  this.config.entity_forecast_low_temp_4,
+  										pop: this.config.entity_pop_4,
   										summary: this.config.entity_summary_4, };
     const forecast5 = { date: forecastDate5,
   	                  condition: this.config.entity_forecast_icon_5,
   										temphigh: this.config.entity_forecast_high_temp_5,
   										templow:  this.config.entity_forecast_low_temp_5,
+  										pop: this.config.entity_pop_5,
   										summary: this.config.entity_summary_5, };
 
 	  return [forecast1, forecast2, forecast3, forecast4, forecast5];
@@ -164,12 +209,13 @@ class DarkSkyWeatherCard extends LitElement {
 
   get current() {
     var conditions = this.hass.states[this.config.entity_current_conditions].state;
-    var humidity = this.hass.states[this.config.entity_humidity].state;
-    var pressure = Math.round(this.hass.states[this.config.entity_pressure].state);
+    var humidity = this.config.entity_apparent_humidity ? this.hass.states[this.config.entity_humidity].state : 0;
+    var pressure = this.config.entity_pressure ? Math.round(this.hass.states[this.config.entity_pressure].state) : 0;
     var temperature = Math.round(this.hass.states[this.config.entity_temperature].state);
-    var visibility = this.hass.states[this.config.entity_visibility].state;
-    var windBearing = this.windDirections[(Math.round((this.hass.states[this.config.entity_wind_bearing].state / 360) * 16))];
-    var windSpeed = Math.round(this.hass.states[this.config.entity_wind_speed].state);
+    var visibility = this.config.entity_visibility ? this.hass.states[this.config.entity_visibility].state : 0;
+    var windBearing = this.config.entity_wind_bearing ? this.windDirections[(Math.round((this.hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
+    var windSpeed = this.config.entity_wind_speed ? Math.round(this.hass.states[this.config.entity_wind_speed].state) : 0;
+    var apparent = this.config.entity_apparent_temp ? Math.round(this.hass.states[this.config.entity_apparent_temp].state) : 0;
     
     return {
       'conditions': conditions,
@@ -179,10 +225,10 @@ class DarkSkyWeatherCard extends LitElement {
       'visibility': visibility,
       'windBearing': windBearing,
       'windSpeed': windSpeed,
+      'apparent' : apparent,
     }
   }
 
-  
 // #####
 // ##### sunSetAndRise: returns set and rise information
 // #####
@@ -268,13 +314,26 @@ get style() {
         margin-right: 7px;
       }
 
+      .apparent {
+        color: var(--primary-text-color);
+        position: absolute;
+        right: 1em;
+        margin-top: 35px;
+        margin-right: 1em;
+      }
+      
+      .pop {
+        font-weight: 400;
+        color: var(--primary-text-color);
+      }
+
       .variations {
         display: inline-block;
         font-weight: 300;
         color: var(--primary-text-color);
         list-style: none;
         margin-left: -2em;
-        margin-top: 4.5em;
+        margin-top: 5em;
       }
 
       .variations.right {
@@ -301,8 +360,9 @@ get style() {
         text-align: center;
         color: var(--primary-text-color);
         border-right: .1em solid #d9d9d9;
-        line-height: 2;
+        line-height: 1.5;
         box-sizing: border-box;
+        margin-top: 1em;
       }
 
       .dayname {
