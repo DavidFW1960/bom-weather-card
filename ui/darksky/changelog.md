@@ -1,3 +1,6 @@
+# 0.5.2
+- Corrected invalid humidity value
+
 # 0.5.1
 - Added Dutch (nl) translation for Wind Directions
 - Added Feels Like to current temperature
