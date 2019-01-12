@@ -1,5 +1,5 @@
 # 0.5.3
-- added flag **time_format** : Overrides locale time format with either 12 or 24 hour time.
+- added **time_format** flag : Overrides locale time format with either 12 or 24 hour time.
 
 # 0.5.2
 - Corrected invalid humidity value
