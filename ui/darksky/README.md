@@ -146,4 +146,4 @@ time_format: 24
 | tooltip_caret_size   | **5**                        | Sets the size of the caret (the little arrow pointing down) in px             |
 | tooltip_left_offset  | **-12**                      | Sets the offset of the left edge of the tooltip. Specified in negative (-) px |
 | old_daily_format     | true / **false**             | Sets the format of the daily high & low temps to be stacked (old format)      |
-| time_format          | **12** / 24                  | Sets the format of the daily high & low temps to be stacked (old format)      |
+| time_format          | **locale** / 12 / 24         | Sets the format sunset and sunrise times. locale format is the default.       |
