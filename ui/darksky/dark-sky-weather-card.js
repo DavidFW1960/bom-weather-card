@@ -234,8 +234,9 @@ class DarkSkyWeatherCard extends LitElement {
 // #####
 
 get sunSet() {
-    var nextSunSet = new Date(this.hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
-    var nextSunRise = new Date(this.hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
+    var test = false;
+    var nextSunSet = new Date(this.hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit',hour12: this.is12Hour});
+    var nextSunRise = new Date(this.hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit', hour12: this.is12Hour});
     var sunLeft;
     var sunRight;
     var nextDate = new Date();
@@ -256,6 +257,21 @@ get sunSet() {
       'right': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span>${nextSunSet}</li>`,
       };
     }
+}
+
+
+// #####
+// ##### is12Hour - returns true if 12 hour clock or false if 24
+// #####
+
+get is12Hour() {
+  var hourFormat= this.config.time_format ? this.config.time_format : 12
+  switch (hourFormat) {
+    case 24:
+      return false;
+    default:
+      return true;
+  }
 }
 
 
