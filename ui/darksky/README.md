@@ -106,7 +106,7 @@ entity_humidity: sensor.dark_sky_humidity
 entity_pressure: sensor.dark_sky_pressure
 entity_apparent_temp: sensor.dark_sky_apparent_temperature
 entity_daily_summary: sensor.dark_sky_daily_summary
-entity_pop: sensor.dark_sky_precip_probability
+entity_pop: sensor.dark_sky_precip_probability_0
 entity_pop_1: sensor.dark_sky_precip_probability_1
 entity_pop_2: sensor.dark_sky_precip_probability_2
 entity_pop_3: sensor.dark_sky_precip_probability_3
