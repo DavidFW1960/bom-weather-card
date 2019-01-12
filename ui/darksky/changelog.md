@@ -1,3 +1,6 @@
+# 0.5.3
+- added flag **time_format** : Overrides locale time format with either 12 or 24 hour time.
+
 # 0.5.2
 - Corrected invalid humidity value
 
@@ -8,9 +11,9 @@
 - Added current probability of precipitation
 - Added daily forecast probability of precipitation
 - Altered the way daily forecast high and low appear
-- Added old_daily_format flag. Shows old style daily forecast high and low format (values stacked on top of each other).
+- Added **old_daily_format** flag. Shows old style daily forecast high and low format (values stacked on top of each other).
 - Made most current condition items optional
-- Removed Sunset flag. Adding entity_sun to the configuration will cause the sunset information to appear
+- Removed **Sunset** flag. Adding entity_sun to the configuration will cause the sunset information to appear
 
 # 0.4.1
 - Refactored card to use LitElement instead fo HTMLElement
@@ -27,8 +30,8 @@
 - Fixed bug in Sunrise / Sunset code where invalid object was calling getDate
 
 # 0.2.1
-- Added Locale flag.  Sets display of day name and time format by Locale specified
-- Added Sunset flag.  Enables / disables dislay of sunset and sunrise icons and times.
+- Added **Locale** flag.  Sets display of day name and time format by Locale specified
+- Added **Sunset** flag.  Enables / disables dislay of sunset and sunrise icons and times.
 
 # 0.1.1
 - Added configuration flag capability
