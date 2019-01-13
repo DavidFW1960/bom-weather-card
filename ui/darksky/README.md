@@ -118,7 +118,6 @@ Flags are used to control the look and feel of the card (See below for details)
 ~~~~
 locale: en
 static_icons: false
-sunset: true
 tooltip_bg_color: 'rgb( 75,155,239)'
 tooltip_border_color: orange
 tooltip_border_width: 3
