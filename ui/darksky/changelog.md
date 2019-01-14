@@ -5,7 +5,6 @@
 - Corrected 'it' localization of "feels like".  Changed to "Percepito".
 - Corrected 'de' localization of "feels like".  Changed to "Gefühlt".
 
--
 # 0.5.3
 - added **time_format** flag : Overrides locale time format with either 12 or 24 hour time.
 
