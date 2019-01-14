@@ -1,3 +1,11 @@
+# 0.6.1
+- Added "Today's High" text to Tcurrent day high temp
+- Added Beaufort scale to Wind. Set show_beaufort flag to true to enable
+- Added current condition text to current condition icon.  Set entity_current_text to a sensor or template entity to enable.
+- Corrected 'it' localization of "feels like".  Changed to "Percepito".
+- Corrected 'de' localization of "feels like".  Changed to "Gefühlt".
+
+-
 # 0.5.2
 - Corrected invalid humidity value
 

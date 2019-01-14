@@ -19,11 +19,12 @@ class DarkSkyWeatherCard extends LitElement {
     var icons = this.config.static_icons ? "static" : "animated";
     var sunLeft = this.config.entity_sun ? this.sunSet.left : "";
     var sunRight = this.config.entity_sun ? this.sunSet.right : "";
-    var apparentTemp =  this.config.entity_apparent_temp ? html`<span class="apparent">${this.feelsLikeText} ${this.current.apparent} ${this.getUOM("temperature")}</span>` : ``;
-    var daytimeHigh = this.config.entity_daytime_high ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer"></ha-icon></span>${Math.round(this.hass.states[this.config.entity_daytime_high].state)}<span> ${this.getUOM('temperature')}</span></li>` : ``;
+    var currentText = this.config.entity_current_text ? html`<span class="currentText">${hass.states[this.config.entity_current_text].state}</span>` : ``;
+    var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike} ${this.current.apparent} ${this.getUOM("temperature")}</span>` : ``;
+    var daytimeHigh = this.config.entity_daytime_high ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer"></ha-icon></span>${this.localeText.maxToday} ${Math.round(this.hass.states[this.config.entity_daytime_high].state)}<span> ${this.getUOM('temperature')}</span></li>` : ``;
     var pop = this.config.entity_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${Math.round(this.hass.states[this.config.entity_pop].state)} %</li>` : ``;
     var visibility = this.config.entity_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span>${this.current.visibility}<span class="unit"> ${this.getUOM('length')}</span></li>` : ``;
-    var windBearing = this.config.entity_wind_bearing && this.config.entity_wind_speed ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span>${this.current.windBearing} ${this.current.windSpeed}<span class="unit"> ${this.getUOM('length')}/h</span></li>` : ``;
+    var windBearing = this.config.entity_wind_bearing && this.config.entity_wind_speed ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span>${this.current.beaufort}${this.current.windBearing} ${this.current.windSpeed}<span class="unit"> ${this.getUOM('length')}/h</span></li>` : ``;
     var humidity = this.config.entity_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span>${this.current.humidity}<span class="unit"> %</span></li>` : ``;
     var pressure = this.config.entity_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span>${this.current.pressure}<span class="unit"> ${this.getUOM('air_pressure')}</span></li>` : ``;
     var summary = this.config.entity_daily_summary ? html`<br><span class="unit">${hass.states[this.config.entity_daily_summary].state}</span></br>` : ``;
@@ -36,6 +37,7 @@ class DarkSkyWeatherCard extends LitElement {
       <ha-card class = "card">  
         <span class="icon bigger" style="background: none, url(/local/icons/weather_icons/${icons}/${this.weatherIcons[this.current.conditions]}.svg) no-repeat; background-size: contain;">${this.current.conditions}</span>
         <span class="temp">${this.current.temperature}</span><span class="tempc">${this.getUOM('temperature')}</span>
+        ${currentText}
         ${apparentTemp}
         <span>
           <ul class="variations right">
@@ -96,24 +98,33 @@ class DarkSkyWeatherCard extends LitElement {
 // ##### feelsLikeText returns set of possible "Feels Like" text by specified language
 // #####
 
-  get feelsLikeText() {
-    const feelsLike_en = "Feels like";
-    const feelsLike_fr = "Se sent comme";
-    const feelslike_it = "Si sente come";
-    const feelsLike_de = "Fühlt sich an wie";
-    const feelsLike_nl = "Voelt als";
-
+  get localeText() {
     switch (this.config.locale) {
       case "it" :
-        return feelslike_it;
+        return {
+          feelsLike: "Percepito",
+          maxToday: "Max oggi:",
+        }
       case "fr" :
-        return feelsLike_fr;
+        return {
+          feelsLike: "Se sent comme",
+          maxToday: "Max aujourd'hui:",
+        }
       case "de" :
-        return feelsLike_de;
+        return {
+          feelsLike: "Gefühlt",
+          maxToday: "Max heute:",
+        }
       case "nl" :
-        return feelsLike_nl;
+        return {
+          feelsLike: "Voelt als",
+          maxToday: "Max vandaag:",
+        }
       default :
-        return feelsLike_en;
+        return {
+          feelsLike: "Feels like",
+          maxToday: "Today's High",
+        }
     }
   }
   
@@ -216,6 +227,7 @@ class DarkSkyWeatherCard extends LitElement {
     var windBearing = this.config.entity_wind_bearing ? this.windDirections[(Math.round((this.hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
     var windSpeed = this.config.entity_wind_speed ? Math.round(this.hass.states[this.config.entity_wind_speed].state) : 0;
     var apparent = this.config.entity_apparent_temp ? Math.round(this.hass.states[this.config.entity_apparent_temp].state) : 0;
+    var beaufort = this.config.show_beaufort ? html`Bft: ${this.beaufortWind} - ` : ``;
     
     return {
       'conditions': conditions,
@@ -226,6 +238,7 @@ class DarkSkyWeatherCard extends LitElement {
       'windBearing': windBearing,
       'windSpeed': windSpeed,
       'apparent' : apparent,
+      'beaufort' : beaufort,
     }
   }
 
@@ -265,6 +278,45 @@ get sunSet() {
       'right': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span>${nextSunSet}</li>`,
       };
     }
+}
+
+
+// #####
+// ##### beaufortWind - returns the wind speed on th beaufort scale
+// #####
+
+get beaufortWind() { 
+  if (this.config.entity_wind_speed) {
+    switch (this.hass.states[this.config.entity_wind_speed].attributes.unit_of_measurement) {
+      case 'mph':
+        if (this.hass.states[this.config.entity_wind_speed].state >= 73) return 12;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 64) return 11;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 55) return 10;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 47) return 9;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 39) return 8;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 31) return 7;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 25) return 6;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 18) return 5;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 13) return 4;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 8) return 3;
+        if (this.hass.states[this.config.entity_wind_speed].state >=3) return 2;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 1) return 1;
+      default:
+        if (this.hass.states[this.config.entity_wind_speed].state >= 118) return 12;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 103) return 11;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 89) return 10;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 75) return 9;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 62) return 8;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 50) return 7;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 39) return 6;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 29) return 5;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 20) return 4;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 12) return 3;
+        if (this.hass.states[this.config.entity_wind_speed].state >=6) return 2;
+        if (this.hass.states[this.config.entity_wind_speed].state >= 1) return 1;
+    }
+  }
+  return 0;
 }
 
 
@@ -345,6 +397,14 @@ get style() {
         margin-top: 35px;
         margin-right: 1em;
       }
+
+      .currentText {
+        font-size: 1.5em;
+        color: var(--secondary-text-color);
+        position: absolute;
+        left: 5em;
+        margin-top: 30px;
+      }
       
       .pop {
         font-weight: 400;
@@ -413,7 +473,7 @@ get style() {
       .icon.bigger {
         width: 10em;
         height: 10em;
-        margin-top: -4em;
+        margin-top: -3.5em;
         position: absolute;
         left: 0em;
       }

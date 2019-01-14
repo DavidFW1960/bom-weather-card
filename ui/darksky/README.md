@@ -112,7 +112,28 @@ entity_pop_2: sensor.dark_sky_precip_probability_2
 entity_pop_3: sensor.dark_sky_precip_probability_3
 entity_pop_4: sensor.dark_sky_precip_probability_4
 entity_pop_5: sensor.dark_sky_precip_probability_5
+entity_current_text: sensor.dark_sky_current_text
 ~~~~
+
+**Note:** sensor.dark_sky_current_text is a template sensor.  You can call it whatever you want 
+so long as you use the same name in the card config above.  An example of how to set up this template is below.
+~~~~~
+      dark_sky_current_text:
+        value_template: '{% if is_state("sensor.dark_sky_icon","clear-day") %} Clear 
+                         {% elif is_state("sensor.dark_sky_icon","clear-night") %} Clear 
+                         {% elif is_state("sensor.dark_sky_icon","rain") %} Rain
+                         {% elif is_state("sensor.dark_sky_icon","snow") %} Snowy
+                         {% elif is_state("sensor.dark_sky_icon","fog") %} Foggy
+                         {% elif is_state("sensor.dark_sky_icon","sleet") %} Sleet
+                         {% elif is_state("sensor.dark_sky_icon","wind") %} Windy
+                         {% elif is_state("sensor.dark_sky_icon","cloudy") %} Cloudy
+                         {% elif is_state("sensor.dark_sky_icon","partly-cloudy-day") %} Partly Cloudy
+                         {% elif is_state("sensor.dark_sky_icon","partly-cloudy-night") %} Partly Cloudy
+                         {% elif is_state("sensor.dark_sky_icon","hail") %} Hailing
+                         {% elif is_state("sensor.dark_sky_icon","lightning") %} Lightning
+                         {% elif is_state("sensor.dark_sky_icon","thunderstorm") %} Thunderstorm
+                         {% endif %}'
+~~~~~
 
 Flags are used to control the look and feel of the card (See below for details)
 ~~~~
@@ -129,6 +150,7 @@ tooltip_width: 100
 tooltips: true
 old_daily_format: false
 time_format: 24
+show_beaufort: true
 ~~~~
 
 **Flags**
@@ -147,3 +169,4 @@ time_format: 24
 | tooltip_left_offset  | **-12**                      | Sets the offset of the left edge of the tooltip. Specified in negative (-) px |
 | old_daily_format     | true / **false**             | Sets the format of the daily high & low temps to be stacked (old format)      |
 | time_format          | **12** / 24                  | Sets the format of the daily high & low temps to be stacked (old format)      |
+| show_beaufort        | true / **false**             | Shows Beaufort Scale wind information                                         |
