@@ -1,3 +1,6 @@
+# 0.6.2
+- Changed URL reference for Lit and html classes
+
 # 0.6.1
 - Added "Today's High" text to current day high temp
 - Added Beaufort scale to Wind. Set show_beaufort flag to true to enable
