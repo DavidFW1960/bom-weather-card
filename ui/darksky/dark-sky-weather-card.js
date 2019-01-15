@@ -1,4 +1,14 @@
-import { LitElement, html, } from 'https://unpkg.com/@polymer/lit-element@^0.5.2/lit-element.js?module';
+//import { LitElement, html, } from 'https://unpkg.com/@polymer/lit-element@^0.5.2/lit-element.js?module';
+
+import { LitElement, html, } from 'https://unpkg-gcp.firebaseapp.com/@polymer/lit-element@0.5.2/lit-element.js?module';
+
+// use Local Lit definition - This does not work (throws warning that customElements does not exist)
+/*
+var LitElement =
+  LitElement ||
+  Object.getPrototypeOf(customElements.get("hui-error-entity-row"));
+var html = LitElement.prototype.html;
+*/
 
 // Create your custom component
 class DarkSkyWeatherCard extends LitElement {
