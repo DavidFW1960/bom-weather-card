@@ -1,5 +1,6 @@
 # 0.6.3
 - Changed to local LitElement and html classes by using existing Lovelace class reference.
+- Allow text (ESE, N, etc) wind bearing sensor to be passed in as well as normal numeric degree
 
 # 0.6.2
 - Changed URL reference for Lit and html classes
