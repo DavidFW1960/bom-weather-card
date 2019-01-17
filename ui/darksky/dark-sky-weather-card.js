@@ -1,43 +1,39 @@
-//import { LitElement, html, } from 'https://unpkg.com/@polymer/lit-element@^0.5.2/lit-element.js?module';
-
-import { LitElement, html, } from 'https://unpkg-gcp.firebaseapp.com/@polymer/lit-element@0.5.2/lit-element.js?module';
-
-// use Local Lit definition - This does not work (throws warning that customElements does not exist)
-/*
-var LitElement =
-  LitElement ||
-  Object.getPrototypeOf(customElements.get("hui-error-entity-row"));
+// #####
+// ##### Get the LitElement and HTML classes from an already defined HA Lovelace class
+// #####
+var LitElement = LitElement || Object.getPrototypeOf(customElements.get("hui-error-entity-row"));
 var html = LitElement.prototype.html;
-*/
 
-// Create your custom component
+// #####
+// ##### Custom Card Definitio begins
+// #####
+
 class DarkSkyWeatherCard extends LitElement {
-  
-  // Declare properties
-  static get properties() {
-    return { hass: Object, config: Object, };
-  }
+
+// #####
+// ##### Assign the external hass object to an internal class var
+// #####
+  set Hass(hass) { this._hass = hass }
 
 
 // #####
 // ##### Define Render Template
 // #####
 
-  _render( {hass, config }) {
-
+  render() {
 //  Handle Configuration Flags 
     var icons = this.config.static_icons ? "static" : "animated";
     var sunLeft = this.config.entity_sun ? this.sunSet.left : "";
     var sunRight = this.config.entity_sun ? this.sunSet.right : "";
-    var currentText = this.config.entity_current_text ? html`<span class="currentText">${hass.states[this.config.entity_current_text].state}</span>` : ``;
+    var currentText = this.config.entity_current_text ? html`<span class="currentText">${this._hass.states[this.config.entity_current_text].state}</span>` : ``;
     var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike} ${this.current.apparent} ${this.getUOM("temperature")}</span>` : ``;
-    var daytimeHigh = this.config.entity_daytime_high ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer"></ha-icon></span>${this.localeText.maxToday} ${Math.round(this.hass.states[this.config.entity_daytime_high].state)}<span> ${this.getUOM('temperature')}</span></li>` : ``;
-    var pop = this.config.entity_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${Math.round(this.hass.states[this.config.entity_pop].state)} %</li>` : ``;
+    var daytimeHigh = this.config.entity_daytime_high ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer"></ha-icon></span>${this.localeText.maxToday} ${Math.round(this._hass.states[this.config.entity_daytime_high].state)}<span> ${this.getUOM('temperature')}</span></li>` : ``;
+    var pop = this.config.entity_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${Math.round(this._hass.states[this.config.entity_pop].state)} %</li>` : ``;
     var visibility = this.config.entity_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span>${this.current.visibility}<span class="unit"> ${this.getUOM('length')}</span></li>` : ``;
     var windBearing = this.config.entity_wind_bearing && this.config.entity_wind_speed ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span>${this.current.beaufort}${this.current.windBearing} ${this.current.windSpeed}<span class="unit"> ${this.getUOM('length')}/h</span></li>` : ``;
     var humidity = this.config.entity_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span>${this.current.humidity}<span class="unit"> %</span></li>` : ``;
     var pressure = this.config.entity_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span>${this.current.pressure}<span class="unit"> ${this.getUOM('air_pressure')}</span></li>` : ``;
-    var summary = this.config.entity_daily_summary ? html`<br><span class="unit">${hass.states[this.config.entity_daily_summary].state}</span></br>` : ``;
+    var summary = this.config.entity_daily_summary ? html`<br><span class="unit">${this._hass.states[this.config.entity_daily_summary].state}</span></br>` : ``;
 
 // Build HTML    
     return html`
@@ -67,12 +63,12 @@ class DarkSkyWeatherCard extends LitElement {
               ${this.forecast.map(daily => html`
                 <div class="day fcasttooltip">
                   <span class="dayname">${(daily.date).toLocaleDateString(this.config.locale,{weekday: 'short'})}</span>
-                  <br><i class="icon" style="background: none, url(/local/icons/weather_icons/${icons}/${this.weatherIcons[this.hass.states[daily.condition].state]}.svg) no-repeat; background-size: contain;"></i>
-                  ${this.config.old_daily_format ? html`<br><span class="highTemp">${Math.round(this.hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>
-                                                        <br><span class="lowTemp">${Math.round(this.hass.states[daily.templow].state)}${this.getUOM("temperature")}</span>` : 
-                                                   html`<br><span class="lowTemp">${Math.round(this.hass.states[daily.templow].state)}</span> / <span class="highTemp">${Math.round(this.hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>`}
-                  ${this.config.entity_pop_1 && this.config.entity_pop_2 && this.config.entity_pop_3 && this.config.entity_pop_4 && this.config.entity_pop_5 ? html`<br><span class="pop">${Math.round(this.hass.states[daily.pop].state)} %</span>` : ``}
-                  <div class="fcasttooltiptext">${ this.config.tooltips ? this.hass.states[daily.summary].state : ""}</div>
+                  <br><i class="icon" style="background: none, url(/local/icons/weather_icons/${icons}/${this.weatherIcons[this._hass.states[daily.condition].state]}.svg) no-repeat; background-size: contain;"></i>
+                  ${this.config.old_daily_format ? html`<br><span class="highTemp">${Math.round(this._hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>
+                                                        <br><span class="lowTemp">${Math.round(this._hass.states[daily.templow].state)}${this.getUOM("temperature")}</span>` : 
+                                                   html`<br><span class="lowTemp">${Math.round(this._hass.states[daily.templow].state)}</span> / <span class="highTemp">${Math.round(this._hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>`}
+                  ${this.config.entity_pop_1 && this.config.entity_pop_2 && this.config.entity_pop_3 && this.config.entity_pop_4 && this.config.entity_pop_5 ? html`<br><span class="pop">${Math.round(this._hass.states[daily.pop].state)} %</span>` : ``}
+                  <div class="fcasttooltiptext">${ this.config.tooltips ? this._hass.states[daily.summary].state : ""}</div>
                 </div>`)}
               </div>
         ${summary}
@@ -144,7 +140,7 @@ class DarkSkyWeatherCard extends LitElement {
 
   get dayOrNight() {
     const transformDayNight = { "below_horizon": "night", "above_horizon": "day", }
-    return transformDayNight[this.hass.states[this.config.entity_sun].state];
+    return transformDayNight[this._hass.states[this.config.entity_sun].state];
   }
 
 
@@ -229,14 +225,14 @@ class DarkSkyWeatherCard extends LitElement {
 // #####
 
   get current() {
-    var conditions = this.hass.states[this.config.entity_current_conditions].state;
-    var humidity = this.config.entity_humidity ? this.hass.states[this.config.entity_humidity].state : 0;
-    var pressure = this.config.entity_pressure ? Math.round(this.hass.states[this.config.entity_pressure].state) : 0;
-    var temperature = Math.round(this.hass.states[this.config.entity_temperature].state);
-    var visibility = this.config.entity_visibility ? this.hass.states[this.config.entity_visibility].state : 0;
-    var windBearing = this.config.entity_wind_bearing ? this.windDirections[(Math.round((this.hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
-    var windSpeed = this.config.entity_wind_speed ? Math.round(this.hass.states[this.config.entity_wind_speed].state) : 0;
-    var apparent = this.config.entity_apparent_temp ? Math.round(this.hass.states[this.config.entity_apparent_temp].state) : 0;
+    var conditions = this._hass.states[this.config.entity_current_conditions].state;
+    var humidity = this.config.entity_humidity ? this._hass.states[this.config.entity_humidity].state : 0;
+    var pressure = this.config.entity_pressure ? Math.round(this._hass.states[this.config.entity_pressure].state) : 0;
+    var temperature = Math.round(this._hass.states[this.config.entity_temperature].state);
+    var visibility = this.config.entity_visibility ? this._hass.states[this.config.entity_visibility].state : 0;
+    var windBearing = this.config.entity_wind_bearing ? this.windDirections[(Math.round((this._hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
+    var windSpeed = this.config.entity_wind_speed ? Math.round(this._hass.states[this.config.entity_wind_speed].state) : 0;
+    var apparent = this.config.entity_apparent_temp ? Math.round(this._hass.states[this.config.entity_apparent_temp].state) : 0;
     var beaufort = this.config.show_beaufort ? html`Bft: ${this.beaufortWind} - ` : ``;
     
     return {
@@ -261,25 +257,25 @@ get sunSet() {
     var nextSunSet ;
     var nextSunRise;
     if (this.config.time_format) {
-      nextSunSet = new Date(this.hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit',hour12: this.is12Hour});
-      nextSunRise = new Date(this.hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit', hour12: this.is12Hour});
+      nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit',hour12: this.is12Hour});
+      nextSunRise = new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit', hour12: this.is12Hour});
     }
     else {
-      nextSunSet = new Date(this.hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
-      nextSunRise = new Date(this.hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
+      nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
+      nextSunRise = new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
     }
     var sunLeft;
     var sunRight;
     var nextDate = new Date();
     nextDate.setDate(nextDate.getDate() + 1);
-    if (this.hass.states[this.config.entity_sun].state == "above_horizon" ) {
+    if (this._hass.states[this.config.entity_sun].state == "above_horizon" ) {
       nextSunRise = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunRise;
       return {
       'left': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span>${nextSunSet}</li>`,
       'right': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-up"></ha-icon></span>${nextSunRise}</li>`,
       };
     } else {
-      if (new Date().getDate() != new Date(this.hass.states[this.config.entity_sun].attributes.next_rising).getDate()) {
+      if (new Date().getDate() != new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).getDate()) {
         nextSunRise = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunRise;
         nextSunSet = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunSet;
       } 
@@ -297,33 +293,33 @@ get sunSet() {
 
 get beaufortWind() { 
   if (this.config.entity_wind_speed) {
-    switch (this.hass.states[this.config.entity_wind_speed].attributes.unit_of_measurement) {
+    switch (this._hass.states[this.config.entity_wind_speed].attributes.unit_of_measurement) {
       case 'mph':
-        if (this.hass.states[this.config.entity_wind_speed].state >= 73) return 12;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 64) return 11;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 55) return 10;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 47) return 9;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 39) return 8;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 31) return 7;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 25) return 6;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 18) return 5;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 13) return 4;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 8) return 3;
-        if (this.hass.states[this.config.entity_wind_speed].state >=3) return 2;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 1) return 1;
-      default:
-        if (this.hass.states[this.config.entity_wind_speed].state >= 118) return 12;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 103) return 11;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 89) return 10;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 75) return 9;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 62) return 8;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 50) return 7;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 39) return 6;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 29) return 5;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 20) return 4;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 12) return 3;
-        if (this.hass.states[this.config.entity_wind_speed].state >=6) return 2;
-        if (this.hass.states[this.config.entity_wind_speed].state >= 1) return 1;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 73) return 12;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 64) return 11;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 55) return 10;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 47) return 9;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 39) return 8;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 31) return 7;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 25) return 6;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 18) return 5;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 13) return 4;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 8) return 3;
+        if (this._hass.states[this.config.entity_wind_speed].state >=3) return 2;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 1) return 1;
+      default: // Assume m/s
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 118) return 12;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 103) return 11;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 89) return 10;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 75) return 9;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 62) return 8;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 50) return 7;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 39) return 6;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 29) return 5;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 20) return 4;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 12) return 3;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >=6) return 2;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 1) return 1;
     }
   }
   return 0;
@@ -560,7 +556,7 @@ get style() {
 
   getUOM(measure) {
     
-    const lengthUnit = this.hass.config.unit_system.length;
+    const lengthUnit = this._hass.config.unit_system.length;
     
     switch (measure) {
       case 'air_pressure':
@@ -570,25 +566,36 @@ get style() {
       case 'precipitation':
         return lengthUnit === 'km' ? 'mm' : 'in';
       default:
-        return this.hass.config.unit_system[measure] || '';
+        return this._hass.config.unit_system[measure] || '';
     }
   }
 
+// #####
+// ##### Assign the external hass object to an internal class var.
+// ##### This is called everytime a state value chnages
+// #####
 
-  setConfig(config) {
-//    if (!config.entity) {
-//      throw new Error('You need to define an entity');
-//    }
-    this.config = config;
-  }
-  
-  // The height of your card. Home Assistant uses this to automatically
-  // distribute all cards over the available columns.
-  getCardSize() {
-    return 3 //this.config.entities.length + 1;
-  }
+  set hass(hass) { this._hass = hass }
+
+
+// #####
+// ##### Assings the configuration vlaues to an internal call var
+// ##### This is called everytime a config change is made
+// #####
+
+  setConfig(config) { this.config = config; }
+
+
+// #####
+// ##### Sets the card size so HA knows how to put in columns
+// #####
+
+  getCardSize() { return 3 }
   
 }
 
+// ##### 
+// ##### Register the card as a customElement
+// #####
 customElements.define('dark-sky-weather-card', DarkSkyWeatherCard);
 

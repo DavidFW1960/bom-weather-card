@@ -1,3 +1,6 @@
+# 0.6.3
+- Changed to local LitElement and html classes by using existing Lovelace class reference.
+
 # 0.6.2
 - Changed URL reference for Lit and html classes
 
