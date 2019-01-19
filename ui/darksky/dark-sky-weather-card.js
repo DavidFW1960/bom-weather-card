@@ -353,9 +353,25 @@ get style() {
   var tooltipBorderColor = this.config.tooltip_border_color || "rgb(255,161,0)";
   var tooltipBorderWidth = this.config.tooltip_border_width || "1";
   var tooltipCaretSize = this.config.tooltip_caret_size || "5";
-  var tooltipWidth = this.config.tooltip_width || "110"
-  var tooltipLeftOffset = this.config.tooltip_left_offset || "-12"
-  var tooltipVisible = this.config.tooltips ? "visible" : "hidden"
+  var tooltipWidth = this.config.tooltip_width || "110";
+  var tooltipLeftOffset = this.config.tooltip_left_offset || "-12";
+  var tooltipVisible = this.config.tooltips ? "visible" : "hidden";
+  var tempTopMargin = this.config.temp_top_margin || "5px";
+  var tempFontWeight = this.config.temp_font_weight || "300";
+  var tempFontSize = this.config.temp_font_size || "4em";
+  var tempColor = this.config.temp_color || "v";
+  var tempRightPos = this.config.temp_right_pos || ".85em";
+  var tempUOMTopMargin = this.config.temp_uom_top_margin || "-9px";
+  var tempUOMRightMargin = this.config.temp_uom_right_margin || "7px";
+  var apparentTopMargin = this.config.apparent_top_margin || "39px";
+  var apparentRightPos =  this.config.apparent_right_pos || "1em";
+  var apparentRightMargin = this.config.apparent_right_margin || "1em";
+  var currentTextTopMargin = this.config.current_text_top_margin || "39px";
+  var currentTextLeftPos = this.config.current_text_left_pos || "5em";
+  var currentTextFontSize = this.config.current_text_font_size || "1.5em";
+  var largeIconTopMargin = this.config.large_icon_top_margin || "-3.5em";
+  var largeIconLeftPos = this.config.large_icon_left_pos || "0em";
+  var currentDataTopMargin = this.config.current_data_top_margin || "6em";
   
   return html`
         .clear {
@@ -378,38 +394,39 @@ get style() {
       }
 
       .temp {
-        font-weight: 300;
-        font-size: 4em;
+        font-weight: ${tempFontWeight};
+        font-size: ${tempFontSize};
         color: var(--primary-text-color);
         position: absolute;
-        right: 1em;
+        right: ${tempRightPos};
+        margin-top: ${tempTopMargin};
       }
 
       .tempc {
-        font-weight: 300;
+        font-weight: ${tempFontWeight};
         font-size: 1.5em;
         vertical-align: super;
         color: var(--primary-text-color);
         position: absolute;
         right: 1em;
-        margin-top: -14px;
-        margin-right: 7px;
+        margin-top: ${tempUOMTopMargin};
+        margin-right: ${tempUOMRightMargin};
       }
 
       .apparent {
         color: var(--primary-text-color);
         position: absolute;
-        right: 1em;
-        margin-top: 35px;
-        margin-right: 1em;
+        right: ${apparentRightPos};
+        margin-top: ${apparentTopMargin};
+        margin-right: ${apparentRightMargin};
       }
 
       .currentText {
-        font-size: 1.5em;
+        font-size: ${currentTextFontSize};
         color: var(--secondary-text-color);
         position: absolute;
-        left: 5em;
-        margin-top: 30px;
+        left: ${currentTextLeftPos};
+        margin-top: ${currentTextTopMargin};
       }
       
       .pop {
@@ -423,7 +440,7 @@ get style() {
         color: var(--primary-text-color);
         list-style: none;
         margin-left: -2em;
-        margin-top: 5em;
+        margin-top: ${currentDataTopMargin};
       }
 
       .variations.right {
@@ -479,9 +496,9 @@ get style() {
       .icon.bigger {
         width: 10em;
         height: 10em;
-        margin-top: -3.5em;
+        margin-top: ${largeIconTopMargin};
         position: absolute;
-        left: 0em;
+        left: ${largeIconLeftPos};
       }
 
       .icon {
