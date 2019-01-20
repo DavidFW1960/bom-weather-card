@@ -154,18 +154,34 @@ show_beaufort: true
 
 **Flags**
 --------------------------
-| Flag                 | Values                       | Usage                                                                         |
-|----------------------|------------------------------|-------------------------------------------------------------------------------|
-| locale               | **en** / fr / de / it / etc. | Sets locale display of day names and time formats                             |
-| static_icons         | true / **false**             | Switches between static (true) and animated (false) icons                     |
-| tooltips             | true / **false**             | Enables tooltips that show daily forecast summary                             |
-| tooltip_width        | **110**                      | Sets the width of the tooltip in px                                           |
-| tooltip_bg_color     | **rgb( 75,155,239)**         | Sets the background color of the tooltip (rgb / # / color)                    |
-| tooltip_fg_color     | **#fff**                     | Sets the foreground color of the tooltip (rgb / # / color)                    |
-| tooltip_border_color | **rgb(255,161,0)**           | Sets the color of the tooltip border including the caret (rgb / # / color)    |
-| tooltip_border_width | **1**                        | Sets the width of the tooltip border in px                                    |
-| tooltip_caret_size   | **5**                        | Sets the size of the caret (the little arrow pointing down) in px             |
-| tooltip_left_offset  | **-12**                      | Sets the offset of the left edge of the tooltip. Specified in negative (-) px |
-| old_daily_format     | true / **false**             | Sets the format of the daily high & low temps to be stacked (old format)      |
-| show_beaufort        | true / **false**             | Shows Beaufort Scale wind information                                         |
-| time_format          | **locale** / 12 / 24         | Sets the format sunset and sunrise times. locale format is the default.       |
+| Flag                     | Values                      | Usage                                                                       |
+|--------------------------|-----------------------------|-----------------------------------------------------------------------------|
+| locale                   | **en** / fr / de / etc.     | Sets locale display of day names and time formats                           |
+| static_icons             | true / **false**            | Switches between static (true) and animated (false) icons                   |
+| tooltips                 | true / **false**            | Enables tooltips that show daily forecast summary                           |
+| tooltip_width            | **110**                     | Sets the width of the tooltip in px                                         |
+| tooltip_bg_color         | **rgb( 75,155,239)**        | Sets the background color of the tooltip (rgb / # / color)                  |
+| tooltip_fg_color         | **#fff**                    | Sets the foreground color of the tooltip (rgb / # / color)                  |
+| tooltip_border_color     | **rgb(255,161,0)**          | Sets the color of the tooltip border including the caret (rgb / # / color)  |
+| tooltip_border_width     | **1**                       | Sets the width of the tooltip border in px                                  |
+| tooltip_caret_size       | **5**                       | Sets the size of the caret (the little arrow pointing down) in px           |
+| tooltip_left_offset      | **-12**                     | Sets the offset of the left edge of the tooltip. In negative (-)x           |
+| old_daily_format         | true / **false**            | Sets the format of the daily high & low temps to be stacked (old format)    |
+| show_beaufort            | true / **false**            | Shows Beaufort Scale wind information                                       |
+| time_format              | **locale** / 12 / 24        | Sets the format sunset and sunrise times. locale format is the default.     |
+| temp_top_margin          | **5px** / px or em value    | Sets the top margin of the Temperature.                                     |
+| temp_font_weight         | **300** / numeric value     | Sets the font weight of the Temperature.                                    |
+| temp_font_size           | **4em** / em value          | Sets the font size of the Temperature.                                      |
+| temp_right_pos           | **.85em** / px or em value  | Sets the right position of the Temperature.                                 |
+| temp_uom_top_margin      | **-9px** / px or em value   | Sets the top margin of the Temperature Unit of Meaure.                      |
+| temp_uom_right_margin    | **7px** / px or em value    | Sets the right margin of the Temperature Unit of Measure.                   |
+| apparent_top_margin      | **39px** / px or em value   | Sets the top margin of the apparent (feels Like) temperature                |
+| apparent_right_pos       | **1em** / px or em value    | Sets the right position of the apparent (feels Like) temperature            |
+| apparent_right_margin    | **1em** / px or em value    | Sets the right margin of the apparent (feels Like) temperature              |
+| current_text_top_margin  | **39px** / px or em value   | Sets the top margin of the current temperature text                         |
+| current_text_left_pos    | **5em** / px or em value    | Sets the left position of the current temperature text                      |
+| current_text_font_size   | **1.5em** / em value        | Sets the font size of the current temperature text                          |
+| current_data_top_margin  | **6em** / px or em value    | Sets the top margin of the current data blocks                              |
+| large_icon_top_margin    | **-3.5em** / px or em value | Sets the top margin of the current conditions icon                          |
+| large_icon_left_position | **0em** / px or em value    | Sets the top margin of the current conditions icon                          |
+
