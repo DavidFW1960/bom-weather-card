@@ -4,4 +4,6 @@
       "version": "0.7.1",
       "remote_location": "https://github.com/iammexx/home-assistant-config/raw/master/ui/darksky/dark-sky-weather-card.js",
       "visit_repo": "https://github.com/iammexx/home-assistant-config/tree/master/ui/darksky",
-      "changelog": 
+      "changelog": "https://github.com/iammexx/home-assistant-config/blob/master/ui/darksky/changelog.md"
+    }
+}
