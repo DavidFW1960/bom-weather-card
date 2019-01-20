@@ -183,5 +183,5 @@ show_beaufort: true
 | current_text_font_size   | **1.5em** / em value        | Sets the font size of the current temperature text                          |
 | current_data_top_margin  | **6em** / px or em value    | Sets the top margin of the current data blocks                              |
 | large_icon_top_margin    | **-3.5em** / px or em value | Sets the top margin of the current conditions icon                          |
-| large_icon_left_position | **0em** / px or em value    | Sets the top margin of the current conditions icon                          |
+| large_icon_left_position | **0em** / px or em value    | Sets the left position of the current conditions icon                          |
 
