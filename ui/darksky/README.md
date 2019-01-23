@@ -106,7 +106,8 @@ entity_humidity: sensor.dark_sky_humidity
 entity_pressure: sensor.dark_sky_pressure
 entity_apparent_temp: sensor.dark_sky_apparent_temperature
 entity_daily_summary: sensor.dark_sky_daily_summary
-entity_pop: sensor.dark_sky_precip_probability_0
+entity_pop: sensor.dark_sky_precip_probability
+entity_pop_intensity: sensor.dark_sky_precip_intensity
 entity_pop_1: sensor.dark_sky_precip_probability_1
 entity_pop_2: sensor.dark_sky_precip_probability_2
 entity_pop_3: sensor.dark_sky_precip_probability_3
@@ -168,6 +169,7 @@ show_beaufort: true
 | tooltip_left_offset      | **-12**                     | Sets the offset of the left edge of the tooltip. In negative (-)x           |
 | old_daily_format         | true / **false**            | Sets the format of the daily high & low temps to be stacked (old format)    |
 | show_beaufort            | true / **false**            | Shows Beaufort Scale wind information                                       |
+| show_separator           | true / **false**            | Shows separator between current conditions columns and current temp / Icon  |
 | time_format              | **locale** / 12 / 24        | Sets the format sunset and sunrise times. locale format is the default.     |
 | temp_top_margin          | **5px** / px or em value    | Sets the top margin of the Temperature.                                     |
 | temp_font_weight         | **300** / numeric value     | Sets the font weight of the Temperature.                                    |
@@ -183,5 +185,27 @@ show_beaufort: true
 | current_text_font_size   | **1.5em** / em value        | Sets the font size of the current temperature text                          |
 | current_data_top_margin  | **6em** / px or em value    | Sets the top margin of the current data blocks                              |
 | large_icon_top_margin    | **-3.5em** / px or em value | Sets the top margin of the current conditions icon                          |
-| large_icon_left_position | **0em** / px or em value    | Sets the left position of the current conditions icon                          |
+| separator_top_margin     | **5em** / px or em value    | Sets the top margin of the separator line                                   |
+| slot_l1                  | **daytime_high**            | Sets the value used in current conditions slot l1 : See slots for more info |
+| slot_l2                  | **wind**                    | Sets the value used in current conditions slot l2 : See slots for more info |
+| slot_l3                  | **visibility**              | Sets the value used in current conditions slot l3 : See slots for more info |
+| slot_l4                  | **sun_next**                | Sets the value used in current conditions slot l4 : See slots for more info |
+| slot_r1                  | **pop**                     | Sets the value used in current conditions slot r1 : See slots for more info |
+| slot_r2                  | **humidity**                | Sets the value used in current conditions slot r2 : See slots for more info |
+| slot_r3                  | **pressure**                | Sets the value used in current conditions slot r3 : See slots for more info |
+| slot_r4                  | **sun_following**           | Sets the value used in current conditions slot r4 : See slots for more info |
 
+
+**Slots**
+The current contion columns are specified by 'slots'.  There are 4 left coloumn slots (designated l1 - l4) and 4 right column
+slots (designated r1 - r4).  There are currently 10 possible values that can be assigned to a slot.  These are:
+- daytime_high
+- wind
+- visibility
+- sun_next (the next sun event ... sunset or sunrise)
+- sun_following (The following sun event ... if sun_next is a sunset then this will be the following sunrise and vice versa)
+- pop (probability of precipitation)
+- humidity
+- pressure
+- empty (empty slot... the slot below does not rise to fill the space)
+- remove (same as empty but the slot below rises to take the place of the slot)

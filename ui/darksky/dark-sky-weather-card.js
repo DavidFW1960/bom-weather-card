@@ -23,18 +23,11 @@ class DarkSkyWeatherCard extends LitElement {
   render() {
 //  Handle Configuration Flags 
     var icons = this.config.static_icons ? "static" : "animated";
-    var sunLeft = this.config.entity_sun ? this.sunSet.left : "";
-    var sunRight = this.config.entity_sun ? this.sunSet.right : "";
     var currentText = this.config.entity_current_text ? html`<span class="currentText">${this._hass.states[this.config.entity_current_text].state}</span>` : ``;
     var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike} ${this.current.apparent} ${this.getUOM("temperature")}</span>` : ``;
-    var daytimeHigh = this.config.entity_daytime_high ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer"></ha-icon></span>${this.localeText.maxToday} ${Math.round(this._hass.states[this.config.entity_daytime_high].state)}<span> ${this.getUOM('temperature')}</span></li>` : ``;
-    var pop = this.config.entity_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${Math.round(this._hass.states[this.config.entity_pop].state)} %</li>` : ``;
-    var visibility = this.config.entity_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span>${this.current.visibility}<span class="unit"> ${this.getUOM('length')}</span></li>` : ``;
-    var windBearing = this.config.entity_wind_bearing && this.config.entity_wind_speed ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span>${this.current.beaufort}${this.current.windBearing} ${this.current.windSpeed}<span class="unit"> ${this.getUOM('length')}/h</span></li>` : ``;
-    var humidity = this.config.entity_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span>${this.current.humidity}<span class="unit"> %</span></li>` : ``;
-    var pressure = this.config.entity_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span>${this.current.pressure}<span class="unit"> ${this.getUOM('air_pressure')}</span></li>` : ``;
     var summary = this.config.entity_daily_summary ? html`<br><span class="unit">${this._hass.states[this.config.entity_daily_summary].state}</span></br>` : ``;
-
+    var separator = this.config.show_separator ? html`<hr class=line>` : ``;
+    
 // Build HTML    
     return html`
       <style>
@@ -45,18 +38,19 @@ class DarkSkyWeatherCard extends LitElement {
         <span class="temp">${this.current.temperature}</span><span class="tempc">${this.getUOM('temperature')}</span>
         ${currentText}
         ${apparentTemp}
+        ${separator}
         <span>
           <ul class="variations right">
-              ${pop}
-              ${humidity}
-              ${pressure}
-              ${sunRight}
+              ${this.slots.r1}
+              ${this.slots.r2}
+              ${this.slots.r3}
+              ${this.slots.r4}
           </ul>
           <ul class="variations">
-              ${daytimeHigh} 
-              ${windBearing}
-              ${visibility}
-              ${sunLeft}
+              ${this.slots.l1} 
+              ${this.slots.l2}
+              ${this.slots.l3}
+              ${this.slots.l4}
           </ul>
         </span>
             <div class="forecast clear">
@@ -78,7 +72,65 @@ class DarkSkyWeatherCard extends LitElement {
 
 
 // #####
-// ##### windDirections" returns set of possible wind directions by specified language
+// ##### slots - returns the value to be displyed in a specific current condiion slot
+// #####
+  
+  get slots() {
+    return {
+      'r1' : this.slotValue('r1',this.config.slot_r1),
+      'r2' : this.slotValue('r2',this.config.slot_r2),
+      'r3' : this.slotValue('r3',this.config.slot_r3),
+      'r4' : this.slotValue('r4',this.config.slot_r4),
+      'l1' : this.slotValue('l1',this.config.slot_l1),
+      'l2' : this.slotValue('l2',this.config.slot_l2),
+      'l3' : this.slotValue('l3',this.config.slot_l3),
+      'l4' : this.slotValue('l4',this.config.slot_l4),
+    }
+  }
+
+// #####
+// ##### slots - calculates the specific slot value
+// #####
+
+  slotValue(slot,value){
+    var sunNext = this.config.entity_sun ? this.sunSet.next : "";
+    var sunFollowing = this.config.entity_sun ? this.sunSet.following : "";
+    var daytimeHigh = this.config.entity_daytime_high ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer"></ha-icon></span>${this.localeText.maxToday} ${Math.round(this._hass.states[this.config.entity_daytime_high].state)}<span> ${this.getUOM('temperature')}</span></li>` : ``;
+    var intensity = this.config.entity_pop_intensity ? html` - ${this._hass.states[this.config.entity_pop_intensity].state} ${this._hass.states[this.config.entity_pop_intensity].attributes.unit_of_measurement}/h` : ``;
+    var pop = this.config.entity_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${Math.round(this._hass.states[this.config.entity_pop].state)} %${intensity}</li>` : ``;
+    var visibility = this.config.entity_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span>${this.current.visibility}<span class="unit"> ${this.getUOM('length')}</span></li>` : ``;
+    var wind = this.config.entity_wind_bearing && this.config.entity_wind_speed ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span>${this.current.beaufort}${this.current.windBearing} ${this.current.windSpeed}<span class="unit"> ${this.getUOM('length')}/h</span></li>` : ``;
+    var humidity = this.config.entity_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span>${this.current.humidity}<span class="unit"> %</span></li>` : ``;
+    var pressure = this.config.entity_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span>${this.current.pressure}<span class="unit"> ${this.getUOM('air_pressure')}</span></li>` : ``;
+    
+    switch (value){
+      case 'pop': return pop;
+      case 'humidity': return humidity;
+      case 'pressure': return pressure;
+      case 'sun_following': return sunFollowing;
+      case 'daytime_high': return daytimeHigh;
+      case 'wind': return wind;
+      case 'visibility': return visibility;
+      case 'sun_next': return sunNext;
+      case 'empty': return html`&nbsp;`;
+      case 'remove': return ``;
+    }
+    // If no value can be matched pass back a default for the slot
+    switch (slot){
+      case 'l1': return daytimeHigh;
+      case 'l2': return wind;
+      case 'l3': return visibility;
+      case 'l4': return sunNext;
+      case 'r1': return pop;
+      case 'r2': return humidity;
+      case 'r3': return pressure;
+      case 'r4': return sunFollowing;
+    }
+  }
+  
+  
+// #####
+// ##### windDirections - returns set of possible wind directions by specified language
 // #####
 
   get windDirections() {
@@ -264,15 +316,15 @@ get sunSet() {
       nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
       nextSunRise = new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
     }
-    var sunLeft;
-    var sunRight;
+    var sunNext;
+    var sunFollowing;
     var nextDate = new Date();
     nextDate.setDate(nextDate.getDate() + 1);
     if (this._hass.states[this.config.entity_sun].state == "above_horizon" ) {
       nextSunRise = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunRise;
       return {
-      'left': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span>${nextSunSet}</li>`,
-      'right': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-up"></ha-icon></span>${nextSunRise}</li>`,
+      'next': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span>${nextSunSet}</li>`,
+      'following': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-up"></ha-icon></span>${nextSunRise}</li>`,
       };
     } else {
       if (new Date().getDate() != new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).getDate()) {
@@ -280,8 +332,8 @@ get sunSet() {
         nextSunSet = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunSet;
       } 
       return {
-      'left': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-up"></ha-icon></span>${nextSunRise}</li>`,
-      'right': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span>${nextSunSet}</li>`,
+      'next': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-up"></ha-icon></span>${nextSunRise}</li>`,
+      'following': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span>${nextSunSet}</li>`,
       };
     }
 }
@@ -359,7 +411,6 @@ get style() {
   var tempTopMargin = this.config.temp_top_margin || "5px";
   var tempFontWeight = this.config.temp_font_weight || "300";
   var tempFontSize = this.config.temp_font_size || "4em";
-  var tempColor = this.config.temp_color || "v";
   var tempRightPos = this.config.temp_right_pos || ".85em";
   var tempUOMTopMargin = this.config.temp_uom_top_margin || "-9px";
   var tempUOMRightMargin = this.config.temp_uom_right_margin || "7px";
@@ -371,7 +422,8 @@ get style() {
   var currentTextFontSize = this.config.current_text_font_size || "1.5em";
   var largeIconTopMargin = this.config.large_icon_top_margin || "-3.5em";
   var largeIconLeftPos = this.config.large_icon_left_pos || "0em";
-  var currentDataTopMargin = this.config.current_data_top_margin || "6em";
+  var currentDataTopMargin = this.config.current_data_top_margin ? this.config.current_data_top_margin : this.config.show_separator ? "1em" : "6em";
+  var separatorTopMargin = this.config.separator_top_margin || "5em";
   
   return html`
         .clear {
@@ -393,6 +445,12 @@ get style() {
         color: var(--paper-item-icon-color);
       }
 
+      .line {
+        margin-top: ${separatorTopMargin};
+        margin-left: 1em;
+        margin-right: 1em;
+      }
+      
       .temp {
         font-weight: ${tempFontWeight};
         font-size: ${tempFontSize};

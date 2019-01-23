@@ -1,3 +1,8 @@
+# 0.8.1
+ - Added slots for current conditions.  Allows setting specific locations for individual conditions.
+ - Added optional separator bar near top of card.
+ - Added optional probability of precipitation (pop) intensity
+ 
 # 0.7.1
  - Added several flags to control the positioning of components in the card
  
