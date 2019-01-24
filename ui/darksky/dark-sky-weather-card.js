@@ -96,7 +96,7 @@ class DarkSkyWeatherCard extends LitElement {
     var sunNext = this.config.entity_sun ? this.sunSet.next : "";
     var sunFollowing = this.config.entity_sun ? this.sunSet.following : "";
     var daytimeHigh = this.config.entity_daytime_high ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer"></ha-icon></span>${this.localeText.maxToday} ${Math.round(this._hass.states[this.config.entity_daytime_high].state)}<span> ${this.getUOM('temperature')}</span></li>` : ``;
-    var intensity = this.config.entity_pop_intensity ? html` - ${this._hass.states[this.config.entity_pop_intensity].state} ${this._hass.states[this.config.entity_pop_intensity].attributes.unit_of_measurement}/h` : ``;
+    var intensity = this.config.entity_pop_intensity ? html` - ${this._hass.states[this.config.entity_pop_intensity].state} ${this.getUOM('intensity')}` : ``;
     var pop = this.config.entity_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${Math.round(this._hass.states[this.config.entity_pop].state)} %${intensity}</li>` : ``;
     var visibility = this.config.entity_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span>${this.current.visibility}<span class="unit"> ${this.getUOM('length')}</span></li>` : ``;
     var wind = this.config.entity_wind_bearing && this.config.entity_wind_speed ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span>${this.current.beaufort}${this.current.windBearing} ${this.current.windSpeed}<span class="unit"> ${this.getUOM('length')}/h</span></li>` : ``;
@@ -640,6 +640,8 @@ get style() {
         return lengthUnit;
       case 'precipitation':
         return lengthUnit === 'km' ? 'mm' : 'in';
+      case 'intensity':
+        return lengthUnit === 'km' ? 'mm/h' : 'in/h'
       default:
         return this._hass.config.unit_system[measure] || '';
     }
