@@ -1,3 +1,6 @@
+# 0.8.2
+ - Fixed UOM for POP Intensity
+ 
 # 0.8.1
  - Added slots for current conditions.  Allows setting specific locations for individual conditions.
  - Added optional separator bar near top of card.
