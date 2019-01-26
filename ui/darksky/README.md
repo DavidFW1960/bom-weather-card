@@ -171,7 +171,7 @@ show_beaufort: true
 | show_beaufort            | true / **false**            | Shows Beaufort Scale wind information                                       |
 | show_separator           | true / **false**            | Shows separator between current conditions columns and current temp / Icon  |
 | time_format              | **locale** / 12 / 24        | Sets the format sunset and sunrise times. locale format is the default.     |
-| temp_top_margin          | **5px** / px or em value    | Sets the top margin of the Temperature.                                     |
+| temp_top_margin          | **-.3em** / px or em value  | Sets the top margin of the Temperature.                                     |
 | temp_font_weight         | **300** / numeric value     | Sets the font weight of the Temperature.                                    |
 | temp_font_size           | **4em** / em value          | Sets the font size of the Temperature.                                      |
 | temp_right_pos           | **.85em** / px or em value  | Sets the right position of the Temperature.                                 |
