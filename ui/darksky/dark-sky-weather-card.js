@@ -191,8 +191,8 @@ class DarkSkyWeatherCard extends LitElement {
 // #####
 
   get dayOrNight() {
-    const transformDayNight = { "below_horizon": "night", "above_horizon": "day", }
-    return transformDayNight[this._hass.states[this.config.entity_sun].state];
+    const transformDayNight = { "below_horizon": "night", "above_horizon": "day", };
+    return this.config.entity_sun ? transformDayNight[this._hass.states[this.config.entity_sun].state] : 'day';
   }
 
 
@@ -214,7 +214,7 @@ class DarkSkyWeatherCard extends LitElement {
       'hail': 'rainy-7',
       'lightning': 'thunder',
       'thunderstorm': 'thunder',
-      'windy-variant': `cloudy-day-3`,
+      'windy-variant': html`cloudy-${this.dayOrNight}-3`,
       'exceptional': '!!',
     }
   }
@@ -408,13 +408,13 @@ get style() {
   var tooltipWidth = this.config.tooltip_width || "110";
   var tooltipLeftOffset = this.config.tooltip_left_offset || "-12";
   var tooltipVisible = this.config.tooltips ? "visible" : "hidden";
-  var tempTopMargin = this.config.temp_top_margin || "5px";
+  var tempTopMargin = this.config.temp_top_margin || "-.3em";
   var tempFontWeight = this.config.temp_font_weight || "300";
   var tempFontSize = this.config.temp_font_size || "4em";
   var tempRightPos = this.config.temp_right_pos || ".85em";
   var tempUOMTopMargin = this.config.temp_uom_top_margin || "-9px";
   var tempUOMRightMargin = this.config.temp_uom_right_margin || "7px";
-  var apparentTopMargin = this.config.apparent_top_margin || "39px";
+  var apparentTopMargin = this.config.apparent_top_margin || "45px";
   var apparentRightPos =  this.config.apparent_right_pos || "1em";
   var apparentRightMargin = this.config.apparent_right_margin || "1em";
   var currentTextTopMargin = this.config.current_text_top_margin || "39px";
@@ -422,8 +422,8 @@ get style() {
   var currentTextFontSize = this.config.current_text_font_size || "1.5em";
   var largeIconTopMargin = this.config.large_icon_top_margin || "-3.5em";
   var largeIconLeftPos = this.config.large_icon_left_pos || "0em";
-  var currentDataTopMargin = this.config.current_data_top_margin ? this.config.current_data_top_margin : this.config.show_separator ? "1em" : "6em";
-  var separatorTopMargin = this.config.separator_top_margin || "5em";
+  var currentDataTopMargin = this.config.current_data_top_margin ? this.config.current_data_top_margin : this.config.show_separator ? "1em" : "7em";
+  var separatorTopMargin = this.config.separator_top_margin || "6em";
   
   return html`
         .clear {
