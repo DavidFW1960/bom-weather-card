@@ -1,3 +1,8 @@
+# 0.8.3
+ - Polish text added : @bieniu
+ - Adjusted temperature top-margin due to changes in HA v 86.x
+ - Corrected windy-variant icon mapping
+ 
 # 0.8.2
  - Fixed UOM for POP Intensity
  
