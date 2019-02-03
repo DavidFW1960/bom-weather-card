@@ -1,3 +1,7 @@
+# 0.9.1
+ - Card now updates all values on hass state changes
+ - style getter is now a function as per suggestion from @thomasloven.  This may help with using card modder with this card.
+ 
 # 0.8.3
  - Polish text added : @bieniu
  - Adjusted temperature top-margin due to changes in HA v 86.x
