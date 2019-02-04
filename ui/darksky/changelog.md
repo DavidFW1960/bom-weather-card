@@ -1,3 +1,6 @@
+# 0.9.2
+ - Corrected issue with Forecast day name not updating with hass state changes.
+ 
 # 0.9.1
  - Card now updates all values on hass state changes
  - style getter is now a function as per suggestion from @thomasloven.  This may help with using card modder with this card.
