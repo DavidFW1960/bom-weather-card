@@ -680,7 +680,7 @@ style() {
 
 // Forecast blocks
       this.forecast.forEach((daily) => {
-        root.getElementById("fcast-dayName-" + daily.dayIndex).currentText = `${(daily.date).toLocaleDateString(this.config.locale,{weekday: 'short'})}`;
+        root.getElementById("fcast-dayName-" + daily.dayIndex).textContent = `${(daily.date).toLocaleDateString(this.config.locale,{weekday: 'short'})}`;
         root.getElementById("fcast-icon-" + daily.dayIndex).style.backgroundImage = `none, url(/local/icons/weather_icons/${this.config.static_icons ? "static" : "animated"}/${this.weatherIcons[this._hass.states[daily.condition].state]}.svg`;
         root.getElementById("fcast-high-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.temphigh].state)}${this.getUOM("temperature")}`;
         root.getElementById("fcast-low-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.templow].state)}${this.getUOM("temperature")}`;
