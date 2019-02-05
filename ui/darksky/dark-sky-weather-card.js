@@ -657,6 +657,7 @@ style() {
 
 // #####
 // ##### Assign the external hass object to an internal class var.
+// ##### This is called everytime a state change occurs in HA
 // #####
 
   set hass(hass) { 
@@ -683,7 +684,7 @@ style() {
         root.getElementById("fcast-dayName-" + daily.dayIndex).textContent = `${(daily.date).toLocaleDateString(this.config.locale,{weekday: 'short'})}`;
         root.getElementById("fcast-icon-" + daily.dayIndex).style.backgroundImage = `none, url(/local/icons/weather_icons/${this.config.static_icons ? "static" : "animated"}/${this.weatherIcons[this._hass.states[daily.condition].state]}.svg`;
         root.getElementById("fcast-high-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.temphigh].state)}${this.getUOM("temperature")}`;
-        root.getElementById("fcast-low-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.templow].state)}${this.getUOM("temperature")}`;
+        root.getElementById("fcast-low-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.templow].state)}${this.config.old_daily_format ? this.getUOM("temperature") : ""}`;
         if (this.config.entity_pop_1 && this.config.entity_pop_2 && this.config.entity_pop_3 && this.config.entity_pop_4 && this.config.entity_pop_5) { root.getElementById("fcast-pop-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.pop].state)} %` }
         root.getElementById("fcast-summary-" + daily.dayIndex).textContent = `${this._hass.states[daily.summary].state}`;
      });
@@ -709,7 +710,7 @@ style() {
   
   
 // #####
-// ##### Assings the configuration vlaues to an internal call var
+// ##### Assigns the configuration vlaues to an internal class var
 // ##### This is called everytime a config change is made
 // #####
 
