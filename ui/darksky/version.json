@@ -1,7 +1,7 @@
 {
     "dark-sky-weather-card": {
-      "updated_at": "2019-02-03",
-      "version": "0.9.1",
+      "updated_at": "2019-02-04",
+      "version": "0.9.2",
       "remote_location": "https://raw.githubusercontent.com/iammexx/home-assistant-config/master/ui/darksky/dark-sky-weather-card.js",
       "visit_repo": "https://github.com/iammexx/home-assistant-config/tree/master/ui/darksky",
       "changelog": "https://github.com/iammexx/home-assistant-config/blob/master/ui/darksky/changelog.md"
