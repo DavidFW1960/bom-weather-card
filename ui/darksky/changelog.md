@@ -1,3 +1,6 @@
+# 0.9.3
+ - Corrected issue where an extra UOM would show on the forecast daily temps
+ 
 # 0.9.2
  - Corrected issue with Forecast day name not updating with hass state changes.
  
