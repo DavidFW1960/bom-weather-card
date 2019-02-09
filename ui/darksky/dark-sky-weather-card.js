@@ -36,17 +36,19 @@ class DarkSkyWeatherCard extends LitElement {
         ${apparentTemp}
         ${separator}
         <span>
-          <ul class="variations right">
-              ${this.getSlot().r1}
-              ${this.getSlot().r2}
-              ${this.getSlot().r3}
-              ${this.getSlot().r4}
-          </ul>
           <ul class="variations">
+            <li>
               ${this.getSlot().l1} 
               ${this.getSlot().l2}
               ${this.getSlot().l3}
               ${this.getSlot().l4}
+            </li>
+            <li>
+              ${this.getSlot().r1}
+              ${this.getSlot().r2}
+              ${this.getSlot().r3}
+              ${this.getSlot().r4}
+            </li>
           </ul>
         </span>
             <div class="forecast clear">
@@ -134,6 +136,7 @@ class DarkSkyWeatherCard extends LitElement {
     const windDirections_fr = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO','N'];
     const windDirections_de = ['N','NNO','NO','ONO','O','OSO','SO','SSO','S','SSW','SW','WSW','W','WNW','NW','NNW','N'];
     const windDirections_nl = ['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW','N'];
+    const windDirections_he = ['צפון','צ-צ-מז','צפון מזרח','מז-צ-מז','מזרח','מז-ד-מז','דרום מזרח','ד-ד-מז','דרום','ד-ד-מע','דרום מערב','מע-ד-מע','מערב','מע-צ-מע','צפון מערב','צ-צ-מע','צפון'];
     
     switch (this.config.locale) {
       case "it" :
@@ -143,6 +146,8 @@ class DarkSkyWeatherCard extends LitElement {
         return windDirections_de;
       case "nl" :
         return windDirections_nl;
+      case "he" :
+        return windDirections_he;
       default :
         return windDirections_en;
     }
@@ -178,6 +183,11 @@ class DarkSkyWeatherCard extends LitElement {
         return {
           feelsLike: "Odczuwalne",
           maxToday: "Najwyższa dziś:",
+        }
+      case "he" :
+        return {
+          feelsLike: "מרגיש כמו:",
+          maxToday: "מקסימלי היום:",
         }
       default :
         return {
@@ -416,10 +426,10 @@ style() {
   var tooltipWidth = this.config.tooltip_width || "110";
   var tooltipLeftOffset = this.config.tooltip_left_offset || "-12";
   var tooltipVisible = this.config.tooltips ? "visible" : "hidden";
-  var tempTopMargin = this.config.temp_top_margin || "-.3em";
+  var tempTopMargin = this.config.temp_top_margin || "-0.3em";
   var tempFontWeight = this.config.temp_font_weight || "300";
   var tempFontSize = this.config.temp_font_size || "4em";
-  var tempRightPos = this.config.temp_right_pos || ".85em";
+  var tempRightPos = this.config.temp_right_pos || "0.85em";
   var tempUOMTopMargin = this.config.temp_uom_top_margin || "-9px";
   var tempUOMRightMargin = this.config.temp_uom_right_margin || "7px";
   var apparentTopMargin = this.config.apparent_top_margin || "45px";
@@ -443,7 +453,7 @@ style() {
         padding-top: 2em;
         padding-bottom: 1em;
         padding-left: 1em;
-        padding-right:1em;
+        padding-right: 1em;
         position: relative;
       }
 
@@ -501,23 +511,18 @@ style() {
       }
 
       .variations {
-        display: inline-block;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
         font-weight: 300;
         color: var(--primary-text-color);
         list-style: none;
-        margin-left: -2em;
+        padding: 0.2em;
         margin-top: ${currentDataTopMargin};
       }
 
-      .variations.right {
-        position: absolute;
-        right: 1em;
-        margin-left: 0;
-        margin-right: 1em;
-      }
-
       .unit {
-        font-size: .8em;
+        font-size: 0.8em;
       }
 
       .forecast {
