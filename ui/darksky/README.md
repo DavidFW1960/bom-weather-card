@@ -167,6 +167,7 @@ show_beaufort: true
 | tooltip_border_width     | **1**                       | Sets the width of the tooltip border in px                                  |
 | tooltip_caret_size       | **5**                       | Sets the size of the caret (the little arrow pointing down) in px           |
 | tooltip_left_offset      | **-12**                     | Sets the offset of the left edge of the tooltip. In negative (-)x           |
+| refresh_interval         | **30** / Integer value      | Sets the nuber of seconds between card value refreshes                      |
 | old_daily_format         | true / **false**            | Sets the format of the daily high & low temps to be stacked (old format)    |
 | show_beaufort            | true / **false**            | Shows Beaufort Scale wind information                                       |
 | show_separator           | true / **false**            | Shows separator between current conditions columns and current temp / Icon  |
