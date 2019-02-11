@@ -660,9 +660,28 @@ style() {
 // ##### This is called everytime a state change occurs in HA
 // #####
 
-  set hass(hass) { 
-    this._hass = hass;
-    this.updateValues();
+  set hass(hass) {
+    
+    var interval = this.config.refresh_interval || 30;
+    var doRefresh = false;
+    
+    // Make sure hass is assigned first time.
+    if (!this._initialized) {
+      this._initialized= true;
+      this._lasRefresh = new Date();
+      doRefresh = true;
+    }
+    
+    var now = new Date();
+    
+    // Check if refresh interval has been exceeded and refresh if necessary
+    if (Math.round((now - this._lastRefresh)/1000) > interval ) { doRefresh = true; } 
+
+    if (doRefresh) {
+      this._lastRefresh = new Date();
+      this._hass = hass;
+      this.updateValues();
+    }
   }
 
   
