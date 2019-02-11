@@ -1,3 +1,8 @@
+# 0.9.4
+ - Modified card refresh logic to allow an interval between card refreshes.  This should help lower cpu powered devices to not be overwhelmed by multiple hass changes / sec.
+ - Added refresh_interval flag to config. Can be used to specify the number of seconds between card value refreshes. Defaults to 30.
+ - (VirtualL) Modified card to allow RTL languages
+ - (VirtualL) Added Hebrew language
 # 0.9.3
  - Corrected issue where an extra UOM would show on the forecast daily temps
  
