@@ -6,11 +6,17 @@ the card's capabilities through configuration flags.
 
 **Installation**
 ------------------------------
-1. Add **dark-sky-weather-card.js** to your **www/custom_ui/** directory.  If you don't have this directory (this is your first
-custom card), you will need to create it.
+1. Add ```dark-sky-weather-card.js``` to your ```<config-dir>/www/custom_ui/``` directory.  If you don't have this directory (this is your first custom card), you will need to create it.
 
-2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in **www/icons/weather_icons**.  Create 
-the directories if necessary. You should end up with an **animated** directory and a **static** directory inside the **weather_icons** directory.
+2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in ```<config-dir>/www/icons/weather_icons```.  Create the directories if necessary.
+
+You should end up with the following folders:
+
+```<config-dir>/www/custom_ui/dark-sky-weather-card.js```
+
+```<config-dir>/www/icons/weather_icons/animated/```
+
+```<config-dir>/www/icons/weather_icons/static/```
 
 **Configuration**
 ------------------------------
@@ -57,7 +63,7 @@ The next two steps are completed differently based on the version of HA you are 
 - Pre 0.84 or if using yaml mode in 0.84 or above : Add to your ui-lovelace.yaml file.
 - Using storage mode in 0.84 or above use the "Raw Config Editor" to add the reference and definition to the config.
 
-2. Add the card reference at the top of the configuration ***Note the use of type: module and not js
+2. Add the card reference at the top of the configuration ***Note the use of type: module and not js  **Note2: /local/ points to the ```<config-dir>/www/``` dir.
 ~~~~
 resources:
   - url: /local/custom_ui/dark-sky-weather-card.js?v=7.1
