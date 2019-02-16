@@ -139,7 +139,7 @@ class DarkSkyWeatherCard extends LitElement {
     const windDirections_de = ['N','NNO','NO','ONO','O','OSO','SO','SSO','S','SSW','SW','WSW','W','WNW','NW','NNW','N'];
     const windDirections_nl = ['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW','N'];
     const windDirections_he = ['צפון','צ-צ-מז','צפון מזרח','מז-צ-מז','מזרח','מז-ד-מז','דרום מזרח','ד-ד-מז','דרום','ד-ד-מע','דרום מערב','מע-ד-מע','מערב','מע-צ-מע','צפון מערב','צ-צ-מע','צפון'];
-    const windDirections_da = ['Nord','Nord-Nordøst','Nordøst','Øst-Nordøst','Øst','Øst-Sydøst','Sydøst','Syd-Sydøst','Syd','Syd-Sydvest','Sydvest','Vest-Sydvest','Vest','Vest-Nordvest','Nordvest','Nord-Nordvest','Nord'];
+    const windDirections_da = ['N','NNØ','NØ','ØNØ','Ø','ØSØ','SØ','SSØ','S','SSV','SV','VSV','V','VNV','NV','NNV','N'];
     
     switch (this.config.locale) {
       case "it" :
