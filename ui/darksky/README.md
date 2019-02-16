@@ -123,14 +123,23 @@ entity_pop_2: sensor.dark_sky_precip_probability_2
 entity_pop_3: sensor.dark_sky_precip_probability_3
 entity_pop_4: sensor.dark_sky_precip_probability_4
 entity_pop_5: sensor.dark_sky_precip_probability_5
-entity_current_text: sensor.dark_sky_current_text
 ~~~~
 
-**Note:** sensor.dark_sky_current_text is a template sensor.  You can call it whatever you want 
-so long as you use the same name in the card config above.  An example of how to set up this template is below.
+**Note: The following entries require template sensors**
+~~~~
+entity_current_text: sensor.dark_sky_current_text
+alt_daytime_high: sensor.dark_sky_alt_daytime_high 
+alt_wind: sensor.dark_sky_alt_wind
+alt_visibility: sensor.dark_sky_alt_visibility
+alt_pop: sensor.dark_sky_alt_pop
+alt_pressure: sensor.dark_sky_alt_pressure
+alt_humidity: sensor.dark_sky_alt_humidity
+~~~~
+
+**Example template sensors:** You can call template sensors whatever you want so long as you use the same name in the card config.  
 ~~~~~
       dark_sky_current_text:
-        value_template: '{% if is_state("sensor.dark_sky_icon","clear-day") %} Clear 
+        value_template:  {% if is_state("sensor.dark_sky_icon","clear-day") %} Clear 
                          {% elif is_state("sensor.dark_sky_icon","clear-night") %} Clear 
                          {% elif is_state("sensor.dark_sky_icon","rain") %} Rain
                          {% elif is_state("sensor.dark_sky_icon","snow") %} Snowy
@@ -143,7 +152,12 @@ so long as you use the same name in the card config above.  An example of how to
                          {% elif is_state("sensor.dark_sky_icon","hail") %} Hailing
                          {% elif is_state("sensor.dark_sky_icon","lightning") %} Lightning
                          {% elif is_state("sensor.dark_sky_icon","thunderstorm") %} Thunderstorm
-                         {% endif %}'
+                         {% endif %}
+                         
+      dark_sky_alt_wind:
+        value_template: >-
+                        {% set winddir = ['Nord','Nord-Nordøst','Nordøst','Øst-Nordøst','Øst','Øst-Sydøst','Sydøst','Syd-Sydøst','Syd','Syd-Sydvest','Sydvest','Vest-Sydvest','Vest','Vest-Nordvest','Nordvest','Nord-Nordvest','Nord'] %}
+                        {{ states('sensor.dark_sky_wind_speed')}} m/s fra {{ winddir[((states('sensor.dark_sky_wind_bearing') | float / 360)*16) | round]}}
 ~~~~~
 
 Flags are used to control the look and feel of the card (See below for details)
