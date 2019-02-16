@@ -156,8 +156,8 @@ alt_humidity: sensor.dark_sky_alt_humidity
                          
       dark_sky_alt_wind:
         value_template: >-
-                        {% set winddir = ['Nord','Nord-Nordøst','Nordøst','Øst-Nordøst','Øst','Øst-Sydøst','Sydøst','Syd-Sydøst','Syd','Syd-Sydvest','Sydvest','Vest-Sydvest','Vest','Vest-Nordvest','Nordvest','Nord-Nordvest','Nord'] %}
-                        {{ states('sensor.dark_sky_wind_speed')}} m/s fra {{ winddir[((states('sensor.dark_sky_wind_bearing') | float / 360)*16) | round]}}
+                        {% set winddir = ['North','North-Northeast','Northeast','East-Northeast','East','East-Southeast','Southeast','South-Southeast','South','South-Southwest','Southwest','West-Southwest','West','West-Northwest','Northwest','North-Northwest','North'] %}
+                        {{ states('sensor.dark_sky_wind_speed') | round }} mi/h from the {{ winddir[((states('sensor.dark_sky_wind_bearing') | float / 360)*16) | round]}}
 ~~~~~
 
 Flags are used to control the look and feel of the card (See below for details)
