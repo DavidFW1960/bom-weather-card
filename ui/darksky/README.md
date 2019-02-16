@@ -125,7 +125,7 @@ entity_pop_4: sensor.dark_sky_precip_probability_4
 entity_pop_5: sensor.dark_sky_precip_probability_5
 ~~~~
 
-**Note: The following entries require template sensors**
+**Note:** The following entries require template sensors.  The alt_* entries are for overriding the text for the indicated slot entry. By using these you can create whatever format you like for these entries.
 ~~~~
 entity_current_text: sensor.dark_sky_current_text
 alt_daytime_high: sensor.dark_sky_alt_daytime_high 
