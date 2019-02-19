@@ -1,3 +1,6 @@
+# 0.10.2
+  - updated LitElement source object to "home-assistant-main" as "hui-error-entity-row" is being removed in HA 0.88 update.
+  
 # 0.10.1
   - Added da locale translations
   - Added alt_* config entries.  These allow complete remapping of slot data to what ever format desired by using a template sensor.
