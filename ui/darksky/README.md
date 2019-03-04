@@ -2,7 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/45823145/53432443-83d83700-39c0-11e9-9c93-db6945f24d70.png)
 
-The Dark Sky Weather Card provides current and forecasted weather conditions using the Dark Sky weather platform. You configure the card by passing in sensor entities from the Dark Sky Sensor platform.  
+The Dark Sky Weather Card provides current and forecasted weather conditions using the Dark Sky sensor platform. You configure the card by passing in sensor entities from the Dark Sky Sensor platform.  
 
 The card is very customizable.  You can configure many aspects of it's look and feel as well as which specific content to show by passing in customization flags and defining optional sensors.  Content can also be rearranged if desired. 
 
