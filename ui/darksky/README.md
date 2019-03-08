@@ -60,7 +60,7 @@ You should end up with the following folders:
       - daily_summary
       - pressure
       - visibility
-    update_interval:
+    scan_interval:
       minutes: 5
 ~~~~
 
