@@ -87,26 +87,26 @@ in your configuration.  The card will not work at all if any of these lines are 
 type: 'custom:dark-sky-weather-card'
 entity_current_conditions: sensor.dark_sky_icon
 entity_temperature: sensor.dark_sky_temperature
-entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1
-entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2
-entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3
-entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4
-entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5
-entity_forecast_icon_1: sensor.dark_sky_icon_1
-entity_forecast_icon_2: sensor.dark_sky_icon_2
-entity_forecast_icon_3: sensor.dark_sky_icon_3
-entity_forecast_icon_4: sensor.dark_sky_icon_4
-entity_forecast_icon_5: sensor.dark_sky_icon_5
-entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_0
-entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1
-entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2
-entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3
-entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4
-entity_summary_1: sensor.dark_sky_summary_1
-entity_summary_2: sensor.dark_sky_summary_2
-entity_summary_3: sensor.dark_sky_summary_3
-entity_summary_4: sensor.dark_sky_summary_4
-entity_summary_5: sensor.dark_sky_summary_5
+entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1d
+entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2d
+entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3d
+entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4d
+entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5d
+entity_forecast_icon_1: sensor.dark_sky_icon_1d
+entity_forecast_icon_2: sensor.dark_sky_icon_2d
+entity_forecast_icon_3: sensor.dark_sky_icon_3d
+entity_forecast_icon_4: sensor.dark_sky_icon_4d
+entity_forecast_icon_5: sensor.dark_sky_icon_5d
+entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_0d
+entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1d
+entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2d
+entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3d
+entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4d
+entity_summary_1: sensor.dark_sky_summary_1d
+entity_summary_2: sensor.dark_sky_summary_2d
+entity_summary_3: sensor.dark_sky_summary_3d
+entity_summary_4: sensor.dark_sky_summary_4d
+entity_summary_5: sensor.dark_sky_summary_5d
 ~~~~
 
 Optional entries add components to the card. 
@@ -114,7 +114,7 @@ Optional entries add components to the card.
 ~~~~
 entity_sun: sun.sun
 entity_visibility: sensor.dark_sky_visibility
-entity_daytime_high: sensor.dark_sky_daytime_high_temperature_0
+entity_daytime_high: sensor.dark_sky_daytime_high_temperature_0d
 entity_wind_bearing: sensor.dark_sky_wind_bearing
 entity_wind_speed: sensor.dark_sky_wind_speed
 entity_humidity: sensor.dark_sky_humidity
@@ -123,11 +123,11 @@ entity_apparent_temp: sensor.dark_sky_apparent_temperature
 entity_daily_summary: sensor.dark_sky_daily_summary
 entity_pop: sensor.dark_sky_precip_probability
 entity_pop_intensity: sensor.dark_sky_precip_intensity
-entity_pop_1: sensor.dark_sky_precip_probability_1
-entity_pop_2: sensor.dark_sky_precip_probability_2
-entity_pop_3: sensor.dark_sky_precip_probability_3
-entity_pop_4: sensor.dark_sky_precip_probability_4
-entity_pop_5: sensor.dark_sky_precip_probability_5
+entity_pop_1: sensor.dark_sky_precip_probability_1d
+entity_pop_2: sensor.dark_sky_precip_probability_2d
+entity_pop_3: sensor.dark_sky_precip_probability_3d
+entity_pop_4: sensor.dark_sky_precip_probability_4d
+entity_pop_5: sensor.dark_sky_precip_probability_5d
 ~~~~
 
 **Note:** The following entries require template sensors.  The alt_* entries are for overriding the text for the indicated slot entry. By using these you can create whatever format you like for these entries.
