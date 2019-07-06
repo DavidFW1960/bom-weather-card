@@ -1,8 +1,8 @@
-# Dark Sky Weather Card
+# BOM Weather Card
 
-![image](https://user-images.githubusercontent.com/45823145/53432443-83d83700-39c0-11e9-9c93-db6945f24d70.png)
+![image](bom-weather.png)
 
-The Dark Sky Weather Card provides current and forecasted weather conditions using the Dark Sky platform. You configure the card by passing in sensor entities from the Dark Sky Sensor platform.  
+The BOM Weather Card provides current and forecasted weather conditions using the BOM platforms. A custom component for BOM Forecast from [here](https://github.com/DavidFW1960/bom_forecast) You configure the card by passing in sensor entities from the BOM platforms. The [weather package](https://github.com/DavidFW1960/bom_forecast/blob/master/weather.yaml) in the BOM Forecast component contains BOM Sensor platform configuration for this card as well. Both the core BOM Sensor and BOM Forecast custom component are REQUIRED to use this card.
 
 The card is very customizable.  You can configure many aspects of it's look and feel as well as which specific content to show by passing in customization flags and defining optional sensors.  Content can also be rearranged if desired. 
 
@@ -11,13 +11,17 @@ Hovering over a forecast day will display the daily weather summary in a tooltip
 
 **Installation**
 ------------------------------
-1. Add ```dark-sky-weather-card.js``` to your ```<config-dir>/www/custom_ui/``` directory.  If you don't have this directory (this is your first custom card), you will need to create it.
+EASY Way? use HACS and add this repo https://github.com/DavidFW1960/bom-weather-card
+HARD Way?
+1. Add ```bom-weather-card.js``` to your ```<config-dir>/www/custom_ui/``` directory.  If you don't have this directory (this is your first custom card), you will need to create it.
 
-2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in ```<config-dir>/www/icons/weather_icons```.  Create the directories if necessary.
+2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in ```<config-dir>/www/icons/weather_icons```.  Create the directories if necessary. NOTE: I have found a few more svg icons to use in this component so [ALL icons required ate in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip)
 
 You should end up with the following folders:
 
-```<config-dir>/www/custom_ui/dark-sky-weather-card.js```
+```<config-dir>/www/custom_ui/bom-weather-card.js```
+OR HACS
+```<config-dir>/www/community/bom-weather-card/bom-weather-card.js```
 
 ```<config-dir>/www/icons/weather_icons/animated/```
 
@@ -25,44 +29,26 @@ You should end up with the following folders:
 
 **Configuration**
 ------------------------------
-1. Add the Dark Sky sensor platform to your configuration.yaml or sensors.yaml or wherever you keep your sensor configuration.
+1. IF You don't use the package weather.yaml, Add the BOM sensor platform to your configuration.yaml or sensors.yaml or wherever you keep your sensor configuration.
 
 ~~~~  
-- platform: darksky
-    api_key: <Your Dark Sky API Key>
-    forecast:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
+  - platform: bom
+    station: !secret my_bom_station
+    name: !secret my_bom_name
     monitored_conditions:
-      - icon
-      - summary
-      - nearest_storm_distance
-      - nearest_storm_bearing
-      - humidity
-      - temperature
-      - temperature_high
-      - temperature_low
-      - apparent_temperature
-      - apparent_temperature_high
-      - apparent_temperature_low
-      - wind_speed
-      - wind_bearing
-      - precip_type
-      - precip_probability
-      - precip_accumulation
-      - precip_intensity
-      - precip_intensity_max
-      - uv_index
-      - daily_summary
-      - pressure
-      - visibility
-    scan_interval:
-      minutes: 5
+      - apparent_t
+      - delta_t
+      - gust_kmh
+      - gust_kt
+      - air_temp
+      - dewpt
+      - rain_trace
+      - rel_hum
+      - wind_dir
+      - wind_spd_kmh
+      - wind_spd_kt
 ~~~~
+Note that different weather stations have different monitored conditions available. Some include pressure for example. See the BOM Sensor docs to see other options and try them with your weather station. I am also using secrets.yaml to set station and name.
 
 The next two steps are completed differently based on the version of HA you are using:
 - Pre 0.84 or if using yaml mode in 0.84 or above : Add to your ui-lovelace.yaml file.
@@ -75,94 +61,75 @@ The next two steps are completed differently based on the version of HA you are 
 
 ~~~~
 resources:
-  - url: /local/custom_ui/dark-sky-weather-card.js?v=7.1
+  - url: /local/custom_ui/bom-weather-card.js?v=0.1
     type: module
 ~~~~
 
-3. Add the card definition:  There are required / optional and flag entries.  
+3. Add the card definition:  There are required / optional and flag entries.
+NOTE: My entries show a mix of the FTP Component sensors and this platform's sensors.
 
 Required entries must be present 
 in your configuration.  The card will not work at all if any of these lines are missing. 
 ~~~~
-type: 'custom:dark-sky-weather-card'
-entity_current_conditions: sensor.dark_sky_icon
-entity_temperature: sensor.dark_sky_temperature
-entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1d
-entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2d
-entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3d
-entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4d
-entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5d
-entity_forecast_icon_1: sensor.dark_sky_icon_1d
-entity_forecast_icon_2: sensor.dark_sky_icon_2d
-entity_forecast_icon_3: sensor.dark_sky_icon_3d
-entity_forecast_icon_4: sensor.dark_sky_icon_4d
-entity_forecast_icon_5: sensor.dark_sky_icon_5d
-entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_0d
-entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1d
-entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2d
-entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3d
-entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4d
-entity_summary_1: sensor.dark_sky_summary_1d
-entity_summary_2: sensor.dark_sky_summary_2d
-entity_summary_3: sensor.dark_sky_summary_3d
-entity_summary_4: sensor.dark_sky_summary_4d
-entity_summary_5: sensor.dark_sky_summary_5d
+          - type: custom:bom-weather-card
+            title: BOM Weather
+            entity_current_conditions: sensor.bom_gosford_icon_0
+            entity_temperature: sensor.bom_gosford_air_temp_c
+            entity_forecast_high_temp_1: sensor.bom_gosford_max_temp_c_1
+            entity_forecast_high_temp_2: sensor.bom_gosford_max_temp_c_2
+            entity_forecast_high_temp_3: sensor.bom_gosford_max_temp_c_3
+            entity_forecast_high_temp_4: sensor.bom_gosford_max_temp_c_4
+            entity_forecast_high_temp_5: sensor.bom_gosford_max_temp_c_5
+            entity_forecast_icon_1: sensor.bom_gosford_icon_1
+            entity_forecast_icon_2: sensor.bom_gosford_icon_2
+            entity_forecast_icon_3: sensor.bom_gosford_icon_3
+            entity_forecast_icon_4: sensor.bom_gosford_icon_4
+            entity_forecast_icon_5: sensor.bom_gosford_icon_5
+            entity_forecast_low_temp_1: sensor.bom_gosford_min_temp_c_1
+            entity_forecast_low_temp_2: sensor.bom_gosford_min_temp_c_2
+            entity_forecast_low_temp_3: sensor.bom_gosford_min_temp_c_3
+            entity_forecast_low_temp_4: sensor.bom_gosford_min_temp_c_4
+            entity_forecast_low_temp_5: sensor.bom_gosford_min_temp_c_5
+            entity_summary_1: sensor.bom_gosford_summary_1
+            entity_summary_2: sensor.bom_gosford_summary_2
+            entity_summary_3: sensor.bom_gosford_summary_3
+            entity_summary_4: sensor.bom_gosford_summary_4
+            entity_summary_5: sensor.bom_gosford_summary_5
 ~~~~
 
-Optional entries add components to the card. 
+Optional entries add components to the card. My BOM does not include visibility or pressure. Also I show Gosford conditions so edit to suit.
 ***Please note entity_pop_1 to 5 lines must all be included for daily pop (probability of precip) to show in forecast
 ~~~~
-entity_sun: sun.sun
-entity_visibility: sensor.dark_sky_visibility
-entity_daytime_high: sensor.dark_sky_daytime_high_temperature_0d
-entity_wind_bearing: sensor.dark_sky_wind_bearing
-entity_wind_speed: sensor.dark_sky_wind_speed
-entity_humidity: sensor.dark_sky_humidity
-entity_pressure: sensor.dark_sky_pressure
-entity_apparent_temp: sensor.dark_sky_apparent_temperature
-entity_daily_summary: sensor.dark_sky_daily_summary
-entity_pop: sensor.dark_sky_precip_probability
-entity_pop_intensity: sensor.dark_sky_precip_intensity
-entity_pop_1: sensor.dark_sky_precip_probability_1d
-entity_pop_2: sensor.dark_sky_precip_probability_2d
-entity_pop_3: sensor.dark_sky_precip_probability_3d
-entity_pop_4: sensor.dark_sky_precip_probability_4d
-entity_pop_5: sensor.dark_sky_precip_probability_5d
+            entity_sun: sun.sun
+#           entity_visibility: sensor.dark_sky_visibility
+            entity_daytime_high: sensor.bom_today_max
+            entity_daytime_low: sensor.bom_today_min
+            entity_wind_bearing: sensor.bom_gosford_wind_direction
+            entity_wind_speed: sensor.bom_gosford_wind_speed_kmh
+            entity_humidity: sensor.bom_gosford_relative_humidity
+#           entity_pressure: sensor.dark_sky_pressure
+            entity_apparent_temp: sensor.bom_gosford_feels_like_c
+            entity_daily_summary: sensor.bom_gosford_detailed_summary_0
+            entity_pop: sensor.bom_gosford_chance_of_rain_0
+            entity_pop_intensity: sensor.bom_gosford_rain_today
+            entity_pop_1: sensor.bom_gosford_chance_of_rain_1
+            entity_pop_2: sensor.bom_gosford_chance_of_rain_2
+            entity_pop_3: sensor.bom_gosford_chance_of_rain_3
+            entity_pop_4: sensor.bom_gosford_chance_of_rain_4
+            entity_pop_5: sensor.bom_gosford_chance_of_rain_5
 ~~~~
 
-**Note:** The following entries require template sensors.  The alt_* entries are for overriding the text for the indicated slot entry. By using these you can create whatever format you like for these entries.
+**Note:** The following entries require template sensors.  
 ~~~~
 entity_current_text: sensor.dark_sky_current_text
-alt_daytime_high: sensor.dark_sky_alt_daytime_high 
-alt_wind: sensor.dark_sky_alt_wind
-alt_visibility: sensor.dark_sky_alt_visibility
-alt_pop: sensor.dark_sky_alt_pop
-alt_pressure: sensor.dark_sky_alt_pressure
-alt_humidity: sensor.dark_sky_alt_humidity
 ~~~~
 
-**Example template sensors:** You can call template sensors whatever you want so long as you use the same name in the card config.  
+**Example template sensors:** You can call template sensors whatever you want so long as you use the same name in the card config. (Included in weather.yaml) 
 ~~~~~
-      dark_sky_current_text:
-        value_template:  {% if is_state("sensor.dark_sky_icon","clear-day") %} Clear 
-                         {% elif is_state("sensor.dark_sky_icon","clear-night") %} Clear 
-                         {% elif is_state("sensor.dark_sky_icon","rain") %} Rain
-                         {% elif is_state("sensor.dark_sky_icon","snow") %} Snowy
-                         {% elif is_state("sensor.dark_sky_icon","fog") %} Foggy
-                         {% elif is_state("sensor.dark_sky_icon","sleet") %} Sleet
-                         {% elif is_state("sensor.dark_sky_icon","wind") %} Windy
-                         {% elif is_state("sensor.dark_sky_icon","cloudy") %} Cloudy
-                         {% elif is_state("sensor.dark_sky_icon","partly-cloudy-day") %} Partly Cloudy
-                         {% elif is_state("sensor.dark_sky_icon","partly-cloudy-night") %} Partly Cloudy
-                         {% elif is_state("sensor.dark_sky_icon","hail") %} Hailing
-                         {% elif is_state("sensor.dark_sky_icon","lightning") %} Lightning
-                         {% elif is_state("sensor.dark_sky_icon","thunderstorm") %} Thunderstorm
-                         {% endif %}
-                         
-      dark_sky_alt_wind:
-        value_template: >-
-                        {% set winddir = ['North','North-Northeast','Northeast','East-Northeast','East','East-Southeast','Southeast','South-Southeast','South','South-Southwest','Southwest','West-Southwest','West','West-Northwest','Northwest','North-Northwest','North'] %}
-                        {{ states('sensor.dark_sky_wind_speed') | round }} mi/h from the {{ winddir[((states('sensor.dark_sky_wind_bearing') | float / 360)*16) | round]}}
+      bom_current_text:
+        value_template: >
+            {% set val = states('sensor.bom_gosford_summary_0').split('.')[0] %} 
+            {{ val | title }}
 ~~~~~
 
 Flags are used to control the look and feel of the card (See below for details)
@@ -239,5 +206,8 @@ slots (designated r1 - r4).  There are currently 10 possible values that can be 
 - pop (probability of precipitation)
 - humidity
 - pressure
+- daytime_low
 - empty (empty slot... the slot below does not rise to fill the space)
 - remove (same as empty but the slot below rises to take the place of the slot)
+
+[My FULL Lovelace configuration for this card is here](https://github.com/DavidFW1960/bom-weather-card/blob/master/lovelace.yaml) Cut and paste it into your lovelace.
