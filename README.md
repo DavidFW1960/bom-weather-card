@@ -2,17 +2,23 @@
 
 ![image](bom-weather.png)
 
-The BOM Weather Card provides current and forecasted weather conditions using the BOM platforms. A custom component for BOM Forecast from [here](https://github.com/DavidFW1960/bom_forecast) You configure the card by passing in sensor entities from the BOM platforms. The [weather package](https://github.com/DavidFW1960/bom_forecast/blob/master/weather.yaml) in the BOM Forecast component contains BOM Sensor platform configuration for this card as well. Both the core BOM Sensor and BOM Forecast custom component are REQUIRED to use this card.
+The BOM Weather Card provides current and forecasted weather conditions using the BOM sensor platforms in core Home Assistant and a custom component for BOM Forecast from [my forecast repo here](https://github.com/DavidFW1960/bom_forecast) You configure the card by passing in sensor entities from these BOM platforms. 
+
+The [weather package](https://github.com/DavidFW1960/bom_forecast/blob/master/weather.yaml) in the BOM Forecast component contains BOM Sensor platform configuration for this card as well. Both the core BOM Sensor and BOM Forecast custom component are REQUIRED to use this card.
 
 The card is very customizable.  You can configure many aspects of it's look and feel as well as which specific content to show by passing in customization flags and defining optional sensors.  Content can also be rearranged if desired. 
 
 Hovering over a forecast day will display the daily weather summary in a tooltip popup if that option has been enabled.
 
 
-**Installation**
+## **Installation**
 ------------------------------
-EASY Way? use HACS and add this repo https://github.com/DavidFW1960/bom-weather-card
-HARD Way?
+# EASY Way? use HACS and add this repo https://github.com/DavidFW1960/bom-weather-card
+1. Install card from HACS as per other plugins. Note that you must add this card as a module to the resources section as per the instructions when you install the card.
+
+2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in ```<config-dir>/www/icons/weather_icons```.  Create the directories if necessary. NOTE: I have found a few more svg icons to use in this component so [ALL icons required ate in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip)
+
+# HARD Way? manual installation as follows:
 1. Add ```bom-weather-card.js``` to your ```<config-dir>/www/custom_ui/``` directory.  If you don't have this directory (this is your first custom card), you will need to create it.
 
 2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in ```<config-dir>/www/icons/weather_icons```.  Create the directories if necessary. NOTE: I have found a few more svg icons to use in this component so [ALL icons required ate in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip)
@@ -27,7 +33,7 @@ OR HACS
 
 ```<config-dir>/www/icons/weather_icons/static/```
 
-**Configuration**
+## **Configuration**
 ------------------------------
 1. IF You don't use the package weather.yaml, Add the BOM sensor platform to your configuration.yaml or sensors.yaml or wherever you keep your sensor configuration.
 
@@ -58,7 +64,16 @@ The next two steps are completed differently based on the version of HA you are 
 
    **Note: Ensure type is set to module and not js**  
    **Note: /local/ points to the ```<config-dir>/www/``` dir.**
+   **Note: /community_plugin/ points to the ```<config-dir>/www/community/``` dir.**
 
+For a HACS Installation:
+~~~~
+resources:
+  - url: /community_plugin/bom-weather-card/bom-weather-card.js
+    type: module
+~~~~
+
+For the manual installation:
 ~~~~
 resources:
   - url: /local/custom_ui/bom-weather-card.js?v=0.1
@@ -66,10 +81,10 @@ resources:
 ~~~~
 
 3. Add the card definition:  There are required / optional and flag entries.
-NOTE: My entries show a mix of the FTP Component sensors and this platform's sensors.
+NOTE: My entries show a mix of the FTP Component sensors and this platform's sensors. **All my values refer to Gosford entities.. You will need to edit these to match your sensors names.**
 
 Required entries must be present 
-in your configuration.  The card will not work at all if any of these lines are missing. 
+in your configuration.  The card will not work at all if any of these lines are missing. **EDIT gosford to match your observations/forecasts**
 ~~~~
           - type: custom:bom-weather-card
             title: BOM Weather
@@ -97,17 +112,17 @@ in your configuration.  The card will not work at all if any of these lines are 
             entity_summary_5: sensor.bom_gosford_summary_5
 ~~~~
 
-Optional entries add components to the card. My BOM does not include visibility or pressure. Also I show Gosford conditions so edit to suit.
+Optional entries add components to the card. My BOM area (Gosford) does not include visibility or pressure. Edit entities to your correct sensor names. Replace Gosford with your name.
 ***Please note entity_pop_1 to 5 lines must all be included for daily pop (probability of precip) to show in forecast
 ~~~~
             entity_sun: sun.sun
-#           entity_visibility: sensor.dark_sky_visibility
+#           entity_visibility: sensor.???? - Not available in my area
             entity_daytime_high: sensor.bom_today_max
             entity_daytime_low: sensor.bom_today_min
             entity_wind_bearing: sensor.bom_gosford_wind_direction
             entity_wind_speed: sensor.bom_gosford_wind_speed_kmh
             entity_humidity: sensor.bom_gosford_relative_humidity
-#           entity_pressure: sensor.dark_sky_pressure
+#           entity_pressure: sensor.???? - Not available in my area
             entity_apparent_temp: sensor.bom_gosford_feels_like_c
             entity_daily_summary: sensor.bom_gosford_detailed_summary_0
             entity_pop: sensor.bom_gosford_chance_of_rain_0
