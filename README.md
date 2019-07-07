@@ -13,7 +13,9 @@ Hovering over a forecast day will display the daily weather summary in a tooltip
 
 ## **Installation**
 ------------------------------
-# EASY Way? use HACS and add this repo https://github.com/DavidFW1960/bom-weather-card
+# EASY Way? use HACS
+Add this repo https://github.com/DavidFW1960/bom-weather-card
+
 1. Install card from HACS as per other plugins. Note that you must add this card as a module to the resources section as per the instructions when you install the card.
 
 2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in ```<config-dir>/www/icons/weather_icons```.  Create the directories if necessary. NOTE: I have found a few more svg icons to use in this component so [ALL icons required ate in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip)
