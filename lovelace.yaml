@@ -34,6 +34,8 @@
             entity_daily_summary: sensor.bom_gosford_detailed_summary_0
             entity_pop: sensor.bom_gosford_chance_of_rain_0
             entity_pop_intensity: sensor.bom_gosford_rain_today
+            entity_possible_today: sensor.bom_gosford_possible_rainfall_0
+            entity_possible_tomorrow: sensor.bom_gosford_possible_rainfall_1
             entity_pop_1: sensor.bom_gosford_chance_of_rain_1
             entity_pop_2: sensor.bom_gosford_chance_of_rain_2
             entity_pop_3: sensor.bom_gosford_chance_of_rain_3
@@ -72,11 +74,12 @@
             large_icon_top_margin: -3.5em   #default -3.5em px or em
             large_icon_left_position: 0em   #default 0em px or em
             separator_top_margin: 6em       #default 6em px or em
-            slot_l1: daytime_high
+            slot_l1: daytime_high           #daytime_high
             slot_l2: daytime_low            #wind
-            slot_l3: sun_next               #visibility but BOM has no visibility reported
-            slot_l4: wind                   #sun_next
-            slot_r1: pop
-            slot_r2: humidity
-            slot_r3: sun_following          #pressure but BOM has no visibility reported
-            slot_r4: remove                 #sun_following
+            slot_l3: wind                   #visibility but BOM has no visibility reported
+            slot_l4: sun_next               #sun_next
+            slot_r1: pop                    #pop
+            slot_r2: humidity               #humidity
+            slot_r3: possible_today         #pressure but BOM has no pressure reported
+            slot_r4: sun_following          #sun_following
+
