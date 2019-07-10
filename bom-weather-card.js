@@ -97,6 +97,8 @@ class BOMWeatherCard extends LitElement {
     var daytimeLow = this.config.alt_daytime_low ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer"></ha-icon></span><span id="alt-daytime-low">${this._hass.states[this.config.alt_daytime_low].state}</span></li>` : this.config.entity_daytime_low ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer"></ha-icon></span>${this.localeText.minToday} <span id="daytime-low-text">${Math.round(this._hass.states[this.config.entity_daytime_low].state)}</span><span> ${this.getUOM('temperature')}</span></li>` : ``;
     var intensity = this.config.entity_pop_intensity ? html`<span id="intensity-text"> - ${this._hass.states[this.config.entity_pop_intensity].state}</span><span class="unit"> ${this.getUOM('precipitation')}</span>` : ``;
     var pop = this.config.alt_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="alt-pop">${this._hass.states[this.config.alt_pop].state}</span></li>` : this.config.entity_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="pop-text">${Math.round(this._hass.states[this.config.entity_pop].state)}</span> %<span id="pop-intensity-text">${intensity}</span></li>` : ``;
+    var possibleToday = this.config.entity_possible_today ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="possible_today-text">${"Pos. Today " + this._hass.states[this.config.entity_possible_today].state}</span><span class="unit"> ${this.getUOM('precipitation')}</span></li>` : ``;
+    var possibleTomorrow = this.config.entity_possible_tomorrow ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="possible_tomorrow-text">${"Pos. Tom " + this._hass.states[this.config.entity_possible_tomorrow].state}</span><span class="unit"> ${this.getUOM('precipitation')}</span></li>` : ``;
     var visibility = this.config.alt_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span><span id="alt-visibility">${this._hass.states[this.config.alt_visibility].state}</span></li>` : this.config.entity_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span><span id="visibility-text">${this.current.visibility}</span><span class="unit"> ${this.getUOM('length')}</span></li>` : ``;
     var wind = this.config.alt_wind ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span id="alt-wind">${this._hass.states[this.config.alt_wind].state}</span></li>` : this.config.entity_wind_bearing && this.config.entity_wind_speed ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span id="beaufort-text">${this.current.beaufort}</span><span id="wind-bearing-text">${this.current.windBearing}</span><span id="wind-speed-text"> ${this.current.windSpeed}</span><span class="unit"> ${this.getUOM('length')}/h</span></li>` : ``;
     var humidity = this.config.alt_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span><span id="alt-humidity">${this._hass.states[this.config.alt_humidity].state}</span></li>` : this.config.entity_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span><span id="humidity-text">${this.current.humidity}</span><span class="unit"> %</span></li>` : ``;
@@ -105,6 +107,8 @@ class BOMWeatherCard extends LitElement {
     
     switch (value){
       case 'pop': return pop;
+      case 'possible_today': return possibleToday;
+      case 'possible_tomorrow': return possibleTomorrow;
       case 'humidity': return humidity;
       case 'pressure': return pressure;
       case 'sun_following': return sunFollowing;
@@ -759,6 +763,8 @@ style() {
       if (this.config.entity_visibility && !this.config.alt_visibility) { root.getElementById("visibility-text").textContent = `${this.current.visibility}` }
       if (this.config.entity_pop && !this.config.alt_pop) { root.getElementById("pop-text").textContent = `${Math.round(this._hass.states[this.config.entity_pop].state)}` }
       if (this.config.entity_pop_intensity && !this.config.alt_pop) { root.getElementById("pop-intensity-text").textContent = ` - ${this._hass.states[this.config.entity_pop_intensity].state} ${this.getUOM('precipitation')}` }
+      if (this.config.entity_possible_today && !this.config.alt_possible_today) { root.getElementById("possible_today-text").textContent = `${this._hass.states[this.config.entity_possible_today].state}` }
+      if (this.config.entity_possible_tomorrow && !this.config.alt_possible_tomorrow) { root.getElementById("possible_tomorrow-text").textContent = `${this._hass.states[this.config.entity_possible_tomorrow].state}` }
       if (this.config.entity_daytime_high && !this.config.alt_daytime_high) { root.getElementById("daytime-high-text").textContent = `${Math.round(this._hass.states[this.config.entity_daytime_high].state)}` }
       if (this.config.entity_daytime_low && !this.config.alt_daytime_low) { root.getElementById("daytime-low-text").textContent = `${Math.round(this._hass.states[this.config.entity_daytime_low].state)}` }
       if (this.config.entity_sun && !this.config.alt_sun_next) { root.getElementById("sun-next-text").textContent = `${this.sunSet.nextText}` }
@@ -774,6 +780,7 @@ style() {
       if (this.config.alt_humidity) { root.getElementById("alt-humidity").textContent = `${this._hass.states[this.config.alt_humidity].state}` }
       if (this.config.alt_daytime_high) { root.getElementById("alt-daytime-high").textContent = `${this._hass.states[this.config.alt_daytime_high].state}` }
       if (this.config.alt_visibility) { root.getElementById("alt-visibility").textContent = `${this._hass.states[this.config.alt_visibility].state}` }
+
     }
   }
   
