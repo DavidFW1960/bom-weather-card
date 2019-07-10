@@ -131,6 +131,8 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
             entity_daily_summary: sensor.bom_gosford_detailed_summary_0
             entity_pop: sensor.bom_gosford_chance_of_rain_0
             entity_pop_intensity: sensor.bom_gosford_rain_today
+            entity_possible_today: sensor.bom_gosford_possible_rainfall_0
+            entity_possible_tomorrow: sensor.bom_gosford_possible_rainfall_1
             entity_pop_1: sensor.bom_gosford_chance_of_rain_1
             entity_pop_2: sensor.bom_gosford_chance_of_rain_2
             entity_pop_3: sensor.bom_gosford_chance_of_rain_3
@@ -226,6 +228,8 @@ slots (designated r1 - r4).  There are currently 10 possible values that can be 
 - humidity
 - pressure
 - daytime_low
+- possible_today (possible rainfall today)
+- possible_tomorrow (possible rainfall tomorrow)
 - empty (empty slot... the slot below does not rise to fill the space)
 - remove (same as empty but the slot below rises to take the place of the slot)
 
