@@ -2,6 +2,8 @@
 
 ![image](bom-weather.png)
 
+This card is a modification of a fork of iammexx/home-assistant-config dark-sky-weather-card
+
 The BOM Weather Card provides current and forecasted weather conditions using the BOM sensor platforms in core Home Assistant and a custom component for BOM Forecast from [my forecast repo here](https://github.com/DavidFW1960/bom_forecast) You configure the card by passing in sensor entities from these BOM platforms. 
 
 The [weather package](https://github.com/DavidFW1960/bom_forecast/blob/master/weather.yaml) in the BOM Forecast component contains BOM Sensor platform configuration for this card as well. Both the core BOM Sensor and BOM Forecast custom component are REQUIRED to use this card.
@@ -14,7 +16,7 @@ Hovering over a forecast day will display the daily weather summary in a tooltip
 ## **Installation**
 ------------------------------
 # EASY Way? use HACS
-Add this repo https://github.com/DavidFW1960/bom-weather-card
+This plugin is now part of the default HACS store. You should not need to add it manually. Add this repo https://github.com/DavidFW1960/bom-weather-card
 
 1. Install card from HACS as per other plugins. Note that you must add this card as a module to the resources section as per the instructions when you install the card.
 
