@@ -121,9 +121,13 @@ in your configuration.  The card will not work at all if any of these lines are 
 ~~~~
 
 Optional entries add components to the card. My BOM area (Gosford) does not include visibility or pressure. Edit entities to your correct sensor names. Replace Gosford with your name.
+
 ***Please note entity_pop_1 to 5 lines must all be included for daily pop (probability of precip) to show in forecast
+
 ***Also note that for daily possible rainfall to show, entity_possible_today as well as the 5 entity_pos_1 to 5 lines are needed.
+
 ***Also note that the name for tomorrow's possible rainfall has changed!
+
 ~~~~
             entity_sun: sun.sun
 #           entity_visibility: sensor.???? - Not available in my area
