@@ -35,7 +35,11 @@
             entity_pop: sensor.bom_gosford_chance_of_rain_0
             entity_pop_intensity: sensor.bom_gosford_rain_today
             entity_possible_today: sensor.bom_gosford_possible_rainfall_0
-            entity_possible_tomorrow: sensor.bom_gosford_possible_rainfall_1
+            entity_pos_1: sensor.bom_gosford_possible_rainfall_1
+            entity_pos_2: sensor.bom_gosford_possible_rainfall_2
+            entity_pos_3: sensor.bom_gosford_possible_rainfall_3
+            entity_pos_4: sensor.bom_gosford_possible_rainfall_4
+            entity_pos_5: sensor.bom_gosford_possible_rainfall_5
             entity_pop_1: sensor.bom_gosford_chance_of_rain_1
             entity_pop_2: sensor.bom_gosford_chance_of_rain_2
             entity_pop_3: sensor.bom_gosford_chance_of_rain_3

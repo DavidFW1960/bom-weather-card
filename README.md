@@ -62,6 +62,8 @@ OR HACS
 ~~~~
 Note that different weather stations have different monitored conditions available. Some include pressure for example. See the BOM Sensor docs to see other options and try them with your weather station. I am also using secrets.yaml to set station and name.
 
+YOU MUST also install and configure the Custom Component BOM FTP Forecast for this card.
+
 The next two steps are completed differently based on the version of HA you are using:
 - Pre 0.84 or if using yaml mode in 0.84 or above : Add to your ui-lovelace.yaml file.
 - Using storage mode in 0.84 or above use the "Raw Config Editor" to add the reference and definition to the config.
@@ -120,6 +122,8 @@ in your configuration.  The card will not work at all if any of these lines are 
 
 Optional entries add components to the card. My BOM area (Gosford) does not include visibility or pressure. Edit entities to your correct sensor names. Replace Gosford with your name.
 ***Please note entity_pop_1 to 5 lines must all be included for daily pop (probability of precip) to show in forecast
+***Also note that for daily possible rainfall to show, entity_possible_today as well as the 5 entity_pos_1 to 5 lines are needed.
+***Also note that the name for tomorrow's possible rainfall has changed!
 ~~~~
             entity_sun: sun.sun
 #           entity_visibility: sensor.???? - Not available in my area
@@ -134,7 +138,11 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
             entity_pop: sensor.bom_gosford_chance_of_rain_0
             entity_pop_intensity: sensor.bom_gosford_rain_today
             entity_possible_today: sensor.bom_gosford_possible_rainfall_0
-            entity_possible_tomorrow: sensor.bom_gosford_possible_rainfall_1
+            entity_pos_1: sensor.bom_gosford_possible_rainfall_1
+            entity_pos_2: sensor.bom_gosford_possible_rainfall_2
+            entity_pos_3: sensor.bom_gosford_possible_rainfall_3
+            entity_pos_4: sensor.bom_gosford_possible_rainfall_4
+            entity_pos_5: sensor.bom_gosford_possible_rainfall_5
             entity_pop_1: sensor.bom_gosford_chance_of_rain_1
             entity_pop_2: sensor.bom_gosford_chance_of_rain_2
             entity_pop_3: sensor.bom_gosford_chance_of_rain_3
