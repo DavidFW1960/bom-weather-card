@@ -1,6 +1,6 @@
 # BOM Weather Card
 
-![image](https://github.com/DavidFW1960/bom-weather-card/edit/master/bom-weather.png)
+![image](https://github.com/DavidFW1960/bom-weather-card/blob/master/bom-weather.png)
 
 This card is a modification of a fork of iammexx/home-assistant-config dark-sky-weather-card
 
