@@ -233,13 +233,13 @@ class BOMWeatherCard extends LitElement {
 
   get weatherIcons() {
     return {
-	  'sunny': 'day',
-	  'clear': 'day',
-	  'mostly-sunny': 'day',
-	  'partly-cloudy': 'cloudy-day-3',
+	  'sunny': `${this.dayOrNight}`,
+	  'clear': `${this.dayOrNight}`,
+	  'mostly-sunny': `fair-${this.dayOrNight}`,
+	  'partly-cloudy': `cloudy-${this.dayOrNight}-3`,
 	  'cloudy': 'cloudy',
-	  'hazy': 'cloudy-day-1',
-	  'hazey': 'cloudy-day-1',
+	  'hazy': `cloudy-${this.dayOrNight}-1`,
+	  'hazey': `cloudy-${this.dayOrNight}-1`,
 	  'light-rain': 'rainy-1',
 	  'windy': 'cloudy',
 	  'fog': 'cloudy',
@@ -268,7 +268,7 @@ class BOMWeatherCard extends LitElement {
 	  'hail': 'rainy-7',
 	  'lightning': 'thunder',
 	  'thunderstorm': 'thunder',
-	  'windy-variant': html`cloudy-${this.dayOrNight}-3`,
+	  'windy-variant': `cloudy-${this.dayOrNight}-3`,
 	  'exceptional': '!!',
     }
   }
