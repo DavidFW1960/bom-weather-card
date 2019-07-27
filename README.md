@@ -219,6 +219,8 @@ show_beaufort: true
 | large_icon_top_margin    | **-3.5em** / px or em value | Sets the top margin of the current conditions icon                          |
 | large_icon_left_position | **0em** / px or em value    | Sets the left position of the current conditions icon                       |
 | separator_top_margin     | **5em** / px or em value    | Sets the top margin of the separator line                                   |
+| summary_top_margin       | **1.2em** / px or em        | Sets the gap between the forecast and summary text                          |
+| summary_font_size:       | **0.8em** / px or em        | Sets the font size for the summary text                                     |
 | slot_l1                  | **daytime_high**            | Sets the value used in current conditions slot l1 : See slots for more info |
 | slot_l2                  | **wind**                    | Sets the value used in current conditions slot l2 : See slots for more info |
 | slot_l3                  | **visibility**              | Sets the value used in current conditions slot l3 : See slots for more info |
