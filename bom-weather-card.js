@@ -211,8 +211,8 @@ class BOMWeatherCard extends LitElement {
           feelsLike: "Feels like",
           maxToday: "Today's High",
           minToday: "Today's Low",
-          posToday: "Possible Today",
-          posTomorrow: "Possible Tomorrow",
+          posToday: "Forecast",
+          posTomorrow: "Fore Tom",
         }
     }
   }
@@ -306,7 +306,7 @@ class BOMWeatherCard extends LitElement {
   										templow:  this.config.entity_forecast_low_temp_2,
   										pop: this.config.entity_pop_2,
   										pos: this.config.entity_pos_2,
-  										summary: this.config.entity_summary_2,  };
+  										summary: this.config.entity_summary_2, };
     const forecast3 = { date: forecastDate3,
                       dayIndex: '3',
   	                  condition: this.config.entity_forecast_icon_3,
@@ -373,7 +373,7 @@ get sunSet() {
     var nextSunRise;
     if (this.config.time_format) {
       nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit',hour12: this.is12Hour});
-      nextSunRise = new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit', hour12: this.is12Hour});
+      nextSunRise = new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit',hour12: this.is12Hour});
     }
     else {
       nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
@@ -491,7 +491,7 @@ style() {
   var separatorTopMargin = this.config.separator_top_margin || "6em";
   
   return html`
-        .clear {
+      .clear {
         clear: both;
       }
 
