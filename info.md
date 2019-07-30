@@ -1,5 +1,15 @@
 # BOM Weather Card
 
+# Breaking Change
+I have changed the summary font margin to padding. The key name has changed as follows:
+```
+            summary_top_padding: 1em        #default 1em px or em
+            summary_font_size: 0.8em        #default 0.8em px or em
+```
+I found that the summary_top_margin was not working when the possibility of rainfall was wrapping down to a second line. This seems to be fixed in this new release.
+I have also changed the default for the padding to 1em instead of 0.2 previously.
+I hope these changes make the card more consistent particularly when the possible rainfall wraps to a second line.
+
 ![image](https://github.com/DavidFW1960/bom-weather-card/blob/master/bom-weather.png)
 
 

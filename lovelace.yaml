@@ -78,7 +78,7 @@
             large_icon_top_margin: -3.5em   #default -3.5em px or em
             large_icon_left_position: 0em   #default 0em px or em
             separator_top_margin: 6em       #default 6em px or em
-            summary_top_margin: 0.2em       #default 0.2em px or em
+            summary_top_padding: 1em        #default 1em px or em
             summary_font_size: 0.8em        #default 0.8em px or em
             slot_l1: daytime_high           #daytime_high
             slot_l2: daytime_low            #wind
