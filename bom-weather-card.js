@@ -19,7 +19,7 @@ class BOMWeatherCard extends LitElement {
 //    var icons = this.config.static_icons ? "static" : "animated";
     var currentText = this.config.entity_current_text ? html`<span class="currentText" id="current-text">${this._hass.states[this.config.entity_current_text].state}</span>` : ``;
     var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike} <span id="apparent-text">${this.current.apparent}</span> ${this.getUOM("temperature")}</span>` : ``;
-    var summary = this.config.entity_daily_summary ? html`<span class="summary" id="daily-summary-text">${this._hass.states[this.config.entity_daily_summary].state}</span>` : ``;
+    var summary = this.config.entity_daily_summary ? html`${this._hass.states[this.config.entity_daily_summary].state}` : ``;
     var separator = this.config.show_separator ? html`<hr class=line>` : ``;
     
     

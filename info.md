@@ -1,6 +1,10 @@
 # BOM Weather Card
 
+From the release yesterday, I finally tracked down a bug where the style was being applied twice to the summary text. If you used px units you would never have noticed but if you used the default or say 0.8em, what it did was multiply 14px x 0.8 x 0.8 = 8.96px instead of just once for 11.2px
+This correction may mean that your text size has changed but now I have fixed this, using an em text size will be much easier to control and more predictable.
+
 # Breaking Change
+
 I have changed the summary font margin to padding. The key name has changed as follows:
 ```
             summary_top_padding: 1em        #default 1em px or em
