@@ -1,18 +1,16 @@
 # BOM Weather Card
 
-From the release yesterday, I finally tracked down a bug where the style was being applied twice to the summary text. If you used px units you would never have noticed but if you used the default or say 0.8em, what it did was multiply 14px x 0.8 x 0.8 = 8.96px instead of just once for 11.2px
-This correction may mean that your text size has changed but now I have fixed this, using an em text size will be much easier to control and more predictable.
+## Changes:
 
-# Breaking Change
-
-I have changed the summary font margin to padding. The key name has changed as follows:
+Added 2 more configuration options for the current text. See my example lovelace.yaml example but I have added lines for width and alignment as follows:
 ```
-            summary_top_padding: 1em        #default 1em px or em
-            summary_font_size: 0.8em        #default 0.8em px or em
+            current_text_left_pos: 0em      #default 5em px or em
+            current_text_font_size: 1.5em   #default 1.5em em
+            current_text_alignment: center  #default center
+            current_text_width: 100%        #default 100%
 ```
-I found that the summary_top_margin was not working when the possibility of rainfall was wrapping down to a second line. This seems to be fixed in this new release.
-I have also changed the default for the padding to 1em instead of 0.2 previously.
-I hope these changes make the card more consistent particularly when the possible rainfall wraps to a second line.
+Note if you set the alignment to center, set the current_text_left_pos to 0!
+Effectively, these changes from the original card mean you can move the current text DOWN so that it won't run into the temperature or 'feels like' text.
 
 ![image](https://github.com/DavidFW1960/bom-weather-card/blob/master/bom-weather.png)
 

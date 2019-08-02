@@ -487,6 +487,8 @@ style() {
   var currentTextTopMargin = this.config.current_text_top_margin || "39px";
   var currentTextLeftPos = this.config.current_text_left_pos || "5em";
   var currentTextFontSize = this.config.current_text_font_size || "1.5em";
+  var currentTextWidth = this.config.current_text_width || "100%";
+  var currentTextAlignment = this.config.current_text_alignment || "center";
   var largeIconTopMargin = this.config.large_icon_top_margin || "-3.5em";
   var largeIconLeftPos = this.config.large_icon_left_pos || "0em";
   var currentDataTopMargin = this.config.current_data_top_margin ? this.config.current_data_top_margin : this.config.show_separator ? "1em" : "7em";
@@ -556,6 +558,8 @@ style() {
         white-space: nowrap;
         left: ${currentTextLeftPos};
         margin-top: ${currentTextTopMargin};
+        text-align: ${currentTextAlignment};
+        width: ${currentTextWidth};
       }
       
       .pop {
