@@ -1,7 +1,7 @@
 // #####
 // ##### Get the LitElement and HTML classes from an already defined HA Lovelace class
 // #####
-var LitElement = LitElement || Object.getPrototypeOf(customElements.get("home-assistant-main"));
+var LitElement = LitElement || Object.getPrototypeOf(customElements.get("hui-view"));
 var html = LitElement.prototype.html;
 
 // #####
