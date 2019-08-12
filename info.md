@@ -1,6 +1,11 @@
 # BOM Weather Card
 
-## Changes:
+## Changes
+
+Added support for new Home Assistant Cast
+Merged some French and Russian Language PR's from original repo.
+
+## Older Changes:
 
 Added 2 more configuration options for the current text. See my example lovelace.yaml example but I have added lines for width and alignment as follows:
 ```
