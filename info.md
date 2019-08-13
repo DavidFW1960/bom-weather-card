@@ -2,7 +2,7 @@
 
 ## Changes
 
-Added support for new Home Assistant Cast
+Added support for new Home Assistant Cast - fixed icons not displaying
 Merged some French and Russian Language PR's from original repo.
 
 ## Older Changes:
