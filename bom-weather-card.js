@@ -23,7 +23,7 @@ class BOMWeatherCard extends LitElement {
     var separator = this.config.show_separator ? html`<hr class=line>` : ``;
     
 // Cast Compatibility
-    var fullurl = window.location.origin   
+    var fullurl = window.location.origin;
     
 // Build HTML    
     return html`
