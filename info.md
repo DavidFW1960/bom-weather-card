@@ -2,10 +2,12 @@
 
 ## Changes
 
-Added support for new Home Assistant Cast - fixed icons not displaying
-Merged some French and Russian Language PR's from original repo.
+Some BOM conditions present in BOM were missing from the card. This resulted in some icons not showing at times.
 
 ## Older Changes:
+
+Added support for new Home Assistant Cast - fixed icons not displaying
+Merged some French and Russian Language PR's from original repo.
 
 Added 2 more configuration options for the current text. See my example lovelace.yaml example but I have added lines for width and alignment as follows:
 ```
@@ -23,8 +25,9 @@ Effectively, these changes from the original card mean you can move the current 
 This card is a modification of a fork of iammexx/home-assistant-config dark-sky-weather-card
 
 
-NOTE: This card REQUIRES the BOM Sensor core component and the BOM FTP Forecast Custom Component. See links below.
-
+NOTE: IF using with BOM, This card REQUIRES the BOM Sensor core component and the BOM FTP Forecast Custom Component. See links below.
+If using DARKSKY of some other weather component, the key is to make sure all referenced ENTITIES exist. If they are missing the card will end up blank.
+This card SHOULD just work as a direct substitute for the Darksky weather card it has been forked from although I have not confirmed this.
 
 The BOM Weather Card provides current and forecasted weather conditions using the BOM sensor platforms in core Home Assistant and a custom component for BOM Forecast from [my forecast repo here](https://github.com/DavidFW1960/bom_forecast) You configure the card by passing in sensor entities from these BOM platforms. 
 
