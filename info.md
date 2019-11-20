@@ -34,7 +34,7 @@ Add to Lovelace:
 
 (along with the other entities in the card of course!) See example lovelace.yaml
 
-It is important to note that if you have a non-existant entity parsed through to the card, the card won't load and will be blank. If you don't want an entity to display, don't parse it through to the card in teh lovelace configuration.
+It is important to note that if you have a non-existant entity parsed through to the card, the card won't load and will be blank. If you don't want an entity to display, don't parse it through to the card in the lovelace configuration.
 
 
 ## Older Changes:
