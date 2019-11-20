@@ -21,7 +21,9 @@ class BOMWeatherCard extends LitElement {
     var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike} <span id="apparent-text">${this.current.apparent}</span> ${this.getUOM("temperature")}</span>` : ``;
     var summary = this.config.entity_daily_summary ? html`${this._hass.states[this.config.entity_daily_summary].state}` : ``;
     var separator = this.config.show_separator ? html`<hr class=line>` : ``;
-    
+    var uv_alert = this.config.entity_uv_alert ? html`${this._hass.states[this.config.entity_uv_alert].state}` : ``;
+    var fire_danger = this.config.entity_fire_danger ? html`${this._hass.states[this.config.entity_fire_danger].state}` : ``;
+   
 // Build HTML    
     return html`
       <style>
@@ -63,7 +65,7 @@ class BOMWeatherCard extends LitElement {
                 </div>`)}
               </div>
             <div class="summary clear">
-              ${summary}
+              ${summary} ${uv_alert} ${fire_danger}
               </div>
       </ha-card>
     `;

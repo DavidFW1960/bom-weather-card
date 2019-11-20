@@ -2,7 +2,40 @@
 
 ## Changes
 
-Some BOM conditions present in BOM were missing from the card. This resulted in some icons not showing at times.
+Added new UV_Alert and Fire_danger conditions from the BOM FTP Component. In addition to a template, they require 2 new lines in the lovelace config.
+(the sample weather.yaml includes all templates)
+Template:
+```yaml
+      bom_uv_alert:
+        value_template: >
+            {%- if states('sensor.bom_gosford_uv_alert_0') != 'n/a' -%} 
+            UV: {{ states('sensor.bom_gosford_uv_alert_0') }}
+            {%- else -%}
+            UV: {{ states('sensor.bom_gosford_uv_alert_1') }}
+            {%- endif -%}
+
+      bom_fire_danger:
+        value_template: >
+            {%- if states('sensor.bom_gosford_fire_danger_0') != 'n/a' -%} 
+            Fire Danger: {{ states('sensor.bom_gosford_fire_danger_0') }}
+            {%- else -%}
+            Fire Danger: {{ states('sensor.bom_gosford_fire_danger_1') }}
+            {%- endif -%}
+```
+
+Note this example is for my Gosford sensors. You will need to examine your states to see what your names are. This is required as well as the current text and min/max templates.
+Just remember, BOM zeros out some sensors during the day (like the min when the temperature starts rising is set to n/a and the max when the temp starts falling is set to n/a - using the min/max template makes sure there is a value available. With UV and Fre danger, these will switch between today and tomorrows values when BOM makes today's value unavailable.)
+
+Add to Lovelace:
+```yaml
+            entity_uv_alert: sensor.bom_uv_alert
+            entity_fire_danger: sensor.bom_fire_danger
+```
+
+(along with the other entities in the card of course!) See example lovelace.yaml
+
+It is important to note that if you have a non-existant entity parsed through to the card, the card won't load and will be blank. If you don't want an entity to display, don't parse it through to the card in teh lovelace configuration.
+
 
 ## Older Changes:
 

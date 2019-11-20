@@ -46,6 +46,8 @@
             entity_pop_4: sensor.bom_gosford_chance_of_rain_4
             entity_pop_5: sensor.bom_gosford_chance_of_rain_5
             entity_current_text: sensor.bom_current_text
+            entity_uv_alert: sensor.bom_uv_alert
+            entity_fire_danger: sensor.bom_fire_danger
             locale: en
             sunset: true
             static_icons: false

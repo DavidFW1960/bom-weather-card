@@ -156,7 +156,9 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 
 **Note:** The following entries require template sensors.  
 ~~~~
-entity_current_text: sensor.dark_sky_current_text
+            entity_current_text: sensor.dark_sky_current_text
+            entity_uv_alert: sensor.bom_uv_alert
+            entity_fire_danger: sensor.bom_fire_danger
 ~~~~
 
 **Example template sensors:** You can call template sensors whatever you want so long as you use the same name in the card config. (Included in weather.yaml) 
@@ -165,6 +167,22 @@ entity_current_text: sensor.dark_sky_current_text
         value_template: >
             {% set val = states('sensor.bom_gosford_summary_0').split('.')[0] %} 
             {{ val | title }}
+
+      bom_uv_alert:
+        value_template: >
+            {%- if states('sensor.bom_gosford_uv_alert_0') != 'n/a' -%} 
+            UV: {{ states('sensor.bom_gosford_uv_alert_0') }}
+            {%- else -%}
+            UV: {{ states('sensor.bom_gosford_uv_alert_1') }}
+            {%- endif -%}
+
+      bom_fire_danger:
+        value_template: >
+            {%- if states('sensor.bom_gosford_fire_danger_0') != 'n/a' -%} 
+            Fire Danger: {{ states('sensor.bom_gosford_fire_danger_0') }}
+            {%- else -%}
+            Fire Danger: {{ states('sensor.bom_gosford_fire_danger_1') }}
+            {%- endif -%}
 ~~~~~
 
 Flags are used to control the look and feel of the card (See below for details)
