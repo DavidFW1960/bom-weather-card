@@ -119,7 +119,7 @@ class BOMWeatherCard extends LitElement {
       case 'sun_following': return sunFollowing;
       case 'daytime_high': return daytimeHigh;
       case 'daytime_low': return daytimeLow;
-      case 'uv_alert' : return uv_summary;
+      case 'uv_summary' : return uv_summary;
       case 'fire_summary' : return fire_summary;
       case 'wind': return wind;
       case 'visibility': return visibility;
