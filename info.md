@@ -16,7 +16,7 @@ Template:
 
       bom_uv_alert_summary:
         value_template: >
-            {% set val = states('sensor.bom_gosford_uv_alert_0').split('[')[1].split(']')[0]%}
+            {% set val = states('sensor.bom_uv_alert').split('[')[1].split(']')[0]%}
             {{ val | title }}
 
       bom_fire_danger:
