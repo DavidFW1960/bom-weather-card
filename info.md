@@ -2,25 +2,39 @@
 
 ## Changes
 
-Added new UV_Alert and Fire_danger conditions from the BOM FTP Component. In addition to a template, they require 2 new lines in the lovelace config.
+Added new UV_Alert and Fire_danger conditions from the BOM FTP Component. In addition to a template, they require 2-4 new lines in the lovelace config.
 (the sample weather.yaml includes all templates)
 Template:
 ```yaml
       bom_uv_alert:
         value_template: >
             {%- if states('sensor.bom_gosford_uv_alert_0') != 'n/a' -%} 
-            UV: {{ states('sensor.bom_gosford_uv_alert_0') }}
+            UV Today: {{ states('sensor.bom_gosford_uv_alert_0') }}
             {%- else -%}
-            UV: {{ states('sensor.bom_gosford_uv_alert_1') }}
+            UV Tomorrow: {{ states('sensor.bom_gosford_uv_alert_1') }}
             {%- endif -%}
+
+      bom_uv_alert_summary:
+        value_template: >
+            {% set val = states('sensor.bom_gosford_uv_alert_0').split('[')[1].split(']')[0]%}
+            {{ val | title }}
 
       bom_fire_danger:
         value_template: >
             {%- if states('sensor.bom_gosford_fire_danger_0') != 'n/a' -%} 
-            Fire Danger: {{ states('sensor.bom_gosford_fire_danger_0') }}
+            Fire Danger Today: {{ states('sensor.bom_gosford_fire_danger_0') }}
             {%- else -%}
-            Fire Danger: {{ states('sensor.bom_gosford_fire_danger_1') }}
+            Fire Danger Tomorrow: {{ states('sensor.bom_gosford_fire_danger_1') }}
             {%- endif -%}
+
+      bom_fire_danger_summary:
+        value_template: >
+            {%- if states('sensor.bom_gosford_fire_danger_0') != 'n/a' -%} 
+            {{ states('sensor.bom_gosford_fire_danger_0') }}
+            {%- else -%}
+            {{ states('sensor.bom_gosford_fire_danger_1') }}
+            {%- endif -%}
+
 ```
 
 Note this example is for my Gosford sensors. You will need to examine your states to see what your names are. This is required as well as the current text and min/max templates.
@@ -30,8 +44,14 @@ Add to Lovelace:
 ```yaml
             entity_uv_alert: sensor.bom_uv_alert
             entity_fire_danger: sensor.bom_fire_danger
+            entity_uv_alert_summary: sensor.bom_uv_alert_summary
+            entity_fire_danger_summary: sensor.bom_fire_danger_summary
 ```
-
+To use the new slots (example - can be any slot),
+```yaml
+            slot_r3: uv_summary
+            slot_r4: fire_summary
+```
 (along with the other entities in the card of course!) See example lovelace.yaml
 
 It is important to note that if you have a non-existant entity parsed through to the card, the card won't load and will be blank. If you don't want an entity to display, don't parse it through to the card in the lovelace configuration.

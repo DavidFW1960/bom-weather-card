@@ -107,6 +107,8 @@ class BOMWeatherCard extends LitElement {
     var humidity = this.config.alt_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span><span id="alt-humidity">${this._hass.states[this.config.alt_humidity].state}</span></li>` : this.config.entity_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span><span id="humidity-text">${this.current.humidity}</span><span class="unit"> %</span></li>` : ``;
     var pressure = this.config.alt_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span><span id="alt-pressure">${this._hass.states[this.config.alt_pressure].state}</span></li>` : this.config.entity_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span><span id="pressure-text">${this.current.pressure}</span><span class="unit"> ${this.getUOM('air_pressure')}</span></li>` : ``;
     var popunit = html`<span class="unit"> ${this.getUOM('precipitation')}</span>`
+    var uv_summary = this.config.entity_uv_alert_summary ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunny"></ha-icon></span>${this.localeText.uvRating} <span id="daytime-uv-text">${this._hass.states[this.config.entity_uv_alert_summary].state}</span></li>` : ``;
+    var fire_summary = this.config.entity_fire_danger_summary ? html`<li><span class="ha-icon"><ha-icon icon="mdi:fire"></ha-icon></span>${this.localeText.fireDanger} <span id="daytime-firedanger-text">${this._hass.states[this.config.entity_fire_danger_summary].state}</span></li>` : ``;
     
     switch (value){
       case 'pop': return pop;
@@ -117,6 +119,8 @@ class BOMWeatherCard extends LitElement {
       case 'sun_following': return sunFollowing;
       case 'daytime_high': return daytimeHigh;
       case 'daytime_low': return daytimeLow;
+      case 'uv_alert' : return uv_summary;
+      case 'fire_summary' : return fire_summary;
       case 'wind': return wind;
       case 'visibility': return visibility;
       case 'sun_next': return sunNext;
@@ -223,6 +227,8 @@ class BOMWeatherCard extends LitElement {
           minToday: "Today's Low",
           posToday: "Forecast",
           posTomorrow: "Fore Tom",
+		  uvRating: "UV Rating",
+		  fireDanger: "Fire Danger"
         }
     }
   }

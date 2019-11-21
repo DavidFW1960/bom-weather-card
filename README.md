@@ -159,6 +159,8 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
             entity_current_text: sensor.dark_sky_current_text
             entity_uv_alert: sensor.bom_uv_alert
             entity_fire_danger: sensor.bom_fire_danger
+            entity_uv_alert_summary: sensor.bom_uv_alert_summary
+            entity_fire_danger_summary: sensor.bom_fire_danger_summary
 ~~~~
 
 **Example template sensors:** You can call template sensors whatever you want so long as you use the same name in the card config. (Included in weather.yaml) 
@@ -171,18 +173,32 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
       bom_uv_alert:
         value_template: >
             {%- if states('sensor.bom_gosford_uv_alert_0') != 'n/a' -%} 
-            UV: {{ states('sensor.bom_gosford_uv_alert_0') }}
+            UV Today: {{ states('sensor.bom_gosford_uv_alert_0') }}
             {%- else -%}
-            UV: {{ states('sensor.bom_gosford_uv_alert_1') }}
+            UV Tomorrow: {{ states('sensor.bom_gosford_uv_alert_1') }}
             {%- endif -%}
+
+      bom_uv_alert_summary:
+        value_template: >
+            {% set val = states('sensor.bom_gosford_uv_alert_0').split('[')[1].split(']')[0]%}
+            {{ val | title }}
 
       bom_fire_danger:
         value_template: >
             {%- if states('sensor.bom_gosford_fire_danger_0') != 'n/a' -%} 
-            Fire Danger: {{ states('sensor.bom_gosford_fire_danger_0') }}
+            Fire Danger Today: {{ states('sensor.bom_gosford_fire_danger_0') }}
             {%- else -%}
-            Fire Danger: {{ states('sensor.bom_gosford_fire_danger_1') }}
+            Fire Danger Tomorrow: {{ states('sensor.bom_gosford_fire_danger_1') }}
             {%- endif -%}
+
+      bom_fire_danger_summary:
+        value_template: >
+            {%- if states('sensor.bom_gosford_fire_danger_0') != 'n/a' -%} 
+            {{ states('sensor.bom_gosford_fire_danger_0') }}
+            {%- else -%}
+            {{ states('sensor.bom_gosford_fire_danger_1') }}
+            {%- endif -%}
+
 ~~~~~
 
 Flags are used to control the look and feel of the card (See below for details)
@@ -256,6 +272,7 @@ show_beaufort: true
 The current condition columns are specified by 'slots'.  There are 4 left column slots (designated l1 - l4) and 4 right column
 slots (designated r1 - r4).  There are currently 10 possible values that can be assigned to a slot.  These are:
 - daytime_high
+- daytime_low
 - wind
 - visibility
 - sun_next (the next sun event ... sunset or sunrise)
@@ -263,7 +280,8 @@ slots (designated r1 - r4).  There are currently 10 possible values that can be 
 - pop (probability of precipitation)
 - humidity
 - pressure
-- daytime_low
+- uv_summary
+- fire_summary
 - possible_today (possible rainfall today)
 - possible_tomorrow (possible rainfall tomorrow)
 - empty (empty slot... the slot below does not rise to fill the space)
