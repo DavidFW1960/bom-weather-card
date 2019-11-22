@@ -1,7 +1,7 @@
 # BOM Weather Card
 
 ## Changes
-
+Due to the fact I have added some more entities, I am adding an extra slot, l5 and r5 that you can configure. Defaults for all slots have been changed from original to what is shown in the graphic. this is a POTENTIAL BREAKING CHANGE if you are using the default slots (by not configuring them yourself)
 Added new UV_Alert and Fire_danger conditions from the BOM FTP Component. In addition to a template, they require 2-4 new lines in the lovelace config.
 (the sample weather.yaml includes all templates)
 Template:

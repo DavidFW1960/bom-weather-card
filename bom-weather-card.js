@@ -42,12 +42,14 @@ class BOMWeatherCard extends LitElement {
               ${this.getSlot().l2}
               ${this.getSlot().l3}
               ${this.getSlot().l4}
+              ${this.getSlot().l5}
             </li>
             <li>
               ${this.getSlot().r1}
               ${this.getSlot().r2}
               ${this.getSlot().r3}
               ${this.getSlot().r4}
+              ${this.getSlot().r5}
             </li>
           </ul>
         </span>
@@ -82,10 +84,12 @@ class BOMWeatherCard extends LitElement {
       'r2' : this.slotValue('r2',this.config.slot_r2),
       'r3' : this.slotValue('r3',this.config.slot_r3),
       'r4' : this.slotValue('r4',this.config.slot_r4),
+      'r5' : this.slotValue('r5',this.config.slot_r5),
       'l1' : this.slotValue('l1',this.config.slot_l1),
       'l2' : this.slotValue('l2',this.config.slot_l2),
       'l3' : this.slotValue('l3',this.config.slot_l3),
       'l4' : this.slotValue('l4',this.config.slot_l4),
+      'l5' : this.slotValue('l5',this.config.slot_l5),
     }
   }
 
@@ -131,13 +135,15 @@ class BOMWeatherCard extends LitElement {
     // If no value can be matched pass back a default for the slot
     switch (slot){
       case 'l1': return daytimeHigh;
-      case 'l2': return wind;
-      case 'l3': return visibility;
-      case 'l4': return sunNext;
+      case 'l2': return daytimeLow;
+      case 'l3': return wind;
+      case 'l4': return pressure;
+      case 'l5': return sunNext;
       case 'r1': return pop;
       case 'r2': return humidity;
-      case 'r3': return pressure;
-      case 'r4': return sunFollowing;
+      case 'r3': return uv_summary;
+      case 'r4': return fire_summary;
+      case 'r5': return sunFollowing;
     }
   }
   
