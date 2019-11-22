@@ -180,8 +180,14 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 
       bom_uv_alert_summary:
         value_template: >
-            {% set val = states('sensor.bom_uv_alert').split('[')[1].split(']')[0]%}
-            {{ val | title }}
+            {%- if states('sensor.bom_gosford_uv_alert_0') != 'n/a' -%} 
+            {% set val = states('sensor.bom_gosford_uv_alert_0').split('[')[1].split(']')[0] %}
+            {%- elif states('sensor.bom_gosford_uv_alert_1') != 'n/a' -%} 
+            {% set val = states('sensor.bom_uv_alert_1').split('[')[1].split(']')[0] %}
+            {%- else -%}
+            {%- set val = 'unavailable' -%}
+            {%- endif -%}
+            {{ val | title }} 
 
       bom_fire_danger:
         value_template: >
