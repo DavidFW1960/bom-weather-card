@@ -277,8 +277,8 @@ show_beaufort: true
 
 **Slots**
 --------------------------
-The current condition columns are specified by 'slots'.  There are 4 left column slots (designated l1 - l4) and 4 right column
-slots (designated r1 - r4).  There are currently 10 possible values that can be assigned to a slot.  These are:
+The current condition columns are specified by 'slots'.  There are 5 left column slots (designated l1 - l5) and 5 right column
+slots (designated r1 - r5).  There are currently 10 possible values that can be assigned to a slot.  These are:
 - daytime_high
 - daytime_low
 - wind
