@@ -1,62 +1,12 @@
 # BOM Weather Card
 
 ## Changes
-Due to the fact I have added some more entities, I am adding an extra slot, l5 and r5 that you can configure. Defaults for all slots have been changed from original to what is shown in the graphic. this is a POTENTIAL BREAKING CHANGE if you are using the default slots (by not configuring them yourself)
+Due to the fact I have added some more entities, I am adding an extra row/2 slots, l5 and r5 that you can configure. Defaults for all slots have been changed from original to what is shown in the graphic. this is a POTENTIAL BREAKING CHANGE if you are using the default slots (by not configuring them yourself)
 Added new UV_Alert and Fire_danger conditions from the BOM FTP Component. In addition to a template, they require 2-4 new lines in the lovelace config.
 (the sample weather.yaml includes all templates)
 Template:
-```yaml
-      bom_uv_alert:
-        value_template: >
-            {%- if states('sensor.bom_gosford_uv_alert_0') == '##' -%}
-            UV Today: No Data
-            {%- elif states('sensor.bom_gosford_uv_alert_0') != 'n/a' -%} 
-            UV Today: {{ states('sensor.bom_gosford_uv_alert_0') }}
-            {%- elif states('sensor.bom_gosford_uv_alert_1') == '##' -%}
-            UV Tomorrow: No Data
-            {%- else -%}
-            UV Tomorrow: {{ states('sensor.bom_gosford_uv_alert_1') }}
-            {%- endif -%}
-
-      bom_uv_alert_summary:
-        value_template: >
-            {%- if states('sensor.bom_gosford_uv_alert_0') == '##' -%} 
-            {% set val = 'No Data' %}
-            {%- elif states('sensor.bom_gosford_uv_alert_0') != 'n/a' -%} 
-            {% set val = states('sensor.bom_gosford_uv_alert_0').split('[')[1].split(']')[0] %}
-            {%- elif states('sensor.bom_gosford_uv_alert_1') == '##' -%} 
-            {% set val = 'No Data' %}
-            {%- elif states('sensor.bom_gosford_uv_alert_1') != 'n/a' -%} 
-            {% set val = states('sensor.bom_gosford_uv_alert_1').split('[')[1].split(']')[0] %}
-            {%- else -%}
-            {%- set val = 'No Data' -%}
-            {%- endif -%}
-            {{ val | title }} 
-          
-      bom_fire_danger:
-        value_template: >
-            {%- if states('sensor.bom_gosford_fire_danger_0') == '##' -%}
-            Fire Danger Today: No Data
-            {%- elif states('sensor.bom_gosford_fire_danger_0') != 'n/a' -%} 
-            Fire Danger Today: {{ states('sensor.bom_gosford_fire_danger_0') }}
-            {%- elif states('sensor.bom_gosford_fire_danger_1') == '##' -%}
-            Fire Danger Tomorrow: No Data
-            {%- else -%}
-            Fire Danger Tomorrow: {{ states('sensor.bom_gosford_fire_danger_1') }}
-            {%- endif -%}
-
-      bom_fire_danger_summary:
-        value_template: >
-            {%- if states('sensor.bom_gosford_fire_danger_0') == '##' -%}
-            No Data
-            {%- elif states('sensor.bom_gosford_fire_danger_0') != 'n/a' -%} 
-            {{ states('sensor.bom_gosford_fire_danger_0') }}
-            {%- elif states('sensor.bom_gosford_fire_danger_1') == '##' -%}
-            No Data
-            {%- else -%}
-            {{ states('sensor.bom_gosford_fire_danger_1') }}
-            {%- endif -%}
-```
+[Get the templates here] (https://github.com/DavidFW1960/bom-weather-card/blob/master/templates.md)
+I'm not going to put them in this info.md anymore as if I change a Template I have to re-release the card for no good reason so they are in this file (and in weather package)
 
 Note this example is for my Gosford sensors. You will need to examine your states to see what your names are. This is required as well as the current text and min/max templates.
 Just remember, BOM zeros out some sensors during the day (like the min when the temperature starts rising is set to n/a and the max when the temp starts falling is set to n/a - using the min/max template makes sure there is a value available. With UV and Fre danger, these will switch between today and tomorrows values when BOM makes today's value unavailable.)
