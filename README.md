@@ -191,7 +191,7 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
             {%- elif states('sensor.bom_gosford_uv_alert_1') == '##' -%} 
             {% set val = 'No Data' %}
             {%- elif states('sensor.bom_gosford_uv_alert_1') != 'n/a' -%} 
-            {% set val = states('sensor.bom_uv_alert_1').split('[')[1].split(']')[0] %}
+            {% set val = states('sensor.bom_gosford_uv_alert_1').split('[')[1].split(']')[0] %}
             {%- else -%}
             {%- set val = 'No Data' -%}
             {%- endif -%}
