@@ -233,8 +233,8 @@ class BOMWeatherCard extends LitElement {
           minToday: "Today's Low",
           posToday: "Forecast",
           posTomorrow: "Fore Tom",
-		  uvRating: "UV Rating",
-		  fireDanger: "Fire Danger"
+          uvRating: "UV",
+          fireDanger: "Fire"
         }
     }
   }
