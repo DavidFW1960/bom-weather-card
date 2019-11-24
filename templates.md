@@ -50,3 +50,18 @@
             {{ states('sensor.bom_gosford_fire_danger_1') }}
             {%- endif -%}
 ```
+Note for users in Perth IDW12300
+Perth (and maybe some other cities) have 2 areas they report fire danger for...
+![image](https://github.com/DavidFW1960/bom-weather-card/blob/master/perth.PNG)
+
+The FTP component will read both of these but you will need to edit the templates above to select the fire area you are interested in.
+Perth Coastal Plain
+```
+      {% set val = states('sensor.bom_fire_danger_summary').split('Perth Coastal Plain: ')[1] .split(':')[1] %}
+      {{ val | title }}
+```
+Perth Hills
+```
+      {% set val = states('sensor.bom_fire_danger_summary').split('Perth Hills: ')[1] .split(':')[1] %}
+      {{ val | title }}
+```
