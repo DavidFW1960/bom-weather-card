@@ -8,7 +8,7 @@ Template:
 [Get the templates here] (https://github.com/DavidFW1960/bom-weather-card/blob/master/templates.md)
 I'm not going to put them in this info.md anymore as if I change a Template I have to re-release the card for no good reason so they are in this file (and in weather package)
 
-Note this example is for my Gosford sensors. You will need to examine your states to see what your names are. This is required as well as the current text and min/max templates.
+Note this example (in templates.md) is for my Gosford sensors. You will need to examine your states to see what your names are. This is required as well as the current text and min/max templates.
 Just remember, BOM zeros out some sensors during the day (like the min when the temperature starts rising is set to n/a and the max when the temp starts falling is set to n/a - using the min/max template makes sure there is a value available. With UV and Fre danger, these will switch between today and tomorrows values when BOM makes today's value unavailable.)
 
 Add to Lovelace:
