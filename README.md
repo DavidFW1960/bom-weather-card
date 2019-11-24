@@ -164,6 +164,8 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 ~~~~
 
 **Example template sensors:** You can call template sensors whatever you want so long as you use the same name in the card config. (Included in weather.yaml) 
+[See also the file] (https://github.com/DavidFW1960/bom-weather-card/blob/master/templates.md) with templates for areas with two fire danger areas like Perth.
+These templates are EXAMPLES. Adjust and adapt as required. Up-to-date templates will always be in the templates.md file.
 ~~~~~
       bom_current_text:
         value_template: >
