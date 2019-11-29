@@ -90,7 +90,7 @@
             slot_l2: daytime_low            #daytime_low
             slot_l3: wind                   #wind
             slot_l4: pressure               #pressure
-            slot_l4: sun_next               #sun_next
+            slot_l5: sun_next               #sun_next
             slot_r1: pop                    #pop
             slot_r2: humidity               #humidity
             slot_r3: uv_alert               #uv_alert
