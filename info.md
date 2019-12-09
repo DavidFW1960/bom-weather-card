@@ -43,7 +43,7 @@ Added 2 more configuration options for the current text. See my example lovelace
 Note if you set the alignment to center, set the current_text_left_pos to 0!
 Effectively, these changes from the original card mean you can move the current text DOWN so that it won't run into the temperature or 'feels like' text.
 
-![image](https://raw.githubusercontent.com/DavidFW1960/bom-weather-card/master/bom_weather.png)
+![image](https://raw.githubusercontent.com/DavidFW1960/bom-weather-card/master/bom-weather.png)
 
 
 This card is a modification of a fork of iammexx/home-assistant-config dark-sky-weather-card
