@@ -225,6 +225,11 @@ class BOMWeatherCard extends LitElement {
         return {
           feelsLike: "Ощущается как:",
           maxToday: "Макс. сегодня"
+        }
+      case "ua" :
+        return {
+          feelsLike: "Відчувається як",
+          maxToday: "Максимально сьогодні"
         }		
       default :
         return {
