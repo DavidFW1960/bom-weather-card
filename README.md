@@ -156,7 +156,7 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 
 **Note:** The following entries require template sensors.  
 ~~~~
-            entity_current_text: sensor.dark_sky_current_text
+            entity_current_text: sensor.bom_current_text
             entity_uv_alert: sensor.bom_uv_alert
             entity_fire_danger: sensor.bom_fire_danger
             entity_uv_alert_summary: sensor.bom_uv_alert_summary
