@@ -53,7 +53,7 @@ NOTE: IF using with BOM, This card REQUIRES the BOM Sensor core component and th
 If using DARKSKY of some other weather component, the key is to make sure all referenced ENTITIES exist. If they are missing the card will end up blank.
 This card SHOULD just work as a direct substitute for the Darksky weather card it has been forked from although I have not confirmed this.
 
-The BOM Weather Card provides current and forecasted weather conditions using the BOM sensor platforms in core Home Assistant and a custom component for BOM Forecast from [my forecast repo here](https://github.com/DavidFW1960/bom_forecast) You configure the card by passing in sensor entities from these BOM platforms. 
+The BOM Weather Card provides current and forecasted weather conditions using the [BOM sensor platform](https://www.home-assistant.io/integrations/bom/#sensor) in core Home Assistant and a custom component for BOM Forecast from [my forecast repo here](https://github.com/DavidFW1960/bom_forecast) You configure the card by passing in sensor entities from these BOM platforms. 
 
 
 The [weather package](https://github.com/DavidFW1960/bom_forecast/blob/master/weather.yaml) in the BOM Forecast component contains BOM Sensor platform configuration for this card as well. Both the core BOM Sensor and BOM Forecast custom component are REQUIRED to use this card.
