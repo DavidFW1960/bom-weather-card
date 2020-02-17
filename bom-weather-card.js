@@ -15,7 +15,7 @@ class BOMWeatherCard extends LitElement {
 // #####
 
   render() {
-//  Handle Configuration Flags 
+//  Handle Configuration Flags
 //    var icons = this.config.static_icons ? "static" : "animated";
     var currentText = this.config.entity_current_text ? html`<span class="currentText" id="current-text">${this._hass.states[this.config.entity_current_text].state}</span>` : ``;
     var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike} <span id="apparent-text">${this.current.apparent}</span> ${this.getUOM("temperature")}</span>` : ``;
@@ -23,13 +23,13 @@ class BOMWeatherCard extends LitElement {
     var separator = this.config.show_separator ? html`<hr class=line>` : ``;
     var uv_alert = this.config.entity_uv_alert ? html`${this._hass.states[this.config.entity_uv_alert].state}` : ``;
     var fire_danger = this.config.entity_fire_danger ? html`${this._hass.states[this.config.entity_fire_danger].state}` : ``;
-   
-// Build HTML    
+
+// Build HTML
     return html`
       <style>
       ${this.style()}
       </style>
-      <ha-card class = "card">  
+      <ha-card class = "card">
         <span class="icon bigger" id="icon-bigger" style="background: none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this.current.conditions] + ".svg")}) no-repeat; background-size: contain;">${this.current.conditions}</span>
         <span class="temp" id="temperature-text">${this.current.temperature}</span><span class="tempc">${this.getUOM('temperature')}</span>
         ${currentText}
@@ -38,7 +38,7 @@ class BOMWeatherCard extends LitElement {
         <span>
           <ul class="variations">
             <li>
-              ${this.getSlot().l1} 
+              ${this.getSlot().l1}
               ${this.getSlot().l2}
               ${this.getSlot().l3}
               ${this.getSlot().l4}
@@ -77,7 +77,7 @@ class BOMWeatherCard extends LitElement {
 // #####
 // ##### slots - returns the value to be displyed in a specific current condition slot
 // #####
-  
+
   getSlot() {
     return {
       'r1' : this.slotValue('r1',this.config.slot_r1),
@@ -113,7 +113,7 @@ class BOMWeatherCard extends LitElement {
     var popunit = html`<span class="unit"> ${this.getUOM('precipitation')}</span>`
     var uv_summary = this.config.entity_uv_alert_summary ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunny"></ha-icon></span>${this.localeText.uvRating} <span id="daytime-uv-text">${this._hass.states[this.config.entity_uv_alert_summary].state}</span></li>` : ``;
     var fire_summary = this.config.entity_fire_danger_summary ? html`<li><span class="ha-icon"><ha-icon icon="mdi:fire"></ha-icon></span>${this.localeText.fireDanger} <span id="daytime-firedanger-text">${this._hass.states[this.config.entity_fire_danger_summary].state}</span></li>` : ``;
-    
+
     switch (value){
       case 'pop': return pop;
       case 'possible_today': return possibleToday;
@@ -131,7 +131,7 @@ class BOMWeatherCard extends LitElement {
       case 'empty': return html`&nbsp;`;
       case 'remove': return ``;
     }
-    
+
     // If no value can be matched pass back a default for the slot
     switch (slot){
       case 'l1': return daytimeHigh;
@@ -146,8 +146,8 @@ class BOMWeatherCard extends LitElement {
       case 'r5': return sunFollowing;
     }
   }
-  
-  
+
+
 // #####
 // ##### windDirections - returns set of possible wind directions by specified language
 // #####
@@ -160,7 +160,7 @@ class BOMWeatherCard extends LitElement {
     const windDirections_he = ['צפון','צ-צ-מז','צפון מזרח','מז-צ-מז','מזרח','מז-ד-מז','דרום מזרח','ד-ד-מז','דרום','ד-ד-מע','דרום מערב','מע-ד-מע','מערב','מע-צ-מע','צפון מערב','צ-צ-מע','צפון'];
     const windDirections_da = ['N','NNØ','NØ','ØNØ','Ø','ØSØ','SØ','SSØ','S','SSV','SV','VSV','V','VNV','NV','NNV','N'];
     const windDirections_ru = ['С','ССВ','СВ','ВСВ','В','ВЮВ','ЮВ','ЮЮВ','Ю','ЮЮЗ','ЮЗ','ЗЮЗ','З','ЗСЗ','СЗ','ССЗ','С'];
-	
+
     switch (this.config.locale) {
       case "it" :
       case "fr" :
@@ -243,7 +243,7 @@ class BOMWeatherCard extends LitElement {
         }
     }
   }
-  
+
 // #####
 // ##### dayOrNight : returns day or night depending on the position of the sun.
 // #####
@@ -319,50 +319,50 @@ class BOMWeatherCard extends LitElement {
     forecastDate4.setDate(forecastDate4.getDate()+4);
     var forecastDate5 = new Date();
     forecastDate5.setDate(forecastDate5.getDate()+5);
-    
+
 
     const forecast1 = { date: forecastDate1,
                       dayIndex: '1',
   	                  condition: this.config.entity_forecast_icon_1,
-  										temphigh: this.config.entity_forecast_high_temp_1,
-  										templow:  this.config.entity_forecast_low_temp_1,
-  										pop: this.config.entity_pop_1,
-  										pos: this.config.entity_pos_1,
-  										summary: this.config.entity_summary_1, };
+                                        temphigh: this.config.entity_forecast_high_temp_1,
+                                        templow:  this.config.entity_forecast_low_temp_1,
+                                        pop: this.config.entity_pop_1,
+                                        pos: this.config.entity_pos_1,
+                                        summary: this.config.entity_summary_1, };
     const forecast2 = { date: forecastDate2,
                       dayIndex: '2',
   	                  condition: this.config.entity_forecast_icon_2,
-  										temphigh: this.config.entity_forecast_high_temp_2,
-  										templow:  this.config.entity_forecast_low_temp_2,
-  										pop: this.config.entity_pop_2,
-  										pos: this.config.entity_pos_2,
-  										summary: this.config.entity_summary_2, };
+                                        temphigh: this.config.entity_forecast_high_temp_2,
+                                        templow:  this.config.entity_forecast_low_temp_2,
+                                        pop: this.config.entity_pop_2,
+                                        pos: this.config.entity_pos_2,
+                                        summary: this.config.entity_summary_2, };
     const forecast3 = { date: forecastDate3,
                       dayIndex: '3',
   	                  condition: this.config.entity_forecast_icon_3,
-  										temphigh: this.config.entity_forecast_high_temp_3,
-  										templow:  this.config.entity_forecast_low_temp_3,
-  										pop: this.config.entity_pop_3,
-  										pos: this.config.entity_pos_3,
-  										summary: this.config.entity_summary_3, };
+                                        temphigh: this.config.entity_forecast_high_temp_3,
+                                        templow:  this.config.entity_forecast_low_temp_3,
+                                        pop: this.config.entity_pop_3,
+                                        pos: this.config.entity_pos_3,
+                                        summary: this.config.entity_summary_3, };
     const forecast4 = { date: forecastDate4,
                       dayIndex: '4',
   	                  condition: this.config.entity_forecast_icon_4,
-  										temphigh: this.config.entity_forecast_high_temp_4,
-  										templow:  this.config.entity_forecast_low_temp_4,
-  										pop: this.config.entity_pop_4,
-  										pos: this.config.entity_pos_4,
-  										summary: this.config.entity_summary_4, };
+                                        temphigh: this.config.entity_forecast_high_temp_4,
+                                        templow:  this.config.entity_forecast_low_temp_4,
+                                        pop: this.config.entity_pop_4,
+                                        pos: this.config.entity_pos_4,
+                                        summary: this.config.entity_summary_4, };
     const forecast5 = { date: forecastDate5,
                       dayIndex: '5',
   	                  condition: this.config.entity_forecast_icon_5,
-  										temphigh: this.config.entity_forecast_high_temp_5,
-  										templow:  this.config.entity_forecast_low_temp_5,
-  										pop: this.config.entity_pop_5,
-  										pos: this.config.entity_pos_5,
-  										summary: this.config.entity_summary_5, };
+                                        temphigh: this.config.entity_forecast_high_temp_5,
+                                        templow:  this.config.entity_forecast_low_temp_5,
+                                        pop: this.config.entity_pop_5,
+                                        pos: this.config.entity_pos_5,
+                                        summary: this.config.entity_summary_5, };
 
-	  return [forecast1, forecast2, forecast3, forecast4, forecast5];
+      return [forecast1, forecast2, forecast3, forecast4, forecast5];
   }
 
 
@@ -380,7 +380,7 @@ class BOMWeatherCard extends LitElement {
     var windSpeed = this.config.entity_wind_speed ? Math.round(this._hass.states[this.config.entity_wind_speed].state) : 0;
     var apparent = this.config.entity_apparent_temp ? Math.round(this._hass.states[this.config.entity_apparent_temp].state) : 0;
     var beaufort = this.config.show_beaufort ? html`Bft: ${this.beaufortWind} - ` : ``;
-    
+
     return {
       'conditions': conditions,
       'humidity': humidity,
@@ -399,7 +399,7 @@ class BOMWeatherCard extends LitElement {
 // #####
 
 get sunSet() {
-    var nextSunSet ;
+    var nextSunSet;
     var nextSunRise;
     if (this.config.time_format) {
       nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit',hour12: this.is12Hour});
@@ -438,7 +438,7 @@ get sunSet() {
 // ##### beaufortWind - returns the wind speed on th beaufort scale
 // #####
 
-get beaufortWind() { 
+get beaufortWind() {
   if (this.config.entity_wind_speed) {
     switch (this._hass.states[this.config.entity_wind_speed].attributes.unit_of_measurement) {
       case 'mph':
@@ -493,7 +493,7 @@ get is12Hour() {
 // ####
 
 style() {
-  
+
   // Get config flags or set defaults if not configured
   var tooltipBGColor = this.config.tooltip_bg_color || "rgb( 75,155,239)";
   var tooltipFGColor = this.config.tooltip_fg_color || "#fff";
@@ -523,7 +523,7 @@ style() {
   var separatorTopMargin = this.config.separator_top_margin || "6em";
   var summaryTopPadding = this.config.summary_top_padding || "1em";
   var summaryFontSize = this.config.summary_font_size || "0.8em";
-  
+
   return html`
       .clear {
         clear: both;
@@ -549,7 +549,7 @@ style() {
         margin-left: 1em;
         margin-right: 1em;
       }
-      
+
       .temp {
         font-weight: ${tempFontWeight};
         font-size: ${tempFontSize};
@@ -589,7 +589,7 @@ style() {
         text-align: ${currentTextAlignment};
         width: ${currentTextWidth};
       }
-      
+
       .pop {
         font-weight: 400;
         color: var(--primary-text-color);
@@ -690,7 +690,7 @@ style() {
         word-wrap: break-word;
         width: 30%;
       }
-  
+
       .fcasttooltip {
         position: relative;
         display: inline-block;
@@ -738,9 +738,9 @@ style() {
 // #####
 
   getUOM(measure) {
-    
+
     const lengthUnit = this._hass.config.unit_system.length;
-    
+
     switch (measure) {
       case 'air_pressure':
         return lengthUnit === 'km' ? 'hPa' : 'mbar';
@@ -761,19 +761,19 @@ style() {
 // #####
 
   set hass(hass) {
-    
+
     var interval = this.config.refresh_interval || 30;
     var doRefresh = false;
-    
+
     // Make sure hass is assigned first time.
     if (!this._initialized) {
       this._initialized= true;
       this._lasRefresh = new Date();
       doRefresh = true;
     }
-    
+
     var now = new Date();
-    
+
     // Check if refresh interval has been exceeded and refresh if necessary
     if (Math.round((now - this._lastRefresh)/1000) > interval ) { doRefresh = true; } 
 
@@ -784,7 +784,6 @@ style() {
     }
   }
 
-  
 // #####
 // updateValues - Updates card values as changes happen in the hass object
 // #####
@@ -808,7 +807,7 @@ style() {
         if (this.config.entity_pos_1 && this.config.entity_pos_2 && this.config.entity_pos_3 && this.config.entity_pos_4 && this.config.entity_pos_5) { root.getElementById("fcast-pos-" + daily.dayIndex).textContent = `${this._hass.states[daily.pos].state} ${popunit}`}
         root.getElementById("fcast-summary-" + daily.dayIndex).textContent = `${this._hass.states[daily.summary].state}`;
      });
-      
+
 // Optional Entities    
       if (this.config.entity_current_text) { root.getElementById("current-text").textContent = `${this._hass.states[this.config.entity_current_text].state}` }
       if (this.config.entity_apparent_temp) { root.getElementById("apparent-text").textContent = `${this.current.apparent}` }
@@ -827,7 +826,7 @@ style() {
       if (this.config.entity_sun && !this.config.alt_sun_next) { root.getElementById("sun-next-text").textContent = `${this.sunSet.nextText}` }
       if (this.config.entity_sun && !this.config.alt_sun_following) { root.getElementById("sun-following-text").textContent = `${this.sunSet.followingText}` }
       if (this.config.entity_daily_summary) { root.getElementById("daily-summary-text").textContent = `${this._hass.states[this.config.entity_daily_summary].state}` }
-      
+
 // Alt Text
       if (this.config.alt_sun_next) { root.getElementById("alt-sun-next").textContent = `${this._hass.states[this.config.alt_sun_next].state}` }
       if (this.config.alt_sun_following) { root.getElementById("alt-sun-following").textContent = `${this._hass.states[this.config.alt_sun_following].state}` }
@@ -840,8 +839,7 @@ style() {
 
     }
   }
-  
-  
+
 // #####
 // ##### Assigns the configuration vlaues to an internal class var
 // ##### This is called everytime a config change is made
@@ -855,11 +853,10 @@ style() {
 // #####
 
   getCardSize() { return 3 }
-  
+
 }
 
-// ##### 
+// #####
 // ##### Register the card as a customElement
 // #####
 customElements.define('bom-weather-card', BOMWeatherCard);
-
