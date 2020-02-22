@@ -2,7 +2,11 @@
 
 # BOM Weather Card
 
-## Changes
+## Latest Changes
+Added some new icons for conditions I found on the forum here (https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702) These have been added to the zip file. See the readme.md file for details on installing the icons.
+## IF YOU DON'T GRAB NEW ICONS you WILL get blank icons on the card! Be Warned.
+
+## Recent Changes
 Due to the fact I have added some more entities, I am adding an extra row/2 slots, l5 and r5 that you can configure. Defaults for all slots have been changed from original to what is shown in the graphic. this is a POTENTIAL BREAKING CHANGE if you are using the default slots (by not configuring them yourself)
 Added new UV_Alert and Fire_danger conditions from the BOM FTP Component. In addition to a template, they require 2-4 new lines in the lovelace config.
 (the sample weather.yaml includes all templates)
