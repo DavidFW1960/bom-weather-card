@@ -3,6 +3,7 @@
 # BOM Weather Card
 
 ## Latest Changes
+Some further Icon changes - tried to make them a bit smaller and added haze. Re-Download ZIP icons and unzip again!
 Added some new icons for conditions I found on the forum here (https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702) These have been added to the zip file. See the readme.md file for details on installing the icons.
 ## IF YOU DON'T GRAB NEW ICONS you WILL get blank icons on the card! Be Warned.
 
