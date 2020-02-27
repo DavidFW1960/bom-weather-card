@@ -53,6 +53,7 @@
             locale: en
             sunset: true
             static_icons: false
+#           old_icon: true
             tooltip_bg_color: 'rgb( 75,155,239)'
             tooltip_border_color: 'rgb(255,161,0)'
             tooltip_border_width: 1
