@@ -243,7 +243,7 @@ tooltips: true
 old_daily_format: false
 time_format: 24
 show_beaufort: true
-old_icon: true   # any value for this key will cause old icons to be rendered
+old_icon: "true"   # must be true in quotes for old icons to be rendered
 ~~~~
 
 **Flags**
@@ -295,7 +295,7 @@ old_icon: true   # any value for this key will cause old icons to be rendered
 | slot_r3                  | **uv_summary**                     | Sets the value used in current conditions slot r3 : See slots for more info |
 | slot_r4                  | **fire_summary**                   | Sets the value used in current conditions slot r4 : See slots for more info |
 | slot_r5                  | **sun_following**                  | Sets the value used in current conditions slot r4 : See slots for more info |
-| old_icon                 | true                               | Sets card to render old icons. ONLY add this key if you want old icons!     |
+| old_icon                 | "true"                             | Sets card to render old icons. Must use quotes                              |
 
 **Slots**
 --------------------------

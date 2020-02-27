@@ -7,9 +7,9 @@ So the new icons were not universally loved.
 I have made an updated card now with an option to use the old icons.
 Add this flag to the lovelace file in raw or yaml
 ```yaml
-old_icon: true
+old_icon: "true"
 ```
-Any value for old_icon here will trigger the card to render the old icons. MAKE sure you have all the incons from weather_icons.zip
+Note the quotes are important. MAKE sure you have all the icons from weather_icons.zip
 
 Log an issue if you find any bugs.
 
