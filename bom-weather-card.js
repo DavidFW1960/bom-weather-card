@@ -59,7 +59,7 @@ class BOMWeatherCard extends LitElement {
                   <span class="dayname" id="fcast-dayName-${daily.dayIndex}">${(daily.date).toLocaleDateString(this.config.locale,{weekday: 'short'})}</span>
                   <br><i class="icon" id="fcast-icon-${daily.dayIndex}" style="background: none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this._hass.states[daily.condition].state] + ".svg")}) no-repeat; background-size: contain;"></i>
                   ${this.config.old_daily_format ? html`<br><span class="highTemp" id="fcast-high-${daily.dayIndex}">${Math.round(this._hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>
-                                                        <br><span class="lowTemp" id="fcast-low-${daily.dayIndex}">${Math.round(this._hass.states[daily.templow].state)}${this.getUOM("temperature")}</span>` : 
+                                                        <br><span class="lowTemp" id="fcast-low-${daily.dayIndex}">${Math.round(this._hass.states[daily.templow].state)}${this.getUOM("temperature")}</span>` :
                                                    html`<br><span class="lowTemp" id="fcast-low-${daily.dayIndex}">${Math.round(this._hass.states[daily.templow].state)}</span> / <span class="highTemp" id="fcast-high-${daily.dayIndex}">${Math.round(this._hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>`}
                   ${this.config.entity_pop_1 && this.config.entity_pop_2 && this.config.entity_pop_3 && this.config.entity_pop_4 && this.config.entity_pop_5 ? html`<br><span class="pop" id="fcast-pop-${daily.dayIndex}">${Math.round(this._hass.states[daily.pop].state)} %</span>` : ``}
                   ${this.config.entity_pos_1 && this.config.entity_pos_2 && this.config.entity_pos_3 && this.config.entity_pos_4 && this.config.entity_pos_5 ? html`<br><span class="pos" id="fcast-pos-${daily.dayIndex}">${this._hass.states[daily.pos].state} </span><span class="unit"> ${this.getUOM('precipitation')}</span>` : ``}
@@ -210,8 +210,8 @@ class BOMWeatherCard extends LitElement {
         return {
           feelsLike: "Odczuwalne",
           maxToday: "Najwyższa dziś:",
-	  minToday: "Najniższa dziś:",
-	  posToday: "Prognoza",
+      minToday: "Najniższa dziś:",
+      posToday: "Prognoza",
           posTomorrow: "Prog. jutro",
           fireDanger: "Ogień"
         }
@@ -234,7 +234,7 @@ class BOMWeatherCard extends LitElement {
         return {
           feelsLike: "Відчувається як",
           maxToday: "Максимально сьогодні"
-        }		
+        }
       default :
         return {
           feelsLike: "Feels like",
@@ -263,50 +263,75 @@ class BOMWeatherCard extends LitElement {
 // #####
 
   get weatherIcons() {
+    var sunny_icon = this.config.old_icon ? `${this.dayOrNight}` : `${this.dayOrNight}`;
+    var clear_icon = this.config.old_icon ? `${this.dayOrNight}` : `clear-${this.dayOrNight}`;
+    var mostly_sunny_icon = this.config.old_icon ? `fair-${this.dayOrNight}` : `fair-${this.dayOrNight}`;
+    var partly_cloudy_icon = this.config.old_icon ? `cloudy-${this.dayOrNight}-3` : `partly-cloudy-${this.dayOrNight}`;
+    var cloudy_icon = this.config.old_icon ? `cloudy-original` : `cloudy`;
+    var hazy_icon = this.config.old_icon ? `cloudy-${this.dayOrNight}-1` : `haze`;
+    var frost_icon = this.config.old_icon ? `cloudy-${this.dayOrNight}-1` : `cloudy-${this.dayOrNight}-1`;
+    var light_rain_icon = this.config.old_icon ? `rainy-1` : `rainy-1`;
+    var windy_icon = this.config.old_icon ? `cloudy-original` : `wind`;
+    var fog_icon = this.config.old_icon ? `cloudy-original` : `fog`;
+    var showers_icon = this.config.old_icon ? `rainy-3` : `rainy-3`;
+    var rain_icon = this.config.old_icon ? `rainy-5` : `rain`;
+    var dust_icon = this.config.old_icon ? `cloudy-${this.dayOrNight}-1` : `haze`;
+    var snow_icon = this.config.old_icon ? `snowy-6` : `snow`;
+    var storm_icon = this.config.old_icon ? `scattered-thunderstorms` : `scattered-thunderstorms`;
+    var light_showers_icon = this.config.old_icon ? `rainy-5` : `rainy-5`;
+    var heavy_showers_icon = this.config.old_icon ? `rainy-7` : `rainy-7`;
+    var cyclone_icon = this.config.old_icon ? `tornado` : `tornado`;
+    var clear_day_icon = this.config.old_icon ? `day` : `clear-day`;
+    var clear_night_icon = this.config.old_icon ? `night` : `clear-night`;
+    var sleet_icon = this.config.old_icon ? `rainy-6` : `sleet`;
+    var partly_cloudy_day_icon = this.config.old_icon ? `cloudy-day-3` : `partly-cloudy-day`;
+    var partly_cloudy_night_icon = this.config.old_icon ? `cloudy-night-3` : `partly-cloudy-night`;
+    var hail_icon = this.config.old_icon ? `rainy-7` : `rainy-7`;
+    var lightning_icon = this.config.old_icon ? `thunder` : `thunder`;
+    var windy_variant_icon = this.config.old_icon ? `cloudy-${this.dayOrNight}-3` : `cloudy-${this.dayOrNight}-3`;
     return {
-	  'sunny': `${this.dayOrNight}`,
-	  'clear': `clear-${this.dayOrNight}`,
-	  'mostly-sunny': `fair-${this.dayOrNight}`,
-	  'partly-cloudy': `partly-cloudy-${this.dayOrNight}`,
-	  'cloudy': 'cloudy',
-	  'hazy': `cloudy-${this.dayOrNight}-1`,
-	  'hazey': `haze`,
-	  'haze': `haze`,
-	  'frost': `cloudy-${this.dayOrNight}-1`,
-	  'light-rain': 'rainy-1',
-	  'windy': 'cloudy',
-	  'fog': 'fog',
-	  'foggy': 'fog',
-	  'showers': 'rainy-3',
-	  'shower': 'rainy-3',
-	  'rain': 'rain',
-	  'rainy': 'rainy-5',
-	  'dust': 'haze',
-	  'dusty': 'haze',
-	  'snow': 'snow',
-	  'snowy': 'snowy-6',
-	  'storm': 'scattered-thunderstorms',
-	  'stormy': 'scattered-thunderstorms',
-	  'light-showers': 'rainy-5',
-	  'light-shower': 'rainy-5',
-	  'heavy-showers': 'rainy-7',
-	  'heavy-shower': 'rainy-7',
-	  'tropical-cyclone': 'tornado',
-	  'tropicalcyclone': 'tornado',
-	  'clear-day': 'day',
-	  'clear-night': 'night',
-	  'sleet': 'sleet',
-	  'wind': 'wind',
-	  'partly-cloudy-day': 'partly-cloudy-day',
-	  'partly-cloudy-night': 'partly-cloudy-night',
-	  'hail': 'rainy-7',
-	  'lightning': 'thunder',
-	  'thunderstorm': 'thunder',
-	  'windy-variant': `cloudy-${this.dayOrNight}-3`,
-	  'exceptional': '!!',
+      'sunny': sunny_icon,
+      'clear': clear_icon,
+      'mostly-sunny': mostly_sunny_icon,
+      'partly-cloudy': partly_cloudy_icon,
+      'cloudy': cloudy_icon,
+      'hazy': hazy_icon,
+      'hazey': hazy_icon,
+      'haze': hazy_icon,
+      'frost': frost_icon,
+      'light-rain': light_rain_icon,
+      'wind': windy_icon,
+      'windy': windy_icon,
+      'fog': fog_icon,
+      'foggy': fog_icon,
+      'showers': showers_icon,
+      'shower': showers_icon,
+      'rain': rain_icon,
+      'rainy': rain_icon,
+      'dust': dust_icon,
+      'dusty': dust_icon,
+      'snow': snow_icon,
+      'snowy': snow_icon,
+      'storm': storm_icon,
+      'stormy': storm_icon,
+      'light-showers': light_showers_icon,
+      'light-shower': light_showers_icon,
+      'heavy-showers': heavy_showers_icon,
+      'heavy-shower': heavy_showers_icon,
+      'tropical-cyclone': cyclone_icon,
+      'tropicalcyclone': cyclone_icon,
+      'clear-day': clear_day_icon,
+      'clear-night': clear_night_icon,
+      'sleet': sleet_icon,
+      'partly-cloudy-day': partly_cloudy_day_icon,
+      'partly-cloudy-night': partly_cloudy_night_icon,
+      'hail': hail_icon,
+      'lightning': lightning_icon,
+      'thunderstorm': lightning_icon,
+      'windy-variant': windy_variant_icon,
+      'exceptional': '!!',
     }
   }
-
 
 // #####
 // ##### forecast : returns forcasted weather information for the next 5 days
@@ -327,7 +352,7 @@ class BOMWeatherCard extends LitElement {
 
     const forecast1 = { date: forecastDate1,
                       dayIndex: '1',
-  	                  condition: this.config.entity_forecast_icon_1,
+                      condition: this.config.entity_forecast_icon_1,
                                         temphigh: this.config.entity_forecast_high_temp_1,
                                         templow:  this.config.entity_forecast_low_temp_1,
                                         pop: this.config.entity_pop_1,
@@ -335,7 +360,7 @@ class BOMWeatherCard extends LitElement {
                                         summary: this.config.entity_summary_1, };
     const forecast2 = { date: forecastDate2,
                       dayIndex: '2',
-  	                  condition: this.config.entity_forecast_icon_2,
+                      condition: this.config.entity_forecast_icon_2,
                                         temphigh: this.config.entity_forecast_high_temp_2,
                                         templow:  this.config.entity_forecast_low_temp_2,
                                         pop: this.config.entity_pop_2,
@@ -343,7 +368,7 @@ class BOMWeatherCard extends LitElement {
                                         summary: this.config.entity_summary_2, };
     const forecast3 = { date: forecastDate3,
                       dayIndex: '3',
-  	                  condition: this.config.entity_forecast_icon_3,
+                      condition: this.config.entity_forecast_icon_3,
                                         temphigh: this.config.entity_forecast_high_temp_3,
                                         templow:  this.config.entity_forecast_low_temp_3,
                                         pop: this.config.entity_pop_3,
@@ -351,7 +376,7 @@ class BOMWeatherCard extends LitElement {
                                         summary: this.config.entity_summary_3, };
     const forecast4 = { date: forecastDate4,
                       dayIndex: '4',
-  	                  condition: this.config.entity_forecast_icon_4,
+                      condition: this.config.entity_forecast_icon_4,
                                         temphigh: this.config.entity_forecast_high_temp_4,
                                         templow:  this.config.entity_forecast_low_temp_4,
                                         pop: this.config.entity_pop_4,
@@ -359,7 +384,7 @@ class BOMWeatherCard extends LitElement {
                                         summary: this.config.entity_summary_4, };
     const forecast5 = { date: forecastDate5,
                       dayIndex: '5',
-  	                  condition: this.config.entity_forecast_icon_5,
+                      condition: this.config.entity_forecast_icon_5,
                                         temphigh: this.config.entity_forecast_high_temp_5,
                                         templow:  this.config.entity_forecast_low_temp_5,
                                         pop: this.config.entity_pop_5,
@@ -427,7 +452,7 @@ get sunSet() {
       if (new Date().getDate() != new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).getDate()) {
         nextSunRise = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunRise;
         nextSunSet = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunSet;
-      } 
+      }
       return {
       'next': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-up"></ha-icon></span><span id="sun-next-text">${nextSunRise}</span></li>`,
       'following': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span><span id="sun-following-text">${nextSunSet}</span></li>`,
@@ -603,7 +628,7 @@ style() {
         font-weight: 400;
         color: var(--primary-text-color);
       }
-	  
+
       .variations {
         display: flex;
         flex-flow: row wrap;
@@ -705,7 +730,7 @@ style() {
         width: ${tooltipWidth}px;
         background-color: ${tooltipBGColor};
         color: ${tooltipFGColor};
-        text-align: center; 
+        text-align: center;
         border-radius: 6px;
         border-style: solid;
         border-color: ${tooltipBorderColor};
@@ -716,7 +741,7 @@ style() {
         position: absolute;
         z-index: 1;
         bottom: 50%;
-        left: 0%; 
+        left: 0%;
         margin-left: ${tooltipLeftOffset}px;
       }
 
@@ -779,7 +804,7 @@ style() {
     var now = new Date();
 
     // Check if refresh interval has been exceeded and refresh if necessary
-    if (Math.round((now - this._lastRefresh)/1000) > interval ) { doRefresh = true; } 
+    if (Math.round((now - this._lastRefresh)/1000) > interval ) { doRefresh = true; }
 
     if (doRefresh) {
       this._lastRefresh = new Date();
@@ -812,7 +837,7 @@ style() {
         root.getElementById("fcast-summary-" + daily.dayIndex).textContent = `${this._hass.states[daily.summary].state}`;
      });
 
-// Optional Entities    
+// Optional Entities
       if (this.config.entity_current_text) { root.getElementById("current-text").textContent = `${this._hass.states[this.config.entity_current_text].state}` }
       if (this.config.entity_apparent_temp) { root.getElementById("apparent-text").textContent = `${this.current.apparent}` }
       if (this.config.entity_pressure && !this.config.alt_pressure) { root.getElementById("pressure-text").textContent = `${this.current.pressure}` }
