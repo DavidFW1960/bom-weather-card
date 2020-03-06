@@ -75,12 +75,12 @@ The next two steps are completed differently based on the version of HA you are 
 
    **Note: Ensure type is set to module and not js**  
    **Note: /local/ points to the ```<config-dir>/www/``` dir.**
-   **Note: /community_plugin/ points to the ```<config-dir>/www/community/``` dir.**
+   **Note: /hascfiles/ points to the ```<config-dir>/www/community/``` dir.**
 
 For a HACS Installation:
 ~~~~
 resources:
-  - url: /community_plugin/bom-weather-card/bom-weather-card.js
+  - url: /hacsfiles/bom-weather-card/bom-weather-card.js
     type: module
 ~~~~
 
@@ -93,6 +93,9 @@ resources:
 
 3. Add the card definition:  There are required / optional and flag entries.
 NOTE: My entries show a mix of the FTP Component sensors and this platform's sensors. **All my values refer to Gosford entities.. You will need to edit these to match your sensors names.**
+
+**An example configuration is in lovelace.yaml - this can be pasted into the manual card configuration in the GUI editor**
+If you paste it in the raw editor or in a yaml file, take care with the indenting.
 
 Required entries must be present 
 in your configuration.  The card will not work at all if any of these lines are missing. **EDIT gosford to match your observations/forecasts**
@@ -167,7 +170,7 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 ~~~~
 
 **Example template sensors:** You can call template sensors whatever you want so long as you use the same name in the card config. (Included in weather.yaml) 
-[See also the file] (https://github.com/DavidFW1960/bom-weather-card/blob/master/templates.md) with templates for areas with two fire danger areas like Perth.
+[See also the file](https://github.com/DavidFW1960/bom-weather-card/blob/master/templates.md) with templates for areas with two fire danger areas like Perth.
 These templates are EXAMPLES. Adjust and adapt as required. Up-to-date templates will always be in the templates.md file.
 ~~~~~
       bom_current_text:
