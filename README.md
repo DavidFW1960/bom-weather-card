@@ -298,7 +298,7 @@ old_icon: "true"   # must be true in quotes for old icons to be rendered
 | slot_r3                  | **uv_summary**                     | Sets the value used in current conditions slot r3 : See slots for more info |
 | slot_r4                  | **fire_summary**                   | Sets the value used in current conditions slot r4 : See slots for more info |
 | slot_r5                  | **sun_following**                  | Sets the value used in current conditions slot r4 : See slots for more info |
-| old_icon                 | "true"                             | Sets card to render old icons. Must use quotes                              |
+| old_icon                 | **"true"** / hybrid or false       | Sets card to render old icons. Must use quotes                              |
 
 **Slots**
 --------------------------

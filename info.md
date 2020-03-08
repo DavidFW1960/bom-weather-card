@@ -10,6 +10,8 @@ Add this flag to the lovelace file in raw or yaml
 old_icon: "true"
 ```
 Note the quotes are important. MAKE sure you have all the icons from weather_icons.zip
+I added a third option 'hybrid' to use the new fog, haze, dust & wind icons as well as the old ones.
+Additionally if the old_icon key is not specified it **should** default to true.
 
 Log an issue if you find any bugs.
 
