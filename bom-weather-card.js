@@ -263,7 +263,7 @@ class BOMWeatherCard extends LitElement {
 // #####
 
   get weatherIcons() {
-    var iconStyle = (this.config.old_icon ==="hybrid") ? `hybrid` : (this.config.old_icon ==="false") ? `false` : this.config.old_icon ? `false` : `true`;
+    var iconStyle = (this.config.old_icon ==="hybrid") ? `hybrid` : (this.config.old_icon ==="false") ? `false` : this.config.old_icon ? `true` : `true`;
     var sunny_icon = (iconStyle ==="true") ? `${this.dayOrNight}` : (iconStyle ==="hybrid") ? `${this.dayOrNight}` : `${this.dayOrNight}`;
     var clear_icon = (iconStyle ==="true") ? `${this.dayOrNight}` : (iconStyle ==="hybrid") ? `${this.dayOrNight}` : `clear-${this.dayOrNight}`;
     var mostly_sunny_icon = (iconStyle ==="true") ? `fair-${this.dayOrNight}` : (iconStyle ==="hybrid") ? `fair-${this.dayOrNight}` : `fair-${this.dayOrNight}`;
