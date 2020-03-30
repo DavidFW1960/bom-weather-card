@@ -3,19 +3,21 @@
 # BOM Weather Card
 
 ## Latest Changes
-So the new icons were not universally loved.
-I have made an updated card now with an option to use the old icons.
+I am providing an additional configuration option for the icons called hybrid.
+The Hybrid will use the old icons EXCEPT for dusty, windy, hazy, fog where it will use the new icons. For those conditions, the old isons used cloudy for everything.
+False will use the new icons for everything
+Trus will use the old icons for everything
+Additionally, if you don't specify the old_icon flag as per the below, it **should** default to the old icons.
+
 Add this flag to the lovelace file in raw or yaml
 ```yaml
-old_icon: "true"
+old_icon: "true" # True is the default if not specified. Can also use False or Hybrid.
 ```
 Note the quotes are important. MAKE sure you have all the icons from weather_icons.zip
-I added a third option 'hybrid' to use the new fog, haze, dust & wind icons as well as the old ones.
-Additionally if the old_icon key is not specified it **should** default to true.
 
 Log an issue if you find any bugs.
 
-Some further Icon changes - tried to make them a bit smaller and added haze. Re-Download ZIP icons and unzip again!
+Make sure you have the latest icon file. Re-Download ZIP icons and unzip again if you are unsure.
 Added some new icons for conditions I found on the forum here (https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702) These have been added to the zip file. See the readme.md file for details on installing the icons.
 ## IF YOU DON'T GRAB NEW ICONS you WILL get blank icons on the card! Be Warned.
 
