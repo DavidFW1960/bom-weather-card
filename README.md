@@ -320,4 +320,6 @@ slots (designated r1 - r5).  There are currently 10 possible values that can be 
 - empty (empty slot... the slot below does not rise to fill the space)
 - remove (same as empty but the slot below rises to take the place of the slot)
 
+If configuring with Slots please ensure to fill all available positions, the slots that you do not need can be filled with "remove" to ensure that they remain blank.
+
 [My FULL Lovelace configuration for this card is here](https://github.com/DavidFW1960/bom-weather-card/blob/master/lovelace.yaml) Cut and paste it into your lovelace.
