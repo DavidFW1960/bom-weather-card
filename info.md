@@ -3,6 +3,17 @@
 # BOM Weather Card
 
 ## Latest Changes
+With version 0.109.x the alignment of the large icon and also the temperature and unit of measurement has 'moved'
+I have adjusted the card with the following new defaults. These are included in the example lovelace.yaml file.
+
+IF you are using versions of HA earlier than 0.109 and also using the card defaults for these offsets your cards will look different so make sure you adjust these values in the settings for the card:
+```
+temp_top_margin: 0px            #default 0px px or em Note: pre-0.109.x default was -0.3em
+temp_uom_top_margin: -12px      #default -12px px or em Note: pre-0.109.x default was -9px
+large_icon_top_margin: -3.2em   #default -3.2em px or em Note: pre-0.109.x default was -3.5em
+```
+
+## Recent Changes
 I am providing an additional configuration option for the icons called hybrid.
 The Hybrid will use the old icons EXCEPT for dusty, windy, hazy, fog where it will use the new icons. For those conditions, the old isons used cloudy for everything.
 False will use the new icons for everything
@@ -21,7 +32,6 @@ Make sure you have the latest icon file. Re-Download ZIP icons and unzip again i
 Added some new icons for conditions I found on the forum here (https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702) These have been added to the zip file. See the readme.md file for details on installing the icons.
 ## IF YOU DON'T GRAB NEW ICONS you WILL get blank icons on the card! Be Warned.
 
-## Recent Changes
 Due to the fact I have added some more entities, I am adding an extra row/2 slots, l5 and r5 that you can configure. Defaults for all slots have been changed from original to what is shown in the graphic. this is a POTENTIAL BREAKING CHANGE if you are using the default slots (by not configuring them yourself)
 Added new UV_Alert and Fire_danger conditions from the BOM FTP Component. In addition to a template, they require 2-4 new lines in the lovelace config.
 (the sample weather.yaml includes all templates)

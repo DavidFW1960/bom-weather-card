@@ -67,11 +67,11 @@ time_format: 12
 show_beaufort: false
 refresh_interval: 60
 show_separator: false
-temp_top_margin: -0.3em         #default -0.3em px or em
+temp_top_margin: 0px            #default 0px px or em Note: pre-0.109.x default was -0.3em
 temp_font_weight: 300           #default 300 numeric
 temp_font_size: 4em             #default 4em em
 temp_right_pos: 0.85em          #default .85em px or em
-temp_uom_top_margin: -9px       #default -9px px or em
+temp_uom_top_margin: -12px      #default -12px px or em Note: pre-0.109.x default was -9px
 temp_uom_right_margin: 7px      #default 7px px or em
 apparent_top_margin: 45px       #default 45px px or em
 apparent_right_pos: 1em         #default 1em px or em
@@ -82,7 +82,7 @@ current_text_font_size: 1.5em   #default 1.5em em
 current_text_alignment: center  #default center
 current_text_width: 100%        #default 100%
 current_data_top_margin: 10em   #default 7em px or em
-large_icon_top_margin: -3.5em   #default -3.5em px or em
+large_icon_top_margin: -3.2em   #default -3.2em px or em Note: pre-0.109.x default was -3.5em
 large_icon_left_position: 0em   #default 0em px or em
 separator_top_margin: 6em       #default 6em px or em
 summary_top_padding: 2em        #default 1em px or em

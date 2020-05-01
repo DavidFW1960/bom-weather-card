@@ -533,11 +533,11 @@ style() {
   var tooltipWidth = this.config.tooltip_width || "110";
   var tooltipLeftOffset = this.config.tooltip_left_offset || "-12";
   var tooltipVisible = this.config.tooltips ? "visible" : "hidden";
-  var tempTopMargin = this.config.temp_top_margin || "-0.3em";
+  var tempTopMargin = this.config.temp_top_margin || "0px";
   var tempFontWeight = this.config.temp_font_weight || "300";
   var tempFontSize = this.config.temp_font_size || "4em";
   var tempRightPos = this.config.temp_right_pos || "0.85em";
-  var tempUOMTopMargin = this.config.temp_uom_top_margin || "-9px";
+  var tempUOMTopMargin = this.config.temp_uom_top_margin || "-12px";
   var tempUOMRightMargin = this.config.temp_uom_right_margin || "7px";
   var apparentTopMargin = this.config.apparent_top_margin || "45px";
   var apparentRightPos =  this.config.apparent_right_pos || "1em";
@@ -547,7 +547,7 @@ style() {
   var currentTextFontSize = this.config.current_text_font_size || "1.5em";
   var currentTextWidth = this.config.current_text_width || "100%";
   var currentTextAlignment = this.config.current_text_alignment || "center";
-  var largeIconTopMargin = this.config.large_icon_top_margin || "-3.5em";
+  var largeIconTopMargin = this.config.large_icon_top_margin || "-3.2em";
   var largeIconLeftPos = this.config.large_icon_left_pos || "0em";
   var currentDataTopMargin = this.config.current_data_top_margin ? this.config.current_data_top_margin : this.config.show_separator ? "1em" : "7em";
   var separatorTopMargin = this.config.separator_top_margin || "6em";

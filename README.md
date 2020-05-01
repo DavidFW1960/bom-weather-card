@@ -268,11 +268,11 @@ old_icon: "true"   # must be true in quotes for old icons to be rendered
 | show_beaufort            | true / **false**                   | Shows Beaufort Scale wind information                                       |
 | show_separator           | true / **false**                   | Shows separator between current conditions columns and current temp / Icon  |
 | time_format              | **locale** / 12 / 24               | Sets the format sunset and sunrise times. locale format is the default.     |
-| temp_top_margin          | **-.3em** / px or em value         | Sets the top margin of the Temperature.                                     |
+| temp_top_margin          | **0px** / px or em value           | Sets the top margin of the Temperature.                                     |
 | temp_font_weight         | **300** / numeric value            | Sets the font weight of the Temperature.                                    |
 | temp_font_size           | **4em** / em value                 | Sets the font size of the Temperature.                                      |
 | temp_right_pos           | **.85em** / px or em value         | Sets the right position of the Temperature.                                 |
-| temp_uom_top_margin      | **-9px** / px or em value          | Sets the top margin of the Temperature Unit of Meaure.                      |
+| temp_uom_top_margin      | **-12px** / px or em value         | Sets the top margin of the Temperature Unit of Meaure.                      |
 | temp_uom_right_margin    | **7px** / px or em value           | Sets the right margin of the Temperature Unit of Measure.                   |
 | apparent_top_margin      | **39px** / px or em value          | Sets the top margin of the apparent (feels Like) temperature                |
 | apparent_right_pos       | **1em** / px or em value           | Sets the right position of the apparent (feels Like) temperature            |
@@ -283,7 +283,7 @@ old_icon: "true"   # must be true in quotes for old icons to be rendered
 | current_text_alignment   | **center** / left, right or center | Sets the alignment of current text                                          |
 | current_text_width       | **100%** / px, em or %             | Sets the width of current text                                              |
 | current_data_top_margin  | **6em** / px or em value           | Sets the top margin of the current data blocks                              |
-| large_icon_top_margin    | **-3.5em** / px or em value        | Sets the top margin of the current conditions icon                          |
+| large_icon_top_margin    | **-3.2em** / px or em value        | Sets the top margin of the current conditions icon                          |
 | large_icon_left_position | **0em** / px or em value           | Sets the left position of the current conditions icon                       |
 | separator_top_margin     | **5em** / px or em value           | Sets the top margin of the separator line                                   |
 | summary_top_padding      | **1em** / px or em                 | Sets the gap between the forecast and summary text                          |
