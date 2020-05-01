@@ -562,7 +562,7 @@ style() {
   return html`
       .clear {
         clear: both;
-		line-height:1.2;
+        line-height:1.2;
       }
 
       .card {
