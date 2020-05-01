@@ -1,3 +1,8 @@
+console.info(
+  `%c bom-weather-card \n%c     Version 0.65     `,
+  "color: #f4eee4; font-weight: bold; background: #241b2f",
+  "color: #f4eee4; font-weight: bold; background: #f92aad"
+);
 // #####
 // ##### Get the LitElement and HTML classes from an already defined HA Lovelace class
 // #####
@@ -762,7 +767,6 @@ style() {
       }
       `
 }
-
 // #####
 // ##### getUOM: gets UOM for specified measure in either metric or imperial
 // #####
