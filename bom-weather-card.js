@@ -1,7 +1,7 @@
 console.info(
-  `%c bom-weather-card \n%c     Version 0.65     `,
-  "color: #f4eee4; font-weight: bold; background: #241b2f",
-  "color: #f4eee4; font-weight: bold; background: #f92aad"
+  `%c BOM-WEATHER-CARD \n%c Version 0.65     `,
+  "color: orange; font-weight: bold; background: black",
+  "color: white; font-weight: bold; background: dimgray"
 );
 // #####
 // ##### Get the LitElement and HTML classes from an already defined HA Lovelace class
