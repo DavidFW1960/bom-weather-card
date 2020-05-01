@@ -12,6 +12,7 @@ temp_top_margin: 0px            #default 0px px or em Note: pre-0.109.x default 
 temp_uom_top_margin: -12px      #default -12px px or em Note: pre-0.109.x default was -9px
 large_icon_top_margin: -3.2em   #default -3.2em px or em Note: pre-0.109.x default was -3.5em
 ```
+Also now if you open the browser console (Chrome F12) it will tell you the card version.
 
 ## Recent Changes
 I am providing an additional configuration option for the icons called hybrid.
