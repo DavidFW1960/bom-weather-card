@@ -12,6 +12,7 @@ temp_top_margin: 0px            #default 0px px or em Note: pre-0.109.x default 
 temp_uom_top_margin: -12px      #default -12px px or em Note: pre-0.109.x default was -9px
 large_icon_top_margin: -3.2em   #default -3.2em px or em Note: pre-0.109.x default was -3.5em
 ```
+Line Height for summary text adjusted for 0.109
 Also now if you open the browser console (Chrome F12) it will tell you the card version.
 
 ## Recent Changes
