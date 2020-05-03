@@ -271,22 +271,22 @@ old_icon: "true"   # must be true in quotes for old icons to be rendered
 | temp_top_margin          | **0px** / px or em value           | Sets the top margin of the Temperature.                                     |
 | temp_font_weight         | **300** / numeric value            | Sets the font weight of the Temperature.                                    |
 | temp_font_size           | **4em** / em value                 | Sets the font size of the Temperature.                                      |
-| temp_right_pos           | **.85em** / px or em value         | Sets the right position of the Temperature.                                 |
+| temp_right_pos           | **0.85em** / px or em value        | Sets the right position of the Temperature.                                 |
 | temp_uom_top_margin      | **-12px** / px or em value         | Sets the top margin of the Temperature Unit of Meaure.                      |
 | temp_uom_right_margin    | **7px** / px or em value           | Sets the right margin of the Temperature Unit of Measure.                   |
-| apparent_top_margin      | **39px** / px or em value          | Sets the top margin of the apparent (feels Like) temperature                |
+| apparent_top_margin      | **45px** / px or em value          | Sets the top margin of the apparent (feels Like) temperature                |
 | apparent_right_pos       | **1em** / px or em value           | Sets the right position of the apparent (feels Like) temperature            |
 | apparent_right_margin    | **1em** / px or em value           | Sets the right margin of the apparent (feels Like) temperature              |
-| current_text_top_margin  | **39px** / px or em value          | Sets the top margin of the current temperature text                         |
-| current_text_left_pos    | **5em** / px or em value           | Sets the left position of the current temperature text                      |
+| current_text_top_margin  | **4.5em** / px or em value         | Sets the top margin of the current temperature text                         |
+| current_text_left_pos    | **0px** / px or em value           | Sets the left position of the current temperature text                      |
 | current_text_font_size   | **1.5em** / em value               | Sets the font size of the current temperature text                          |
 | current_text_alignment   | **center** / left, right or center | Sets the alignment of current text                                          |
 | current_text_width       | **100%** / px, em or %             | Sets the width of current text                                              |
-| current_data_top_margin  | **6em** / px or em value           | Sets the top margin of the current data blocks                              |
+| current_data_top_margin  | **10em** / px or em value          | Sets the top margin of the current data blocks                              |
 | large_icon_top_margin    | **-3.2em** / px or em value        | Sets the top margin of the current conditions icon                          |
-| large_icon_left_position | **0em** / px or em value           | Sets the left position of the current conditions icon                       |
-| separator_top_margin     | **5em** / px or em value           | Sets the top margin of the separator line                                   |
-| summary_top_padding      | **1em** / px or em                 | Sets the gap between the forecast and summary text                          |
+| large_icon_left_position | **0px** / px or em value           | Sets the left position of the current conditions icon                       |
+| separator_top_margin     | **6em** / px or em value           | Sets the top margin of the separator line                                   |
+| summary_top_padding      | **2em** / px or em                 | Sets the gap between the forecast and summary text                          |
 | summary_font_size        | **0.8em** / px or em               | Sets the font size for the summary text                                     |
 | slot_l1                  | **daytime_high**                   | Sets the value used in current conditions slot l1 : See slots for more info |
 | slot_l2                  | **daytime_low**                    | Sets the value used in current conditions slot l2 : See slots for more info |
