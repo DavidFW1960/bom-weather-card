@@ -3,7 +3,7 @@
 # BOM Weather Card
 
 ## Latest Changes
-With version 0.109.x the alignment of the large icon and also the temperature and unit of measurement has 'moved'
+With version 0.109.x the alignment of the large icon and also the temperature and unit of measurement as well as the current text positions have 'moved'
 I have adjusted the card with the following new defaults. These are included in the example lovelace.yaml file.
 
 IF you are using versions of HA earlier than 0.109 and also using the card defaults for these offsets your cards will look different so make sure you adjust these values in the settings for the card:
@@ -11,6 +11,10 @@ IF you are using versions of HA earlier than 0.109 and also using the card defau
 temp_top_margin: 0px            #default 0px px or em Note: pre-0.109.x default was -0.3em
 temp_uom_top_margin: -12px      #default -12px px or em Note: pre-0.109.x default was -9px
 large_icon_top_margin: -3.2em   #default -3.2em px or em Note: pre-0.109.x default was -3.5em
+current_text_top_margin: 4.5em  #default 4.5em px or em pre-0.109.x default was 39px
+current_text_left_pos: 0px      #default 0px px or em pre-0.109.x default was 5em
+current_data_top_margin: 10em   #default 10em px or em pre-0.109.x default was 7em
+summary_top_padding: 2em        #default 2em px or em pre-0.109.x default was 1em
 ```
 Line Height for summary text adjusted for 0.109
 Also now if you open the browser console (Chrome F12) it will tell you the card version.
