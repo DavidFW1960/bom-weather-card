@@ -553,7 +553,7 @@ style() {
   var currentTextWidth = this.config.current_text_width || "100%";
   var currentTextAlignment = this.config.current_text_alignment || "center";
   var largeIconTopMargin = this.config.large_icon_top_margin || "-3.2em";
-  var largeIconLeftPos = this.config.large_icon_left_pos || "0em";
+  var largeIconLeftPos = this.config.large_icon_left_pos || "0px";
   var currentDataTopMargin = this.config.current_data_top_margin ? this.config.current_data_top_margin : this.config.show_separator ? "1em" : "10em";
   var separatorTopMargin = this.config.separator_top_margin || "6em";
   var summaryTopPadding = this.config.summary_top_padding || "2em";
