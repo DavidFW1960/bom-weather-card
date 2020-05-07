@@ -3,6 +3,18 @@
 # BOM Weather Card
 
 ## Latest Changes
+
+I have added an option to displat the Wind Gust speed.
+
+![image](https://raw.githubusercontent.com/DavidFW1960/bom-weather-card/master/bom-weather.png)
+
+Add this to the lovelace configuration:
+```
+entity_wind_gust: sensor.bom_gosford_wind_gust_kmh
+```
+Obviously with whatever your wind gust sensor is. It will then display automatically if you have the wind slot showing
+
+## Recent Changes
 With version 0.109.x the alignment of the large icon and also the temperature and unit of measurement as well as the current text positions have 'moved'
 I have adjusted the card with the following new defaults. These are included in the example lovelace.yaml file.
 
@@ -19,7 +31,6 @@ summary_top_padding: 2em        #default 2em px or em pre-0.109.x default was 1e
 Line Height for summary text adjusted for 0.109
 Also now if you open the browser console (Chrome F12) it will tell you the card version.
 
-## Recent Changes
 I am providing an additional configuration option for the icons called hybrid.
 The Hybrid will use the old icons EXCEPT for dusty, windy, hazy, fog where it will use the new icons. For those conditions, the old isons used cloudy for everything.
 False will use the new icons for everything

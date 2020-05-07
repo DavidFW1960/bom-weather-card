@@ -141,8 +141,9 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
             entity_daytime_low: sensor.bom_today_min
             entity_wind_bearing: sensor.bom_gosford_wind_direction
             entity_wind_speed: sensor.bom_gosford_wind_speed_kmh
+            entity_wind_gust: sensor.bom_gosford_wind_gust_kmh
             entity_humidity: sensor.bom_gosford_relative_humidity
-#           entity_pressure: sensor.???? - Not available in my area
+#           entity_pressure: sensor.???? - Not available in my area. I DO use a value from my BME280 sensor for this though
             entity_apparent_temp: sensor.bom_gosford_feels_like_c
             entity_daily_summary: sensor.bom_gosford_detailed_summary_0
             entity_pop: sensor.bom_gosford_chance_of_rain_0
