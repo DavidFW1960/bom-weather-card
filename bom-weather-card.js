@@ -198,7 +198,7 @@ class BOMWeatherCard extends LitElement {
         }
       case "fr" :
         return {
-          feelsLike: "Température ressentie",
+          feelsLike: "Ressenti:",
           maxToday: "Max aujourd'hui:",
         }
       case "de" :
@@ -215,8 +215,8 @@ class BOMWeatherCard extends LitElement {
         return {
           feelsLike: "Odczuwalne",
           maxToday: "Najwyższa dziś:",
-      minToday: "Najniższa dziś:",
-      posToday: "Prognoza",
+          minToday: "Najniższa dziś:",
+          posToday: "Prognoza",
           posTomorrow: "Prog. jutro",
           fireDanger: "Ogień"
         }
