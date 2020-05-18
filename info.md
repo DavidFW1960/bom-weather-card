@@ -4,7 +4,9 @@
 
 ## Latest Changes
 
-I have added an option to displat the Wind Gust speed.
+Fix card refresh.
+Remove leading zeros from 12h times
+I have added an option to display the Wind Gust speed.
 
 ![image](https://raw.githubusercontent.com/DavidFW1960/bom-weather-card/master/bom-weather.png)
 
