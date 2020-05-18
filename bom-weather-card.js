@@ -865,11 +865,12 @@ style() {
       if (this.config.entity_sun && !this.config.alt_sun_next) { root.getElementById("sun-next-text").textContent = `${this.sunSet.nextText}` }
       if (this.config.entity_sun && !this.config.alt_sun_following) { root.getElementById("sun-following-text").textContent = `${this.sunSet.followingText}` }
       if (this.config.entity_daily_summary) { 
-        root.getElementById("daily-summary-text").textContent =  
-          `${this._hass.states[this.config.entity_daily_summary].state} 
-           ${this._hass.states[this.config.entity_uv_alert].state} 
-           ${this._hass.states[this.config.entity_fire_danger].state}`
-           }
+      if (this.config.entity_daily_summary) {
+        root.getElementById("daily-summary-text").textContent = 
+          `${this._hass.states[this.config.entity_daily_summary].state} ` + 
+          (this.config.entity_uv_alert ?    `${this._hass.states[this.config.entity_uv_alert].state} `    : ``) + 
+          (this.config.entity_fire_danger ? `${this._hass.states[this.config.entity_fire_danger].state}` : ``)
+          }
 
 // Alt Text
       if (this.config.alt_sun_next) { root.getElementById("alt-sun-next").textContent = `${this._hass.states[this.config.alt_sun_next].state}` }
