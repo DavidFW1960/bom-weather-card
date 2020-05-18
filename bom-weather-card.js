@@ -864,7 +864,6 @@ style() {
       if (this.config.entity_daytime_low) { root.getElementById("daytime-low-text").textContent = `${Math.round(this._hass.states[this.config.entity_daytime_low].state)}` }
       if (this.config.entity_sun && !this.config.alt_sun_next) { root.getElementById("sun-next-text").textContent = `${this.sunSet.nextText}` }
       if (this.config.entity_sun && !this.config.alt_sun_following) { root.getElementById("sun-following-text").textContent = `${this.sunSet.followingText}` }
-      if (this.config.entity_daily_summary) { 
       if (this.config.entity_daily_summary) {
         root.getElementById("daily-summary-text").textContent = 
           `${this._hass.states[this.config.entity_daily_summary].state} ` + 
