@@ -1,5 +1,5 @@
 console.info(
-  `%c BOM-WEATHER-CARD \n%c Version 0.68     `,
+  `%c BOM-WEATHER-CARD \n%c Version 0.69     `,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );
@@ -71,7 +71,7 @@ class BOMWeatherCard extends LitElement {
                   <div class="fcasttooltiptext" id="fcast-summary-${daily.dayIndex}">${ this.config.tooltips ? this._hass.states[daily.summary].state : ""}</div>
                 </div>`)}
               </div>
-            <div class="summary clear">
+            <div class="summary clear" id="daily-summary-text">
               ${summary} ${uv_alert} ${fire_danger}
               </div>
       </ha-card>
@@ -115,7 +115,6 @@ class BOMWeatherCard extends LitElement {
     var wind = this.config.alt_wind ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span id="alt-wind">${this._hass.states[this.config.alt_wind].state}</span></li>` : this.config.entity_wind_bearing && this.config.entity_wind_speed && this.config.entity_wind_gust ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span id="beaufort-text">${this.current.beaufort}</span><span id="wind-bearing-text">${this.current.windBearing}</span><span id="wind-speed-text"> ${this.current.windSpeed}</span><span class="unit"> ${this.getUOM('length')}/h</span><span id="wind-gust-text"> (Gust ${this.current.windGust}</span><span class="unit"> ${this.getUOM('length')}/h)</span></li>` : this.config.entity_wind_bearing && this.config.entity_wind_speed ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span id="beaufort-text">${this.current.beaufort}</span><span id="wind-bearing-text">${this.current.windBearing}</span><span id="wind-speed-text"> ${this.current.windSpeed}</span><span class="unit"> ${this.getUOM('length')}/h</span></li>` : ``;
     var humidity = this.config.alt_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span><span id="alt-humidity">${this._hass.states[this.config.alt_humidity].state}</span></li>` : this.config.entity_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span><span id="humidity-text">${this.current.humidity}</span><span class="unit"> %</span></li>` : ``;
     var pressure = this.config.alt_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span><span id="alt-pressure">${this._hass.states[this.config.alt_pressure].state}</span></li>` : this.config.entity_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span><span id="pressure-text">${this.current.pressure}</span><span class="unit"> ${this.getUOM('air_pressure')}</span></li>` : ``;
-    var popunit = html`<span class="unit"> ${this.getUOM('precipitation')}</span>`
     var uv_summary = this.config.entity_uv_alert_summary ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunny"></ha-icon></span>${this.localeText.uvRating} <span id="daytime-uv-text">${this._hass.states[this.config.entity_uv_alert_summary].state}</span></li>` : ``;
     var fire_summary = this.config.entity_fire_danger_summary ? html`<li><span class="ha-icon"><ha-icon icon="mdi:fire"></ha-icon></span>${this.localeText.fireDanger} <span id="daytime-firedanger-text">${this._hass.states[this.config.entity_fire_danger_summary].state}</span></li>` : ``;
 
@@ -440,7 +439,9 @@ get sunSet() {
     var nextSunRise;
     if (this.config.time_format) {
       nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit',hour12: this.is12Hour});
+	  nextSunSet = nextSunSet.replace(/^0+/, '');
       nextSunRise = new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit',hour12: this.is12Hour});
+	  nextSunRise = nextSunRise.replace(/^0+/, '');
     }
     else {
       nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
@@ -853,7 +854,7 @@ style() {
       if (this.config.show_beaufort  && !this.config.alt_wind) { root.getElementById("beaufort-text").textContent =  `Bft: ${this.beaufortWind} - ` }
       if (this.config.entity_wind_bearing  && !this.config.alt_wind) { root.getElementById("wind-bearing-text").textContent = `${this.current.windBearing} ` }
       if (this.config.entity_wind_speed && !this.config.alt_wind) { root.getElementById("wind-speed-text").textContent = `${this.current.windSpeed}` }
-      if (this.config.entity_wind_gust && !this.config.alt_wind) { root.getElementById("wind-gust-text").textContent = `${this.current.windGust}` }
+      if (this.config.entity_wind_gust && !this.config.alt_wind) { root.getElementById("wind-gust-text").textContent = ` (Gust ${this.current.windGust}` }
       if (this.config.entity_visibility && !this.config.alt_visibility) { root.getElementById("visibility-text").textContent = `${this.current.visibility}` }
       if (this.config.entity_pop && !this.config.alt_pop) { root.getElementById("pop-text").textContent = `${Math.round(this._hass.states[this.config.entity_pop].state)}` }
       if (this.config.entity_pop_intensity && !this.config.alt_pop) html`<span id="intensity-text"> - ${this._hass.states[this.config.entity_pop_intensity].state}</span><span class="unit"> ${this.getUOM('precipitation')}</span>`
@@ -863,7 +864,12 @@ style() {
       if (this.config.entity_daytime_low) { root.getElementById("daytime-low-text").textContent = `${Math.round(this._hass.states[this.config.entity_daytime_low].state)}` }
       if (this.config.entity_sun && !this.config.alt_sun_next) { root.getElementById("sun-next-text").textContent = `${this.sunSet.nextText}` }
       if (this.config.entity_sun && !this.config.alt_sun_following) { root.getElementById("sun-following-text").textContent = `${this.sunSet.followingText}` }
-      if (this.config.entity_daily_summary) { root.getElementById("daily-summary-text").textContent = `${this._hass.states[this.config.entity_daily_summary].state}` }
+      if (this.config.entity_daily_summary) { 
+        root.getElementById("daily-summary-text").textContent =  
+          `${this._hass.states[this.config.entity_daily_summary].state} 
+           ${this._hass.states[this.config.entity_uv_alert].state} 
+           ${this._hass.states[this.config.entity_fire_danger].state}`
+           }
 
 // Alt Text
       if (this.config.alt_sun_next) { root.getElementById("alt-sun-next").textContent = `${this._hass.states[this.config.alt_sun_next].state}` }
