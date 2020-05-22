@@ -857,7 +857,10 @@ style() {
       if (this.config.entity_wind_gust && !this.config.alt_wind) { root.getElementById("wind-gust-text").textContent = ` (Gust ${this.current.windGust}` }
       if (this.config.entity_visibility && !this.config.alt_visibility) { root.getElementById("visibility-text").textContent = `${this.current.visibility}` }
       if (this.config.entity_pop && !this.config.alt_pop) { root.getElementById("pop-text").textContent = `${Math.round(this._hass.states[this.config.entity_pop].state)}` }
-      if (this.config.entity_pop_intensity && !this.config.alt_pop) html`<span id="intensity-text-1"> - ${this._hass.states[this.config.entity_pop_intensity].state}</span><span class="unit"> ${this.getUOM('precipitation')}</span>`
+      if (this.config.entity_pop_intensity && !this.config.alt_pop) {
+        root.getElementById("intensity-text").textContent = 
+          ` - ` + `${this._hass.states[this.config.entity_pop_intensity].state} `
+	      }
       if (this.config.entity_possible_today) { root.getElementById("possible_today-text").textContent = `${this._hass.states[this.config.entity_possible_today].state}` }
       if (this.config.entity_pos_1) { root.getElementById("possible_tomorrow-text").textContent = `${this._hass.states[this.config.entity_pos_1].state}` }
       if (this.config.entity_daytime_high && !this.config.alt_daytime_high) { root.getElementById("daytime-high-text").textContent = `${Math.round(this._hass.states[this.config.entity_daytime_high].state)}` }
