@@ -134,6 +134,8 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 
 ***Also note that the name for tomorrow's possible rainfall has changed!
 
+***Defining BOTH entity_pop_intensity and entity_pop_intensity_rate will give an INVALID message in the pop slot if defined.
+
 ~~~~
             entity_sun: sun.sun
 #           entity_visibility: sensor.???? - Not available in my area
@@ -148,6 +150,7 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
             entity_daily_summary: sensor.bom_gosford_detailed_summary_0
             entity_pop: sensor.bom_gosford_chance_of_rain_0
             entity_pop_intensity: sensor.bom_gosford_rain_today
+#           entity_pop_intensity_rate: sensor.bom_gosford_rain_today
             entity_possible_today: sensor.bom_gosford_possible_rainfall_0
             entity_pos_1: sensor.bom_gosford_possible_rainfall_1
             entity_pos_2: sensor.bom_gosford_possible_rainfall_2

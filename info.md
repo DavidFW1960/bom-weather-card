@@ -4,7 +4,14 @@
 
 ## Latest Changes
 
-Fix card refresh.
+With the variable for rainfall today. The ORIGINAL card used a rate in say mm/h. I changed this to just be an amount of rainfall today in mm.
+So I added a new variable, entity_pop_intensity_rate in case you are using a mm/h rather than just blanket rainfall for the day. 
+You can only use ONE of these variables. If you use both you will see an invalid message on the card where rainfall is displayed.
+```
+entity_pop_intensity: sensor.bom_gosford_rain_today
+# entity_pop_intensity_rate: sensor.bom_gosford_rain_today #####NOTE only define entity_pop_intensity OR entity_pop_intensity_rate or you will get an invalid message!
+```
+Fix card refresh. (again!)
 Remove leading zeros from 12h times
 I have added an option to display the Wind Gust speed.
 

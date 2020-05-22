@@ -35,6 +35,7 @@ entity_apparent_temp: sensor.bom_gosford_feels_like_c
 entity_daily_summary: sensor.bom_gosford_detailed_summary_0
 entity_pop: sensor.bom_gosford_chance_of_rain_0
 entity_pop_intensity: sensor.bom_gosford_rain_today
+# entity_pop_intensity_rate: sensor.bom_gosford_rain_today #####NOTE only define entity_pop_intensity OR entity_pop_intensity_rate or you will get an invalid message!
 entity_possible_today: sensor.bom_gosford_possible_rainfall_0
 entity_pos_1: sensor.bom_gosford_possible_rainfall_1
 entity_pos_2: sensor.bom_gosford_possible_rainfall_2
