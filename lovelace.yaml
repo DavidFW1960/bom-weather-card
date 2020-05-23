@@ -29,6 +29,8 @@ entity_daytime_low: sensor.bom_today_min
 entity_wind_bearing: sensor.bom_gosford_wind_direction
 entity_wind_speed: sensor.bom_gosford_wind_speed_kmh
 entity_wind_gust: sensor.bom_gosford_wind_gust_kmh
+entity_wind_speed_kt: sensor.bom_gosford_wind_speed_kt
+entity_wind_gust_kt: sensor.bom_gosford_wind_gust_kt
 entity_humidity: sensor.bom_gosford_relative_humidity
 # entity_pressure: sensor.dark_sky_pressure
 entity_apparent_temp: sensor.bom_gosford_feels_like_c

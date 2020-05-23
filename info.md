@@ -11,6 +11,18 @@ You can only use ONE of these variables. If you use both you will see an invalid
 entity_pop_intensity: sensor.bom_gosford_rain_today
 # entity_pop_intensity_rate: sensor.bom_gosford_rain_today #####NOTE only define entity_pop_intensity OR entity_pop_intensity_rate or you will get an invalid message!
 ```
+
+Also added ability to display wind speed and wind gust in knots instead of km/h (m/h)
+To do this, there is a new slot option example:
+```
+slot_l3: wind_kt
+```
+Also define 2 new (optional) variables like this:
+```
+entity_wind_speed_kt: sensor.bom_gosford_wind_speed_kt
+entity_wind_gust_kt: sensor.bom_gosford_wind_gust_kt
+```
+
 Fix card refresh. (again!)
 Remove leading zeros from 12h times
 I have added an option to display the Wind Gust speed.
