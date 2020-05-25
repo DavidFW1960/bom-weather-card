@@ -870,6 +870,10 @@ style() {
         root.getElementById("intensity-text").textContent = 
           ` - ${this._hass.states[this.config.entity_pop_intensity].state} `
           }
+      if (this.config.entity_pop_intensity_rate && !this.config.alt_pop) {
+        root.getElementById("intensity-text").textContent = 
+          ` - ${this._hass.states[this.config.entity_pop_intensity_rate].state} `
+          }
       if (this.config.entity_possible_today) { root.getElementById("possible_today-text").textContent = `${this._hass.states[this.config.entity_possible_today].state}` }
       if (this.config.entity_pos_1) { root.getElementById("possible_tomorrow-text").textContent = `${this._hass.states[this.config.entity_pos_1].state}` }
       if (this.config.entity_daytime_high && !this.config.alt_daytime_high) { root.getElementById("daytime-high-text").textContent = `${Math.round(this._hass.states[this.config.entity_daytime_high].state)}` }
