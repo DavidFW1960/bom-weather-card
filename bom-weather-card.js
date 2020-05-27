@@ -854,43 +854,42 @@ style() {
      });
 
 // Optional Entities
-      if (this.config.entity_current_text) { root.getElementById("current-text").textContent = `${this._hass.states[this.config.entity_current_text].state}` }
-      if (this.config.entity_apparent_temp) { root.getElementById("apparent-text").textContent = `${this.current.apparent}` }
-      if (this.config.entity_wind_bearing && !this.config.alt_wind) { root.getElementById("wind-bearing-text").textContent = `${this.current.windBearing}` }
-      if (this.config.entity_wind_speed && !this.config.alt_wind) { root.getElementById("wind-speed-text").textContent = ` ${this.current.windSpeed}` }
-      if (this.config.entity_wind_gust && !this.config.alt_wind) { root.getElementById("wind-gust-text").textContent = ` (Gust ${this.current.windGust}` }
-      if (this.config.entity_wind_speed_kt && !this.config.alt_wind) { root.getElementById("wind-speed-text-kt").textContent = ` ${this.current.windSpeedKt}` }
-      if (this.config.entity_wind_gust_kt && !this.config.alt_wind) { root.getElementById("wind-gust-text-kt").textContent = ` (Gust ${this.current.windGustKt}` }
-      if (this.config.entity_visibility && !this.config.alt_visibility) { root.getElementById("visibility-text").textContent = `${this.current.visibility}` }
-      if (this.config.entity_pop_intensity && !this.config.entity_pop_intensity_rate) { root.getElementById("intensity-text").textContent = ` - ${this._hass.states[this.config.entity_pop_intensity].state}` }
-      if (this.config.entity_pop_intensity_rate && !this.config.entity_pop_intensity) { root.getElementById("intensity-text").textContent = ` - ${this._hass.states[this.config.entity_pop_intensity_rate].state}` }
-      if (this.config.entity_pop && !this.config.alt_pop) { root.getElementById("pop-text").textContent = `${Math.round(this._hass.states[this.config.entity_pop].state)}` }
-      if (this.config.entity_daytime_high && !this.config.alt_daytime_high) { root.getElementById("daytime-high-text").textContent = `${Math.round(this._hass.states[this.config.entity_daytime_high].state)}` }
-      if (this.config.entity_daytime_low) { root.getElementById("daytime-low-text").textContent = `${Math.round(this._hass.states[this.config.entity_daytime_low].state)}` }
-      if (this.config.entity_sun && !this.config.alt_sun_next) { root.getElementById("sun-next-text").textContent = `${this.sunSet.nextText}` }
-      if (this.config.entity_sun && !this.config.alt_sun_following) { root.getElementById("sun-following-text").textContent = `${this.sunSet.followingText}` }
-      if (this.config.entity_daily_summary) {
+      try { root.getElementById("current-text").textContent = `${this._hass.states[this.config.entity_current_text].state}` } catch(e) {}
+      try { root.getElementById("apparent-text").textContent = `${this.current.apparent}` } catch(e) {}
+      try { root.getElementById("wind-bearing-text").textContent = `${this.current.windBearing}` } catch(e) {}
+      try { root.getElementById("wind-speed-text").textContent = ` ${this.current.windSpeed}` } catch(e) {}
+      try { root.getElementById("wind-gust-text").textContent = ` (Gust ${this.current.windGust}` } catch(e) {}
+      try { root.getElementById("wind-speed-text-kt").textContent = ` ${this.current.windSpeedKt}` } catch(e) {}
+      try { root.getElementById("wind-gust-text-kt").textContent = ` (Gust ${this.current.windGustKt}` } catch(e) {}
+      try { root.getElementById("visibility-text").textContent = `${this.current.visibility}` } catch(e) {}
+      try { root.getElementById("intensity-text").textContent = ` - ${this._hass.states[this.config.entity_pop_intensity].state}` } catch(e) {}
+      try { root.getElementById("intensity-text").textContent = ` - ${this._hass.states[this.config.entity_pop_intensity_rate].state}` } catch(e) {}
+      try { root.getElementById("pop-text").textContent = `${Math.round(this._hass.states[this.config.entity_pop].state)}` } catch(e) {}
+      try { root.getElementById("daytime-high-text").textContent = `${Math.round(this._hass.states[this.config.entity_daytime_high].state)}` } catch(e) {}
+      try { root.getElementById("daytime-low-text").textContent = `${Math.round(this._hass.states[this.config.entity_daytime_low].state)}` } catch(e) {}
+      try { root.getElementById("sun-next-text").textContent = `${this.sunSet.nextText}` } catch(e) {}
+      try { root.getElementById("sun-following-text").textContent = `${this.sunSet.followingText}` } catch(e) {}
+      try { 
         root.getElementById("daily-summary-text").textContent = 
           `${this._hass.states[this.config.entity_daily_summary].state} ` + 
           (this.config.entity_uv_alert ?    `${this._hass.states[this.config.entity_uv_alert].state} `    : ``) + 
           (this.config.entity_fire_danger ? `${this._hass.states[this.config.entity_fire_danger].state}` : ``)
-          }
-      if (this.config.entity_pressure && !this.config.alt_pressure) { root.getElementById("pressure-text").textContent = `${this.current.pressure}` }
-      if (this.config.entity_humidity && !this.config.alt_humidity) { root.getElementById("humidity-text").textContent = `${this.current.humidity}` }
-      if (this.config.show_beaufort  && !this.config.alt_wind) { root.getElementById("beaufort-text").textContent =  `Bft: ${this.beaufortWind} - ` }
-      if (this.config.entity_possible_today) { root.getElementById("possible_today-text").textContent = `${this._hass.states[this.config.entity_possible_today].state}` }
-      if (this.config.entity_pos_1) { root.getElementById("possible_tomorrow-text").textContent = `${this._hass.states[this.config.entity_pos_1].state}` }
+          } catch(e) {}
+      try { root.getElementById("pressure-text").textContent = `${this.current.pressure}` } catch(e) {}
+      try { root.getElementById("humidity-text").textContent = `${this.current.humidity}` } catch(e) {}
+      if (this.config.show_beaufort  && !this.config.alt_wind) try { root.getElementById("beaufort-text").textContent =  `Bft: ${this.beaufortWind} - ` } catch(e) {}
+      try { root.getElementById("possible_today-text").textContent = `${this._hass.states[this.config.entity_possible_today].state}` } catch(e) {}
+      try { root.getElementById("possible_tomorrow-text").textContent = `${this._hass.states[this.config.entity_pos_1].state}` } catch(e) {}
 
 // Alt Text
-      if (this.config.alt_sun_next) { root.getElementById("alt-sun-next").textContent = `${this._hass.states[this.config.alt_sun_next].state}` }
-      if (this.config.alt_sun_following) { root.getElementById("alt-sun-following").textContent = `${this._hass.states[this.config.alt_sun_following].state}` }
-      if (this.config.alt_pop) { root.getElementById("alt-pop").textContent = `${this._hass.states[this.config.alt_pop].state}` }
-      if (this.config.alt_wind) { root.getElementById("alt-wind").textContent = `${this._hass.states[this.config.alt_wind].state}` }
-      if (this.config.alt_pressure) { root.getElementById("alt-pressure").textContent = `${this._hass.states[this.config.alt_pressure].state}` }
-      if (this.config.alt_humidity) { root.getElementById("alt-humidity").textContent = `${this._hass.states[this.config.alt_humidity].state}` }
-      if (this.config.alt_daytime_high) { root.getElementById("alt-daytime-high").textContent = `${this._hass.states[this.config.alt_daytime_high].state}` }
-      if (this.config.alt_visibility) { root.getElementById("alt-visibility").textContent = `${this._hass.states[this.config.alt_visibility].state}` }
-
+      try { root.getElementById("alt-sun-next").textContent = `${this._hass.states[this.config.alt_sun_next].state}` } catch(e) {}
+      try { root.getElementById("alt-sun-following").textContent = `${this._hass.states[this.config.alt_sun_following].state}` } catch(e) {}
+      try { root.getElementById("alt-pop").textContent = `${this._hass.states[this.config.alt_pop].state}` } catch(e) {}
+      try { root.getElementById("alt-wind").textContent = `${this._hass.states[this.config.alt_wind].state}` } catch(e) {}
+      try { root.getElementById("alt-pressure").textContent = `${this._hass.states[this.config.alt_pressure].state}` } catch(e) {}
+      try { root.getElementById("alt-humidity").textContent = `${this._hass.states[this.config.alt_humidity].state}` } catch(e) {}
+      try { root.getElementById("alt-daytime-high").textContent = `${this._hass.states[this.config.alt_daytime_high].state}` } catch(e) {}
+      try { root.getElementById("alt-visibility").textContent = `${this._hass.states[this.config.alt_visibility].state}` } catch(e) {}
     }
   }
 
