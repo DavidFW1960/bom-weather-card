@@ -485,6 +485,7 @@ get sunSet() {
 
 // #####
 // ##### beaufortWind - returns the wind speed on the beaufort scale
+// ##### reference https://en.wikipedia.org/wiki/Beaufort_scale
 // #####
 
 get beaufortWind() {
@@ -496,39 +497,39 @@ get beaufortWind() {
         if (this._hass.states[this.config.entity_wind_speed].state >= 55) return 10;
         if (this._hass.states[this.config.entity_wind_speed].state >= 47) return 9;
         if (this._hass.states[this.config.entity_wind_speed].state >= 39) return 8;
-        if (this._hass.states[this.config.entity_wind_speed].state >= 31) return 7;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 32) return 7;
         if (this._hass.states[this.config.entity_wind_speed].state >= 25) return 6;
-        if (this._hass.states[this.config.entity_wind_speed].state >= 18) return 5;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 19) return 5;
         if (this._hass.states[this.config.entity_wind_speed].state >= 13) return 4;
         if (this._hass.states[this.config.entity_wind_speed].state >= 8) return 3;
-        if (this._hass.states[this.config.entity_wind_speed].state >= 3) return 2;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 4) return 2;
         if (this._hass.states[this.config.entity_wind_speed].state >= 1) return 1;
       case 'm/s':
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 118) return 12;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 103) return 11;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 89) return 10;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 75) return 9;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 62) return 8;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 50) return 7;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 39) return 6;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 29) return 5;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 20) return 4;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 12) return 3;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >=6) return 2;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 1) return 1;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 32.7) return 12;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 28.5) return 11;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 24.5) return 10;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 20.8) return 9;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 17.2) return 8;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 13.9) return 7;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 10.8) return 6;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 8) return 5;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 5.5) return 4;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 3.4) return 3;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 1.6) return 2;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 0.5) return 1;
       default: // Assume km/h
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 118) return 12;
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 103) return 11;
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 89) return 10;
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 75) return 9;
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 62) return 8;
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 50) return 7;
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 39) return 6;
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 29) return 5;
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 20) return 4;
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 12) return 3;
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 6) return 2;
-        if ((this._hass.states[this.config.entity_wind_speed].state) >= 1) return 1;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 118) return 12;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 103) return 11;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 89) return 10;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 75) return 9;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 62) return 8;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 50) return 7;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 39) return 6;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 29) return 5;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 20) return 4;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 12) return 3;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 6) return 2;
+        if (this._hass.states[this.config.entity_wind_speed].state >= 2) return 1;
     }
   }
   if (this.config.entity_wind_speed_kt) {
