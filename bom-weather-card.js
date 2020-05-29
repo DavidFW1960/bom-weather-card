@@ -1,5 +1,5 @@
 console.info(
-  `%c BOM-WEATHER-CARD \n%c Version 0.73d    `,
+  `%c BOM-WEATHER-CARD \n%c Version 0.74     `,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );
@@ -503,7 +503,7 @@ get beaufortWind() {
         if (this._hass.states[this.config.entity_wind_speed].state >= 8) return 3;
         if (this._hass.states[this.config.entity_wind_speed].state >= 3) return 2;
         if (this._hass.states[this.config.entity_wind_speed].state >= 1) return 1;
-      default: // Assume m/s
+      case 'm/s':
         if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 118) return 12;
         if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 103) return 11;
         if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 89) return 10;
@@ -514,12 +514,24 @@ get beaufortWind() {
         if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 29) return 5;
         if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 20) return 4;
         if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 12) return 3;
-        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 6) return 2;
+        if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >=6) return 2;
         if ((this._hass.states[this.config.entity_wind_speed].state * 3.6) >= 1) return 1;
+      default: // Assume km/h
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 118) return 12;
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 103) return 11;
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 89) return 10;
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 75) return 9;
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 62) return 8;
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 50) return 7;
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 39) return 6;
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 29) return 5;
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 20) return 4;
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 12) return 3;
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 6) return 2;
+        if ((this._hass.states[this.config.entity_wind_speed].state) >= 1) return 1;
     }
   }
-  else {
-    if (this.config.entity_wind_speed_kt) {
+  if (this.config.entity_wind_speed_kt) {
       if (this._hass.states[this.config.entity_wind_speed_kt].state >= 64) return 12;
       if (this._hass.states[this.config.entity_wind_speed_kt].state >= 56) return 11;
       if (this._hass.states[this.config.entity_wind_speed_kt].state >= 48) return 10;
@@ -532,7 +544,6 @@ get beaufortWind() {
       if (this._hass.states[this.config.entity_wind_speed_kt].state >= 7) return 3;
       if (this._hass.states[this.config.entity_wind_speed_kt].state >= 4) return 2;
       if (this._hass.states[this.config.entity_wind_speed_kt].state >= 1) return 1;
-    }
   }
   return 0;
 }
