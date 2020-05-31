@@ -3,6 +3,8 @@
 # BOM Weather Card
 
 ## Latest Changes
+I have been having a problem with the Beaufort rating not updating if using knots. This release corrects that.
+Also thanks to @rudders Adrian for fixing the other issues with refreshing the card automatically.
 
 With the variable for rainfall today. The ORIGINAL card used a rate in say mm/h. I changed this to just be an amount of rainfall today in mm.
 So I added a new variable, entity_pop_intensity_rate in case you are using a mm/h rather than just blanket rainfall for the day. 
