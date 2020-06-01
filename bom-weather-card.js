@@ -1,5 +1,5 @@
 console.info(
-  `%c BOM-WEATHER-CARD \n%c Version 0.76     `,
+  `%c BOM-WEATHER-CARD \n%c Version 0.76a    `,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );
@@ -673,6 +673,7 @@ style() {
         margin-top: ${currentTextTopMargin};
         text-align: ${currentTextAlignment};
         width: ${currentTextWidth};
+        padding-bottom: 0.2em;
       }
 
       .pop {
