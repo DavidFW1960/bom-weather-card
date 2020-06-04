@@ -937,7 +937,7 @@ style() {
   }
 
 // #####
-// ##### Assigns the configuration vlaues to an internal class var
+// ##### Assigns the configuration values to an internal class var
 // ##### This is called everytime a config change is made
 // #####
 
