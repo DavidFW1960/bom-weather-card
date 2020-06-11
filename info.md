@@ -3,6 +3,14 @@
 # BOM Weather Card
 
 ## Latest Changes
+Option to show the apparent and current temperature to 1 decimal place
+Add to lovelace:
+```
+show_decimals: true
+```
+The default if not specified is false
+
+
 I have been having a problem with the Beaufort rating not updating if using knots. This release corrects that.
 Also thanks to @rudders Adrian for fixing the other issues with refreshing the card automatically.
 

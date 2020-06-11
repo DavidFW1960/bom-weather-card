@@ -1,5 +1,5 @@
 console.info(
-  `%c BOM-WEATHER-CARD \n%c Version 0.77     `,
+  `%c BOM-WEATHER-CARD \n%c Version 0.78     `,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );
@@ -414,7 +414,7 @@ class BOMWeatherCard extends LitElement {
     var conditions = this._hass.states[this.config.entity_current_conditions].state;
     var humidity = this.config.entity_humidity ? this._hass.states[this.config.entity_humidity].state : 0;
     var pressure = this.config.entity_pressure ? Math.round(this._hass.states[this.config.entity_pressure].state) : 0;
-    var temperature = Math.round(this._hass.states[this.config.entity_temperature].state);
+    var temperature = !this.config.show_decimals ? Math.round(this._hass.states[this.config.entity_temperature].state) : this._hass.states[this.config.entity_temperature].state;
     var visibility = this.config.entity_visibility ? this._hass.states[this.config.entity_visibility].state : 0;
     var windBearing = this.config.entity_wind_bearing ? isNaN(this._hass.states[this.config.entity_wind_bearing].state) ? this._hass.states[this.config.entity_wind_bearing].state : this.windDirections[(Math.round((this._hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
     var windBearingKt = this.config.entity_wind_bearing ? isNaN(this._hass.states[this.config.entity_wind_bearing].state) ? this._hass.states[this.config.entity_wind_bearing].state : this.windDirections[(Math.round((this._hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
@@ -422,7 +422,7 @@ class BOMWeatherCard extends LitElement {
     var windGust = this.config.entity_wind_gust ? Math.round(this._hass.states[this.config.entity_wind_gust].state) : 0;
     var windSpeedKt = this.config.entity_wind_speed_kt ? Math.round(this._hass.states[this.config.entity_wind_speed_kt].state) : 0;
     var windGustKt = this.config.entity_wind_gust_kt ? Math.round(this._hass.states[this.config.entity_wind_gust_kt].state) : 0;
-    var apparent = this.config.entity_apparent_temp ? Math.round(this._hass.states[this.config.entity_apparent_temp].state) : 0;
+    var apparent = (this.config.entity_apparent_temp && !this.config.show_decimals) ? Math.round(this._hass.states[this.config.entity_apparent_temp].state) : (this.config.entity_apparent_temp && this.config.show_decimals) ? this._hass.states[this.config.entity_apparent_temp].state : 0;
     var beaufort = this.config.show_beaufort ? html`Bft: ${this.beaufortWind} - ` : ``;
     var beaufortkt = this.config.show_beaufort ? html`Bft: ${this.beaufortWindKt} - ` : ``;
 
@@ -937,7 +937,7 @@ style() {
   }
 
 // #####
-// ##### Assigns the configuration values to an internal class var
+// ##### Assigns the configuration vlaues to an internal class var
 // ##### This is called everytime a config change is made
 // #####
 

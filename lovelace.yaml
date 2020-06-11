@@ -69,6 +69,7 @@ tooltips: true
 old_daily_format: false
 time_format: 12
 show_beaufort: false
+show_decimals: false
 refresh_interval: 60
 show_separator: false
 temp_top_margin: 0px            #default 0px px or em Note: pre-0.109.x default was -0.3em
