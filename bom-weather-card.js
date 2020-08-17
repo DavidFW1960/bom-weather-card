@@ -72,7 +72,7 @@ class BOMWeatherCard extends LitElement {
                 </div>`)}
               </div>
             <div class="summary clear" id="daily-summary-text">
-              ${summary} ${uv_alert} ${fire_danger}
+              ${summary} ${uv_alert}. ${fire_danger}
               </div>
       </ha-card>
     `;
