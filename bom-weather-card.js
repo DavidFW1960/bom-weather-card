@@ -1,12 +1,12 @@
 console.info(
-  `%c BOM-WEATHER-CARD \n%c Version 0.78     `,
+  `%c BOM-WEATHER-CARD \n%c Version 0.79     `,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );
 // #####
 // ##### Get the LitElement and HTML classes from an already defined HA Lovelace class
 // #####
-var LitElement = LitElement || Object.getPrototypeOf(customElements.get("hui-view"));
+var LitElement = LitElement || Object.getPrototypeOf(customElements.get("hui-masonry-view") || customElements.get('hui-view'));
 var html = LitElement.prototype.html;
 
 // #####
