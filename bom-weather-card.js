@@ -1,5 +1,5 @@
 console.info(
-  `%c BOM-WEATHER-CARD \n%c Version 0.79     `,
+  `%c BOM-WEATHER-CARD \n%c Version 0.80     `,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );
@@ -284,13 +284,13 @@ class BOMWeatherCard extends LitElement {
     var light_rain_icon = (iconStyle ==="true") ? `rainy-1` : (iconStyle ==="hybrid") ? `rainy-1` : `rainy-1` ;
     var windy_icon = (iconStyle ==="true") ? `cloudy-original` : (iconStyle ==="hybrid") ? `wind` : `wind`;
     var fog_icon = (iconStyle ==="true") ? `cloudy-original` : (iconStyle ==="hybrid") ? `fog` : `fog`;
-    var showers_icon = (iconStyle ==="true") ? `rainy-3` : (iconStyle ==="hybrid") ? `rainy-3` : `rainy-3`;
+    var showers_icon = (iconStyle ==="true") ? `rainy-1` : (iconStyle ==="hybrid") ? `rainy-1` : `rainy-1`;
     var rain_icon = (iconStyle ==="true") ? `rainy-5` : (iconStyle ==="hybrid") ? `rainy-5` : `rain`;
     var dust_icon = (iconStyle ==="true") ? `cloudy-${this.dayOrNight}-1` : (iconStyle ==="hybrid") ? `haze` : `haze`;
     var snow_icon = (iconStyle ==="true") ? `snowy-6` : (iconStyle ==="hybrid") ? `snowy-6` : `snow`;
     var storm_icon = (iconStyle ==="true") ? `scattered-thunderstorms` : (iconStyle ==="hybrid") ? `scattered-thunderstorms` : `scattered-thunderstorms`;
-    var light_showers_icon = (iconStyle ==="true") ? `rainy-5` : (iconStyle ==="hybrid") ? `rainy-5` : `rainy-5`;
-    var heavy_showers_icon = (iconStyle ==="true") ? `rainy-7` : (iconStyle ==="hybrid") ? `rainy-7` : `rainy-7`;
+    var light_showers_icon = (iconStyle ==="true") ? `rainy-2` : (iconStyle ==="hybrid") ? `rainy-2` : `rainy-2`;
+    var heavy_showers_icon = (iconStyle ==="true") ? `rainy-3` : (iconStyle ==="hybrid") ? `rainy-3` : `rainy-3`;
     var cyclone_icon = (iconStyle ==="true") ? `tornado` : (iconStyle ==="hybrid") ? `tornado` : `tornado`;
     var clear_day_icon = (iconStyle ==="true") ? `day` : (iconStyle ==="hybrid") ? `day` : `clear-day`;
     var clear_night_icon = (iconStyle ==="true") ? `night` : (iconStyle ==="hybrid") ? `night` : `clear-night`;
