@@ -1,5 +1,5 @@
 console.info(
-  `%c BOM-WEATHER-CARD \n%c Version 0.80     `,
+  `%c BOM-WEATHER-CARD \n%c Version 0.81     `,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );
@@ -641,7 +641,7 @@ style() {
         color: var(--primary-text-color);
         position: absolute;
         right: ${tempRightPos};
-        margin-top: ${tempTopMargin};
+        margin-top: ${tempTopMargin} !important;
       }
 
       .tempc {
@@ -651,7 +651,7 @@ style() {
         color: var(--primary-text-color);
         position: absolute;
         right: 1em;
-        margin-top: ${tempUOMTopMargin};
+        margin-top: ${tempUOMTopMargin} !important;
         margin-right: ${tempUOMRightMargin};
       }
 

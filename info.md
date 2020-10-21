@@ -3,6 +3,13 @@
 # BOM Weather Card
 
 ## Latest Changes
+VERY IMPORTANT NOTE:
+As of HA 0.117.x, the BOM Core Sensor component is removed as it violates ADR14 rule regarding web scraping.
+I have added this now as a custom component in HACS. 
+Add this repo as an integration in HACS and install the custom BOM component.
+
+Also made an adjustment to the css to display the temperature correctly again.
+
 Option to show the apparent and current temperature to 1 decimal place
 Add to lovelace:
 ```

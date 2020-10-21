@@ -6,7 +6,14 @@
 
 This card is a modification of a fork of iammexx/home-assistant-config dark-sky-weather-card
 
-NOTE: This card REQUIRES the BOM Sensor core component and the BOM FTP Forecast Custom Component. See links below.
+VERY IMPORTANT NOTE:
+As of HA 0.117.x, the BOM Core Sensor component is removed as it violates ADR14 rule regarding web scraping.
+I have added this now as a custom component in HACS. 
+Add this repo as an integration in HACS and install the custom BOM component.
+
+Also made an adjustment to the css to display the temperature correctly again.
+
+NOTE: This card REQUIRES the BOM Sensor core component (now a custom component as per above note) and the BOM FTP Forecast Custom Component. See links below.
 Alternately, if you are using DarkSky (or any other provider), the important thing is that any entities parsed to the card must be provided by that platform and you should carefully check the sensor names exist. Parsing a non existant sensor to the card will cause the card to fail to display!
 
 The BOM Weather Card provides current and forecasted weather conditions using the [BOM sensor platforms](https://www.home-assistant.io/integrations/bom/#sensor) in core Home Assistant and a custom component for BOM Forecast from [my forecast repo here](https://github.com/DavidFW1960/bom_forecast) You configure the card by passing in sensor entities from these BOM platforms. 
