@@ -305,12 +305,15 @@ class BOMWeatherCard extends LitElement {
       'clear': clear_icon,
       'mostly-sunny': mostly_sunny_icon,
       'partly-cloudy': partly_cloudy_icon,
+      'mostly_sunny': mostly_sunny_icon,
+      'partly_cloudy': partly_cloudy_icon,
       'cloudy': cloudy_icon,
       'hazy': hazy_icon,
       'hazey': hazy_icon,
       'haze': hazy_icon,
       'frost': frost_icon,
       'light-rain': light_rain_icon,
+      'light_rain': light_rain_icon,
       'wind': windy_icon,
       'windy': windy_icon,
       'fog': fog_icon,
@@ -329,17 +332,27 @@ class BOMWeatherCard extends LitElement {
       'light-shower': light_showers_icon,
       'heavy-showers': heavy_showers_icon,
       'heavy-shower': heavy_showers_icon,
+      'light_showers': light_showers_icon,
+      'light_shower': light_showers_icon,
+      'heavy_showers': heavy_showers_icon,
+      'heavy_shower': heavy_showers_icon,
       'tropical-cyclone': cyclone_icon,
+      'tropical_cyclone': cyclone_icon,
       'tropicalcyclone': cyclone_icon,
       'clear-day': clear_day_icon,
       'clear-night': clear_night_icon,
+      'clear_day': clear_day_icon,
+      'clear_night': clear_night_icon,
       'sleet': sleet_icon,
       'partly-cloudy-day': partly_cloudy_day_icon,
       'partly-cloudy-night': partly_cloudy_night_icon,
+      'partly_cloudy_day': partly_cloudy_day_icon,
+      'partly_cloudy_night': partly_cloudy_night_icon,
       'hail': hail_icon,
       'lightning': lightning_icon,
       'thunderstorm': lightning_icon,
       'windy-variant': windy_variant_icon,
+      'windy_variant': windy_variant_icon,
       'exceptional': '!!',
     }
   }
@@ -592,7 +605,7 @@ style() {
   var tempFontSize = this.config.temp_font_size || "4em";
   var tempRightPos = this.config.temp_right_pos || "0.85em";
   var tempUOMTopMargin = this.config.temp_uom_top_margin || "-12px";
-  var tempUOMRightMargin = this.config.temp_uom_right_margin || "7px";
+  var tempUOMRightMargin = this.config.temp_uom_right_margin || "4px";
   var apparentTopMargin = this.config.apparent_top_margin || "45px";
   var apparentRightPos =  this.config.apparent_right_pos || "1em";
   var apparentRightMargin = this.config.apparent_right_margin || "1em";
