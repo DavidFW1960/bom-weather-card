@@ -2,6 +2,22 @@
 
 # BOM Weather Card
 
+## IMPORTANT CHANGES
+VERY IMPORTANT NOTE:
+As of HA 0.117.x, the BOM Core Sensor component is removed as it violates ADR14 rule regarding web scraping.
+
+I have made some changes so that this card now uses the new [BOM Component by Brendan](https://github.com/bremor/bureau_of_meteorology)
+
+I have updated the lovelace.yaml and templates as well for this new component.
+
+When you install Brendans new BOM Component, you will get sensors that look like this:
+For the Observations, they will be named for the BOM Observation station like.. sensor.gosford_temperature as an example.
+For the Forecast, they will be named by your local suburb determined from the entered Latitude and Longitude (which will default to your HA configuration) like sensor.kariong_icon_0
+
+It MAY be that there will be some new conditions from BOM. If icons are missing or you get any errors please let me know.
+
+IF you are using the old card as well with the 7 days forecast, note the new component only provides 6 days now and additionally I have added some icons so make sure you grab the bom_icons.zip file and extract the contents to /config/www/bom_icons The animated icons for the card itself are unchanged.
+
 ![image](bom-weather.png)
 
 This card is a modification of a fork of iammexx/home-assistant-config dark-sky-weather-card
@@ -105,32 +121,33 @@ NOTE: My entries show a mix of the FTP Component sensors and this platform's sen
 If you paste it in the raw editor or in a yaml file, take care with the indenting.
 
 Required entries must be present 
-in your configuration.  The card will not work at all if any of these lines are missing. **EDIT gosford to match your observations/forecasts**
+in your configuration.  The card will not work at all if any of these lines are missing. **EDIT gosford/kariong to match your observations/forecasts**
 ~~~~
           - type: custom:bom-weather-card
             title: BOM Weather
-            entity_current_conditions: sensor.bom_gosford_icon_0
-            entity_temperature: sensor.bom_gosford_air_temp_c
-            entity_forecast_high_temp_1: sensor.bom_gosford_max_temp_c_1
-            entity_forecast_high_temp_2: sensor.bom_gosford_max_temp_c_2
-            entity_forecast_high_temp_3: sensor.bom_gosford_max_temp_c_3
-            entity_forecast_high_temp_4: sensor.bom_gosford_max_temp_c_4
-            entity_forecast_high_temp_5: sensor.bom_gosford_max_temp_c_5
-            entity_forecast_icon_1: sensor.bom_gosford_icon_1
-            entity_forecast_icon_2: sensor.bom_gosford_icon_2
-            entity_forecast_icon_3: sensor.bom_gosford_icon_3
-            entity_forecast_icon_4: sensor.bom_gosford_icon_4
-            entity_forecast_icon_5: sensor.bom_gosford_icon_5
-            entity_forecast_low_temp_1: sensor.bom_gosford_min_temp_c_1
-            entity_forecast_low_temp_2: sensor.bom_gosford_min_temp_c_2
-            entity_forecast_low_temp_3: sensor.bom_gosford_min_temp_c_3
-            entity_forecast_low_temp_4: sensor.bom_gosford_min_temp_c_4
-            entity_forecast_low_temp_5: sensor.bom_gosford_min_temp_c_5
-            entity_summary_1: sensor.bom_gosford_summary_1
-            entity_summary_2: sensor.bom_gosford_summary_2
-            entity_summary_3: sensor.bom_gosford_summary_3
-            entity_summary_4: sensor.bom_gosford_summary_4
-            entity_summary_5: sensor.bom_gosford_summary_5
+            entity_current_conditions: sensor.kariong_icon_0
+            entity_temperature: sensor.gosford_temperature
+            entity_forecast_high_temp_1: sensor.kariong_max_1
+            entity_forecast_high_temp_2: sensor.kariong_max_2
+            entity_forecast_high_temp_3: sensor.kariong_max_3
+            entity_forecast_high_temp_4: sensor.kariong_max_4
+            entity_forecast_high_temp_5: sensor.kariong_max_5
+            entity_forecast_icon_1: sensor.kariong_icon_1
+            entity_forecast_icon_2: sensor.kariong_icon_2
+            entity_forecast_icon_3: sensor.kariong_icon_3
+            entity_forecast_icon_4: sensor.kariong_icon_4
+            entity_forecast_icon_5: sensor.kariong_icon_5
+            entity_forecast_low_temp_1: sensor.kariong_min_1
+            entity_forecast_low_temp_2: sensor.kariong_min_2
+            entity_forecast_low_temp_3: sensor.kariong_min_3
+            entity_forecast_low_temp_4: sensor.kariong_min_4
+            entity_forecast_low_temp_5: sensor.kariong_min_5
+            entity_summary_1: sensor.kariong_short_text_1
+            entity_summary_2: sensor.kariong_short_text_2
+            entity_summary_3: sensor.kariong_short_text_3
+            entity_summary_4: sensor.kariong_short_text_4
+            entity_summary_5: sensor.kariong_short_text_5
+			entity_sun: sun.sun
 ~~~~
 
 Optional entries add components to the card. My BOM area (Gosford) does not include visibility or pressure. Edit entities to your correct sensor names. Replace Gosford with your name.
@@ -144,33 +161,32 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 ***Defining BOTH entity_pop_intensity and entity_pop_intensity_rate will give an INVALID message in the pop slot if defined.
 
 ~~~~
-            entity_sun: sun.sun
-#           entity_visibility: sensor.???? - Not available in my area
+#           entity_visibility: sensor.dark_sky_visibility
             entity_daytime_high: sensor.bom_today_max
             entity_daytime_low: sensor.bom_today_min
-            entity_wind_bearing: sensor.bom_gosford_wind_direction
-            entity_wind_speed: sensor.bom_gosford_wind_speed_kmh
-            entity_wind_gust: sensor.bom_gosford_wind_gust_kmh
-            entity_wind_speed_kt: sensor.bom_gosford_wind_speed_kt
-            entity_wind_gust_kt: sensor.bom_gosford_wind_gust_kt
-            entity_humidity: sensor.bom_gosford_relative_humidity
-#           entity_pressure: sensor.???? - Not available in my area. I DO use a value from my BME280 sensor for this though
-            entity_apparent_temp: sensor.bom_gosford_feels_like_c
-            entity_daily_summary: sensor.bom_gosford_detailed_summary_0
-            entity_pop: sensor.bom_gosford_chance_of_rain_0
-            entity_pop_intensity: sensor.bom_gosford_rain_today
-#           entity_pop_intensity_rate: sensor.bom_gosford_rain_today    NOTE Do not define BOTH intensity and intensity_rate
-            entity_possible_today: sensor.bom_gosford_possible_rainfall_0
-            entity_pos_1: sensor.bom_gosford_possible_rainfall_1
-            entity_pos_2: sensor.bom_gosford_possible_rainfall_2
-            entity_pos_3: sensor.bom_gosford_possible_rainfall_3
-            entity_pos_4: sensor.bom_gosford_possible_rainfall_4
-            entity_pos_5: sensor.bom_gosford_possible_rainfall_5
-            entity_pop_1: sensor.bom_gosford_chance_of_rain_1
-            entity_pop_2: sensor.bom_gosford_chance_of_rain_2
-            entity_pop_3: sensor.bom_gosford_chance_of_rain_3
-            entity_pop_4: sensor.bom_gosford_chance_of_rain_4
-            entity_pop_5: sensor.bom_gosford_chance_of_rain_5
+            entity_wind_bearing: sensor.gosford_wind_direction
+            entity_wind_speed: sensor.gosford_wind_speed
+            entity_wind_gust: sensor.gosford_gust_speed
+#           entity_wind_speed_kt: sensor.gosford_wind_speed_knots
+#           entity_wind_gust_kt: sensor.gosford_gust_speed_knots
+            entity_humidity: sensor.gosford_humidity
+            entity_pressure: sensor.nodemcu_lounge_bme280_seapressure
+            entity_apparent_temp: sensor.gosford_temperature_feels_like
+            entity_daily_summary: sensor.kariong_extended_text_0
+            entity_pop: sensor.kariong_rain_chance_0
+            entity_pop_intensity: sensor.gosford_rain_since_9am
+            entity_possible_today: sensor.kariong_rain_amount_range_0
+            entity_pos_1: sensor.kariong_rain_amount_range_1
+            entity_pos_2: sensor.kariong_rain_amount_range_2
+            entity_pos_3: sensor.kariong_rain_amount_range_3
+            entity_pos_4: sensor.kariong_rain_amount_range_4
+            entity_pos_5: sensor.kariong_rain_amount_range_5
+            entity_pop_1: sensor.kariong_rain_chance_1
+            entity_pop_2: sensor.kariong_rain_chance_2
+            entity_pop_3: sensor.kariong_rain_chance_3
+            entity_pop_4: sensor.kariong_rain_chance_4
+            entity_pop_5: sensor.kariong_rain_chance_5
+
 ~~~~
 
 **Note:** The following entries require template sensors.  
@@ -179,7 +195,7 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
             entity_uv_alert: sensor.bom_uv_alert
             entity_fire_danger: sensor.bom_fire_danger
             entity_uv_alert_summary: sensor.bom_uv_alert_summary
-            entity_fire_danger_summary: sensor.bom_fire_danger_summary
+            entity_fire_danger_summary: sensor.kariong_fire_danger_0
 ~~~~
 
 **Example template sensors:** You can call template sensors whatever you want so long as you use the same name in the card config. (Included in weather.yaml) 
@@ -188,59 +204,27 @@ These templates are EXAMPLES. Adjust and adapt as required. Up-to-date templates
 ~~~~~
       bom_current_text:
         value_template: >
-            {% set val = states('sensor.bom_gosford_summary_0').split('.')[0] %} 
+            {% set val = states('sensor.kariong_short_text_0').split('.')[0] %} 
             {{ val | title }}
 
       bom_uv_alert:
         value_template: >
-            {%- if states('sensor.bom_gosford_uv_alert_0') == '##' -%}
-            UV Today: No Data
-            {%- elif states('sensor.bom_gosford_uv_alert_0') != 'n/a' -%} 
-            UV Today: {{ states('sensor.bom_gosford_uv_alert_0') }}
-            {%- elif states('sensor.bom_gosford_uv_alert_1') == '##' -%}
-            UV Tomorrow: No Data
-            {%- else -%}
-            UV Tomorrow: {{ states('sensor.bom_gosford_uv_alert_1') }}
-            {%- endif -%}
+            UV Today: Sun Protection 
+            {{ as_timestamp(states('sensor.kariong_uv_start_time_0')) | timestamp_custom(' %I:%M%p') | lower | replace(" 0", "") }} to {{ as_timestamp(states('sensor.kariong_uv_end_time_0')) | timestamp_custom(' %I:%M%p') | lower | replace(" 0", "") }}, UV Index predicted to reach {{ states('sensor.kariong_uv_max_index_0') }} [{{ states('sensor.bom_uv_alert_summary') }}]
 
       bom_uv_alert_summary:
         value_template: >
-            {%- if states('sensor.bom_gosford_uv_alert_0') == '##' -%} 
-            {% set val = 'No Data' %}
-            {%- elif states('sensor.bom_gosford_uv_alert_0') != 'n/a' -%} 
-            {% set val = states('sensor.bom_gosford_uv_alert_0').split('[')[1].split(']')[0] %}
-            {%- elif states('sensor.bom_gosford_uv_alert_1') == '##' -%} 
-            {% set val = 'No Data' %}
-            {%- elif states('sensor.bom_gosford_uv_alert_1') != 'n/a' -%} 
-            {% set val = states('sensor.bom_gosford_uv_alert_1').split('[')[1].split(']')[0] %}
-            {%- else -%}
-            {%- set val = 'No Data' -%}
-            {%- endif -%}
-            {{ val | title }} 
+            {% set uv = states('sensor.kariong_uv_category_0') %}
+            {% if uv == 'extreme' %} {% set uv = 'Extreme' %}
+            {% elif uv == 'veryhigh' %} {% set uv = 'Very High' %} 
+            {% elif uv == 'high' %} {% set uv = 'High' %}
+            {% elif uv == 'moderate' %} {% set uv = 'Moderate' %}
+            {% elif uv == 'low' %} {% set uv = 'Low' %}
+            {% endif %}
+            {{ uv }}
           
       bom_fire_danger:
-        value_template: >
-            {%- if states('sensor.bom_gosford_fire_danger_0') == '##' -%}
-            Fire Danger Today: No Data
-            {%- elif states('sensor.bom_gosford_fire_danger_0') != 'n/a' -%} 
-            Fire Danger Today: {{ states('sensor.bom_gosford_fire_danger_0') }}
-            {%- elif states('sensor.bom_gosford_fire_danger_1') == '##' -%}
-            Fire Danger Tomorrow: No Data
-            {%- else -%}
-            Fire Danger Tomorrow: {{ states('sensor.bom_gosford_fire_danger_1') }}
-            {%- endif -%}
-
-      bom_fire_danger_summary:
-        value_template: >
-            {%- if states('sensor.bom_gosford_fire_danger_0') == '##' -%}
-            No Data
-            {%- elif states('sensor.bom_gosford_fire_danger_0') != 'n/a' -%} 
-            {{ states('sensor.bom_gosford_fire_danger_0') }}
-            {%- elif states('sensor.bom_gosford_fire_danger_1') == '##' -%}
-            No Data
-            {%- else -%}
-            {{ states('sensor.bom_gosford_fire_danger_1') }}
-            {%- endif -%}
+        value_template: "Fire Danger Today: {{ states('sensor.kariong_fire_danger_1') }}"
 
 ~~~~~
 

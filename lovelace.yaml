@@ -1,63 +1,62 @@
 type: custom:bom-weather-card
 title: BOM Weather
-entity_current_conditions: sensor.bom_gosford_icon_0
-entity_temperature: sensor.bom_gosford_air_temp_c
-entity_forecast_high_temp_1: sensor.bom_gosford_max_temp_c_1
-entity_forecast_high_temp_2: sensor.bom_gosford_max_temp_c_2
-entity_forecast_high_temp_3: sensor.bom_gosford_max_temp_c_3
-entity_forecast_high_temp_4: sensor.bom_gosford_max_temp_c_4
-entity_forecast_high_temp_5: sensor.bom_gosford_max_temp_c_5
-entity_forecast_icon_1: sensor.bom_gosford_icon_1
-entity_forecast_icon_2: sensor.bom_gosford_icon_2
-entity_forecast_icon_3: sensor.bom_gosford_icon_3
-entity_forecast_icon_4: sensor.bom_gosford_icon_4
-entity_forecast_icon_5: sensor.bom_gosford_icon_5
-entity_forecast_low_temp_1: sensor.bom_gosford_min_temp_c_1
-entity_forecast_low_temp_2: sensor.bom_gosford_min_temp_c_2
-entity_forecast_low_temp_3: sensor.bom_gosford_min_temp_c_3
-entity_forecast_low_temp_4: sensor.bom_gosford_min_temp_c_4
-entity_forecast_low_temp_5: sensor.bom_gosford_min_temp_c_5
-entity_summary_1: sensor.bom_gosford_summary_1
-entity_summary_2: sensor.bom_gosford_summary_2
-entity_summary_3: sensor.bom_gosford_summary_3
-entity_summary_4: sensor.bom_gosford_summary_4
-entity_summary_5: sensor.bom_gosford_summary_5
+entity_current_conditions: sensor.kariong_icon_0
+entity_temperature: sensor.gosford_temperature
+entity_forecast_high_temp_1: sensor.kariong_max_1
+entity_forecast_high_temp_2: sensor.kariong_max_2
+entity_forecast_high_temp_3: sensor.kariong_max_3
+entity_forecast_high_temp_4: sensor.kariong_max_4
+entity_forecast_high_temp_5: sensor.kariong_max_5
+entity_forecast_icon_1: sensor.kariong_icon_1
+entity_forecast_icon_2: sensor.kariong_icon_2
+entity_forecast_icon_3: sensor.kariong_icon_3
+entity_forecast_icon_4: sensor.kariong_icon_4
+entity_forecast_icon_5: sensor.kariong_icon_5
+entity_forecast_low_temp_1: sensor.kariong_min_1
+entity_forecast_low_temp_2: sensor.kariong_min_2
+entity_forecast_low_temp_3: sensor.kariong_min_3
+entity_forecast_low_temp_4: sensor.kariong_min_4
+entity_forecast_low_temp_5: sensor.kariong_min_5
+entity_summary_1: sensor.kariong_short_text_1
+entity_summary_2: sensor.kariong_short_text_2
+entity_summary_3: sensor.kariong_short_text_3
+entity_summary_4: sensor.kariong_short_text_4
+entity_summary_5: sensor.kariong_short_text_5
 entity_sun: sun.sun
-# entity_visibility: sensor.dark_sky_visibility
+#           entity_visibility: sensor.dark_sky_visibility
 entity_daytime_high: sensor.bom_today_max
 entity_daytime_low: sensor.bom_today_min
-entity_wind_bearing: sensor.bom_gosford_wind_direction
-entity_wind_speed: sensor.bom_gosford_wind_speed_kmh
-entity_wind_gust: sensor.bom_gosford_wind_gust_kmh
-entity_wind_speed_kt: sensor.bom_gosford_wind_speed_kt
-entity_wind_gust_kt: sensor.bom_gosford_wind_gust_kt
-entity_humidity: sensor.bom_gosford_relative_humidity
-# entity_pressure: sensor.dark_sky_pressure
-entity_apparent_temp: sensor.bom_gosford_feels_like_c
-entity_daily_summary: sensor.bom_gosford_detailed_summary_0
-entity_pop: sensor.bom_gosford_chance_of_rain_0
-entity_pop_intensity: sensor.bom_gosford_rain_today
-# entity_pop_intensity_rate: sensor.bom_gosford_rain_today #####NOTE only define entity_pop_intensity OR entity_pop_intensity_rate or you will get an invalid message!
-entity_possible_today: sensor.bom_gosford_possible_rainfall_0
-entity_pos_1: sensor.bom_gosford_possible_rainfall_1
-entity_pos_2: sensor.bom_gosford_possible_rainfall_2
-entity_pos_3: sensor.bom_gosford_possible_rainfall_3
-entity_pos_4: sensor.bom_gosford_possible_rainfall_4
-entity_pos_5: sensor.bom_gosford_possible_rainfall_5
-entity_pop_1: sensor.bom_gosford_chance_of_rain_1
-entity_pop_2: sensor.bom_gosford_chance_of_rain_2
-entity_pop_3: sensor.bom_gosford_chance_of_rain_3
-entity_pop_4: sensor.bom_gosford_chance_of_rain_4
-entity_pop_5: sensor.bom_gosford_chance_of_rain_5
+entity_wind_bearing: sensor.gosford_wind_direction
+entity_wind_speed: sensor.gosford_wind_speed
+entity_wind_gust: sensor.gosford_gust_speed
+#           entity_wind_speed_kt: sensor.gosford_wind_speed_knots
+#           entity_wind_gust_kt: sensor.gosford_gust_speed_knots
+entity_humidity: sensor.gosford_humidity
+entity_pressure: sensor.nodemcu_lounge_bme280_seapressure
+entity_apparent_temp: sensor.gosford_temperature_feels_like
+entity_daily_summary: sensor.kariong_extended_text_0
+entity_pop: sensor.kariong_rain_chance_0
+entity_pop_intensity: sensor.gosford_rain_since_9am
+entity_possible_today: sensor.kariong_rain_amount_range_0
+entity_pos_1: sensor.kariong_rain_amount_range_1
+entity_pos_2: sensor.kariong_rain_amount_range_2
+entity_pos_3: sensor.kariong_rain_amount_range_3
+entity_pos_4: sensor.kariong_rain_amount_range_4
+entity_pos_5: sensor.kariong_rain_amount_range_5
+entity_pop_1: sensor.kariong_rain_chance_1
+entity_pop_2: sensor.kariong_rain_chance_2
+entity_pop_3: sensor.kariong_rain_chance_3
+entity_pop_4: sensor.kariong_rain_chance_4
+entity_pop_5: sensor.kariong_rain_chance_5
 entity_current_text: sensor.bom_current_text
 entity_uv_alert: sensor.bom_uv_alert
 entity_fire_danger: sensor.bom_fire_danger
 entity_uv_alert_summary: sensor.bom_uv_alert_summary
-entity_fire_danger_summary: sensor.bom_fire_danger_summary
+entity_fire_danger_summary: sensor.kariong_fire_danger_0
 locale: en
 sunset: true
 static_icons: false
-# old_icon: "true"
+old_icon: hybrid
 tooltip_bg_color: 'rgb( 75,155,239)'
 tooltip_border_color: 'rgb(255,161,0)'
 tooltip_border_width: 1
@@ -69,13 +68,13 @@ tooltips: true
 old_daily_format: false
 time_format: 12
 show_beaufort: false
-show_decimals: false
+#           show_decimals: true
 refresh_interval: 60
 show_separator: false
 temp_top_margin: 0px            #default 0px px or em Note: pre-0.109.x default was -0.3em
 temp_font_weight: 300           #default 300 numeric
 temp_font_size: 4em             #default 4em em
-temp_right_pos: 0.85em          #default 0.85em px or em
+temp_right_pos: 0.85em          #default .85em px or em
 temp_uom_top_margin: -12px      #default -12px px or em Note: pre-0.109.x default was -9px
 temp_uom_right_margin: 7px      #default 7px px or em
 apparent_top_margin: 45px       #default 45px px or em
@@ -88,7 +87,7 @@ current_text_alignment: center  #default center
 current_text_width: 100%        #default 100%
 current_data_top_margin: 10em   #default 10em px or em pre-0.109.x default was 7em
 large_icon_top_margin: -3.2em   #default -3.2em px or em Note: pre-0.109.x default was -3.5em
-large_icon_left_position: 0px   #default 0px px or em
+large_icon_left_position: 0px   #default 0em px or em
 separator_top_margin: 6em       #default 6em px or em
 summary_top_padding: 2em        #default 2em px or em pre-0.109.x default was 1em
 summary_font_size: 0.8em        #default 0.8em px or em
@@ -99,6 +98,6 @@ slot_l4: pressure               #pressure
 slot_l5: sun_next               #sun_next
 slot_r1: pop                    #pop
 slot_r2: humidity               #humidity
-slot_r3: uv_alert               #uv_alert
-slot_r4: fire_danger            #fire_danger
+slot_r3: uv_summary             #uv_summary
+slot_r4: fire_summary           #fire_summary
 slot_r5: sun_following          #sun_following

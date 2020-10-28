@@ -1,4 +1,13 @@
-```yaml
+# Download the BOM icons from https://github.com/DavidFW1960/bom_forecast/blob/master/bom_icons.zip
+# and save them under <config-dir>/www/icons/bom_icons/ (Note this is for the example in the ftp component. This is different to the animated card.)
+# For the animated card follow the instructions and put the icons in <config-dir>/www/icons/weather_icons. This is a DIFFERENT icon file to the above.
+# Show BOM Satellite and Radar
+
+sensor:
+
+  - platform: template
+    sensors:
+
       bom_current_text:
         value_template: >
             {% set val = states('sensor.kariong_short_text_0').split('.')[0] %} 
@@ -160,3 +169,48 @@
         value_template: >
           {{ state_attr('sensor.today_temp_bom', 'min_value') }}
 
+  - platform: average
+    name: today_temp_bom
+    entities:
+      - sensor.gosford_temperature
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+
+
+      bom_today_max:
+        value_template: >
+          {%- if states('sensor.kariong_max_0') == 'n/a' -%} 
+            {{ state_attr('sensor.today_temp_bom', 'max_value') }}
+          {% else %}
+            {{ states('sensor.kariong_max_0') }}
+          {% endif %}
+
+      bom_today_min:
+        value_template: >
+          {%- if states('sensor.sensor.kariong_min_0') == 'n/a' -%} 
+            {{ state_attr('sensor.today_temp_bom', 'min_value') }}
+          {% else %}
+            {{ states('sensor.kariong_min_0') }}
+          {% endif %}
+
+  - platform: statistics
+    name: today_temp_bom
+    sampling_size: 150
+    entity_id: sensor.gosford_temperature
+    max_age:
+      hours: 24
+
+automation:
+- alias: 'Update BOM Icons'
+  trigger:
+    - event: start
+      platform: homeassistant
+    - entity_id: sun.sun
+      platform: state
+      to: 'above_horizon'
+    - entity_id: sun.sun
+      platform: state
+      to: 'below_horizon'
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.bom_forecast_0, sensor.bom_forecast_1, sensor.bom_forecast_2, sensor.bom_forecast_3, sensor.bom_forecast_4, sensor.bom_forecast_5, sensor.bom_forecast_6

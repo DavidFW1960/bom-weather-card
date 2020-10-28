@@ -5,9 +5,20 @@
 ## Latest Changes
 VERY IMPORTANT NOTE:
 As of HA 0.117.x, the BOM Core Sensor component is removed as it violates ADR14 rule regarding web scraping.
-I have added this now as a custom component in HACS. 
-Add this repo as an integration in HACS and install the custom BOM component.
 
+I have made some changes so that this card now uses the new [BOM Component by Brendan](https://github.com/bremor/bureau_of_meteorology)
+
+I have updated the lovelace.yaml and templates as well for this new component.
+
+When you install Brendans new BOM Component, you will get sensors that look like this:
+For the Observations, they will be named for the BOM Observation station like.. sensor.gosford_temperature as an example.
+For the Forecast, they will be named by your local suburb determined from the entered Latitude and Longitude (which will default to your HA configuration) like sensor.kariong_icon_0
+
+It MAY be that there will be some new conditions from BOM. If icons are missing or you get any errors please let me know.
+
+IF you are using the old card as well with the 7 days forecast, note the new component only provides 6 days now and additionally I have added some icons so make sure you grab the bom_icons.zip file and extract the contents to /config/www/bom_icons The animated icons for the card itself are unchanged.
+
+## Older
 Also made an adjustment to the css to display the temperature correctly again.
 
 Option to show the apparent and current temperature to 1 decimal place
