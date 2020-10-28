@@ -665,7 +665,7 @@ style() {
         position: absolute;
         right: 1em;
         margin-top: ${tempUOMTopMargin} !important;
-        margin-right: ${tempUOMRightMargin};
+        margin-right: ${tempUOMRightMargin} !important;
       }
 
       .apparent {
