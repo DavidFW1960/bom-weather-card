@@ -6,7 +6,8 @@
 VERY IMPORTANT NOTE:
 As of HA 0.117.x, the BOM Core Sensor component is removed as it violates ADR14 rule regarding web scraping.
 
-I have made some changes so that this card now uses the new [BOM Component by Brendan](https://github.com/bremor/bureau_of_meteorology)
+I have made some changes so that this card now uses the new [BOM Component by Brendan](https://github.com/bremor/bureau_of_meteorology )
+This new repo can be added to HACS
 
 I have updated the lovelace.yaml and templates as well for this new component.
 
@@ -22,19 +23,12 @@ IF you are using the old card as well with the 7 days forecast, note the new com
 
 This card is a modification of a fork of iammexx/home-assistant-config dark-sky-weather-card
 
-VERY IMPORTANT NOTE:
-As of HA 0.117.x, the BOM Core Sensor component is removed as it violates ADR14 rule regarding web scraping.
-I have added this now as a custom component in HACS. 
-Add this repo as an integration in HACS and install the custom BOM component.
-
-Also made an adjustment to the css to display the temperature correctly again.
-
-NOTE: This card REQUIRES the BOM Sensor core component (now a custom component as per above note) and the BOM FTP Forecast Custom Component. See links below.
+NOTE: This card REQUIRES the BOM custom component as per above note.
 Alternately, if you are using DarkSky (or any other provider), the important thing is that any entities parsed to the card must be provided by that platform and you should carefully check the sensor names exist. Parsing a non existant sensor to the card will cause the card to fail to display!
 
-The BOM Weather Card provides current and forecasted weather conditions using the [BOM sensor platforms](https://www.home-assistant.io/integrations/bom/#sensor) in core Home Assistant and a custom component for BOM Forecast from [my forecast repo here](https://github.com/DavidFW1960/bom_forecast) You configure the card by passing in sensor entities from these BOM platforms. 
+The BOM Weather Card provides current and forecasted weather conditions using the. You configure the card by passing in sensor entities from the BOM component (or any other weather component but the examples here are based on BOM). 
 
-The [weather package](https://github.com/DavidFW1960/bom_forecast/blob/master/weather.yaml) in the BOM Forecast component contains BOM Sensor platform configuration for this card as well. Both the core BOM Sensor and BOM Forecast custom component are REQUIRED to use this card. This package is for HA versions > 0.115.0. For older versions of HA use the weather pre 0.115.x.yaml file instead. 0.115.0 deprecated listeners for entity_id's in template sensors.
+The [weather package](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather.yaml ) in the repo shows configuration for this card. This package is for HA versions > 0.115.0. 
 
 The card is very customizable.  You can configure many aspects of it's look and feel as well as which specific content to show by passing in customization flags and defining optional sensors.  Content can also be rearranged if desired. 
 
@@ -49,6 +43,8 @@ This plugin is now part of the default HACS store. You should not need to add it
 1. Install card from HACS as per other plugins. Note that you must add this card as a module to the resources section as per the instructions when you install the card.
 
 2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in ```<config-dir>/www/icons/weather_icons```.  Create the directories if necessary. NOTE: I have found a few more svg icons (from here https://github.com/SouthernWolf95/amCharts-SVG-Icons-Additions and also vis the Home Assistant Forums here https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702 ) to use in this component so [ALL icons required are in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip)
+
+To use the basic card, you will also need the /<config-dir>/www/bom_icons which are contained in [bom_icons.zip](https://github.com/DavidFW1960/bom-weather-card/blob/master/bom_icons.zip )
 
 # HARD Way? manual installation as follows:
 1. Add ```bom-weather-card.js``` to your ```<config-dir>/www/custom_ui/``` directory.  If you don't have this directory (this is your first custom card), you will need to create it.
@@ -67,32 +63,13 @@ OR HACS
 
 ## **Configuration**
 ------------------------------
-1. IF You don't use the package weather.yaml, Add the BOM sensor platform to your configuration.yaml or sensors.yaml or wherever you keep your sensor configuration.
+1. All configuration for the component is done via the GUI!
 
-~~~~  
-  - platform: bom
-    station: !secret my_bom_station
-    name: !secret my_bom_name
-    monitored_conditions:
-      - apparent_t
-      - delta_t
-      - gust_kmh
-      - gust_kt
-      - air_temp
-      - dewpt
-      - rain_trace
-      - rel_hum
-      - wind_dir
-      - wind_spd_kmh
-      - wind_spd_kt
-~~~~
-Note that different weather stations have different monitored conditions available. Some include pressure for example. See the BOM Sensor docs to see other options and try them with your weather station. I am also using secrets.yaml to set station and name.
-
-YOU MUST also install and configure the Custom Component BOM FTP Forecast for this card.
+It seems the new BOM API actually will generate a forecast for ANY location/Suburb in Australia and observations for defined observation stations. The nearest station is used.
 
 The next two steps are completed differently based on the version of HA you are using:
 - Pre 0.84 or if using yaml mode in 0.84 or above : Add to your ui-lovelace.yaml file.
-- Using storage mode in 0.84 or above use the "Raw Config Editor" to add the reference and definition to the config.
+- Using storage mode in 0.84 or above use the GUI Editor to add the reference and definition to the config.
 
 2. Add the card reference at the top of the configuration
 
@@ -115,7 +92,7 @@ resources:
 ~~~~
 
 3. Add the card definition:  There are required / optional and flag entries.
-NOTE: My entries show a mix of the FTP Component sensors and this platform's sensors. **All my values refer to Gosford entities.. You will need to edit these to match your sensors names.**
+NOTE: All my values refer to Gosford observation entities and Kariong forecast.. You will need to edit these to match your sensors names.**
 
 **An example configuration is in lovelace.yaml - this can be pasted into the manual card configuration in the GUI editor**
 If you paste it in the raw editor or in a yaml file, take care with the indenting.
@@ -123,31 +100,31 @@ If you paste it in the raw editor or in a yaml file, take care with the indentin
 Required entries must be present 
 in your configuration.  The card will not work at all if any of these lines are missing. **EDIT gosford/kariong to match your observations/forecasts**
 ~~~~
-          - type: custom:bom-weather-card
-            title: BOM Weather
-            entity_current_conditions: sensor.kariong_icon_0
-            entity_temperature: sensor.gosford_temperature
-            entity_forecast_high_temp_1: sensor.kariong_max_1
-            entity_forecast_high_temp_2: sensor.kariong_max_2
-            entity_forecast_high_temp_3: sensor.kariong_max_3
-            entity_forecast_high_temp_4: sensor.kariong_max_4
-            entity_forecast_high_temp_5: sensor.kariong_max_5
-            entity_forecast_icon_1: sensor.kariong_icon_1
-            entity_forecast_icon_2: sensor.kariong_icon_2
-            entity_forecast_icon_3: sensor.kariong_icon_3
-            entity_forecast_icon_4: sensor.kariong_icon_4
-            entity_forecast_icon_5: sensor.kariong_icon_5
-            entity_forecast_low_temp_1: sensor.kariong_min_1
-            entity_forecast_low_temp_2: sensor.kariong_min_2
-            entity_forecast_low_temp_3: sensor.kariong_min_3
-            entity_forecast_low_temp_4: sensor.kariong_min_4
-            entity_forecast_low_temp_5: sensor.kariong_min_5
-            entity_summary_1: sensor.kariong_short_text_1
-            entity_summary_2: sensor.kariong_short_text_2
-            entity_summary_3: sensor.kariong_short_text_3
-            entity_summary_4: sensor.kariong_short_text_4
-            entity_summary_5: sensor.kariong_short_text_5
-			entity_sun: sun.sun
+type: custom:bom-weather-card
+title: BOM Weather
+entity_current_conditions: sensor.kariong_icon_0
+entity_temperature: sensor.gosford_temperature
+entity_forecast_high_temp_1: sensor.kariong_max_1
+entity_forecast_high_temp_2: sensor.kariong_max_2
+entity_forecast_high_temp_3: sensor.kariong_max_3
+entity_forecast_high_temp_4: sensor.kariong_max_4
+entity_forecast_high_temp_5: sensor.kariong_max_5
+entity_forecast_icon_1: sensor.kariong_icon_1
+entity_forecast_icon_2: sensor.kariong_icon_2
+entity_forecast_icon_3: sensor.kariong_icon_3
+entity_forecast_icon_4: sensor.kariong_icon_4
+entity_forecast_icon_5: sensor.kariong_icon_5
+entity_forecast_low_temp_1: sensor.kariong_min_1
+entity_forecast_low_temp_2: sensor.kariong_min_2
+entity_forecast_low_temp_3: sensor.kariong_min_3
+entity_forecast_low_temp_4: sensor.kariong_min_4
+entity_forecast_low_temp_5: sensor.kariong_min_5
+entity_summary_1: sensor.kariong_short_text_1
+entity_summary_2: sensor.kariong_short_text_2
+entity_summary_3: sensor.kariong_short_text_3
+entity_summary_4: sensor.kariong_short_text_4
+entity_summary_5: sensor.kariong_short_text_5
+entity_sun: sun.sun
 ~~~~
 
 Optional entries add components to the card. My BOM area (Gosford) does not include visibility or pressure. Edit entities to your correct sensor names. Replace Gosford with your name.
@@ -161,45 +138,47 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 ***Defining BOTH entity_pop_intensity and entity_pop_intensity_rate will give an INVALID message in the pop slot if defined.
 
 ~~~~
-#           entity_visibility: sensor.dark_sky_visibility
-            entity_daytime_high: sensor.bom_today_max
-            entity_daytime_low: sensor.bom_today_min
-            entity_wind_bearing: sensor.gosford_wind_direction
-            entity_wind_speed: sensor.gosford_wind_speed
-            entity_wind_gust: sensor.gosford_gust_speed
-#           entity_wind_speed_kt: sensor.gosford_wind_speed_knots
-#           entity_wind_gust_kt: sensor.gosford_gust_speed_knots
-            entity_humidity: sensor.gosford_humidity
-            entity_pressure: sensor.nodemcu_lounge_bme280_seapressure
-            entity_apparent_temp: sensor.gosford_temperature_feels_like
-            entity_daily_summary: sensor.kariong_extended_text_0
-            entity_pop: sensor.kariong_rain_chance_0
-            entity_pop_intensity: sensor.gosford_rain_since_9am
-            entity_possible_today: sensor.kariong_rain_amount_range_0
-            entity_pos_1: sensor.kariong_rain_amount_range_1
-            entity_pos_2: sensor.kariong_rain_amount_range_2
-            entity_pos_3: sensor.kariong_rain_amount_range_3
-            entity_pos_4: sensor.kariong_rain_amount_range_4
-            entity_pos_5: sensor.kariong_rain_amount_range_5
-            entity_pop_1: sensor.kariong_rain_chance_1
-            entity_pop_2: sensor.kariong_rain_chance_2
-            entity_pop_3: sensor.kariong_rain_chance_3
-            entity_pop_4: sensor.kariong_rain_chance_4
-            entity_pop_5: sensor.kariong_rain_chance_5
-
+# entity_visibility: If provided from a different source
+entity_daytime_high: sensor.bom_today_max
+entity_daytime_low: sensor.bom_today_min
+entity_wind_bearing: sensor.gosford_wind_direction
+entity_wind_speed: sensor.gosford_wind_speed
+entity_wind_gust: sensor.gosford_gust_speed
+# entity_wind_speed_kt: sensor.gosford_wind_speed_knots
+# entity_wind_gust_kt: sensor.gosford_gust_speed_knots
+entity_humidity: sensor.gosford_humidity
+# entity_pressure: sensor.nodemcu_lounge_bme280_seapressure I get pressure from a NodeMCU. Bom does not supply this!
+entity_apparent_temp: sensor.gosford_temperature_feels_like
+entity_daily_summary: sensor.kariong_extended_text_0
+entity_pop: sensor.kariong_rain_chance_0
+entity_pop_intensity: sensor.gosford_rain_since_9am
+entity_possible_today: sensor.kariong_rain_amount_range_0
+entity_pos_1: sensor.kariong_rain_amount_range_1
+entity_pos_2: sensor.kariong_rain_amount_range_2
+entity_pos_3: sensor.kariong_rain_amount_range_3
+entity_pos_4: sensor.kariong_rain_amount_range_4
+entity_pos_5: sensor.kariong_rain_amount_range_5
+entity_pop_1: sensor.kariong_rain_chance_1
+entity_pop_2: sensor.kariong_rain_chance_2
+entity_pop_3: sensor.kariong_rain_chance_3
+entity_pop_4: sensor.kariong_rain_chance_4
+entity_pop_5: sensor.kariong_rain_chance_5
+entity_fire_danger_summary: sensor.kariong_fire_danger_0
 ~~~~
 
 **Note:** The following entries require template sensors.  
 ~~~~
-            entity_current_text: sensor.bom_current_text
-            entity_uv_alert: sensor.bom_uv_alert
-            entity_fire_danger: sensor.bom_fire_danger
-            entity_uv_alert_summary: sensor.bom_uv_alert_summary
-            entity_fire_danger_summary: sensor.kariong_fire_danger_0
+entity_current_text: sensor.bom_current_text
+entity_uv_alert: sensor.bom_uv_alert
+entity_fire_danger: sensor.bom_fire_danger
+entity_uv_alert_summary: sensor.bom_uv_alert_summary
 ~~~~
 
 **Example template sensors:** You can call template sensors whatever you want so long as you use the same name in the card config. (Included in weather.yaml) 
-[See also the file](https://github.com/DavidFW1960/bom-weather-card/blob/master/templates.md) with templates for areas with two fire danger areas like Perth.
+I don't believe templates for areas with two fire danger areas like Perth are required anymore with the new forecasts.
+NOTE ALSO that the minimum temperature 'disappears' in the early afternoon from the BOM feed. ALso the UV and fire information becomes unknown around 10PM. I have used Template sensors toselect the next day when this happens but have not done this in this latest package (too little benefit!)
+I am also parsing the ACTUAL minimum and maximum temperatures to the card rather than the forecast ones for the current day. If you don't like that, feel free to make your own sensors. (See the minimal card template for examples)
+
 These templates are EXAMPLES. Adjust and adapt as required. Up-to-date templates will always be in the templates.md file.
 ~~~~~
       bom_current_text:
@@ -324,3 +303,100 @@ slots (designated r1 - r5).  There are currently 10 possible values that can be 
 If configuring with Slots please ensure to fill all available positions, the slots that you do not need can be filled with "remove" to ensure that they remain blank.
 
 [My FULL Lovelace configuration for this card is here](https://github.com/DavidFW1960/bom-weather-card/blob/master/lovelace.yaml) Cut and paste it into your lovelace.
+
+## MINIMAL CARD Example
+See these templates:
+~~~~~
+      bom_forecast_0:
+        friendly_name: "Today"
+        value_template: >
+          {% if states('sensor.kariong_min_0') == 'unknown' %} {% set min = states('sensor.bom_today_min') %} {% else %} {% set min = states('sensor.kariong_min_0') %} {% endif %}
+          {% if states('sensor.kariong_max_0') == 'unknown' %} {% set max = states('sensor.bom_today_max') %} {% else %} {% set max = states('sensor.kariong_max_0') %} {% endif %}
+          {{ max|round(0)}}°/{{ min|round(0)}}°/{{states('sensor.kariong_rain_chance_0')|round(0)}}%
+        entity_picture_template: >-
+          {%- if states('sun.sun') == 'below_horizon' and (states('sensor.kariong_icon_0') == 'fog' or states('sensor.kariong_icon_0') == 'haze' or states('sensor.kariong_icon_0') == 'light-showers' or states('sensor.kariong_icon_0') == 'partly-cloudy' or states('sensor.kariong_icon_0') == 'showers' or states('sensor.kariong_icon_0') == 'shower' or states('sensor.kariong_icon_0') == 'light_showers' or states('sensor.kariong_icon_0') == 'partly_cloudy') -%}
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_0') ~ '-night.png' }}
+          {%- else -%}
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_0') ~ '.png' }}
+          {%- endif -%}
+
+      bom_forecast_1:
+        friendly_name_template: >
+          {%- set date = as_timestamp(now()) + (1 * 86400 ) -%}
+          {{ date | timestamp_custom('Tomorrow (%-d/%-m)') }}
+        value_template: >
+          {{states('sensor.kariong_max_1')|round(0)}}°/{{states('sensor.kariong_min_1')|round(0)}}°/{{states('sensor.kariong_rain_chance_1')|round(0)}}%
+        entity_picture_template: >-
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_1') ~ '.png' }}
+
+      bom_forecast_2:
+        friendly_name_template: >
+          {%- set date = as_timestamp(now()) + (2 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+        value_template: >
+          {{states('sensor.kariong_max_2')|round(0)}}°/{{states('sensor.kariong_min_2')|round(0)}}°/{{states('sensor.kariong_rain_chance_2')|round(0)}}%
+        entity_picture_template: >-
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_2') ~ '.png' }}
+
+      bom_forecast_3:
+        friendly_name_template: >
+          {%- set date = as_timestamp(now()) + (3 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+        value_template: >
+          {{states('sensor.kariong_max_3')|round(0)}}°/{{states('sensor.kariong_min_3')|round(0)}}°/{{states('sensor.kariong_rain_chance_3')|round(0)}}%
+        entity_picture_template: >-
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_3') ~ '.png' }}
+
+      bom_forecast_4:
+        friendly_name_template: >
+          {%- set date = as_timestamp(now()) + (4 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+        value_template: >
+          {{states('sensor.kariong_max_4')|round(0)}}°/{{states('sensor.kariong_min_4')|round(0)}}°/{{states('sensor.kariong_rain_chance_4')|round(0)}}%
+        entity_picture_template: >-
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_4') ~ '.png' }}
+
+      bom_forecast_5:
+        friendly_name_template: >
+          {%- set date = as_timestamp(now()) + (5 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+        value_template: >
+          {{states('sensor.kariong_max_5')|round(0)}}°/{{states('sensor.kariong_min_5')|round(0)}}°/{{states('sensor.kariong_rain_chance_5')|round(0)}}%
+        entity_picture_template: >-
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_5') ~ '.png' }}
+
+      bom_today_max:
+        value_template: >
+          {{ state_attr('sensor.today_temp_bom', 'max_value') }}
+
+      bom_today_min:
+        value_template: >
+          {{ state_attr('sensor.today_temp_bom', 'min_value') }}
+
+  - platform: average
+    name: today_temp_bom
+    entities:
+      - sensor.gosford_temperature
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+~~~~~
+
+NOTE I am using a custom component average for the bom_today_max and bom_today_min sensors.
+See that for day 0, if the min/max is missing from the forecast it uses the average component.
+In the weather.yaml package, I use the statistics sensor instead of the custom average component..
+You can then display these on an entities card like this:
+
+~~~~~
+type: entities
+title: BOM Forecast
+show_header_toggle: false
+entities:
+  - sensor.bom_forecast_0
+  - sensor.bom_forecast_1
+  - sensor.bom_forecast_2
+  - sensor.bom_forecast_3
+  - sensor.bom_forecast_4
+  - sensor.bom_forecast_5
+~~~~~
+
+![image](bom-forecast.png)
