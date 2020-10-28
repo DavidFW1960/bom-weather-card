@@ -399,4 +399,4 @@ entities:
   - sensor.bom_forecast_5
 ~~~~~
 
-![image](bom-forecast.png)
+![image](bom_forecast.png)
