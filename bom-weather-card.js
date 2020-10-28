@@ -1,5 +1,5 @@
 console.info(
-  `%c BOM-WEATHER-CARD \n%c Version 0.81     `,
+  `%c BOM-WEATHER-CARD \n%c Version 0.82     `,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );
