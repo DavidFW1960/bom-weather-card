@@ -169,6 +169,7 @@ sensor:
         value_template: >
           {{ state_attr('sensor.today_temp_bom', 'min_value') }}
 
+# IMPORTANT NOTE IF YOU USE average, you must comment out the below statistics sensor. Both cannot exist
   - platform: average
     name: today_temp_bom
     entities:
@@ -187,18 +188,19 @@ sensor:
 
       bom_today_min:
         value_template: >
-          {%- if states('sensor.sensor.kariong_min_0') == 'n/a' -%} 
+          {%- if states('sensor.kariong_min_0') == 'n/a' -%} 
             {{ state_attr('sensor.today_temp_bom', 'min_value') }}
           {% else %}
             {{ states('sensor.kariong_min_0') }}
           {% endif %}
 
-  - platform: statistics
-    name: today_temp_bom
-    sampling_size: 150
-    entity_id: sensor.gosford_temperature
-    max_age:
-      hours: 24
+# IMPORTANT NOTE IF YOU USE statistics, you must comment out the above average sensor. Both cannot exist
+#  - platform: statistics
+#    name: today_temp_bom
+#    sampling_size: 150
+#    entity_id: sensor.gosford_temperature
+#    max_age:
+#      hours: 24
 
 automation:
 - alias: 'Update BOM Icons'

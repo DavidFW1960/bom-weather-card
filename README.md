@@ -181,6 +181,9 @@ I am also parsing the ACTUAL minimum and maximum temperatures to the card rather
 
 These templates are EXAMPLES. Adjust and adapt as required. Up-to-date templates will always be in the templates.md file.
 ~~~~~
+sensor:
+  - platform: template
+    sensors:
       bom_current_text:
         value_template: >
             {% set val = states('sensor.kariong_short_text_0').split('.')[0] %} 
@@ -307,6 +310,9 @@ If configuring with Slots please ensure to fill all available positions, the slo
 ## MINIMAL CARD Example
 See these templates:
 ~~~~~
+sensor:
+  - platform: template
+    sensors:
       bom_forecast_0:
         friendly_name: "Today"
         value_template: >

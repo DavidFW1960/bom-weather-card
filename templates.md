@@ -1,4 +1,7 @@
 ```yaml
+sensor:
+  - platform: template
+    sensors:
       bom_current_text:
         value_template: >
             {% set val = states('sensor.kariong_short_text_0').split('.')[0] %} 
