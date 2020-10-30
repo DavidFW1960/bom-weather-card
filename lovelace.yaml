@@ -76,7 +76,7 @@ temp_font_weight: 300           #default 300 numeric
 temp_font_size: 4em             #default 4em em
 temp_right_pos: 0.85em          #default .85em px or em
 temp_uom_top_margin: -12px      #default -12px px or em Note: pre-0.109.x default was -9px
-temp_uom_right_margin: 7px      #default 7px px or em
+temp_uom_right_margin: 4px      #default 4px px or em
 apparent_top_margin: 45px       #default 45px px or em
 apparent_right_pos: 1em         #default 1em px or em
 apparent_right_margin: 1em      #default 1em px or em
