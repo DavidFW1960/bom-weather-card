@@ -253,7 +253,7 @@ show_decimals: false
 | temp_font_size           | **4em** / em value                 | Sets the font size of the Temperature.                                      |
 | temp_right_pos           | **0.85em** / px or em value        | Sets the right position of the Temperature.                                 |
 | temp_uom_top_margin      | **-12px** / px or em value         | Sets the top margin of the Temperature Unit of Meaure.                      |
-| temp_uom_right_margin    | **7px** / px or em value           | Sets the right margin of the Temperature Unit of Measure.                   |
+| temp_uom_right_margin    | **4px** / px or em value           | Sets the right margin of the Temperature Unit of Measure.                   |
 | apparent_top_margin      | **45px** / px or em value          | Sets the top margin of the apparent (feels Like) temperature                |
 | apparent_right_pos       | **1em** / px or em value           | Sets the right position of the apparent (feels Like) temperature            |
 | apparent_right_margin    | **1em** / px or em value           | Sets the right margin of the apparent (feels Like) temperature              |
