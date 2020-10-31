@@ -32,7 +32,9 @@ entity_wind_gust: sensor.gosford_gust_speed
 #           entity_wind_speed_kt: sensor.gosford_wind_speed_knots
 #           entity_wind_gust_kt: sensor.gosford_gust_speed_knots
 entity_humidity: sensor.gosford_humidity
-entity_pressure: sensor.nodemcu_lounge_bme280_seapressure
+############################## IMPORTANT!!! BOM are NOT providing Pressure sensor for forecast.
+############################## IF you use my entity_pressure sensor the card won't display
+# entity_pressure: sensor.nodemcu_lounge_bme280_seapressure CAN USE OWN PRESSURE
 entity_apparent_temp: sensor.gosford_temperature_feels_like
 entity_daily_summary: sensor.kariong_extended_text_0
 entity_pop: sensor.kariong_rain_chance_0
@@ -94,6 +96,7 @@ summary_font_size: 0.8em        #default 0.8em px or em
 slot_l1: daytime_high           #daytime_high
 slot_l2: daytime_low            #daytime_low
 slot_l3: wind                   #wind
+######### change slot_l4 to something else if you don't have a pressure entity (otherwise it will be blank on the card
 slot_l4: pressure               #pressure
 slot_l5: sun_next               #sun_next
 slot_r1: pop                    #pop
