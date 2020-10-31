@@ -7,7 +7,7 @@ VERY IMPORTANT NOTE:
 As of HA 0.117.x, the BOM Core Sensor component is removed as it violates ADR14 rule regarding web scraping.
 
 I have made some changes so that this card now uses the new [BOM Component by Brendan](https://github.com/bremor/bureau_of_meteorology )
-This new repo can be added to HACS
+This new repo can be added to HACS See also the excellent new [BOM Radar Card by @therat here](https://github.com/theOzzieRat/bom-radar-card )
 
 I have updated the lovelace.yaml and templates as well for this new component.
 
