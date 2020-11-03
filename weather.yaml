@@ -188,6 +188,7 @@ sensor:
 #          {% endif %}
 
 # IMPORTANT NOTE IF YOU USE average, you must comment out the below statistics sensor. Both cannot exist
+# https://github.com/Limych/ha-average
   - platform: average
     name: today_temp_bom
     entities:
