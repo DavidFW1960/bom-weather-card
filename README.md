@@ -387,7 +387,7 @@ sensor:
     end: '{{ now() }}'
 ~~~~~
 
-NOTE I am using a custom component average for the bom_today_max and bom_today_min sensors.
+NOTE I am using a [custom component average](https://github.com/Limych/ha-average ) for the bom_today_max and bom_today_min sensors.
 See that for day 0, if the min/max is missing from the forecast it uses the average component.
 In the weather.yaml package, I use the statistics sensor instead of the custom average component..
 You can then display these on an entities card like this:
