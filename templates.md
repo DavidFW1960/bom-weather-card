@@ -155,11 +155,45 @@ sensor:
         entity_picture_template: >-
           {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_5') ~ '.png' }}
 
+# ONLY USE ONE bom_today_max below:
       bom_today_max:
         value_template: >
           {{ state_attr('sensor.today_temp_bom', 'max_value') }}
 
+#      bom_today_max:
+#        value_template: >
+#          {%- if states('sensor.kariong_max_0') == 'n/a' -%} 
+#            {{ state_attr('sensor.today_temp_bom', 'max_value') }}
+#          {% else %}
+#            {{ states('sensor.kariong_max_0') }}
+#          {% endif %}
+
+# ONLY USE ONE bom_today_min below:
       bom_today_min:
         value_template: >
           {{ state_attr('sensor.today_temp_bom', 'min_value') }}
 
+#      bom_today_min:
+#        value_template: >
+#          {%- if states('sensor.kariong_min_0') == 'n/a' -%} 
+#            {{ state_attr('sensor.today_temp_bom', 'min_value') }}
+#          {% else %}
+#            {{ states('sensor.kariong_min_0') }}
+#          {% endif %}
+
+# IMPORTANT NOTE IF YOU USE average, you must comment out the below statistics sensor. Both cannot exist
+# https://github.com/Limych/ha-average
+  - platform: average
+    name: today_temp_bom
+    entities:
+      - sensor.gosford_temperature
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+
+# IMPORTANT NOTE IF YOU USE statistics, you must comment out the above average sensor. Both cannot exist
+#  - platform: statistics
+#    name: today_temp_bom
+#    sampling_size: 150
+#    entity_id: sensor.gosford_temperature
+#    max_age:
+#      hours: 24
