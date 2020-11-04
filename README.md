@@ -42,19 +42,27 @@ This plugin is now part of the default HACS store. You should not need to add it
 
 1. Install card from HACS as per other plugins. Note that you must add this card as a module to the resources section as per the instructions when you install the card.
 
-2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in ```<config-dir>/www/icons/weather_icons```.  Create the directories if necessary. NOTE: I have found a few more svg icons (from here https://github.com/SouthernWolf95/amCharts-SVG-Icons-Additions and also vis the Home Assistant Forums here https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702 ) to use in this component so [ALL icons required are in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip)
+2. Please download [ALL icons required are in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip) In addition to the amcharts ones I have found a few more svg icons (from here https://github.com/SouthernWolf95/amCharts-SVG-Icons-Additions and also via the Home Assistant Forums here https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702 ) to use in this component. Put them in ```<config-dir>/www/icons/weather_icons``` and then sub folders animated and static.  Create the directories if necessary. 
+I used to recommend downloading Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ however if you don't use my zip file version some icons will be missing.
 
 To use the basic card, you will also need the /<config-dir>/www/bom_icons which are contained in [bom_icons.zip](https://github.com/DavidFW1960/bom-weather-card/blob/master/bom_icons.zip )
 
 # HARD Way? manual installation as follows:
 1. Add ```bom-weather-card.js``` to your ```<config-dir>/www/custom_ui/``` directory.  If you don't have this directory (this is your first custom card), you will need to create it.
 
-2. Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ and put them in ```<config-dir>/www/icons/weather_icons```.  Create the directories if necessary. NOTE: I have found a few more svg icons to use in this component so [ALL icons required are in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip)
+2. Please download [ALL icons required are in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip) In addition to the amcharts ones I have found a few more svg icons (from here https://github.com/SouthernWolf95/amCharts-SVG-Icons-Additions and also via the Home Assistant Forums here https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702 ) to use in this component. Put them in ```<config-dir>/www/icons/weather_icons``` and then sub folders animated and static.  Create the directories if necessary. 
+I used to recommend downloading Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ however if you don't use my zip file version some icons will be missing.
 
 You should end up with the following folders:
 
 ```<config-dir>/www/custom_ui/bom-weather-card.js```
+
+```<config-dir>/www/icons/weather_icons/animated/```
+
+```<config-dir>/www/icons/weather_icons/static/```
+
 OR HACS
+
 ```<config-dir>/www/community/bom-weather-card/bom-weather-card.js```
 
 ```<config-dir>/www/icons/weather_icons/animated/```
