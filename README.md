@@ -255,6 +255,7 @@ show_decimals: false
 | old_daily_format         | true / **false**                   | Sets the format of the daily high & low temps to be stacked (old format)    |
 | show_beaufort            | true / **false**                   | Shows Beaufort Scale wind information                                       |
 | show_separator           | true / **false**                   | Shows separator between current conditions columns and current temp / Icon  |
+| tempformat               | highlow / **noentry**              | Any setting for this flag will trigger the option to show max/min in daily  |
 | time_format              | **locale** / 12 / 24               | Sets the format sunset and sunrise times. locale format is the default.     |
 | temp_top_margin          | **0px** / px or em value           | Sets the top margin of the Temperature.                                     |
 | temp_font_weight         | **300** / numeric value            | Sets the font weight of the Temperature.                                    |

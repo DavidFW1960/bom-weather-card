@@ -3,6 +3,15 @@
 # BOM Weather Card
 
 ## Latest Changes
+
+This version includes the option to have maximum temperature before the minimum.
+It is a new 'flag' as:
+````yaml
+tempformat: highlow
+````
+
+I also updated some of the docs/packages to clarify some settings etc
+
 VERY IMPORTANT NOTE:
 As of HA 0.117.x, the BOM Core Sensor component is removed as it violates ADR14 rule regarding web scraping.
 
