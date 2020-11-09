@@ -3,6 +3,23 @@
 # BOM Weather Card
 
 ## IMPORTANT CHANGES
+
+In the latest BOM component, a number of sensors have been renamed.
+This should not affect existing component however the renaming I have found is here:
+sensor.gosford_wind_speed > sensor.gosford_wind_speed_kilometre
+sensor.gosford_temperature > sensor.gosford_temp
+sensor.gosford_temperature_feels_like > sensor.gosford_temp_feels_like
+sensor.kariong_min* > sensor.kariong_temp_max*
+sensor.kariong_min* > sensor.kariong_temp_max*
+sensor.kariong_icon* > sensor.kariong_icon_descriptor*
+Added day 6 forecast
+sensor.gosford_gust_speed > sensor.gosford_gust_speed_kilometre
+sensor.gosford_wind_speed > sensor.gosford_wind_speed_kilometre
+sensor.gosford_gust_speed_knots > sensor.gosford_gust_speed_knot
+sensor.gosford_wind_speed_knots > sensor.gosford_wind_speed_knot
+
+I have amended the docs to reflect this and have also updated the ICON instructions.
+
 VERY IMPORTANT NOTE:
 As of HA 0.117.x, the BOM Core Sensor component is removed as it violates ADR14 rule regarding web scraping.
 
@@ -13,7 +30,7 @@ I have updated the lovelace.yaml and templates as well for this new component.
 
 When you install Brendans new BOM Component, you will get sensors that look like this:
 For the Observations, they will be named for the BOM Observation station like.. sensor.gosford_temperature as an example.
-For the Forecast, they will be named by your local suburb determined from the entered Latitude and Longitude (which will default to your HA configuration) like sensor.kariong_icon_0
+For the Forecast, they will be named by your local suburb determined from the entered Latitude and Longitude (which will default to your HA configuration) like sensor.kariong_icon_descriptor_0
 
 It MAY be that there will be some new conditions from BOM. If icons are missing or you get any errors please let me know.
 
@@ -40,34 +57,47 @@ Hovering over a forecast day will display the daily weather summary in a tooltip
 # EASY Way? use HACS
 This plugin is now part of the default HACS store. You should not need to add it manually. Add this repo https://github.com/DavidFW1960/bom-weather-card
 
-1. Install card from HACS as per other plugins. Note that you must add this card as a module to the resources section as per the instructions when you install the card.
-
-2. Please download [ALL icons required are in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip) In addition to the amcharts ones I have found a few more svg icons (from here https://github.com/SouthernWolf95/amCharts-SVG-Icons-Additions and also via the Home Assistant Forums here https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702 ) to use in this component. Put them in ```<config-dir>/www/icons/weather_icons``` and then sub folders animated and static.  Create the directories if necessary. 
-I used to recommend downloading Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ however if you don't use my zip file version some icons will be missing.
-
-To use the basic card, you will also need the /<config-dir>/www/bom_icons which are contained in [bom_icons.zip](https://github.com/DavidFW1960/bom-weather-card/blob/master/bom_icons.zip )
+Install card from HACS as per other plugins. Note that you must add this card as a module to the resources section as per the instructions when you install the card.
 
 # HARD Way? manual installation as follows:
-1. Add ```bom-weather-card.js``` to your ```<config-dir>/www/custom_ui/``` directory.  If you don't have this directory (this is your first custom card), you will need to create it.
+1. Add ```bom-weather-card.js``` to your ```<config-dir>/www/``` directory.  If you don't have this directory (this is your first custom card), you will need to create it.
 
-2. Please download [ALL icons required are in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip) In addition to the amcharts ones I have found a few more svg icons (from here https://github.com/SouthernWolf95/amCharts-SVG-Icons-Additions and also via the Home Assistant Forums here https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702 ) to use in this component. Put them in ```<config-dir>/www/icons/weather_icons``` and then sub folders animated and static.  Create the directories if necessary. 
+# Then install the icon files
+Please download [ALL icons required are in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip) In addition to the amcharts ones I have found a few more svg icons (from here https://github.com/SouthernWolf95/amCharts-SVG-Icons-Additions and also via the Home Assistant Forums here https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702 ) to use in this component. Put them in ```<config-dir>/www/icons/weather_icons``` and then sub folders animated and static.  Create the directories if necessary. 
 I used to recommend downloading Download the amcharts icons from https://www.amcharts.com/dl/svg-weather-icons/ however if you don't use my zip file version some icons will be missing.
+
+To use the basic card, you will also need the /<config-dir>/www/icons/bom_icons which are contained in [bom_icons.zip](https://github.com/DavidFW1960/bom-weather-card/blob/master/bom_icons.zip )
 
 You should end up with the following folders:
 
-```<config-dir>/www/custom_ui/bom-weather-card.js```
+HACS:-
 
-```<config-dir>/www/icons/weather_icons/animated/```
+└── ...
+└── configuration.yaml
+└── www
+    └── community
+        └── bom-weather-card
+            └── bom-weather-card.js
+            └── bom-weather-card.js.gz
+	└── icons
+		└── bom_icons        ###### Containing bom_icons.zip unzipped
+		└── weather_icons
+			└── animated     ###### Containing the animated icons from weather_icons.zip animated directory
+			└── static       ###### Containing the animated icons from weather_icons.zip static directory
 
-```<config-dir>/www/icons/weather_icons/static/```
+MANUAL INSTALL:- 
 
-OR HACS
+└── ...
+└── configuration.yaml
+└── www
+    └── bom-weather-card.js
+    └── icons
+		└── bom_icons        ###### Containing bom_icons.zip unzipped
+		└── weather_icons
+			└── animated     ###### Containing the animated icons from weather_icons.zip animated directory
+			└── static       ###### Containing the animated icons from weather_icons.zip static directory
 
-```<config-dir>/www/community/bom-weather-card/bom-weather-card.js```
-
-```<config-dir>/www/icons/weather_icons/animated/```
-
-```<config-dir>/www/icons/weather_icons/static/```
+IF YOU USE the SAMBA addin in Home Assistant, the ICON directory will be hidden by default. Go to the configuration of the addon and remove the exclusion of icons and restart the addon otherwise you can't create the directory.
 
 ## **Configuration**
 ------------------------------
@@ -79,11 +109,14 @@ The next two steps are completed differently based on the version of HA you are 
 - Pre 0.84 or if using yaml mode in 0.84 or above : Add to your ui-lovelace.yaml file.
 - Using storage mode in 0.84 or above use the GUI Editor to add the reference and definition to the config.
 
-2. Add the card reference at the top of the configuration
+2. Add the card reference to resources
+If you installed using HACS, the resources should be updated automatically (see below)
 
    **Note: Ensure type is set to module and not js**  
    **Note: /local/ points to the ```<config-dir>/www/``` dir.**
    **Note: /hascfiles/ points to the ```<config-dir>/www/community/``` dir.**
+
+Note that neither /local/ of /hascfiles/ physically exist! The directory structure is as per above.
 
 For a HACS Installation:
 ~~~~
@@ -110,23 +143,23 @@ in your configuration.  The card will not work at all if any of these lines are 
 ~~~~
 type: custom:bom-weather-card
 title: BOM Weather
-entity_current_conditions: sensor.kariong_icon_0
-entity_temperature: sensor.gosford_temperature
-entity_forecast_high_temp_1: sensor.kariong_max_1
-entity_forecast_high_temp_2: sensor.kariong_max_2
-entity_forecast_high_temp_3: sensor.kariong_max_3
-entity_forecast_high_temp_4: sensor.kariong_max_4
-entity_forecast_high_temp_5: sensor.kariong_max_5
-entity_forecast_icon_1: sensor.kariong_icon_1
-entity_forecast_icon_2: sensor.kariong_icon_2
-entity_forecast_icon_3: sensor.kariong_icon_3
-entity_forecast_icon_4: sensor.kariong_icon_4
-entity_forecast_icon_5: sensor.kariong_icon_5
-entity_forecast_low_temp_1: sensor.kariong_min_1
-entity_forecast_low_temp_2: sensor.kariong_min_2
-entity_forecast_low_temp_3: sensor.kariong_min_3
-entity_forecast_low_temp_4: sensor.kariong_min_4
-entity_forecast_low_temp_5: sensor.kariong_min_5
+entity_current_conditions: sensor.kariong_icon_descriptor_0
+entity_temperature: sensor.gosford_temp
+entity_forecast_high_temp_1: sensor.kariong_temp_max_1
+entity_forecast_high_temp_2: sensor.kariong_temp_max_2
+entity_forecast_high_temp_3: sensor.kariong_temp_max_3
+entity_forecast_high_temp_4: sensor.kariong_temp_max_4
+entity_forecast_high_temp_5: sensor.kariong_temp_max_5
+entity_forecast_icon_1: sensor.kariong_icon_descriptor_1
+entity_forecast_icon_2: sensor.kariong_icon_descriptor_2
+entity_forecast_icon_3: sensor.kariong_icon_descriptor_3
+entity_forecast_icon_4: sensor.kariong_icon_descriptor_4
+entity_forecast_icon_5: sensor.kariong_icon_descriptor_5
+entity_forecast_low_temp_1: sensor.kariong_temp_min_1
+entity_forecast_low_temp_2: sensor.kariong_temp_min_2
+entity_forecast_low_temp_3: sensor.kariong_temp_min_3
+entity_forecast_low_temp_4: sensor.kariong_temp_min_4
+entity_forecast_low_temp_5: sensor.kariong_temp_min_5
 entity_summary_1: sensor.kariong_short_text_1
 entity_summary_2: sensor.kariong_short_text_2
 entity_summary_3: sensor.kariong_short_text_3
@@ -325,14 +358,14 @@ sensor:
       bom_forecast_0:
         friendly_name: "Today"
         value_template: >
-          {% if states('sensor.kariong_min_0') == 'unknown' %} {% set min = states('sensor.bom_today_min') %} {% else %} {% set min = states('sensor.kariong_min_0') %} {% endif %}
-          {% if states('sensor.kariong_max_0') == 'unknown' %} {% set max = states('sensor.bom_today_max') %} {% else %} {% set max = states('sensor.kariong_max_0') %} {% endif %}
+          {% if states('sensor.kariong_temp_min_0') == 'unknown' %} {% set min = states('sensor.bom_today_min') %} {% else %} {% set min = states('sensor.kariong_temp_min_0') %} {% endif %}
+          {% if states('sensor.kariong_temp_max_0') == 'unknown' %} {% set max = states('sensor.bom_today_max') %} {% else %} {% set max = states('sensor.kariong_temp_max_0') %} {% endif %}
           {{ max|round(0)}}°/{{ min|round(0)}}°/{{states('sensor.kariong_rain_chance_0')|round(0)}}%
         entity_picture_template: >-
-          {%- if states('sun.sun') == 'below_horizon' and (states('sensor.kariong_icon_0') == 'fog' or states('sensor.kariong_icon_0') == 'haze' or states('sensor.kariong_icon_0') == 'light-showers' or states('sensor.kariong_icon_0') == 'partly-cloudy' or states('sensor.kariong_icon_0') == 'showers' or states('sensor.kariong_icon_0') == 'shower' or states('sensor.kariong_icon_0') == 'light_showers' or states('sensor.kariong_icon_0') == 'partly_cloudy') -%}
-          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_0') ~ '-night.png' }}
+          {%- if states('sun.sun') == 'below_horizon' and (states('sensor.kariong_icon_descriptor_0') == 'fog' or states('sensor.kariong_icon_descriptor_0') == 'haze' or states('sensor.kariong_icon_descriptor_0') == 'light-showers' or states('sensor.kariong_icon_descriptor_0') == 'partly-cloudy' or states('sensor.kariong_icon_descriptor_0') == 'showers' or states('sensor.kariong_icon_descriptor_0') == 'shower' or states('sensor.kariong_icon_descriptor_0') == 'light_showers' or states('sensor.kariong_icon_descriptor_0') == 'partly_cloudy') -%}
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_0') ~ '-night.png' }}
           {%- else -%}
-          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_0') ~ '.png' }}
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_0') ~ '.png' }}
           {%- endif -%}
 
       bom_forecast_1:
@@ -340,45 +373,55 @@ sensor:
           {%- set date = as_timestamp(now()) + (1 * 86400 ) -%}
           {{ date | timestamp_custom('Tomorrow (%-d/%-m)') }}
         value_template: >
-          {{states('sensor.kariong_max_1')|round(0)}}°/{{states('sensor.kariong_min_1')|round(0)}}°/{{states('sensor.kariong_rain_chance_1')|round(0)}}%
+          {{states('sensor.kariong_temp_max_1')|round(0)}}°/{{states('sensor.kariong_temp_min_1')|round(0)}}°/{{states('sensor.kariong_rain_chance_1')|round(0)}}%
         entity_picture_template: >-
-          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_1') ~ '.png' }}
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_1') ~ '.png' }}
 
       bom_forecast_2:
         friendly_name_template: >
           {%- set date = as_timestamp(now()) + (2 * 86400 ) -%}
           {{ date | timestamp_custom('%A (%-d/%-m)') }}
         value_template: >
-          {{states('sensor.kariong_max_2')|round(0)}}°/{{states('sensor.kariong_min_2')|round(0)}}°/{{states('sensor.kariong_rain_chance_2')|round(0)}}%
+          {{states('sensor.kariong_temp_max_2')|round(0)}}°/{{states('sensor.kariong_temp_min_2')|round(0)}}°/{{states('sensor.kariong_rain_chance_2')|round(0)}}%
         entity_picture_template: >-
-          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_2') ~ '.png' }}
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_2') ~ '.png' }}
 
       bom_forecast_3:
         friendly_name_template: >
           {%- set date = as_timestamp(now()) + (3 * 86400 ) -%}
           {{ date | timestamp_custom('%A (%-d/%-m)') }}
         value_template: >
-          {{states('sensor.kariong_max_3')|round(0)}}°/{{states('sensor.kariong_min_3')|round(0)}}°/{{states('sensor.kariong_rain_chance_3')|round(0)}}%
+          {{states('sensor.kariong_temp_max_3')|round(0)}}°/{{states('sensor.kariong_temp_min_3')|round(0)}}°/{{states('sensor.kariong_rain_chance_3')|round(0)}}%
         entity_picture_template: >-
-          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_3') ~ '.png' }}
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_3') ~ '.png' }}
 
       bom_forecast_4:
         friendly_name_template: >
           {%- set date = as_timestamp(now()) + (4 * 86400 ) -%}
           {{ date | timestamp_custom('%A (%-d/%-m)') }}
         value_template: >
-          {{states('sensor.kariong_max_4')|round(0)}}°/{{states('sensor.kariong_min_4')|round(0)}}°/{{states('sensor.kariong_rain_chance_4')|round(0)}}%
+          {{states('sensor.kariong_temp_max_4')|round(0)}}°/{{states('sensor.kariong_temp_min_4')|round(0)}}°/{{states('sensor.kariong_rain_chance_4')|round(0)}}%
         entity_picture_template: >-
-          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_4') ~ '.png' }}
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_4') ~ '.png' }}
 
       bom_forecast_5:
         friendly_name_template: >
           {%- set date = as_timestamp(now()) + (5 * 86400 ) -%}
           {{ date | timestamp_custom('%A (%-d/%-m)') }}
         value_template: >
-          {{states('sensor.kariong_max_5')|round(0)}}°/{{states('sensor.kariong_min_5')|round(0)}}°/{{states('sensor.kariong_rain_chance_5')|round(0)}}%
+          {{states('sensor.kariong_temp_max_5')|round(0)}}°/{{states('sensor.kariong_temp_min_5')|round(0)}}°/{{states('sensor.kariong_rain_chance_5')|round(0)}}%
         entity_picture_template: >-
-          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_5') ~ '.png' }}
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_5') ~ '.png' }}
+
+      bom_forecast_6:
+        friendly_name_template: >
+          {%- set date = as_timestamp(now()) + (6 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+        value_template: >
+          {{states('sensor.kariong_temp_max_6')|round(0)}}°/{{states('sensor.kariong_temp_min_6')|round(0)}}°/{{states('sensor.kariong_rain_chance_6')|round(0)}}%
+        entity_picture_template: >-
+          {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_6') ~ '.png' }}
+
 
       bom_today_max:
         value_template: >
@@ -391,7 +434,7 @@ sensor:
   - platform: average
     name: today_temp_bom
     entities:
-      - sensor.gosford_temperature
+      - sensor.gosford_temp
     start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
     end: '{{ now() }}'
 ~~~~~
@@ -412,6 +455,7 @@ entities:
   - sensor.bom_forecast_3
   - sensor.bom_forecast_4
   - sensor.bom_forecast_5
+  - sensor.bom_forecast_6
 ~~~~~
 
 ![image](bom_forecast.png)

@@ -3,6 +3,21 @@
 # BOM Weather Card
 
 ## Latest Changes
+In the latest BOM component, a number of sensors have been renamed.
+This should not affect existing component however the renaming I have found is here:
+sensor.gosford_wind_speed > sensor.gosford_wind_speed_kilometre
+sensor.gosford_temperature > sensor.gosford_temp
+sensor.gosford_temperature_feels_like > sensor.gosford_temp_feels_like
+sensor.kariong_min* > sensor.kariong_temp_max*
+sensor.kariong_min* > sensor.kariong_temp_max*
+sensor.kariong_icon* > sensor.kariong_icon_descriptor*
+Added day 6 forecast
+sensor.gosford_gust_speed > sensor.gosford_gust_speed_kilometre
+sensor.gosford_wind_speed > sensor.gosford_wind_speed_kilometre
+sensor.gosford_gust_speed_knots > sensor.gosford_gust_speed_knot
+sensor.gosford_wind_speed_knots > sensor.gosford_wind_speed_knot
+
+I have amended the docs to reflect this and have also updated the ICON instructions.
 
 This version includes the option to have maximum temperature before the minimum.
 It is a new 'flag' as:
