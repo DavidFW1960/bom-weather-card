@@ -72,7 +72,7 @@ To use the basic card, you will also need the /<config-dir>/www/icons/bom_icons 
 You should end up with the following folders:
 
 HACS:-
-
+~~~~
 └── ...
 └── configuration.yaml
 └── www
@@ -98,6 +98,7 @@ MANUAL INSTALL:-
 			└── animated     ###### Containing the animated icons from weather_icons.zip animated directory
 			└── static       ###### Containing the animated icons from weather_icons.zip static directory
 
+~~~~
 IF YOU USE the SAMBA addin in Home Assistant, the ICON directory will be hidden by default. Go to the configuration of the addon and remove the exclusion of icons and restart the addon otherwise you can't create the directory.
 
 ## **Configuration**
