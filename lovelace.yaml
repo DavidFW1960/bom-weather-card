@@ -1,22 +1,22 @@
 type: custom:bom-weather-card
 title: BOM Weather
-entity_current_conditions: sensor.kariong_icon_0
-entity_temperature: sensor.gosford_temperature
-entity_forecast_high_temp_1: sensor.kariong_max_1
-entity_forecast_high_temp_2: sensor.kariong_max_2
-entity_forecast_high_temp_3: sensor.kariong_max_3
-entity_forecast_high_temp_4: sensor.kariong_max_4
-entity_forecast_high_temp_5: sensor.kariong_max_5
-entity_forecast_icon_1: sensor.kariong_icon_1
-entity_forecast_icon_2: sensor.kariong_icon_2
-entity_forecast_icon_3: sensor.kariong_icon_3
-entity_forecast_icon_4: sensor.kariong_icon_4
-entity_forecast_icon_5: sensor.kariong_icon_5
-entity_forecast_low_temp_1: sensor.kariong_min_1
-entity_forecast_low_temp_2: sensor.kariong_min_2
-entity_forecast_low_temp_3: sensor.kariong_min_3
-entity_forecast_low_temp_4: sensor.kariong_min_4
-entity_forecast_low_temp_5: sensor.kariong_min_5
+entity_current_conditions: sensor.kariong_icon_descriptor_0
+entity_temperature: sensor.gosford_temp
+entity_forecast_high_temp_1: sensor.kariong_temp_max_1
+entity_forecast_high_temp_2: sensor.kariong_temp_max_2
+entity_forecast_high_temp_3: sensor.kariong_temp_max_3
+entity_forecast_high_temp_4: sensor.kariong_temp_max_4
+entity_forecast_high_temp_5: sensor.kariong_temp_max_5
+entity_forecast_icon_1: sensor.kariong_icon_descriptor_1
+entity_forecast_icon_2: sensor.kariong_icon_descriptor_2
+entity_forecast_icon_3: sensor.kariong_icon_descriptor_3
+entity_forecast_icon_4: sensor.kariong_icon_descriptor_4
+entity_forecast_icon_5: sensor.kariong_icon_descriptor_5
+entity_forecast_low_temp_1: sensor.kariong_temp_min_1
+entity_forecast_low_temp_2: sensor.kariong_temp_min_2
+entity_forecast_low_temp_3: sensor.kariong_temp_min_3
+entity_forecast_low_temp_4: sensor.kariong_temp_min_4
+entity_forecast_low_temp_5: sensor.kariong_temp_min_5
 entity_summary_1: sensor.kariong_short_text_1
 entity_summary_2: sensor.kariong_short_text_2
 entity_summary_3: sensor.kariong_short_text_3
@@ -27,15 +27,15 @@ entity_sun: sun.sun
 entity_daytime_high: sensor.bom_today_max
 entity_daytime_low: sensor.bom_today_min
 entity_wind_bearing: sensor.gosford_wind_direction
-entity_wind_speed: sensor.gosford_wind_speed
-entity_wind_gust: sensor.gosford_gust_speed
-#           entity_wind_speed_kt: sensor.gosford_wind_speed_knots
-#           entity_wind_gust_kt: sensor.gosford_gust_speed_knots
+entity_wind_speed: sensor.gosford_wind_speed_kilometre
+entity_wind_gust: sensor.gosford_gust_speed_kilometre
+#           entity_wind_speed_kt: sensor.gosford_wind_speed_knot
+#           entity_wind_gust_kt: sensor.gosford_gust_speed_knot
 entity_humidity: sensor.gosford_humidity
 ############################## IMPORTANT!!! BOM are NOT providing Pressure sensor for forecast.
 ############################## IF you use my entity_pressure sensor the card won't display
-# entity_pressure: sensor.nodemcu_lounge_bme280_seapressure CAN USE OWN PRESSURE
-entity_apparent_temp: sensor.gosford_temperature_feels_like
+# entity_pressure: sensor.nodemcu_lounge_bme280_seapressure
+entity_apparent_temp: sensor.gosford_temp_feels_like
 entity_daily_summary: sensor.kariong_extended_text_0
 entity_pop: sensor.kariong_rain_chance_0
 entity_pop_intensity: sensor.gosford_rain_since_9am
