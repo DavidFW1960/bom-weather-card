@@ -75,6 +75,8 @@ HACS:-
 ~~~~
 └── ...
 └── configuration.yaml
+└── packages
+    └── weather.yaml
 └── www
     └── community
         └── bom-weather-card
@@ -90,6 +92,8 @@ MANUAL INSTALL:-
 
 └── ...
 └── configuration.yaml
+└── packages
+    └── weather.yaml
 └── www
     └── bom-weather-card.js
     └── icons
@@ -132,6 +136,13 @@ For the manual installation:
 resources:
   - url: /local/custom_ui/bom-weather-card.js?v=0.1
     type: module
+~~~~
+
+To use the package, copy weather.yaml to your packages folder as per above. Create that directory if it doesn't exist.
+Edit weather.yaml for your sensor names and ensure you include packages in configuration.yaml:
+~~~~
+homeassistant:
+  packages: !include_dir_named packages
 ~~~~
 
 3. Add the card definition:  There are required / optional and flag entries.
