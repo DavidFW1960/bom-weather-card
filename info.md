@@ -3,6 +3,8 @@
 # BOM Weather Card
 
 ## Latest Changes
+Added this card to the card picker in Lovelace
+
 In the latest BOM component, a number of sensors have been renamed.
 This should not affect existing component however the renaming I have found is here:
 ~~~~

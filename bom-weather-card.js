@@ -1,8 +1,19 @@
+// #### Add card info to console
 console.info(
-  `%c BOM-WEATHER-CARD \n%c Version 0.83     `,
+  `%c BOM-WEATHER-CARD \n%c Version 0.84     `,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );
+
+// #### Add to Custom-Card Picker
+window.customCards = window.customCards || [];
+window.customCards.push({
+ type: "bom-weather-card",
+ name: "BOM Animated Weather Card",
+ preview: false, // Optional - defaults to false
+ description: "A custom card made by @DavidFW1960" // Optional
+});
+
 // #####
 // ##### Get the LitElement and HTML classes from an already defined HA Lovelace class
 // #####

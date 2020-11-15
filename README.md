@@ -147,7 +147,7 @@ homeassistant:
 
 3. Add the card definition:  There are required / optional and flag entries.
 NOTE: All my values refer to Gosford observation entities and Kariong forecast.. You will need to edit these to match your sensors names.**
-
+This card has been added to the custom-card-picker in Lovelace
 **An example configuration is in lovelace.yaml - this can be pasted into the manual card configuration in the GUI editor**
 If you paste it in the raw editor or in a yaml file, take care with the indenting.
 
