@@ -24,7 +24,7 @@ sensor:
             {{ uv }}
           
       bom_fire_danger:
-        value_template: "Fire Danger Today: {{ states('sensor.kariong_fire_danger_1') }}"
+        value_template: "Fire Danger Today: {{ states('sensor.kariong_fire_danger_0') }}"
 
 # Beaufort
 # https://en.wikipedia.org/wiki/Beaufort_scale
