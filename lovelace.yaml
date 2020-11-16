@@ -53,7 +53,7 @@ entity_pop_5: sensor.kariong_rain_chance_5
 entity_current_text: sensor.bom_current_text
 entity_uv_alert: sensor.bom_uv_alert
 entity_fire_danger: sensor.bom_fire_danger
-entity_uv_alert_summary: sensor.bom_uv_alert_summary
+entity_uv_alert_summary: sensor.kariong_uv_category_0
 entity_fire_danger_summary: sensor.kariong_fire_danger_0
 locale: en
 sunset: true
