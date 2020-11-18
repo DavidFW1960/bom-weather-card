@@ -82,11 +82,11 @@ HACS:-
         └── bom-weather-card
             └── bom-weather-card.js
             └── bom-weather-card.js.gz
-	└── icons
-		└── bom_icons        ###### Containing bom_icons.zip unzipped
-		└── weather_icons
-			└── animated     ###### Containing the animated icons from weather_icons.zip animated directory
-			└── static       ###### Containing the animated icons from weather_icons.zip static directory
+    └── icons
+	└── bom_icons        ###### Containing bom_icons.zip unzipped
+	└── weather_icons
+		└── animated     ###### Containing the animated icons from weather_icons.zip animated directory
+		└── static       ###### Containing the animated icons from weather_icons.zip static directory
 
 MANUAL INSTALL:- 
 
@@ -97,10 +97,10 @@ MANUAL INSTALL:-
 └── www
     └── bom-weather-card.js
     └── icons
-		└── bom_icons        ###### Containing bom_icons.zip unzipped
-		└── weather_icons
-			└── animated     ###### Containing the animated icons from weather_icons.zip animated directory
-			└── static       ###### Containing the animated icons from weather_icons.zip static directory
+	└── bom_icons        ###### Containing bom_icons.zip unzipped
+	└── weather_icons
+		└── animated     ###### Containing the animated icons from weather_icons.zip animated directory
+		└── static       ###### Containing the animated icons from weather_icons.zip static directory
 
 ~~~~
 IF YOU USE the SAMBA addin in Home Assistant, the ICON directory will be hidden by default. Go to the configuration of the addon and remove the exclusion of icons and restart the addon otherwise you can't create the directory.
@@ -145,7 +145,7 @@ homeassistant:
   packages: !include_dir_named packages
 ~~~~
 
-3. Add the card definition:  There are required / optional and flag entries.
+3. Add the card definition: You can add this card from the card picker but need to configure the entities and flags in YAML. There are required / optional and flag entries.
 NOTE: All my values refer to Gosford observation entities and Kariong forecast.. You will need to edit these to match your sensors names.**
 This card has been added to the custom-card-picker in Lovelace
 **An example configuration is in lovelace.yaml - this can be pasted into the manual card configuration in the GUI editor**
