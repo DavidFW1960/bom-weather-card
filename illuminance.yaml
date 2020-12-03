@@ -1,0 +1,60 @@
+# pnbruckner's sensor component as a template.
+# https://github.com/pnbruckner/ha-illuminance/blob/master/custom_components/illuminance/sensor.py
+# https://community.home-assistant.io/t/outdoor-illuminance-estimated-from-weather-conditions-reported-by-weather-underground-dark-sky-or-yr-no/
+# https://community.home-assistant.io/t/outdoor-illuminance-template-sensor/
+
+sensor:
+  - platform: template
+    sensors:
+      illuminance:
+        friendly_name: Outdoor Illuminance Educated Guessor
+        icon_template: mdi:brightness-auto
+        unit_of_measurement: lx
+        value_template: |
+          {%- set factors = namespace(condition='',sun='') %}
+
+          {#- Retrieve the current condition and normalize the value #}
+          {%- set current_condition = states("sensor.kariong_icon_descriptor_0") %}
+          {%- set current_condition = current_condition|lower|replace("-day","")|replace("_day","")|replace("-night","")|replace("_night","")|replace("and","")|replace("-", " ")|replace("_", " ")|replace("(","")|replace(")","")|replace(".", "")|replace(" ", "") %}
+
+          
+          {#- Assign a seemingly arbitrary number to the condition factor #}
+          {%- set condition_factors = {
+            "10000": ("clear", "clearnight", "sunny", "windy", "wind", "windyvariant", "exceptional"),
+            "7500": ("partlycloudy", "partlysunny", "mostlysunny", "mostlyclear", "hazy", "hazey", "hazysunshine", "intermittentclouds", "lightrain"),
+            "2500": ("cloudy", "mostlycloudy"),
+            "1000": ("fog", "foggy", "dust", "dusty", "rainy", "rain", "lightshower", "lightshowers", "showers", "shower", "snowy", "snow", "snowyheavy", "snowyrainy", "flurries", "chanceflurries", "chancerain", "chancesleet", "drearyovercast", "sleet", "frost"),
+            "200": ("hail", "lightning", "tstorms", "thunderstorm", "storm", "stormy", "heavyshower", "heavyshowers", "tropicalcyclone")
+          } %}
+          {%- for factor in condition_factors if current_condition in condition_factors[factor] %}
+            {%- set factors.condition = factor %}
+          {%- endfor %}
+          
+          {#- Compute Sun Factor #}
+          {%- set right_now = now() | as_timestamp %}
+          {%- set sunrise = states("sensor.solar_sunrise") | as_timestamp %}
+          {%- set sunrise_begin = states("sensor.solar_dawn") | as_timestamp %}
+          {%- set sunrise_end = sunrise + (40 * 60) %}
+          {%- set sunset = states("sensor.solar_sunset") | as_timestamp %}
+          {%- set sunset_begin = sunset - (40 * 60) %}
+          {%- set sunset_end = states("sensor.solar_dusk") | as_timestamp %}
+          {%- if sunrise_end < right_now and right_now < sunset_begin %}
+            {%- set factors.sun = 1 %}
+          {%- elif sunset_end < right_now or right_now < sunrise_begin %}
+            {%- set factors.sun = 0 %}
+          {%- elif right_now <= sunrise_end %}
+            {%- set factors.sun = (right_now - sunrise_begin) / (60*60) %}
+          {%- else %}
+            {%- set factors.sun = (sunset_end - right_now) / (60*60) %}
+          {%- endif %}
+          {%- set factors.sun = 1 if factors.sun > 1 else factors.sun %}
+          
+          {# Take an educated guess #}
+          {%- set illuminance = (factors.sun|float * factors.condition|float) | round %}
+          {%- set illuminance = 10 if illuminance < 10 else illuminance %}
+          {{ illuminance }}
+ 
+ # Use PBruckner Component
+  - platform: illuminance
+    entity_id: weather.home
+    name: Estimated Illuminance

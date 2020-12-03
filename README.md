@@ -461,3 +461,57 @@ entities:
 ~~~~~
 
 ![image](bom_forecast.png)
+
+##Extra Info Card example
+![image](extrainfo.png)
+I show some additional info on a seperate card. This utilises the Beaufort, Heat Index templates as well as an illuminance computation.
+I have added an illuminance package derived from [Brian Hanifin's work here](https://community.home-assistant.io/t/outdoor-illuminance-template-sensor/228581 )
+
+I also used Phil Bruckners illuminance component for [comparison using met.no here](https://github.com/pnbruckner/ha-illuminance )
+
+I use a history graph to display these
+![image](illuminance.png)
+I am hoping to refine this and maybe use to assist with turning on an indoor light.
+
+My Lovelace Code to display these is here:
+(Note I am using the config-template-custom-card also in HACS by Ian)
+~~~~
+          - type: 'custom:config-template-card'
+            variables:
+              - states['sensor.beaufort'].state
+              - states['sensor.heatindex'].state
+              - states['sensor.heatindexrating'].state
+              - states['sensor.gosford_temp'].attributes['issue_time']
+            entities:
+              - sensor.beaufort
+              - sensor.heatindex
+              - sensor.heatindexrating
+              - sensor.gosford_temp
+            card:
+              type: 'custom:hui-entities-card'
+              entities:
+                - entity: sensor.bom_forecast_0
+                - entity: sensor.beaufort
+                  name: "${'Beaufort force:' + '\xa0'.repeat(2) + (vars[0] == 12 ? 'Hurricane Force' : vars[0] == 11 ? 'Violent Storm' : vars[0] == 10 ? 'Storm, whole gale' : vars[0] == 9 ? 'Strong/severe gale' : vars[0] == 8 ? 'Gale/ fresh gale' : vars[0] == 7 ? 'High wind, moderate/near gale' : vars[0] == 6 ? 'Strong breeze' : vars[0] == 5 ? 'Fresh breeze' : vars[0] == 4 ? 'Moderate breeze' : vars[0] == 3 ? 'Gentle breeze' : vars[0] == 2 ? 'Light breeze' : vars[0] == 1 ? 'Light air' : 'Calm')}"
+                - entity: sensor.heatindex
+                  name: "${'Heat Index:' + '\xa0'.repeat(2) + vars[2]}"
+                - entity: sensor.gosford_temp
+                  name: "${'BOM Update:' + '\xa0'.repeat(2) + ( new Date(vars[3]).toLocaleTimeString('en-US') ) + '\xa0'.repeat(2) + 'Current Temp' }"
+                - entity: sensor.illuminance
+                  type: "custom:template-entity-row"
+                  secondary: "{{ states('sensor.kariong_icon_descriptor_0') }} weather.kariong"
+                  state: "{{ '{:,}'.format((states('sensor.illuminance'))|int) }} lx"
+                  icon: mdi:brightness-5
+                - entity: sensor.estimated_illuminance
+                  type: "custom:template-entity-row"
+                  secondary: "{{ states('weather.home') }} weather.home"
+                  state: "{{ '{:,}'.format((states('sensor.estimated_illuminance'))|int) }} lx"
+                  icon: mdi:brightness-5
+          - type: history-graph
+            title: Outdoor Illuminance
+            hours_to_show: 48
+            refresh_interval: 300
+            entities:
+              - sensor.illuminance
+              - sensor.estimated_illuminance
+~~~~

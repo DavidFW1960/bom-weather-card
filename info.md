@@ -3,6 +3,12 @@
 # BOM Weather Card
 
 ## Latest Changes
+
+This card will now respect locale formatting (commas instead of decimal points etc)
+
+Also added my illuminance sensor and history graph to display and also a more information card utilising some of the other templates.
+
+
 Added this card to the card picker in Lovelace
 
 In the latest BOM component, a number of sensors have been renamed.
