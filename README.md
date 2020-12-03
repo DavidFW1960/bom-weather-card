@@ -462,8 +462,10 @@ entities:
 
 ![image](bom_forecast.png)
 
-##Extra Info Card example
+## Extra Info Card example
+
 ![image](extrainfo.png)
+
 I show some additional info on a seperate card. This utilises the Beaufort, Heat Index templates as well as an illuminance computation.
 I have added an illuminance package derived from [Brian Hanifin's work here](https://community.home-assistant.io/t/outdoor-illuminance-template-sensor/228581 )
 
