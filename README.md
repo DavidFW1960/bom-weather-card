@@ -472,7 +472,9 @@ I have added an illuminance package derived from [Brian Hanifin's work here](htt
 I also used Phil Bruckners illuminance component for [comparison using met.no here](https://github.com/pnbruckner/ha-illuminance )
 
 I use a history graph to display these
+
 ![image](illuminance.png)
+
 I am hoping to refine this and maybe use to assist with turning on an indoor light.
 
 My Lovelace Code to display these is here:
