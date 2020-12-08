@@ -4,6 +4,7 @@
 
 ## Latest Changes
 
+Added new slot popforecast so if you display a slot as popforecast it will now show the predicted instead of actual rainfall today
 This card will now respect locale formatting (commas instead of decimal points etc)
 
 Also added my illuminance sensor and history graph to display and also a more information card utilising some of the other templates.

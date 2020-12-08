@@ -337,7 +337,8 @@ slots (designated r1 - r5).  There are currently 10 possible values that can be 
 - visibility
 - sun_next (the next sun event ... sunset or sunrise)
 - sun_following (The following sun event ... if sun_next is a sunset then this will be the following sunrise and vice versa)
-- pop (probability of precipitation)
+- pop (probability of precipitation) Shows % possible rainfall today and the actual recorded rainfall
+- popforecast Shows % possible rainfall today and forecast rainfall
 - humidity
 - pressure
 - uv_summary
