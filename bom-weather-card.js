@@ -1,6 +1,6 @@
 // #### Add card info to console
 console.info(
-  `%c BOM-WEATHER-CARD \n%c Version 0.86     `,
+  `%c BOM-WEATHER-CARD \n%c Version 0.86a    `,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );
