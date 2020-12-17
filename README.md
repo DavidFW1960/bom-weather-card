@@ -202,7 +202,7 @@ entity_wind_gust: sensor.gosford_gust_speed_kilometer
 # entity_wind_gust_kt: sensor.gosford_gust_speed_knot
 entity_humidity: sensor.gosford_humidity
 # entity_pressure: sensor.nodemcu_lounge_bme280_seapressure I get pressure from a NodeMCU. Bom does not supply this!
-entity_apparent_temp: sensor.gosford_temperature_feels_like
+entity_apparent_temp: sensor.gosford_temp_feels_like
 entity_daily_summary: sensor.kariong_extended_text_0
 entity_pop: sensor.kariong_rain_chance_0
 entity_pop_intensity: sensor.gosford_rain_since_9am
