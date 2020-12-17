@@ -196,10 +196,10 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 entity_daytime_high: sensor.bom_today_max
 entity_daytime_low: sensor.bom_today_min
 entity_wind_bearing: sensor.gosford_wind_direction
-entity_wind_speed: sensor.gosford_wind_speed
-entity_wind_gust: sensor.gosford_gust_speed
-# entity_wind_speed_kt: sensor.gosford_wind_speed_knots
-# entity_wind_gust_kt: sensor.gosford_gust_speed_knots
+entity_wind_speed: sensor.gosford_wind_speed_kilometer
+entity_wind_gust: sensor.gosford_gust_speed_kilometer
+# entity_wind_speed_kt: sensor.gosford_wind_speed_knot
+# entity_wind_gust_kt: sensor.gosford_gust_speed_knot
 entity_humidity: sensor.gosford_humidity
 # entity_pressure: sensor.nodemcu_lounge_bme280_seapressure I get pressure from a NodeMCU. Bom does not supply this!
 entity_apparent_temp: sensor.gosford_temperature_feels_like
