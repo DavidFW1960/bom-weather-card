@@ -70,7 +70,7 @@ I used to recommend downloading Download the amcharts icons from https://www.amc
 To use the basic card, you will also need the /<config-dir>/www/icons/bom_icons which are contained in [bom_icons.zip](https://github.com/DavidFW1960/bom-weather-card/blob/master/bom_icons.zip )
 
 You should end up with the following folders:
-
+This structure is after all configuration is done. If you install via HACS you must still configure the package/yaml and icons manually.
 HACS:-
 ~~~~
 └── ...
@@ -87,9 +87,10 @@ HACS:-
 	└── weather_icons
 		└── animated     ###### Containing the animated icons from weather_icons.zip animated directory
 		└── static       ###### Containing the animated icons from weather_icons.zip static directory
-
+~~~~
+This structure is after all configuration is done. You must still configure the package/yaml and icons manually.
 MANUAL INSTALL:- 
-
+~~~~
 └── ...
 └── configuration.yaml
 └── packages
@@ -353,6 +354,8 @@ If configuring with Slots please ensure to fill all available positions, the slo
 [My FULL Lovelace configuration for this card is here](https://github.com/DavidFW1960/bom-weather-card/blob/master/lovelace.yaml) Cut and paste it into your lovelace.
 
 ## MINIMAL CARD Example
+Please be aware I may update the templates and lovelace config for these cards without making a new release so if you watch this repo you will get notified when this happens.
+
 See these templates:
 ~~~~~
 sensor:
@@ -365,7 +368,7 @@ sensor:
           {% if states('sensor.kariong_temp_max_0') == 'unknown' %} {% set max = states('sensor.bom_today_max') %} {% else %} {% set max = states('sensor.kariong_temp_max_0') %} {% endif %}
           {{ max|round(0)}}°/{{ min|round(0)}}°/{{states('sensor.kariong_rain_chance_0')|round(0)}}%
         entity_picture_template: >-
-          {%- if states('sun.sun') == 'below_horizon' and (states('sensor.kariong_icon_descriptor_0') == 'fog' or states('sensor.kariong_icon_descriptor_0') == 'haze' or states('sensor.kariong_icon_descriptor_0') == 'light-showers' or states('sensor.kariong_icon_descriptor_0') == 'partly-cloudy' or states('sensor.kariong_icon_descriptor_0') == 'showers' or states('sensor.kariong_icon_descriptor_0') == 'shower' or states('sensor.kariong_icon_descriptor_0') == 'light_showers' or states('sensor.kariong_icon_descriptor_0') == 'partly_cloudy') -%}
+          {%- if states('sun.sun') == 'below_horizon' and (states('sensor.kariong_icon_descriptor_0') == 'fog' or states('sensor.kariong_icon_descriptor_0') == 'haze' or states('sensor.kariong_icon_descriptor_0') == 'light-showers' or states('sensor.kariong_icon_descriptor_0') == 'partly-cloudy' or states('sensor.kariong_icon_descriptor_0') == 'showers' or  states('sensor.kariong_icon_descriptor_0') == 'light_shower' or states('sensor.kariong_icon_descriptor_0') == 'shower' or states('sensor.kariong_icon_descriptor_0') == 'light_showers' or states('sensor.kariong_icon_descriptor_0') == 'partly_cloudy') -%}
           {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_0') ~ '-night.png' }}
           {%- else -%}
           {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_0') ~ '.png' }}
@@ -476,6 +479,8 @@ I use a history graph to display these
 
 ![image](illuminance.png)
 
+Please be aware I may update the templates and lovelace config for these cards without making a new release so if you watch this repo you will get notified when this happens.
+
 I am hoping to refine this and maybe use to assist with turning on an indoor light.
 
 My Lovelace Code to display these is here:
@@ -504,7 +509,7 @@ My Lovelace Code to display these is here:
                   name: "${'BOM Update:' + '\xa0'.repeat(2) + ( new Date(vars[3]).toLocaleTimeString('en-US') ) + '\xa0'.repeat(2) + 'Current Temp' }"
                 - entity: sensor.illuminance
                   type: "custom:template-entity-row"
-                  secondary: "{{ states('sensor.kariong_icon_descriptor_0') }} weather.kariong"
+                  secondary: "{{ states('weather.kariong') }} weather.kariong"
                   state: "{{ '{:,}'.format((states('sensor.illuminance'))|int) }} lx"
                   icon: mdi:brightness-5
                 - entity: sensor.estimated_illuminance
