@@ -23,7 +23,7 @@ sensor:
             "10000": ("clear", "clearnight", "sunny", "windy", "wind", "windyvariant", "exceptional"),
             "7500": ("partlycloudy", "partlysunny", "mostlysunny", "mostlyclear", "hazy", "hazey", "hazysunshine", "intermittentclouds", "lightrain"),
             "2500": ("cloudy", "mostlycloudy"),
-            "1000": ("fog", "foggy", "dust", "dusty", "rainy", "rain", "lightshower", "lightshowers", "showers", "shower", "snowy", "snow", "snowyheavy", "snowyrainy", "flurries", "chanceflurries", "chancerain", "chancesleet", "drearyovercast", "sleet", "frost"),
+            "1000": ("fog", "foggy", "dust", "dusty", "rainy", "pouring", "rain", "lightshower", "lightshowers", "showers", "shower", "snowy", "snow", "snowyheavy", "snowyrainy", "flurries", "chanceflurries", "chancerain", "chancesleet", "drearyovercast", "sleet", "frost"),
             "200": ("hail", "lightning", "lightningrainy", "tstorms", "thunderstorm", "storm", "stormy", "heavyshower", "heavyshowers", "tropicalcyclone")
           } %}
           {%- for factor in condition_factors if current_condition in condition_factors[factor] %}
