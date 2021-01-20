@@ -4,6 +4,15 @@
 
 ## Latest Changes
 
+This release adds new icons for light-rain and showers at night.
+Download the weather_icons.zip and unzip it for the new icons.
+This is only applicable if you are using the hybrid or new icon set!!!
+THIS IS A BREAKING CHANGE unless you are configured to use the old icons.
+I have also changed the forcast icon to never use the day icon - it will now always use night.
+
+
+
+
 Added new slot popforecast so if you display a slot as popforecast it will now show the predicted instead of actual rainfall today
 This card will now respect locale formatting (commas instead of decimal points etc)
 
