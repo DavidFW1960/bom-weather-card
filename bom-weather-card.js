@@ -1,6 +1,6 @@
 // #### Add card info to console
 console.info(
-  `%cBOM-WEATHER-CARD\n%cVersion 0.87b   `,
+  `%cBOM-WEATHER-CARD\n%cVersion 0.88    `,
   "color: #043ff6; font-weight: bold; background: white",
   "color: white; font-weight: bold; background: #043ff6"
 );
@@ -138,7 +138,7 @@ class BOMWeatherCard extends LitElement {
 
     switch (value){
       case 'pop': return pop;
-	  case 'popforecast': return popforecast;
+      case 'popforecast': return popforecast;
       case 'possible_today': return possibleToday;
       case 'possible_tomorrow': return possibleTomorrow;
       case 'humidity': return humidity;
@@ -224,6 +224,7 @@ class BOMWeatherCard extends LitElement {
         return {
           feelsLike: "Gefühlt",
           maxToday: "Max heute:",
+          minToday: "Min heute:",
         }
       case "nl" :
         return {
@@ -302,6 +303,7 @@ class BOMWeatherCard extends LitElement {
     var rain_icon = (iconStyle ==="true") ? `rainy-5` : (iconStyle ==="hybrid") ? `rainy-5` : `rain`;
     var dust_icon = (iconStyle ==="true") ? `cloudy-${this.dayOrNight}-1` : (iconStyle ==="hybrid") ? `haze` : `haze`;
     var snow_icon = (iconStyle ==="true") ? `snowy-6` : (iconStyle ==="hybrid") ? `snowy-6` : `snow`;
+    var snow_rain_icon = (iconStyle ==="true") ? `snowy-6` : (iconStyle ==="hybrid") ? `snow-and-sleet-mix` : `snow-and-sleet-mix`;
     var storm_icon = (iconStyle ==="true") ? `scattered-thunderstorms` : (iconStyle ==="hybrid") ? `scattered-thunderstorms` : `scattered-thunderstorms`;
     var light_showers_icon = (iconStyle ==="true") ? `rainy-2` : (iconStyle ==="hybrid") ? `rainy-2` : `rainy-2`;
     var heavy_showers_icon = (iconStyle ==="true") ? `rainy-3` : (iconStyle ==="hybrid") ? `rainy-3` : `rainy-3`;
@@ -321,6 +323,7 @@ class BOMWeatherCard extends LitElement {
       'partly-cloudy': partly_cloudy_icon,
       'mostly_sunny': mostly_sunny_icon,
       'partly_cloudy': partly_cloudy_icon,
+      'partlycloudy': partly_cloudy_icon,
       'cloudy': cloudy_icon,
       'hazy': hazy_icon,
       'hazey': hazy_icon,
@@ -340,6 +343,9 @@ class BOMWeatherCard extends LitElement {
       'dusty': dust_icon,
       'snow': snow_icon,
       'snowy': snow_icon,
+      'snowy-rainy': snow_rain_icon,
+      'snowy_rainy': snow_rain_icon,
+      'snowyrainy': snow_rain_icon,
       'storm': storm_icon,
       'stormy': storm_icon,
       'light-showers': light_showers_icon,
@@ -350,6 +356,7 @@ class BOMWeatherCard extends LitElement {
       'light_shower': light_showers_icon,
       'heavy_showers': heavy_showers_icon,
       'heavy_shower': heavy_showers_icon,
+      'pouring': heavy_showers_icon,
       'tropical-cyclone': cyclone_icon,
       'tropical_cyclone': cyclone_icon,
       'tropicalcyclone': cyclone_icon,
@@ -364,6 +371,8 @@ class BOMWeatherCard extends LitElement {
       'partly_cloudy_night': partly_cloudy_night_icon,
       'hail': hail_icon,
       'lightning': lightning_icon,
+      'lightning-rainy': lightning_icon,
+      'lightning_rainy': lightning_icon,
       'thunderstorm': lightning_icon,
       'windy-variant': windy_variant_icon,
       'windy_variant': windy_variant_icon,
