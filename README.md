@@ -85,7 +85,7 @@ HACS:-
             └── bom-weather-card.js
             └── bom-weather-card.js.gz
     └── icons
-	└── bom_icons        ###### Containing bom_icons.zip unzipped
+	└── bom_icons            ###### Containing bom_icons.zip unzipped (ONLY if using the basic card and icons)
 	└── weather_icons
 		└── animated     ###### Containing the animated icons from weather_icons.zip animated directory
 		└── static       ###### Containing the animated icons from weather_icons.zip static directory
@@ -100,7 +100,7 @@ MANUAL INSTALL:-
 └── www
     └── bom-weather-card.js
     └── icons
-	└── bom_icons        ###### Containing bom_icons.zip unzipped
+	└── bom_icons            ###### Containing bom_icons.zip unzipped (ONLY if using the basic card and icons)
 	└── weather_icons
 		└── animated     ###### Containing the animated icons from weather_icons.zip animated directory
 		└── static       ###### Containing the animated icons from weather_icons.zip static directory
