@@ -1,6 +1,6 @@
 // #### Add card info to console
 console.info(
-  `%cBOM-WEATHER-CARD\n%cVersion 0.88    `,
+  `%cBOM-WEATHER-CARD\n%cVersion 0.88a   `,
   "color: #043ff6; font-weight: bold; background: white",
   "color: white; font-weight: bold; background: #043ff6"
 );
@@ -306,11 +306,11 @@ class BOMWeatherCard extends LitElement {
     var snow_rain_icon = (iconStyle ==="true") ? `snowy-6` : (iconStyle ==="hybrid") ? `snow-and-sleet-mix` : `snow-and-sleet-mix`;
     var storm_icon = (iconStyle ==="true") ? `scattered-thunderstorms` : (iconStyle ==="hybrid") ? `scattered-thunderstorms` : `scattered-thunderstorms`;
     var light_showers_icon = (iconStyle ==="true") ? `rainy-2` : (iconStyle ==="hybrid") ? `rainy-2` : `rainy-2`;
-    var heavy_showers_icon = (iconStyle ==="true") ? `rainy-3` : (iconStyle ==="hybrid") ? `rainy-3` : `rainy-3`;
+    var heavy_showers_icon = (iconStyle ==="true") ? `rainy-6` : (iconStyle ==="hybrid") ? `rainy-6` : `rainy-6`;
     var cyclone_icon = (iconStyle ==="true") ? `tornado` : (iconStyle ==="hybrid") ? `tornado` : `tornado`;
     var clear_day_icon = (iconStyle ==="true") ? `day` : (iconStyle ==="hybrid") ? `day` : `clear-day`;
     var clear_night_icon = (iconStyle ==="true") ? `night` : (iconStyle ==="hybrid") ? `night` : `clear-night`;
-    var sleet_icon = (iconStyle ==="true") ? `rainy-6` : (iconStyle ==="hybrid") ? `rainy-6` : `sleet`;
+    var sleet_icon = (iconStyle ==="true") ? `rainy-2` : (iconStyle ==="hybrid") ? `rainy-2` : `sleet`;
     var partly_cloudy_day_icon = (iconStyle ==="true") ? `cloudy-day-3` : (iconStyle ==="hybrid") ? `cloudy-day-3` : `partly-cloudy-day`;
     var partly_cloudy_night_icon = (iconStyle ==="true") ? `cloudy-night-3` : (iconStyle ==="hybrid") ? `cloudy-night-3` : `partly-cloudy-night`;
     var hail_icon = (iconStyle ==="true") ? `rainy-7` : (iconStyle ==="hybrid") ? `rainy-7` : `rainy-7`;
