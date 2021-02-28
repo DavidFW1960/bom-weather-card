@@ -1,6 +1,6 @@
 // #### Add card info to console
 console.info(
-  `%cBOM-WEATHER-CARD\n%cVersion 0.88a   `,
+  `%cBOM-WEATHER-CARD\n%cVersion 0.88b   `,
   "color: #043ff6; font-weight: bold; background: white",
   "color: white; font-weight: bold; background: #043ff6"
 );
@@ -73,7 +73,7 @@ class BOMWeatherCard extends LitElement {
               ${this.forecast.map(daily => html`
                 <div class="day fcasttooltip">
                   <span class="dayname" id="fcast-dayName-${daily.dayIndex}">${(daily.date).toLocaleDateString(this.config.locale,{weekday: 'short'})}</span>
-                  <br><i class="icon" id="fcast-icon-${daily.dayIndex}" style="background: none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this._hass.states[daily.condition].state] + ".svg").replace("night", "day")}) no-repeat; background-size: contain;"></i>
+                  <br><i class="icon" id="fcast-icon-${daily.dayIndex}" style="background: none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this._hass.states[daily.condition].state] + ".svg").replace("-night", "-day")}) no-repeat; background-size: contain;"></i>
                   ${this.config.old_daily_format ? html`<br><span class="highTemp" id="fcast-high-${daily.dayIndex}">${Math.round(this._hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>
                                                         <br><span class="lowTemp" id="fcast-low-${daily.dayIndex}">${Math.round(this._hass.states[daily.templow].state)}${this.getUOM("temperature")}</span>` : this.config.tempformat ==="highlow" ? 
                                                    html`<br><span class="highTemp" id="fcast-high-${daily.dayIndex}">${Math.round(this._hass.states[daily.temphigh].state)}</span> / <span class="lowTemp" id="fcast-low-${daily.dayIndex}">${Math.round(this._hass.states[daily.templow].state)}${this.getUOM("temperature")}</span>` :
@@ -303,14 +303,14 @@ class BOMWeatherCard extends LitElement {
     var rain_icon = (iconStyle ==="true") ? `rainy-5` : (iconStyle ==="hybrid") ? `rainy-5` : `rain`;
     var dust_icon = (iconStyle ==="true") ? `cloudy-${this.dayOrNight}-1` : (iconStyle ==="hybrid") ? `haze` : `haze`;
     var snow_icon = (iconStyle ==="true") ? `snowy-6` : (iconStyle ==="hybrid") ? `snowy-6` : `snow`;
-    var snow_rain_icon = (iconStyle ==="true") ? `snowy-6` : (iconStyle ==="hybrid") ? `snow-and-sleet-mix` : `snow-and-sleet-mix`;
+    var snow_rain_icon = (iconStyle ==="true") ? `snowy-6` : (iconStyle ==="hybrid") ? `rain-and-snow-mix` : `rain-and-snow-mix`;
     var storm_icon = (iconStyle ==="true") ? `scattered-thunderstorms` : (iconStyle ==="hybrid") ? `scattered-thunderstorms` : `scattered-thunderstorms`;
     var light_showers_icon = (iconStyle ==="true") ? `rainy-2` : (iconStyle ==="hybrid") ? `rainy-2` : `rainy-2`;
     var heavy_showers_icon = (iconStyle ==="true") ? `rainy-6` : (iconStyle ==="hybrid") ? `rainy-6` : `rainy-6`;
     var cyclone_icon = (iconStyle ==="true") ? `tornado` : (iconStyle ==="hybrid") ? `tornado` : `tornado`;
     var clear_day_icon = (iconStyle ==="true") ? `day` : (iconStyle ==="hybrid") ? `day` : `clear-day`;
     var clear_night_icon = (iconStyle ==="true") ? `night` : (iconStyle ==="hybrid") ? `night` : `clear-night`;
-    var sleet_icon = (iconStyle ==="true") ? `rainy-2` : (iconStyle ==="hybrid") ? `rainy-2` : `sleet`;
+    var sleet_icon = (iconStyle ==="true") ? `rainy-2` : (iconStyle ==="hybrid") ? `rain-and-sleet-mix` : `rain-and-sleet-mix`;
     var partly_cloudy_day_icon = (iconStyle ==="true") ? `cloudy-day-3` : (iconStyle ==="hybrid") ? `cloudy-day-3` : `partly-cloudy-day`;
     var partly_cloudy_night_icon = (iconStyle ==="true") ? `cloudy-night-3` : (iconStyle ==="hybrid") ? `cloudy-night-3` : `partly-cloudy-night`;
     var hail_icon = (iconStyle ==="true") ? `rainy-7` : (iconStyle ==="hybrid") ? `rainy-7` : `rainy-7`;
@@ -921,7 +921,7 @@ style() {
 // Forecast blocks
       this.forecast.forEach((daily) => {
         root.getElementById("fcast-dayName-" + daily.dayIndex).textContent = `${(daily.date).toLocaleDateString(this.config.locale,{weekday: 'short'})}`;
-        root.getElementById("fcast-icon-" + daily.dayIndex).style.backgroundImage = `none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this._hass.states[daily.condition].state] + ".svg").replace("night", "day")})`;
+        root.getElementById("fcast-icon-" + daily.dayIndex).style.backgroundImage = `none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this._hass.states[daily.condition].state] + ".svg").replace("-night", "-day")})`;
         root.getElementById("fcast-high-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.temphigh].state)}${this.config.tempformat ? "" : this.getUOM("temperature")}`;
         root.getElementById("fcast-low-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.templow].state)}${this.config.old_daily_format ? this.getUOM("temperature") : this.config.tempformat ? this.getUOM("temperature") : ""}`;
         if (this.config.entity_pop_1 && this.config.entity_pop_2 && this.config.entity_pop_3 && this.config.entity_pop_4 && this.config.entity_pop_5) root.getElementById("fcast-pop-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.pop].state)} %`;
