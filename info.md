@@ -8,7 +8,7 @@ This release adds new icons for light-rain and showers at night.
 Download the weather_icons.zip and unzip it for the new icons.
 This is only applicable if you are using the hybrid or new icon set!!!
 THIS IS A BREAKING CHANGE unless you are configured to use the old icons.
-I have also changed the forecast icon to never use the day icon - it will now always use night.
+I have also changed the forecast icon to never use the night icon - it will now always use day.
 
 
 
