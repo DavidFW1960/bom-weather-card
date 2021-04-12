@@ -4,6 +4,12 @@
 
 ## Latest Changes
 
+This release corrects a bug in the night icon for the sunny condition. It is a breaking change.
+This affects you if you use hybrid icons
+You need to copy the day.png to sunny-day.png and night.png to sunny-night.png or re-download and extract the icons from the zip file again. (Don't rename the old one as that will break installations using old icons.)
+If you care about the reason for this read on:
+The reason this happened is because I had to change a substitution in the icon url to use -night instead of just night because someone was using night in their domain name... so last night, I was getting a night icon for a forecast day which shouldn't be happening except night.svg wasn't getting re-written because it was night.svg not including -night.svg...
+
 This release adds new icons for light-rain and showers at night.
 Download the weather_icons.zip and unzip it for the new icons.
 This is only applicable if you are using the hybrid or new icon set!!!
@@ -16,7 +22,7 @@ I have also changed the forecast icon to never use the night icon - it will now 
 Added new slot popforecast so if you display a slot as popforecast it will now show the predicted instead of actual rainfall today
 This card will now respect locale formatting (commas instead of decimal points etc)
 
-Also added my illuminance sensor and history graph to display and also a more information card utilising some of the other templates.
+Also added my illuminance sensor and history graph to display and a to sunny-day.png and night.png to sunny-night.pnglso a more information card utilising some of the other templates.
 
 
 Added this card to the card picker in Lovelace

@@ -1,6 +1,6 @@
 // #### Add card info to console
 console.info(
-  `%cBOM-WEATHER-CARD\n%cVersion 0.88b   `,
+  `%cBOM-WEATHER-CARD\n%cVersion 0.88c   `,
   "color: #043ff6; font-weight: bold; background: white",
   "color: white; font-weight: bold; background: #043ff6"
 );
@@ -289,8 +289,8 @@ class BOMWeatherCard extends LitElement {
 
   get weatherIcons() {
     var iconStyle = (this.config.old_icon ==="hybrid") ? `hybrid` : (this.config.old_icon ==="false") ? `false` : `true`;
-    var sunny_icon = (iconStyle ==="true") ? `${this.dayOrNight}` : (iconStyle ==="hybrid") ? `${this.dayOrNight}` : `${this.dayOrNight}`;
-    var clear_icon = (iconStyle ==="true") ? `${this.dayOrNight}` : (iconStyle ==="hybrid") ? `${this.dayOrNight}` : `clear-${this.dayOrNight}`;
+    var sunny_icon = (iconStyle ==="true") ? `${this.dayOrNight}` : (iconStyle ==="hybrid") ? `sunny-${this.dayOrNight}` : `sunny-${this.dayOrNight}`;
+    var clear_icon = (iconStyle ==="true") ? `${this.dayOrNight}` : (iconStyle ==="hybrid") ? `sunny-${this.dayOrNight}` : `clear-${this.dayOrNight}`;
     var mostly_sunny_icon = (iconStyle ==="true") ? `fair-${this.dayOrNight}` : (iconStyle ==="hybrid") ? `fair-${this.dayOrNight}` : `fair-${this.dayOrNight}`;
     var partly_cloudy_icon = (iconStyle ==="true") ? `cloudy-${this.dayOrNight}-3` : (iconStyle ==="hybrid") ? `cloudy-${this.dayOrNight}-3` : `partly-cloudy-${this.dayOrNight}`;
     var cloudy_icon = (iconStyle ==="true") ? `cloudy-original` : (iconStyle ==="hybrid") ? `cloudy-original` : `cloudy`;
