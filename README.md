@@ -1,5 +1,5 @@
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
-
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs) ![GitHub](https://img.shields.io/github/license/DavidFW1960/bom-weather-card?style=for-the-badge) ![GitHub last commit](https://img.shields.io/github/last-commit/DavidFW1960/bom-weather-card?style=for-the-badge) ![Maintenance](https://img.shields.io/maintenance/yes/2021?style=for-the-badge)
 # BOM Weather Card
 
 ## IMPORTANT CHANGES
