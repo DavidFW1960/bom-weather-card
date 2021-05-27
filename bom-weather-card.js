@@ -901,7 +901,7 @@ style() {
     if (doRefresh) {
       this._lastRefresh = new Date();
       this._hass = hass;
-      this.updateValues();
+      if (this.shadowRoot) {this.updateValues();}
     }
   }
 
