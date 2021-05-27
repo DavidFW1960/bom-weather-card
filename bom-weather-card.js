@@ -1,6 +1,6 @@
 // #### Add card info to console
 console.info(
-  `%cBOM-WEATHER-CARD\n%cVersion 0.88c   `,
+  `%cBOM-WEATHER-CARD\n%cVersion 0.89    `,
   "color: #043ff6; font-weight: bold; background: white",
   "color: white; font-weight: bold; background: #043ff6"
 );
@@ -15,16 +15,16 @@ window.customCards.push({
 });
 
 // #####
-// ##### Get the LitElement and HTML classes from an already defined HA Lovelace class
+// ##### Get the Lit and HTML classes from an already defined HA Lovelace class
 // #####
-var LitElement = LitElement || Object.getPrototypeOf(customElements.get("hui-masonry-view") || customElements.get('hui-view'));
-var html = LitElement.prototype.html;
+var Lit = Lit || Object.getPrototypeOf(customElements.get("ha-panel-lovelace") || customElements.get('hui-view'));
+var html = Lit.prototype.html;
 
 // #####
 // ##### Custom Card Definition begins
 // #####
 
-class BOMWeatherCard extends LitElement {
+class BOMWeatherCard extends Lit {
 
 // #####
 // ##### Define Render Template
