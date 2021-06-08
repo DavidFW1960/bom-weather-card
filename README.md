@@ -3,30 +3,14 @@
 
 ## IMPORTANT CHANGES
 
-In the latest BOM component, a number of sensors have been renamed.
-This should not affect existing component however the renaming I have found is here:
-~~~~
-sensor.gosford_wind_speed > sensor.gosford_wind_speed_kilometre
-sensor.gosford_temperature > sensor.gosford_temp
-sensor.gosford_temperature_feels_like > sensor.gosford_temp_feels_like
-sensor.kariong_min* > sensor.kariong_temp_max*
-sensor.kariong_min* > sensor.kariong_temp_max*
-sensor.kariong_icon* > sensor.kariong_icon_descriptor*
-Added day 6 forecast
-sensor.gosford_gust_speed > sensor.gosford_gust_speed_kilometre
-sensor.gosford_wind_speed > sensor.gosford_wind_speed_kilometre
-sensor.gosford_gust_speed_knots > sensor.gosford_gust_speed_knot
-sensor.gosford_wind_speed_knots > sensor.gosford_wind_speed_knot
-~~~~
-I have amended the docs to reflect this and have also updated the ICON instructions.
+I have renamed this card to remove the emphasis on BOM. This is a generic card that works with any provider
 
-VERY IMPORTANT NOTE:
-As of HA 0.117.x, the BOM Core Sensor component is removed as it violates ADR14 rule regarding web scraping.
+NON-Australian Users: This card and docs has always been a generic card with an emphasis on BOM in Australia however it will work with ANY weather provider that can supply the sensors.
 
-I have made some changes so that this card now uses the new [BOM Component by Brendan](https://github.com/bremor/bureau_of_meteorology )
+AUSTRALIA ONLY NOTE: I have made some changes to the docs so that this card now uses the new [BOM Component by Brendan](https://github.com/bremor/bureau_of_meteorology )
 This new repo can be added to HACS See also the excellent new [BOM Radar Card by @therat here](https://github.com/theOzzieRat/bom-radar-card )
 
-I have updated the lovelace.yaml and templates as well for this new component.
+I have updated the lovelace.yaml and templates (NOTE THESE AE EXAMPLES and can be customised for your needs) as well for this new component.
 
 When you install Brendans new BOM Component, you will get sensors that look like this:
 For the Observations, they will be named for the BOM Observation station like.. sensor.gosford_temperature as an example.
@@ -39,11 +23,28 @@ IF you are using the old card as well with the 7 days forecast, note the new com
 ![image](bom-weather.png)
 
 This card is a modification of a fork of iammexx/home-assistant-config dark-sky-weather-card
+This card provides MANY additional features as well as compatability with later versions of home assistant. 
+New features not in original card include:
+- Lit 2
+- Only use Day time icons for forecast for future days (days 1-5)
+- More icons
+- Adds Locale customisation for number formats
+- Added to card-picker in Lovelace
+- Added option to show minimum or maximum first in forecast
+- Added option to show 1 decimal place to temperatures
+- Added option to display windspeeds in knots
+- Show rainfall as an intensity or absolute number
+- Removed leading zeros if 12hr time
+- Added Wind Gust
+- Can use different icon sets
+- Added extra (5th) row of slots
+- Added slots (optional) for UV and fire danger ratings
+- Added possibility of rainfall to forecast
 
-NOTE: This card REQUIRES the BOM custom component as per above note.
+NOTE: This card REQUIRES any weather component that can provide the required sensors. (like the new BOM Component if in Australia)
 Alternately, if you are using DarkSky (or any other provider), the important thing is that any entities parsed to the card must be provided by that platform and you should carefully check the sensor names exist. Parsing a non existant sensor to the card will cause the card to fail to display!
 
-The BOM Weather Card provides current and forecasted weather conditions using the. You configure the card by passing in sensor entities from the BOM component (or any other weather component but the examples here are based on BOM). 
+The Weather Card provides current and forecast weather conditions using HA sensors. You configure the card by passing in sensor entities from the weather component.
 
 The [weather package](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather.yaml ) in the repo shows configuration for this card. This package is for HA versions > 0.115.0. 
 

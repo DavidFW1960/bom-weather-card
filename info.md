@@ -4,6 +4,11 @@
 
 ## Latest Changes
 
+Slight rebranding so people know it's not a BOM specific card but generic.
+
+Correctedjs for lit changes and also fixed shadowroot issues
+
+## Older
 This release corrects a bug in the night icon for the sunny condition. It is a breaking change.
 This affects you if you use hybrid icons
 You need to copy the day.png to sunny-day.png and night.png to sunny-night.png or re-download and extract the icons from the zip file again. (Don't rename the old one as that will break installations using old icons.)
@@ -16,40 +21,27 @@ This is only applicable if you are using the hybrid or new icon set!!!
 THIS IS A BREAKING CHANGE unless you are configured to use the old icons.
 I have also changed the forecast icon to never use the night icon - it will now always use day.
 
-
-
-
 Added new slot popforecast so if you display a slot as popforecast it will now show the predicted instead of actual rainfall today
 This card will now respect locale formatting (commas instead of decimal points etc)
 
 Also added my illuminance sensor and history graph to display and a to sunny-day.png and night.png to sunny-night.pnglso a more information card utilising some of the other templates.
 
-
 Added this card to the card picker in Lovelace
 
-In the latest BOM component, a number of sensors have been renamed.
-This should not affect existing component however the renaming I have found is here:
-~~~~
-sensor.gosford_wind_speed > sensor.gosford_wind_speed_kilometre
-sensor.gosford_temperature > sensor.gosford_temp
-sensor.gosford_temperature_feels_like > sensor.gosford_temp_feels_like
-sensor.kariong_min* > sensor.kariong_temp_max*
-sensor.kariong_min* > sensor.kariong_temp_max*
-sensor.kariong_icon* > sensor.kariong_icon_descriptor*
-Added day 6 forecast
-sensor.gosford_gust_speed > sensor.gosford_gust_speed_kilometre
-sensor.gosford_wind_speed > sensor.gosford_wind_speed_kilometre
-sensor.gosford_gust_speed_knots > sensor.gosford_gust_speed_knot
-sensor.gosford_wind_speed_knots > sensor.gosford_wind_speed_knot
-~~~~
-I have amended the docs to reflect this and have also updated the ICON instructions.
+Also made an adjustment to the css to display the temperature correctly again.
+
+Option to show the apparent and current temperature to 1 decimal place
+Add to lovelace:
+```
+show_decimals: true
+```
+The default if not specified is false
 
 This version includes the option to have maximum temperature before the minimum.
 It is a new 'flag' as:
 ````yaml
 tempformat: highlow
 ````
-
 I also updated some of the docs/packages to clarify some settings etc
 
 VERY IMPORTANT NOTE:
@@ -66,17 +58,6 @@ For the Forecast, they will be named by your local suburb determined from the en
 It MAY be that there will be some new conditions from BOM. If icons are missing or you get any errors please let me know.
 
 IF you are using the old card as well with the 7 days forecast, note the new component only provides 6 days now and additionally I have added some icons so make sure you grab the bom_icons.zip file and extract the contents to /config/www/bom_icons The animated icons for the card itself are unchanged.
-
-## Older
-Also made an adjustment to the css to display the temperature correctly again.
-
-Option to show the apparent and current temperature to 1 decimal place
-Add to lovelace:
-```
-show_decimals: true
-```
-The default if not specified is false
-
 
 I have been having a problem with the Beaufort rating not updating if using knots. This release corrects that.
 Also thanks to @rudders Adrian for fixing the other issues with refreshing the card automatically.
