@@ -1,0 +1,6 @@
+{
+  "name": "Custom Animated Weather Card",
+  "content_in_root": true,
+  "filename": "bom-weather-card.js",
+  "country": ["IT", "FR", "DE", "NL", "PL", "HE", "RU", "DA", "UA", "EN" ]
+}
