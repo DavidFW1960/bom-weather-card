@@ -64,9 +64,13 @@ NOTE: Home Assistant caches stuff in a way that seems particularly hard to break
 The rule of thumb is that when you install a new version you MUST break the cache in order for HA to load the new card. This is fairly easy to do.
 In CHROME open up the Dev Tools by pressing F12
 Then right click on the refresh icon in the task bar (see graphic) and you will see a menu of options. Select Empty cache and hard reload from the options. It is the only option with no shortcut!
+
 ![image](hard-reload.png)
+
 You then need to press either CTRL+R OR CTRL+F5 at least TWICE. Then check the version in the same dev-tools. It will look something like this:
+
 ![image](version.png)
+
 The first time you do the CTRL+F5 you might find that the version will again change back to the previous version but a second refresh will fix it.
 
 # HARD Way? manual installation as follows:
@@ -160,7 +164,9 @@ homeassistant:
 3. Add the card definition: You can add this card from the card picker but need to configure the entities and flags in YAML. There are required / optional and flag entries.
 NOTE: All my values refer to Gosford observation entities and Kariong forecast.. You will need to edit these to match your sensors names.**
 This card has been added to the custom-card-picker in Lovelace
+	
 ![image](card-picker.png)
+	
 **An example configuration is in lovelace.yaml - this can be pasted into the manual card configuration in the GUI editor**
 If you paste it in the raw editor or in a yaml file, take care with the indenting.
 
