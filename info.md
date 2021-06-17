@@ -4,8 +4,10 @@
 
 ## Latest Changes
 
-Slight rebranding so people know it's not a BOM specific card but generic.
+Fixed card-picker text for rebranding
+Fixed small icon positioning with latest HA
 
+Slight rebranding so people know it's not a BOM specific card but generic.
 Correctedjs for lit changes and also fixed shadowroot issues
 
 ## Older

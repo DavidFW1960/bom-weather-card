@@ -1,6 +1,6 @@
 // #### Add card info to console
 console.info(
-  `%cGENERIC-WEATHER-CARD\n%cVersion 0.90        `,
+  `%cGENERIC-WEATHER-CARD\n%cVersion 0.90a       `,
   "color: #043ff6; font-weight: bold; background: white",
   "color: white; font-weight: bold; background: #043ff6"
 );
@@ -9,7 +9,7 @@ console.info(
 window.customCards = window.customCards || [];
 window.customCards.push({
  type: "bom-weather-card",
- name: "BOM Animated Weather Card",
+ name: "Generic Animated Weather Card",
  preview: false, // Optional - defaults to false
  description: "A custom card made by @DavidFW1960" // Optional
 });
@@ -792,9 +792,8 @@ style() {
       .icon {
         width: 50px;
         height: 50px;
-        margin-right: 5px;
+        margin: auto;
         display: inline-block;
-        vertical-align: middle;
         background-size: contain;
         background-position: center center;
         background-repeat: no-repeat;
