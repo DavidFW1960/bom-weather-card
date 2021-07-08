@@ -73,6 +73,8 @@ You then need to press either CTRL+R OR CTRL+F5 at least TWICE. Then check the v
 
 The first time you do the CTRL+F5 you might find that the version will again change back to the previous version but a second refresh will fix it.
 
+EDIT: Latest HACS version includes a version tag in the resource which will change when you update the card so the caching fix described above is no longer necessary! Yay!
+
 # HARD Way? manual installation as follows:
 1. Add ```bom-weather-card.js``` to your ```<config-dir>/www/``` directory.  If you don't have this directory (this is your first custom card), you will need to create it.
 
