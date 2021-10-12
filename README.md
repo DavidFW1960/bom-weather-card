@@ -77,7 +77,7 @@ EDIT: Latest HACS version includes a version tag in the resource which will chan
 
 # HARD Way? manual installation as follows:
 1. Add ```bom-weather-card.js``` to your ```<config-dir>/www/``` directory.  If you don't have this directory (this is your first custom card), you will need to create it.
-
+2. Add ```/local/bom-weather-card/bom-weather-card.js?v=o.89``` type js to resources. You must increment or use a different version number for every update to break the caching of the card and make it use the new version.
 # Then install the icon files
 Please download [ALL icons required are in this file here](https://github.com/DavidFW1960/bom-weather-card/blob/master/weather_icons.zip) 
 In addition to the amcharts ones from [here](https://www.amcharts.com/dl/svg-weather-icons/ ) I have found a few more svg icons (from [here]( https://github.com/SouthernWolf95/amCharts-SVG-Icons-Additions ) and also via the Home Assistant Forums [here]( https://community.home-assistant.io/t/animated-weather-icons-svg-for-all-dark-sky-values/150702 ) to use in this component. Put them in ```<config-dir>/www/icons/weather_icons``` and then sub folders animated and static.  Create the directories if necessary. 
