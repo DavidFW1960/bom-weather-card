@@ -396,8 +396,8 @@ sensor:
 
       bom_forecast_1:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (1 * 86400 ) -%}
-          {{ date | timestamp_custom('Tomorrow (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (1 * 86400 ) -%}
+          {{ date | timestamp_custom('Tomorrow (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_1')|round(0)}}°/{{states('sensor.kariong_temp_min_1')|round(0)}}°/{{states('sensor.kariong_rain_chance_1')|round(0)}}%
         entity_picture_template: >-
@@ -405,8 +405,8 @@ sensor:
 
       bom_forecast_2:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (2 * 86400 ) -%}
-          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (2 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_2')|round(0)}}°/{{states('sensor.kariong_temp_min_2')|round(0)}}°/{{states('sensor.kariong_rain_chance_2')|round(0)}}%
         entity_picture_template: >-
@@ -414,8 +414,8 @@ sensor:
 
       bom_forecast_3:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (3 * 86400 ) -%}
-          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (3 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_3')|round(0)}}°/{{states('sensor.kariong_temp_min_3')|round(0)}}°/{{states('sensor.kariong_rain_chance_3')|round(0)}}%
         entity_picture_template: >-
@@ -423,8 +423,8 @@ sensor:
 
       bom_forecast_4:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (4 * 86400 ) -%}
-          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (4 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_4')|round(0)}}°/{{states('sensor.kariong_temp_min_4')|round(0)}}°/{{states('sensor.kariong_rain_chance_4')|round(0)}}%
         entity_picture_template: >-
@@ -432,8 +432,8 @@ sensor:
 
       bom_forecast_5:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (5 * 86400 ) -%}
-          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (5 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_5')|round(0)}}°/{{states('sensor.kariong_temp_min_5')|round(0)}}°/{{states('sensor.kariong_rain_chance_5')|round(0)}}%
         entity_picture_template: >-
@@ -441,13 +441,12 @@ sensor:
 
       bom_forecast_6:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (6 * 86400 ) -%}
-          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (6 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_6')|round(0)}}°/{{states('sensor.kariong_temp_min_6')|round(0)}}°/{{states('sensor.kariong_rain_chance_6')|round(0)}}%
         entity_picture_template: >-
           {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_6') ~ '.png' }}
-
 
       bom_today_max:
         value_template: >
@@ -467,7 +466,7 @@ sensor:
 
 NOTE I am using a [custom component average](https://github.com/Limych/ha-average ) for the bom_today_max and bom_today_min sensors.
 See that for day 0, if the min/max is missing from the forecast it uses the average component.
-In the weather.yaml package, I use the statistics sensor instead of the custom average component..
+In the weather.yaml package, I use the statistics sensor instead of the custom average component (and provide code for both so you can choose)..
 You can then display these on an entities card like this:
 
 ~~~~~

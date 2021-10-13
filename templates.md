@@ -19,29 +19,29 @@ sensor:
 # https://en.wikipedia.org/wiki/Beaufort_scale
       beaufort:
         value_template: >
-            {%- if states('sensor.gosford_wind_speed_kilometre') | float  >= 118 -%}
+            {%- if states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 118 -%}
             12
-            {%- elif states('sensor.gosford_wind_speed_kilometre') | float  >= 103 -%}
+            {%- elif states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 103 -%}
             11
-            {%- elif states('sensor.gosford_wind_speed_kilometre') | float  >= 89 -%}
+            {%- elif states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 89 -%}
             10
-            {%- elif states('sensor.gosford_wind_speed_kilometre') | float  >= 75 -%}
+            {%- elif states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 75 -%}
             9
-            {%- elif states('sensor.gosford_wind_speed_kilometre') | float  >= 62 -%}
+            {%- elif states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 62 -%}
             8
-            {%- elif states('sensor.gosford_wind_speed_kilometre') | float  >= 50 -%}
+            {%- elif states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 50 -%}
             7
-            {%- elif states('sensor.gosford_wind_speed_kilometre') | float  >= 39 -%}
+            {%- elif states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 39 -%}
             6
-            {%- elif states('sensor.gosford_wind_speed_kilometre') | float  >= 29 -%}
+            {%- elif states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 29 -%}
             5
-            {%- elif states('sensor.gosford_wind_speed_kilometre') | float  >= 20 -%}
+            {%- elif states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 20 -%}
             4
-            {%- elif states('sensor.gosford_wind_speed_kilometre') | float  >= 12 -%}
+            {%- elif states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 12 -%}
             3
-            {%- elif states('sensor.gosford_wind_speed_kilometre') | float  >= 6 -%}
+            {%- elif states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 6 -%}
             2
-            {%- elif states('sensor.gosford_wind_speed_kilometre') | float  >= 2 -%}
+            {%- elif states('sensor.gosford_wind_speed_kilometre') | float(default='n/a')  >= 2 -%}
             1
             {%- else -%}
             0
@@ -53,9 +53,9 @@ sensor:
         unit_of_measurement: °C
         device_class: temperature
         value_template: >
-            {%- if states('sensor.gosford_temp') | float > 27 and states('sensor.gosford_humidity') | float > 40 -%}
-            {% set T = states('sensor.gosford_temp') | float %}
-            {% set R = states('sensor.gosford_humidity') | float %}
+            {%- if states('sensor.gosford_temp') | float(default='n/a') > 27 and states('sensor.gosford_humidity') | float(default='n/a') > 40 -%}
+            {% set T = states('sensor.gosford_temp') | float(default='n/a') %}
+            {% set R = states('sensor.gosford_humidity') | float(default='n/a') %}
             {% set c1 = -8.78469475556 %}
             {% set c2 = 1.61139411 %}
             {% set c3 = 2.33854883889 %}
@@ -74,13 +74,13 @@ sensor:
         value_template: >
             {%- if states('sensor.heatindex') == 'n/a' -%}
             Out of range
-            {%- elif states('sensor.heatindex') | float  >= 54 -%}
+            {%- elif states('sensor.heatindex') | float(default='n/a')  >= 54 -%}
             Extreme danger: heat stroke imminent
-            {%- elif states('sensor.heatindex') | float  >= 41 -%}
+            {%- elif states('sensor.heatindex') | float(default='n/a')  >= 41 -%}
             Danger: cramps, exhaustion heat stroke probable
-            {%- elif states('sensor.heatindex') | float  >= 32 -%}
+            {%- elif states('sensor.heatindex') | float(default='n/a')  >= 32 -%}
             Extreme caution: cramps and exhaustion possible
-            {%- elif states('sensor.heatindex') | float  >= 26 -%}
+            {%- elif states('sensor.heatindex') | float(default='n/a')  >= 26 -%}
             Caution: fatigue possible
             {%- else -%}
             Normal
@@ -101,8 +101,8 @@ sensor:
 
       bom_forecast_1:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (1 * 86400 ) -%}
-          {{ date | timestamp_custom('Tomorrow (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (1 * 86400 ) -%}
+          {{ date | timestamp_custom('Tomorrow (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_1')|round(0)}}°/{{states('sensor.kariong_temp_min_1')|round(0)}}°/{{states('sensor.kariong_rain_chance_1')|round(0)}}%
         entity_picture_template: >-
@@ -110,8 +110,8 @@ sensor:
 
       bom_forecast_2:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (2 * 86400 ) -%}
-          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (2 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_2')|round(0)}}°/{{states('sensor.kariong_temp_min_2')|round(0)}}°/{{states('sensor.kariong_rain_chance_2')|round(0)}}%
         entity_picture_template: >-
@@ -119,8 +119,8 @@ sensor:
 
       bom_forecast_3:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (3 * 86400 ) -%}
-          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (3 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_3')|round(0)}}°/{{states('sensor.kariong_temp_min_3')|round(0)}}°/{{states('sensor.kariong_rain_chance_3')|round(0)}}%
         entity_picture_template: >-
@@ -128,8 +128,8 @@ sensor:
 
       bom_forecast_4:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (4 * 86400 ) -%}
-          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (4 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_4')|round(0)}}°/{{states('sensor.kariong_temp_min_4')|round(0)}}°/{{states('sensor.kariong_rain_chance_4')|round(0)}}%
         entity_picture_template: >-
@@ -137,8 +137,8 @@ sensor:
 
       bom_forecast_5:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (5 * 86400 ) -%}
-          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (5 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_5')|round(0)}}°/{{states('sensor.kariong_temp_min_5')|round(0)}}°/{{states('sensor.kariong_rain_chance_5')|round(0)}}%
         entity_picture_template: >-
@@ -146,8 +146,8 @@ sensor:
 
       bom_forecast_6:
         friendly_name_template: >
-          {%- set date = as_timestamp(now()) + (6 * 86400 ) -%}
-          {{ date | timestamp_custom('%A (%-d/%-m)') }}
+          {%- set date = as_timestamp(now(),default='n/a') + (6 * 86400 ) -%}
+          {{ date | timestamp_custom('%A (%-d/%-m)',default='n/a') }}
         value_template: >
           {{states('sensor.kariong_temp_max_6')|round(0)}}°/{{states('sensor.kariong_temp_min_6')|round(0)}}°/{{states('sensor.kariong_rain_chance_6')|round(0)}}%
         entity_picture_template: >-
