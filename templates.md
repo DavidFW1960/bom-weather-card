@@ -7,11 +7,14 @@ sensor:
             {% set val = states('sensor.kariong_short_text_0').split('.')[0] %} 
             {{ val | title }}
 
+      uv_cat_formatted:
+        value_template: "{{ states('sensor.kariong_uv_category_0') | replace('veryhigh', 'Very High') | title }}"
+
       bom_uv_alert:
         value_template: >
             UV Today: Sun Protection 
-            {{ as_timestamp(states('sensor.kariong_uv_start_time_0'),default='n/a') | timestamp_custom(' %I:%M%p',default='n/a') | lower | replace(" 0", "") }} to {{ as_timestamp(states('sensor.kariong_uv_end_time_0'),default='n/a') | timestamp_custom(' %I:%M%p',default='n/a') | lower | replace(" 0", "") }}, UV Index predicted to reach {{ states('sensor.kariong_uv_max_index_0') }} [{{ states('sensor.kariong_uv_category_0') }}]
-          
+            {{ as_timestamp(states('sensor.kariong_uv_start_time_0'),default='n/a') | timestamp_custom(' %I:%M%p',default='n/a') | lower | replace(" 0", "") }} to {{ as_timestamp(states('sensor.kariong_uv_end_time_0'),default='n/a') | timestamp_custom(' %I:%M%p',default='n/a') | lower | replace(" 0", "") }}, UV Index predicted to reach {{ states('sensor.kariong_uv_max_index_0') }} [{{ states('sensor.uv_cat_formatted') }}]
+
       bom_fire_danger:
         value_template: "Fire Danger Today: {{ states('sensor.kariong_fire_danger_0') }}"
 

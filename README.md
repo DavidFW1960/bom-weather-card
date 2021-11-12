@@ -239,7 +239,6 @@ entity_pop_3: sensor.kariong_rain_chance_3
 entity_pop_4: sensor.kariong_rain_chance_4
 entity_pop_5: sensor.kariong_rain_chance_5
 entity_fire_danger_summary: sensor.kariong_fire_danger_0
-entity_uv_alert_summary: sensor.kariong_uv_category_0
 ~~~~
 
 **Note:** The following entries require template sensors.  
@@ -247,6 +246,7 @@ entity_uv_alert_summary: sensor.kariong_uv_category_0
 entity_current_text: sensor.bom_current_text
 entity_uv_alert: sensor.bom_uv_alert
 entity_fire_danger: sensor.bom_fire_danger
+entity_uv_alert_summary: sensor.uv_cat_formatted
 ~~~~
 
 **Example template sensors:** You can call template sensors whatever you want so long as you use the same name in the card config. (Included in weather.yaml) 
@@ -264,10 +264,13 @@ sensor:
             {% set val = states('sensor.kariong_short_text_0').split('.')[0] %} 
             {{ val | title }}
 
+      uv_cat_formatted:
+        value_template: "{{ states('sensor.kariong_uv_category_0') | replace('veryhigh', 'Very High') | title }}"
+
       bom_uv_alert:
         value_template: >
             UV Today: Sun Protection 
-            {{ as_timestamp(states('sensor.kariong_uv_start_time_0'),default='n/a') | timestamp_custom(' %I:%M%p',default='n/a') | lower | replace(" 0", "") }} to {{ as_timestamp(states('sensor.kariong_uv_end_time_0'),default='n/a') | timestamp_custom(' %I:%M%p',default='n/a') | lower | replace(" 0", "") }}, UV Index predicted to reach {{ states('sensor.kariong_uv_max_index_0') }} [{{ states('sensor.kariong_uv_category_0') }}]value_template: >
+            {{ as_timestamp(states('sensor.kariong_uv_start_time_0'),default='n/a') | timestamp_custom(' %I:%M%p',default='n/a') | lower | replace(" 0", "") }} to {{ as_timestamp(states('sensor.kariong_uv_end_time_0'),default='n/a') | timestamp_custom(' %I:%M%p',default='n/a') | lower | replace(" 0", "") }}, UV Index predicted to reach {{ states('sensor.kariong_uv_max_index_0') }} [{{ states('sensor.uv_cat_formatted') }}]
 
       bom_fire_danger:
         value_template: "Fire Danger Today: {{ states('sensor.kariong_fire_danger_0') }}"
