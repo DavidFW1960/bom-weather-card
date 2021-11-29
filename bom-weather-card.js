@@ -1,6 +1,6 @@
 // #### Add card info to console
 console.info(
-  `%cGENERIC-WEATHER-CARD\n%cVersion 0.90a       `,
+  `%cGENERIC-WEATHER-CARD\n%cVersion 0.91        `,
   "color: #043ff6; font-weight: bold; background: white",
   "color: white; font-weight: bold; background: #043ff6"
 );
@@ -447,10 +447,11 @@ class BOMWeatherCard extends Lit {
 // #####
 
   get current() {
+	var places = this.config.show_decimals ? 1 : 0;
     var conditions = this._hass.states[this.config.entity_current_conditions].state;
     var humidity = this.config.entity_humidity ? Number(this._hass.states[this.config.entity_humidity].state).toLocaleString() : 0;
     var pressure = this.config.entity_pressure ? Number(Math.round(this._hass.states[this.config.entity_pressure].state)).toLocaleString() : 0;
-    var temperature = !this.config.show_decimals ? Number(Math.round(this._hass.states[this.config.entity_temperature].state)).toLocaleString() : Number(this._hass.states[this.config.entity_temperature].state).toLocaleString() ;
+    var temperature = Number(this._hass.states[this.config.entity_temperature].state)toFixed(places).toLocaleString() ;
     var visibility = this.config.entity_visibility ? Number(this._hass.states[this.config.entity_visibility].state).toLocaleString() : 0;
     var windBearing = this.config.entity_wind_bearing ? isNaN(this._hass.states[this.config.entity_wind_bearing].state) ? this._hass.states[this.config.entity_wind_bearing].state : this.windDirections[(Math.round((this._hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
     var windBearingKt = this.config.entity_wind_bearing ? isNaN(this._hass.states[this.config.entity_wind_bearing].state) ? this._hass.states[this.config.entity_wind_bearing].state : this.windDirections[(Math.round((this._hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
