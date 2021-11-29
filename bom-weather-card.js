@@ -451,7 +451,7 @@ class BOMWeatherCard extends Lit {
     var conditions = this._hass.states[this.config.entity_current_conditions].state;
     var humidity = this.config.entity_humidity ? Number(this._hass.states[this.config.entity_humidity].state).toLocaleString() : 0;
     var pressure = this.config.entity_pressure ? Number(Math.round(this._hass.states[this.config.entity_pressure].state)).toLocaleString() : 0;
-    var temperature = Number(this._hass.states[this.config.entity_temperature].state)toFixed(places).toLocaleString() ;
+    var temperature = Number(this._hass.states[this.config.entity_temperature].state).toFixed(places).toLocaleString() ;
     var visibility = this.config.entity_visibility ? Number(this._hass.states[this.config.entity_visibility].state).toLocaleString() : 0;
     var windBearing = this.config.entity_wind_bearing ? isNaN(this._hass.states[this.config.entity_wind_bearing].state) ? this._hass.states[this.config.entity_wind_bearing].state : this.windDirections[(Math.round((this._hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
     var windBearingKt = this.config.entity_wind_bearing ? isNaN(this._hass.states[this.config.entity_wind_bearing].state) ? this._hass.states[this.config.entity_wind_bearing].state : this.windDirections[(Math.round((this._hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
