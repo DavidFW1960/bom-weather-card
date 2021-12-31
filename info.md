@@ -4,6 +4,8 @@
 
 ## Latest Changes
 
+So I found when card was set to display decimal points it wasn't doing that correctly in some cases sometimes showing none and sometimes showing 2 decimal places. The min and max also were rounding to whole degrees. If rounding is set not it should consistently display 1 decimal pace for all temperature entities.
+
 Fixed card-picker text for rebranding
 Fixed small icon positioning with latest HA
 
