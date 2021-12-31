@@ -471,6 +471,7 @@ NOTE I am using a [custom component average](https://github.com/Limych/ha-averag
 See that for day 0, if the min/max is missing from the forecast it uses the average component.
 In the weather.yaml package, I use the statistics sensor instead of the custom average component (and provide code for both so you can choose)..
 You can then display these on an entities card like this:
+Note this uses a custom hui_element card in case BOM isn't publishing day 6
 
 ~~~~~
 type: entities
@@ -483,7 +484,22 @@ entities:
   - sensor.bom_forecast_3
   - sensor.bom_forecast_4
   - sensor.bom_forecast_5
-  - sensor.bom_forecast_6
+  - type: 'custom:hui-element'
+	card_type: conditional
+	conditions:
+	  - entity: sensor.bom_forecast_6
+		state_not: "unknown°/unknown°/unknown%"
+	card:
+	  type: entities
+	  card_mod:
+		style: |
+		  ha-card {
+			box-shadow: none;
+			--ha-card-background: rgba(0, 0, 0, 0);
+			margin: -16px -16px -16px -16px;
+		  }
+	  entities:
+	  - entity: sensor.bom_forecast_6
 ~~~~~
 
 ![image](bom_forecast.png)
