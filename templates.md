@@ -152,7 +152,7 @@ sensor:
           {%- set date = as_timestamp(now(),default='n/a') + (6 * 86400 ) -%}
           {{ date | timestamp_custom('%A (%-d/%-m)',default='n/a') }}
         value_template: >
-          {{states('sensor.kariong_temp_max_6')|round(0)}}°/{{states('sensor.kariong_temp_min_6')|round(0)}}°/{{states('sensor.kariong_rain_chance_6')|round(0)}}%
+          {{states('sensor.kariong_temp_max_6')|round(0,default='unknown')}}°/{{states('sensor.kariong_temp_min_6')|round(0,default='unknown')}}°/{{states('sensor.kariong_rain_chance_6')|round(0,default='unknown')}}%
         entity_picture_template: >-
           {{ '/local/icons/bom_icons/' ~ states('sensor.kariong_icon_descriptor_6') ~ '.png' }}
 
