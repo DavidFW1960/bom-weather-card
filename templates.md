@@ -196,5 +196,6 @@ sensor:
 #    name: today_temp_bom
 #    sampling_size: 150
 #    entity_id: sensor.gosford_temp
+#    state_characteristic: mean
 #    max_age:
 #      hours: 24
