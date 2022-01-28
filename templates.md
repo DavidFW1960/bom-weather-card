@@ -56,7 +56,7 @@ sensor:
         unit_of_measurement: °C
         device_class: temperature
         value_template: >
-            {%- if states('sensor.gosford_temp') | float(default='n/a') > 27 and states('sensor.gosford_humidity') | float(default='n/a') > 40 -%}
+            {%- if states('sensor.gosford_temp') | float(default=0) > 27 and states('sensor.gosford_humidity') | float(default=0) > 40 -%}
             {% set T = states('sensor.gosford_temp') | float(default='n/a') %}
             {% set R = states('sensor.gosford_humidity') | float(default='n/a') %}
             {% set c1 = -8.78469475556 %}
