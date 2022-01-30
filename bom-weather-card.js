@@ -1,6 +1,6 @@
 // #### Add card info to console
 console.info(
-  `%cGENERIC-WEATHER-CARD\n%cVersion 0.91        `,
+  `%cGENERIC-WEATHER-CARD\n%cVersion 0.92        `,
   "color: #043ff6; font-weight: bold; background: white",
   "color: white; font-weight: bold; background: #043ff6"
 );
@@ -496,7 +496,10 @@ get sunSet() {
     }
     else {
       nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
+	  nextSunSet = nextSunSet.replace(":", '');
       nextSunRise = new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
+	  nextSunRise = nextSunRise.replace(":", '');
+	  If (nextSunRise.length < 4) {nextSunRise="0" + nextSunRise;}
     }
     var nextDate = new Date();
     nextDate.setDate(nextDate.getDate() + 1);
