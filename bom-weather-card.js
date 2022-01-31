@@ -499,7 +499,9 @@ get sunSet() {
 	  nextSunSet = nextSunSet.replace(":", '');
       nextSunRise = new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute:'2-digit'});
 	  nextSunRise = nextSunRise.replace(":", '');
-	  if (nextSunRise.length < 4) {nextSunRise="0" + nextSunRise};
+	  if (nextSunRise.length < 4) {
+		nextSunRise = "0" + nextSunRise;
+	  }
     }
     var nextDate = new Date();
     nextDate.setDate(nextDate.getDate() + 1);
