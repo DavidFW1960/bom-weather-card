@@ -1,6 +1,6 @@
 // #### Add card info to console
 console.info(
-  `%cGENERIC-WEATHER-CARD\n%cVersion 0.91        `,
+  `%cGENERIC-WEATHER-CARD\n%cVersion 0.92        `,
   "color: #043ff6; font-weight: bold; background: white",
   "color: white; font-weight: bold; background: #043ff6"
 );
