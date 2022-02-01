@@ -494,9 +494,9 @@ get sunSet() {
     }
     else {
       nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute: '2-digit', hour12: false});
-      nextSunSet = nextSunSet.replace(":", '');
+      nextSunSet = (nextSunSet.replace(":", ''));
       nextSunRise = new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute: '2-digit', hour12: false});
-	  nextSunrise = nextSunRise.replace(":", '');
+	  nextSunRise = (nextSunRise.replace(":", ''));
     }
     var nextDate = new Date();
     nextDate.setDate(nextDate.getDate() + 1);
