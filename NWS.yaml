@@ -1,1 +1,257 @@
-#This is the start point of using the NWS entities to feed this card
+sensor:
+  - platform: sun2
+    monitored_conditions:
+      - sunrise 
+      - sunset 
+  - platform: template
+    sensors:
+      #Current Observations
+      #Modify all of these to align with your NWS station ID - Don't use mine unless you want to know what's happening were I am...
+      nws_pressure:
+        value_template: "{{ states( 'sensor.kyip_barometric_pressure' ) }}"
+        unit_of_measurement: "inHg"
+      nws_dewpoint:
+        value_template: "{{ states( 'sensor.kyip_dew_point' ) }}"
+        unit_of_measurement: "°F"
+      nws_heatindex:
+        value_template: "{{ states( 'sensor.kyip_heat_index' ) }}"
+        unit_of_measurement: "°F"
+      nws_humidity:
+        value_template: "{{ states( 'sensor.kyip_relative_humidity' ) }}"
+        unit_of_measurement: "%"
+      nws_temperature:
+        value_template: "{{ states( 'sensor.kyip_temperature') }}"
+        unit_of_measurement: "°F"
+      nws_visibility:
+        value_template: "{{ state_attr('weather.kyip_daynight', 'visibility') }}"
+        unit_of_measurement: "mile"
+      nws_daily_summary:
+        value_template: "{{ state_attr('weather.kyip_daynight', 'forecast')[0].detailed_description | truncate(254,true,'…',0) }}"
+      nws_windchill:
+        value_template: "{{ states('sensor.kyip_wind_chill') }}"
+        unit_of_measurement: "°F"
+      nws_wind_bearing:
+        value_template: "{{ states('sensor.kyip_wind_direction') }}"
+        unit_of_measurement: "°F"
+      nws_wind_gust:
+        value_template: "{{ states('sensor.kyip_wind_gust') }}"
+        unit_of_measurement: "mph"
+      nws_wind_speed:
+        value_template: "{{ states('sensor.kyip_wind_speed') }}"
+      nws_current_conditions:
+        value_template: "{{ states('weather.kyip_daynight') | capitalize }}"
+      nws_current_conditions_0:
+        value_template: "{{ states('weather.kyip_daynight') }}"
+      nws_rain_chance_0:
+        value_template: >
+          {{ state_attr('weather.kyip_daynight', 'forecast')[0].precipitation_probability }}
+        unit_of_measurement: "%"
+      nws_rain_amount_today:
+        value_template: "0"  # not provided by NWS integration - needed to keep a NaN off the weather card
+      nws_daytime_low:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | min }}
+        unit_of_measurement: "°F"
+      nws_daytime_high:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | max }}
+        unit_of_measurement: "°F"
+      # Now for the Forecast Data
+      nws_forecast_low_temp_1:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) + timedelta(days=1) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | min }}
+        unit_of_measurement: "°F"
+      nws_forecast_high_temp_1:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) + timedelta(days=1) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | max }}
+        unit_of_measurement: "°F"
+      nws_forecast_icon_1:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[2].condition }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[1].condition }}
+          {% endif %}
+      nws_summary_1:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[2].detailed_description | truncate(254,true,'…',0) }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[1].detailed_description | truncate(254,true,'…',0) }}
+          {% endif %}        
+      nws_rain_chance_1:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[2].precipitation_probability }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[1].precipitation_probability }}
+          {% endif %}  
+        unit_of_measurement: "%"
+      nws_forecast_low_temp_2:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) + timedelta(days=2) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | min }}
+        unit_of_measurement: "°F"
+      nws_forecast_high_temp_2:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) + timedelta(days=2) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | max }}
+        unit_of_measurement: "°F"
+      nws_forecast_icon_2:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[4].condition }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[3].condition }}
+          {% endif %}
+      nws_summary_2:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[4].detailed_description | truncate(254,true,'…',0) }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[3].detailed_description | truncate(254,true,'…',0) }}
+          {% endif %} 
+      nws_rain_chance_2:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[4].precipitation_probability }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[3].precipitation_probability }}
+          {% endif %}  
+        unit_of_measurement: "%"
+      nws_forecast_low_temp_3:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) + timedelta(days=3) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | min }}
+        unit_of_measurement: "°F"
+      nws_forecast_high_temp_3:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) + timedelta(days=3) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | max }}
+        unit_of_measurement: "°F"
+      nws_forecast_icon_3:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[6].condition }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[5].condition }}
+          {% endif %}
+      nws_summary_3:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[6].detailed_description | truncate(254,true,'…',0) }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[5].detailed_description | truncate(254,true,'…',0) }}
+          {% endif %} 
+      nws_rain_chance_3:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[6].precipitation_probability }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[5].precipitation_probability }}
+          {% endif %}  
+        unit_of_measurement: "%"
+      nws_forecast_low_temp_4:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) + timedelta(days=4) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | min }}
+        unit_of_measurement: "°F"
+      nws_forecast_high_temp_4:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) + timedelta(days=4) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | max }}
+        unit_of_measurement: "°F"
+      nws_forecast_icon_4:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[8].condition }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[7].condition }}
+          {% endif %}
+      nws_summary_4:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[8].detailed_description | truncate(254,true,'…',0) }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[7].detailed_description | truncate(254,true,'…',0) }}
+          {% endif %} 
+      nws_rain_chance_4:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[8].precipitation_probability }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[7].precipitation_probability }}
+          {% endif %} 
+        unit_of_measurement: "%"
+      nws_forecast_low_temp_5:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) + timedelta(days=5) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | min }}
+        unit_of_measurement: "°F"
+      nws_forecast_high_temp_5:
+        value_template: >
+          {% set start = now().replace(hour=0,minute=0,second=0, microsecond=0) + timedelta(days=5) %}
+          {% set end = (start + timedelta(days=1)) %}
+          {% set start = start.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {% set end = end.strftime("%Y-%m-%dT%H:%M:%S+00:00") %}
+          {{ state_attr('weather.kyip_daynight', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | max }}
+        unit_of_measurement: "°F"
+      nws_forecast_icon_5:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[10].condition }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[9].condition }}
+          {% endif %}
+      nws_summary_5:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[10].detailed_description | truncate(254,true,'…',0) }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[9].detailed_description | truncate(254,true,'…',0) }}
+          {% endif %} 
+      nws_rain_chance_5:
+        value_template: >
+          {% if (state_attr('weather.kyip_daynight', 'forecast')[0].daytime) == true %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[10].precipitation_probability }}
+          {% else %}
+          {{ state_attr('weather.kyip_daynight', 'forecast')[9].precipitation_probability }}
+          {% endif %} 
+        unit_of_measurement: "%"
