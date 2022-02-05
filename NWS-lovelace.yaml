@@ -1,0 +1,70 @@
+cards:
+  - type: custom:bom-weather-card
+    title: NWS Weather
+    entity_current_conditions: sensor.nws_current_conditions_0
+    entity_daily_summary: sensor.nws_daily_summary
+    entity_forecast_high_temp_1: sensor.nws_forecast_high_temp_1
+    entity_forecast_high_temp_2: sensor.nws_forecast_high_temp_2
+    entity_forecast_high_temp_3: sensor.nws_forecast_high_temp_3
+    entity_forecast_high_temp_4: sensor.nws_forecast_high_temp_4
+    entity_forecast_high_temp_5: sensor.nws_forecast_high_temp_5
+    entity_forecast_icon_1: sensor.nws_forecast_icon_1
+    entity_forecast_icon_2: sensor.nws_forecast_icon_2
+    entity_forecast_icon_3: sensor.nws_forecast_icon_3
+    entity_forecast_icon_4: sensor.nws_forecast_icon_4
+    entity_forecast_icon_5: sensor.nws_forecast_icon_5
+    entity_forecast_low_temp_1: sensor.nws_forecast_low_temp_1
+    entity_forecast_low_temp_2: sensor.nws_forecast_low_temp_2
+    entity_forecast_low_temp_3: sensor.nws_forecast_low_temp_3
+    entity_forecast_low_temp_4: sensor.nws_forecast_low_temp_4
+    entity_forecast_low_temp_5: sensor.nws_forecast_low_temp_5
+    entity_summary_1: sensor.nws_summary_1
+    entity_summary_2: sensor.nws_summary_2
+    entity_summary_3: sensor.nws_summary_3
+    entity_summary_4: sensor.nws_summary_4
+    entity_summary_5: sensor.nws_summary_5
+    entity_pop_1: sensor.nws_rain_chance_1
+    entity_pop_2: sensor.nws_rain_chance_2
+    entity_pop_3: sensor.nws_rain_chance_3
+    entity_pop_4: sensor.nws_rain_chance_4
+    entity_pop_5: sensor.nws_rain_chance_5
+    entity_sun: sun.sun  # Fed from the Sun2 integration
+    entity_temperature: sensor.nws_temperature
+    entity_apparent_temp: sensor.nws_windchill
+    entity_daytime_high: sensor.maxtempdaily  # Fed from the Daily Sensor Integration
+    entity_daytime_low: sensor.mintempdaily  # Fed from the Daily Sensor Integration
+    entity_visibility: sensor.nws_visibility
+    entity_wind_bearing: sensor.nws_wind_bearing
+    entity_wind_speed: sensor.nws_wind_speed
+    entity_wind_gust: sensor.nws_wind_gust
+    entity_humidity: sensor.nws_humidity
+    entity_pressure: sensor.nws_pressure
+    entity_pop: sensor.nws_rain_chance_0
+    entity_pop_intensity: sensor.nws_rain_amount_today
+    entity_current_text: sensor.nws_current_conditions
+    slot_l1: sensor.nws_daytime_high
+    slot_l2: sensor.nws_daytime_low
+    slot_l3: sensor.sunrise
+    slot_l4: sensor.nws_wind_speed
+    slot_l5: sensor.nws_pressure
+    slot_r1: sensor.nws_visability
+    slot_r2: blank
+    slot_r3: sensor.nws_rain_chance_0
+    slot_r4: sensor.nws_humidity
+    slot_r5: sensor.sunset
+    locale: en-US
+    static_icons: false
+    tooltip_bg_color: rgb( 75,155,239)
+    tooltip_border_color: orange
+    tooltip_border_width: 3
+    tooltip_caret_size: 10
+    tooltip_fg_color: '#fff'
+    tooltip_left_offset: -12
+    tooltip_width: 100
+    tooltips: true
+    old_daily_format: true
+    time_format: 12
+    show_beaufort: false
+    old_icon: false
+    show_decimals: true
+    tempformat: highlow
