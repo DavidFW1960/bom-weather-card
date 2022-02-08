@@ -42,16 +42,16 @@ cards:
     entity_pop: sensor.nws_rain_chance_0
     entity_pop_intensity: sensor.nws_rain_amount_today
     entity_current_text: sensor.nws_current_conditions
-    slot_l1: sensor.nws_daytime_high
-    slot_l2: sensor.nws_daytime_low
-    slot_l3: sensor.sunrise
-    slot_l4: sensor.nws_wind_speed
-    slot_l5: sensor.nws_pressure
-    slot_r1: sensor.nws_visability
-    slot_r2: blank
-    slot_r3: sensor.nws_rain_chance_0
-    slot_r4: sensor.nws_humidity
-    slot_r5: sensor.sunset
+    slot_l1: daytime_high
+    slot_l2: daytime_low
+    slot_l3: wind
+    slot_l4: pressure
+    slot_l5: sun_next
+    slot_r1: empty
+    slot_r2: visibility
+    slot_r3: pop
+    slot_r4: humidity
+    slot_r5: sun_following
     locale: en-US
     static_icons: false
     tooltip_bg_color: rgb( 75,155,239)
