@@ -31,6 +31,7 @@ class BOMWeatherCard extends Lit {
 // #####
 
   render() {
+    if (!this.config || !this._hass) return html``;
 //  Handle Configuration Flags
 //    var icons = this.config.static_icons ? "static" : "animated";
     var currentText = this.config.entity_current_text ? html`<span class="currentText" id="current-text">${this._hass.states[this.config.entity_current_text].state}</span>` : ``;
@@ -872,6 +873,14 @@ style() {
       default:
         return this._hass.config.unit_system[measure] || '';
     }
+  }
+
+  // Watch this._hass and this.config - with the following, any changes to these properties will call render() again
+  static get properties() {
+    return {
+      _hass: {},
+      config: {},
+    };
   }
 
 // #####
