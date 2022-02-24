@@ -3,6 +3,11 @@ sensor:
     monitored_conditions:
       - sunrise 
       - sunset 
+  - platform: derivative
+    source: sensor.nws_pressure
+    name: Pressure change per hour
+    unit_time: h # the resulting "unit_of_measurement" will be inHg/h if the sensor.temperate has set inHg as its unit
+    time_window: "02:00:00"  # we look at the change over the last 2 hours
   - platform: template
     sensors:
       #Current Observations
