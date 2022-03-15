@@ -332,7 +332,7 @@ show_decimals: false
 | current_text_width       | **100%** / px, em or %             | Sets the width of current text                                              |
 | current_data_top_margin  | **10em** / px or em value          | Sets the top margin of the current data blocks                              |
 | large_icon_top_margin    | **-3.2em** / px or em value        | Sets the top margin of the current conditions icon                          |
-| large_icon_left_position | **0px** / px or em value           | Sets the left position of the current conditions icon                       |
+| large_icon_left_pos	     | **0px** / px or em value           | Sets the left position of the current conditions icon                       |
 | separator_top_margin     | **6em** / px or em value           | Sets the top margin of the separator line                                   |
 | summary_top_padding      | **2em** / px or em                 | Sets the gap between the forecast and summary text                          |
 | summary_font_size        | **0.8em** / px or em               | Sets the font size for the summary text                                     |
