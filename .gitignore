@@ -1,2 +1,4 @@
 *.bak
 bom-weather-card.js.try 24hr
+*.error
+
