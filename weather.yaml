@@ -199,10 +199,18 @@ sensor:
 
 # IMPORTANT NOTE IF YOU USE statistics, you must comment out the above average sensor. Both cannot exist
 #  - platform: statistics
-#    name: today_temp_bom
+#    name: today_temp_bom_min
 #    sampling_size: 150
 #    entity_id: sensor.gosford_temp
-#    state_characteristic: mean
+#    state_characteristic: value_min
+#    max_age:
+#      hours: 24
+
+#  - platform: statistics
+#    name: today_temp_bom_max
+#    sampling_size: 150
+#    entity_id: sensor.gosford_temp
+#    state_characteristic: value_max
 #    max_age:
 #      hours: 24
 
