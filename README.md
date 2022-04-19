@@ -216,6 +216,10 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 # entity_visibility: If provided from a different source
 entity_daytime_high: sensor.bom_today_max
 entity_daytime_low: sensor.bom_today_min
+entity_temp_next: sensor.gosford_now_temp_now
+entity_temp_next_label: sensor.gosford_now_now_label
+entity_temp_following: sensor.gosford_now_temp_later
+entity_temp_following_label: sensor.gosford_now_later_label
 entity_wind_bearing: sensor.gosford_wind_direction
 entity_wind_speed: sensor.gosford_wind_speed_kilometre
 entity_wind_gust: sensor.gosford_gust_speed_kilometre
@@ -355,6 +359,8 @@ The current condition columns are specified by 'slots'.  There are 5 left column
 slots (designated r1 - r5).  There are currently 10 possible values that can be assigned to a slot.  These are:
 - daytime_high
 - daytime_low
+- temp_next
+- temp_following
 - wind
 - wind_kt
 - visibility
