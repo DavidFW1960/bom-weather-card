@@ -351,7 +351,8 @@ show_decimals: false
 | slot_r4                  | **fire_summary**                   | Sets the value used in current conditions slot r4 : See slots for more info |
 | slot_r5                  | **sun_following**                  | Sets the value used in current conditions slot r4 : See slots for more info |
 | old_icon                 | **"true"** / hybrid or false       | Sets card to render old icons. Must use quotes                              |
-| show_decimals            | **false** / true                   | Sets card to render current and apparent temperature to 1 decimal place.    |
+| show_decimals            | **false** / true                   | Sets card to render current and apparent temperatures to 1 decimal place.   |
+| show_decimals_today      | **false** / true                   | Sets card to render todays min and max temperatures to 1 decimal place.     |
 
 **Slots**
 --------------------------
