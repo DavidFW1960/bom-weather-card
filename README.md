@@ -353,6 +353,8 @@ show_decimals: false
 | old_icon                 | **"true"** / hybrid or false       | Sets card to render old icons. Must use quotes                              |
 | show_decimals            | **false** / true                   | Sets card to render current and apparent temperatures to 1 decimal place.   |
 | show_decimals_today      | **false** / true                   | Sets card to render todays min and max temperatures to 1 decimal place.     |
+| show_decimals_pressure   | **0** / 1, 2, 3                    | Sets card to render pressure with specified decimal places.                 |
+| pressure_units           | string / **null**                  | Override the unit displayed for pressure                                    |
 
 **Slots**
 --------------------------
