@@ -133,6 +133,8 @@ class BOMWeatherCard extends LitElement {
       case 'visibility': return this.visibility;
       case 'sun_next': return this.sunNext;
       case 'sun_following': return this.sunFollowing;
+      case 'custom1': return this.custom1;
+      case 'custom2': return this.custom2;
       case 'empty': return html`&nbsp;`;
       case 'remove': return ``;
     }
@@ -267,6 +269,21 @@ class BOMWeatherCard extends LitElement {
        return this.config.entity_sun ? this.sunSet.following : "";
      }
   }
+
+  get custom1() {
+    var icon = this.config.custom1_icon ? this.config.custom1_icon : 'mdi:help-box';
+    var value = this.config.custom1_value ? this._hass.states[this.config.custom1_value].state : 'unknown';
+    var unit = this.config.custom1_units ? this.config.custom1_units : '';
+    return html`<li><span class="ha-icon"><ha-icon icon=${icon}></ha-icon></span><span id="custom-1">${value}</span><span class="unit"> ${unit}</span></li>`;
+  }
+
+  get custom2() {
+    var icon = this.config.custom2_icon ? this.config.custom2_icon : 'mdi:help-box';
+    var value = this.config.custom2_value ? this._hass.states[this.config.custom2_value].state : 'unknown';
+    var unit = this.config.custom2_units ? this.config.custom2_units : '';
+    return html`<li><span class="ha-icon"><ha-icon icon=${icon}></ha-icon></span><span id="custom-2">${value}</span><span class="unit"> ${unit}</span></li>`;
+  }
+
 // #####
 // ##### windDirections - returns set of possible wind directions by specified language
 // #####
@@ -1102,6 +1119,8 @@ style() {
       if (this.config.show_beaufort  && !this.config.alt_wind && (root.getElementById("beaufort-kt-text") !== null)) try { root.getElementById("beaufort-kt-text").textContent =  `Bft: ${this.beaufortWindKt} - ` } catch(e) {}
       if (this.config.entity_possible_today && (root.getElementById("possible_today-text") !== null)) try { root.getElementById("possible_today-text").textContent = `${this._hass.states[this.config.entity_possible_today].state}` } catch(e) {}
       if (this.config.entity_pos_1 && (root.getElementById("possible_tomorrow-text") !== null)) try { root.getElementById("possible_tomorrow-text").textContent = `${this._hass.states[this.config.entity_pos_1].state}` } catch(e) {}
+      if (this.config.custom1_value && (root.getElementById("custom-1") !== null)) try { root.getElementById("custom-1").textContent = `${this._hass.states[this.config.custom1_value].state}` } catch(e) {}
+      if (this.config.custom2_value && (root.getElementById("custom-2") !== null)) try { root.getElementById("custom-2").textContent = `${this._hass.states[this.config.custom2_value].state}` } catch(e) {}
 
 // Alt Text
       if (this.config.alt_sun_next) try { root.getElementById("alt-sun-next").textContent = `${this._hass.states[this.config.alt_sun_next].state}` } catch(e) {}

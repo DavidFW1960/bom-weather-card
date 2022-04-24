@@ -355,6 +355,13 @@ show_decimals: false
 | show_decimals_today      | **false** / true                   | Sets card to render todays min and max temperatures to 1 decimal place.     |
 | show_decimals_pressure   | **0** / 1, 2, 3                    | Sets card to render pressure with specified decimal places.                 |
 | pressure_units           | string / **null**                  | Override the unit displayed for pressure                                    |
+| custom1_icon             | **mdi:help-box** / mdi icon        | Sets the icon to use for slot custom1                                       |
+| custom1_value            | **unknown** / sensor               | Sets the sensor to use for the value of slot custom1                        |
+| custom1_units            | **""** / string                     | Sets the string to use for the units of slot custom1                        |
+| custom2_icon             | **mdi:help-box** / mdi icon        | Sets the icon to use for slot custom2                                       |
+| custom2_value            | **unknown** / sensor               | Sets the sensor to use for the value of slot custom2                        |
+| custom2_units            | **""** / string                     | Sets the string to use for the units of slot custom2                        |
+
 
 **Slots**
 --------------------------
@@ -377,6 +384,8 @@ slots (designated r1 - r5).  There are currently 10 possible values that can be 
 - fire_summary
 - possible_today (possible rainfall today)
 - possible_tomorrow (possible rainfall tomorrow)
+- custom1 (populates using config fields custom1_icon, custom1_value and custom1_units)
+- custom2 (populates using config fields custom2_icon, custom2_value and custom2_units)
 - empty (empty slot... the slot below does not rise to fill the space)
 - remove (same as empty but the slot below rises to take the place of the slot)
 
