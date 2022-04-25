@@ -1,3 +1,8 @@
+import {
+  LitElement,
+  html,
+} from "https://unpkg.com/lit-element@3.2.0/lit-element.js?module";
+
 // #### Add card info to console
 console.info(
   `%cGENERIC-WEATHER-CARD\n%cVersion 0.94       `,
@@ -15,16 +20,10 @@ window.customCards.push({
 });
 
 // #####
-// ##### Get the Lit and HTML classes from an already defined HA Lovelace class
-// #####
-var Lit = Lit || Object.getPrototypeOf(customElements.get("ha-panel-lovelace") || customElements.get('hui-view'));
-var html = Lit.prototype.html;
-
-// #####
 // ##### Custom Card Definition begins
 // #####
 
-class BOMWeatherCard extends Lit {
+class BOMWeatherCard extends LitElement {
 
 // #####
 // ##### Define Render Template
@@ -35,7 +34,7 @@ class BOMWeatherCard extends Lit {
 //  Handle Configuration Flags
 //    var icons = this.config.static_icons ? "static" : "animated";
     var currentText = this.config.entity_current_text ? html`<span class="currentText" id="current-text">${this._hass.states[this.config.entity_current_text].state}</span>` : ``;
-    var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike} <span id="apparent-text">${this.current.apparent}</span> ${this.getUOM("temperature")}</span>` : ``;
+    var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike} <span id="apparent-text">${this.currentApparent}</span> ${this.getUOM("temperature")}</span>` : ``;
     var summary = this.config.entity_daily_summary ? html`${this._hass.states[this.config.entity_daily_summary].state}` : ``;
     var separator = this.config.show_separator ? html`<hr class=line>` : ``;
     var uv_alert = this.config.entity_uv_alert ? html`${this._hass.states[this.config.entity_uv_alert].state}` : ``;
@@ -47,21 +46,21 @@ class BOMWeatherCard extends Lit {
       ${this.style()}
       </style>
       <ha-card class = "card">
-        <span class="icon bigger" id="icon-bigger" style="background: none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this.current.conditions] + ".svg")}) no-repeat; background-size: contain;">${this.current.conditions}</span>
-        <span class="temp" id="temperature-text">${this.current.temperature}</span><span class="tempc">${this.getUOM('temperature')}</span>
+        <span class="icon bigger" id="icon-bigger" style="background: none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this.currentConditions] + ".svg")}) no-repeat; background-size: contain;">${this.currentConditions}</span>
+        <span class="temp" id="temperature-text">${this.currentTemperature}</span><span class="tempc">${this.getUOM('temperature')}</span>
         ${currentText}
         ${apparentTemp}
         ${separator}
         <span>
           <ul class="variations">
-            <li>
+            <li class="slotlist">
               ${this.getSlot().l1}
               ${this.getSlot().l2}
               ${this.getSlot().l3}
               ${this.getSlot().l4}
               ${this.getSlot().l5}
             </li>
-            <li>
+            <li class="slotlist">
               ${this.getSlot().r1}
               ${this.getSlot().r2}
               ${this.getSlot().r3}
@@ -115,63 +114,175 @@ class BOMWeatherCard extends Lit {
 // ##### slots - calculates the specific slot value
 // #####
 
-  slotValue(slot,value){
-    var sunNext = this.config.alt_sun_next ? html`<li><span id="alt-sun-next">${this._hass.states[this.config.alt_sun_next].state}</span></li>` : this.config.entity_sun ? this.sunSet.next : "";
-    var sunFollowing = this.config.alt_sun_following ? html`<li><span id="alt-sun-following">${this._hass.states[this.config.alt_sun_following].state}</span></li>` : this.config.entity_sun ? this.sunSet.following : "";
-    var daytimeHigh = this.config.alt_daytime_high ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer-high"></ha-icon></span><span id="alt-daytime-high">${this._hass.states[this.config.alt_daytime_high].state}</span></li>` : this.config.entity_daytime_high && this.config.show_decimals ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer-high"></ha-icon></span>${this.localeText.maxToday} <span id="daytime-high-text">${(Number(Number(this._hass.states[this.config.entity_daytime_high].state).toFixed(1))).toLocaleString()}</span><span> ${this.getUOM('temperature')}</span></li>` : this.config.entity_daytime_high && !this.config.show_decimals ?html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer-high"></ha-icon></span>${this.localeText.maxToday} <span id="daytime-high-text">${(Number(this._hass.states[this.config.entity_daytime_high].state).toFixed(0)).toLocaleString()}</span><span> ${this.getUOM('temperature')}</span></li>` : ``;
-    var daytimeLow = this.config.entity_daytime_low && this.config.show_decimals ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer-low"></ha-icon></span>${this.localeText.minToday} <span id="daytime-low-text">${(Number(Number(this._hass.states[this.config.entity_daytime_low].state).toFixed(1))).toLocaleString()}</span><span> ${this.getUOM('temperature')}</span></li>` : this.config.entity_daytime_low && !this.config.show_decimals ?html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer-low"></ha-icon></span>${this.localeText.minToday} <span id="daytime-low-text">${(Number(this._hass.states[this.config.entity_daytime_low].state).toFixed(0)).toLocaleString()}</span><span> ${this.getUOM('temperature')}</span></li>` : ``;
-    var intensity = this.config.entity_pop_intensity && !this.config.entity_pop_intensity_rate ? html`<span id="intensity-text"> - ${(Number(this._hass.states[this.config.entity_pop_intensity].state)).toLocaleString()}</span><span class="unit"> ${this.getUOM('precipitation')}</span>` : this.config.entity_pop_intensity_rate && !this.config.entity_pop_intensity ? html`<span id="intensity-text"> - ${(Number(this._hass.states[this.config.entity_pop_intensity_rate].state)).toLocaleString()}</span><span class="unit"> ${this.getUOM('intensity')}</span>` : ` invalid`;
-    var pop = this.config.alt_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="alt-pop">${this._hass.states[this.config.alt_pop].state}</span></li>` : this.config.entity_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="pop-text">${Math.round(this._hass.states[this.config.entity_pop].state)}</span><span class="unit"> %</span><span>${intensity}</span></li>` : ``;
-    var popforecast = this.config.alt_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="alt-pop">${this._hass.states[this.config.alt_pop].state}</span></li>` : this.config.entity_pop && this.config.entity_possible_today ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="pop-text">${Math.round(this._hass.states[this.config.entity_pop].state)}</span><span class="unit"> %</span><span> - <span id="pop-text-today">${this._hass.states[this.config.entity_possible_today].state}</span></span><span class="unit"> ${this.getUOM('precipitation')}</span></li>` : ``;
-    var possibleToday = this.config.entity_possible_today ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${this.localeText.posToday} <span id="possible_today-text">${this._hass.states[this.config.entity_possible_today].state}</span><span class="unit"> ${this.getUOM('precipitation')}</span></li>` : ``;
-    var possibleTomorrow = this.config.entity_pos_1 ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${this.localeText.posTomorrow} <span id="possible_tomorrow-text">${this._hass.states[this.config.entity_pos_1].state}</span><span class="unit"> ${this.getUOM('precipitation')}</span></li>` : ``;
-    var visibility = this.config.alt_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span><span id="alt-visibility">${this._hass.states[this.config.alt_visibility].state}</span></li>` : this.config.entity_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span><span id="visibility-text">${this.current.visibility}</span><span class="unit"> ${this.getUOM('length')}</span></li>` : ``;
-    var windBearing = this.config.entity_wind_bearing ? html`<span id="wind-bearing-text">${this.current.windBearing}</span>` : ``;
-    var windBearingKt = this.config.entity_wind_bearing ? html`<span id="wind-bearing-kt-text">${this.current.windBearingKt}</span>` : ``;
-    var beaufortRating = this.config.entity_wind_speed ? html`<span id="beaufort-text">${this.current.beaufort}</span>` : ``;
-    var beaufortRatingKt = this.config.entity_wind_speed_kt ? html`<span id="beaufort-text-kt">${this.current.beaufortkt}</span>` : ``;
-    var wind = this.config.alt_wind ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span id="alt-wind">${this._hass.states[this.config.alt_wind].state}</span></li>` : this.config.entity_wind_bearing && this.config.entity_wind_speed && this.config.entity_wind_gust ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span>${beaufortRating}</span><span>${windBearing}</span><span id="wind-speed-text"> ${this.current.windSpeed}</span><span class="unit"> ${this.getUOM('length')}/h</span><span id="wind-gust-text"> (Gust ${this.current.windGust}</span><span class="unit"> ${this.getUOM('length')}/h)</span></li>` : this.config.entity_wind_bearing && this.config.entity_wind_speed ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span>${beaufortRating}</span><span>${windBearing}</span><span id="wind-speed-text"> ${this.current.windSpeed}</span><span class="unit"> ${this.getUOM('length')}/h</span></li>` : ``;
-    var wind_kt = this.config.entity_wind_bearing && this.config.entity_wind_speed_kt && this.config.entity_wind_gust_kt ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span>${beaufortRatingKt}</span><span>${windBearingKt}</span><span id="wind-speed-text-kt"> ${this.current.windSpeedKt}</span><span class="unit"> kt</span><span id="wind-gust-text-kt"> (Gust ${this.current.windGustKt}</span><span class="unit"> kt)</span></li>` : this.config.entity_wind_bearing && this.config.entity_wind_speed_kt ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span>${beaufortRatingKt}</span><span>${windBearingKt}</span><span id="wind-speed-text-kt"> ${this.current.windSpeedKt}</span><span class="unit"> kt</span></li>` : ``;
-    var humidity = this.config.alt_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span><span id="alt-humidity">${this._hass.states[this.config.alt_humidity].state}</span></li>` : this.config.entity_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span><span id="humidity-text">${this.current.humidity}</span><span class="unit"> %</span></li>` : ``;
-    var pressure = this.config.alt_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span><span id="alt-pressure">${this._hass.states[this.config.alt_pressure].state}</span></li>` : this.config.entity_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span><span id="pressure-text">${this.current.pressure}</span><span class="unit"> ${this.getUOM('air_pressure')}</span></li>` : ``;
-    var uv_summary = this.config.entity_uv_alert_summary ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunny"></ha-icon></span>${this.localeText.uvRating} <span id="daytime-uv-text">${this._hass.states[this.config.entity_uv_alert_summary].state}</span></li>` : ``;
-    var fire_summary = this.config.entity_fire_danger_summary ? html`<li><span class="ha-icon"><ha-icon icon="mdi:fire"></ha-icon></span>${this.localeText.fireDanger} <span id="daytime-firedanger-text">${this._hass.states[this.config.entity_fire_danger_summary].state}</span></li>` : ``;
-
-    switch (value){
-      case 'pop': return pop;
-      case 'popforecast': return popforecast;
-      case 'possible_today': return possibleToday;
-      case 'possible_tomorrow': return possibleTomorrow;
-      case 'humidity': return humidity;
-      case 'pressure': return pressure;
-      case 'sun_following': return sunFollowing;
-      case 'daytime_high': return daytimeHigh;
-      case 'daytime_low': return daytimeLow;
-      case 'uv_summary' : return uv_summary;
-      case 'fire_summary' : return fire_summary;
-      case 'wind': return wind;
-      case 'wind_kt': return wind_kt;
-      case 'visibility': return visibility;
-      case 'sun_next': return sunNext;
+  slotValue(slot,value) {
+    switch (value) {
+      case 'pop': return this.pop;
+      case 'popforecast': return this.popforecast;
+      case 'possible_today': return this.possibleToday;
+      case 'possible_tomorrow': return this.possibleTomorrow;
+      case 'humidity': return this.humidity;
+      case 'pressure': return this.pressure;
+      case 'daytime_high': return this.daytimeHigh;
+      case 'daytime_low': return this.daytimeLow;
+      case 'temp_next': return this.tempNext.next;
+      case 'temp_following': return this.tempFollowing.following;
+      case 'uv_summary' : return this.uvSummary;
+      case 'fire_summary' : return this.fireSummary;
+      case 'wind': return this.wind;
+      case 'wind_kt': return this.windKt;
+      case 'visibility': return this.visibility;
+      case 'sun_next': return this.sunNext;
+      case 'sun_following': return this.sunFollowing;
+      case 'custom1': return this.custom1;
+      case 'custom2': return this.custom2;
       case 'empty': return html`&nbsp;`;
       case 'remove': return ``;
     }
 
     // If no value can be matched pass back a default for the slot
-    switch (slot){
-      case 'l1': return daytimeHigh;
-      case 'l2': return daytimeLow;
-      case 'l3': return wind;
-      case 'l4': return pressure;
-      case 'l5': return sunNext;
-      case 'r1': return pop;
-      case 'r2': return humidity;
-      case 'r3': return uv_summary;
-      case 'r4': return fire_summary;
-      case 'r5': return sunFollowing;
+    switch (slot) {
+      case 'l1': return this.daytimeHigh;
+      case 'l2': return this.daytimeLow;
+      case 'l3': return this.wind;
+      case 'l4': return this.pressure;
+      case 'l5': return this.sunNext;
+      case 'r1': return this.pop;
+      case 'r2': return this.humidity;
+      case 'r3': return this.uvSummary;
+      case 'r4': return this.fireSummary;
+      case 'r5': return this.sunFollowing;
     }
   }
 
+  get pop() {
+    var intensity = this.config.entity_pop_intensity && !this.config.entity_pop_intensity_rate ? html`<span id="intensity-text"> - ${(Number(this._hass.states[this.config.entity_pop_intensity].state)).toLocaleString()}</span><span class="unit"> ${this.getUOM('precipitation')}</span>` : this.config.entity_pop_intensity_rate && !this.config.entity_pop_intensity ? html`<span id="intensity-text"> - ${(Number(this._hass.states[this.config.entity_pop_intensity_rate].state)).toLocaleString()}</span><span class="unit"> ${this.getUOM('intensity')}</span>` : ` invalid`;
+    if (this.config.alt_pop) {
+      return html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="alt-pop">${this._hass.states[this.config.alt_pop].state}</span></li>`;
+    } else {
+      return this.config.entity_pop ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="pop-text">${Math.round(this._hass.states[this.config.entity_pop].state)}</span><span class="unit"> %</span><span>${intensity}</span></li>` : ``;
+    }
+  }
+
+  get popforecast() {
+    if (this.config.alt_pop) {
+      return html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="alt-pop">${this._hass.states[this.config.alt_pop].state}</span></li>`;
+    } else {
+      return this.config.entity_pop && this.config.entity_possible_today ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="pop-text">${Math.round(this._hass.states[this.config.entity_pop].state)}</span><span class="unit"> %</span><span> - <span id="pop-text-today">${this._hass.states[this.config.entity_possible_today].state}</span></span><span class="unit"> ${this.getUOM('precipitation')}</span></li>` : ``;
+    }
+  }
+
+  get possibleToday() {
+    return this.config.entity_possible_today ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${this.localeText.posToday} <span id="possible_today-text">${this._hass.states[this.config.entity_possible_today].state}</span><span class="unit"> ${this.getUOM('precipitation')}</span></li>` : ``;
+  }
+
+  get possibleTomorrw() {
+    return this.config.entity_pos_1 ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${this.localeText.posTomorrow} <span id="possible_tomorrow-text">${this._hass.states[this.config.entity_pos_1].state}</span><span class="unit"> ${this.getUOM('precipitation')}</span></li>` : ``;
+  }
+
+  get humidity() {
+    if (this.config.alt_humidity) {
+      return html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span><span id="alt-humidity">${this._hass.states[this.config.alt_humidity].state}</span></li>`;
+    } else {
+      return this.config.entity_humidity ? html`<li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span><span id="humidity-text">${this.currentHumidity}</span><span class="unit"> %</span></li>` : ``;
+    }
+  }
+
+  get pressure() {
+    if (this.config.alt_pressure) {
+      return html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span><span id="alt-pressure">${this._hass.states[this.config.alt_pressure].state}</span></li>`;
+     } else {
+       var unit = this.config.pressure_units ? this.config.pressure_units : this.getUOM('air_pressure');
+       return this.config.entity_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span><span id="pressure-text">${this.currentPressure}</span><span class="unit"> ${unit}</span></li>` : ``;
+     }
+  }
+
+  get daytimeHigh() {
+    if (this.config.alt_daytime_high) {
+      return html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer-high"></ha-icon></span><span id="alt-daytime-high">${this._hass.states[this.config.alt_daytime_high].state}</span></li>`;
+     } else {
+       return this.config.entity_daytime_high && this.config.show_decimals_today ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer-high"></ha-icon></span>${this.localeText.maxToday} <span id="daytime-high-text">${(Number(this._hass.states[this.config.entity_daytime_high].state)).toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})}</span><span> ${this.getUOM('temperature')}</span></li>` : this.config.entity_daytime_high && !this.config.show_decimals_today ?html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer-high"></ha-icon></span>${this.localeText.maxToday} <span id="daytime-high-text">${(Number(this._hass.states[this.config.entity_daytime_high].state).toFixed(0)).toLocaleString()}</span><span> ${this.getUOM('temperature')}</span></li>` : ``;
+     }
+  }
+
+  get daytimeLow() {
+    if (this.config.alt_daytime_low) {
+      return html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer-low"></ha-icon></span><span id="alt-daytime-low">${this._hass.states[this.config.alt_daytime_low].state}</span></li>`;
+     } else {
+       return this.config.entity_daytime_low && this.config.show_decimals_today ? html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer-low"></ha-icon></span>${this.localeText.minToday} <span id="daytime-low-text">${(Number(this._hass.states[this.config.entity_daytime_low].state)).toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})}</span><span> ${this.getUOM('temperature')}</span></li>` : this.config.entity_daytime_low && !this.config.show_decimals_today ?html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer-low"></ha-icon></span>${this.localeText.minToday} <span id="daytime-low-text">${(Number(this._hass.states[this.config.entity_daytime_low].state).toFixed(0)).toLocaleString()}</span><span> ${this.getUOM('temperature')}</span></li>` : ``;
+     }
+  }
+
+  get tempNext() {
+    var icon = this._hass.states[this.config.entity_temp_next_label].state.includes("Min") ? "mdi:thermometer-low" : "mdi:thermometer-high";
+    return {
+      next: this.config.entity_temp_next && this.config.entity_temp_next_label ? html`<li><span class="ha-icon"><ha-icon id="temp-next-icon" icon="${icon}"></ha-icon></span><span id="temp-next-text">${this._hass.states[this.config.entity_temp_next_label].state} ${this._hass.states[this.config.entity_temp_next].state}</span><span> ${this.getUOM('temperature')}</span></li>` : ``,
+      nextText: this.config.entity_temp_next && this.config.entity_temp_next_label ? `${this._hass.states[this.config.entity_temp_next_label].state} ${this._hass.states[this.config.entity_temp_next].state}` : ``,
+      nextIcon: icon,
+    }
+  }
+
+  get tempFollowing() {
+    var icon = this._hass.states[this.config.entity_temp_following_label].state.includes("Min") ? "mdi:thermometer-low" : "mdi:thermometer-high";
+    return {
+      following: this.config.entity_temp_following && this.config.entity_temp_following_label ? html`<li><span class="ha-icon"><ha-icon id="temp-following-icon" icon="${icon}"></ha-icon></span><span id="temp-following-text">${this._hass.states[this.config.entity_temp_following_label].state} ${this._hass.states[this.config.entity_temp_following].state}</span><span> ${this.getUOM('temperature')}</span></li>` : ``,
+      followingText: this.config.entity_temp_following && this.config.entity_temp_following_label ? `${this._hass.states[this.config.entity_temp_following_label].state} ${this._hass.states[this.config.entity_temp_following].state}` : ``,
+      followingIcon: icon,
+    }
+  }
+
+  get uvSummary() {
+    return this.config.entity_uv_alert_summary ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunny"></ha-icon></span>${this.localeText.uvRating} <span id="daytime-uv-text">${this._hass.states[this.config.entity_uv_alert_summary].state}</span></li>` : ``;
+  }
+
+  get fireSummary() {
+    return this.config.entity_fire_danger_summary ? html`<li><span class="ha-icon"><ha-icon icon="mdi:fire"></ha-icon></span>${this.localeText.fireDanger} <span id="daytime-firedanger-text">${this._hass.states[this.config.entity_fire_danger_summary].state !== 'unknown' ? this._hass.states[this.config.entity_fire_danger_summary].state : 'N/A'}</span></li>` : ``;
+  }
+
+  get wind() {
+    var windBearing = this.config.entity_wind_bearing ? html`<span id="wind-bearing-text">${this.currentWindBearing}</span>` : ``;
+    var beaufortRating = this.config.entity_wind_speed ? html`<span id="beaufort-text">${this.currentBeaufort}</span>` : ``;
+    return this.config.alt_wind ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span id="alt-wind">${this._hass.states[this.config.alt_wind].state}</span></li>` : this.config.entity_wind_bearing && this.config.entity_wind_speed && this.config.entity_wind_gust ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span>${beaufortRating}</span><span>${windBearing}</span><span id="wind-speed-text"> ${this.currentWindSpeed}</span><span class="unit"> ${this.getUOM('length')}/h</span><span id="wind-gust-text"> (Gust ${this.currentWindGust}</span><span class="unit"> ${this.getUOM('length')}/h)</span></li>` : this.config.entity_wind_bearing && this.config.entity_wind_speed ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span>${beaufortRating}</span><span>${windBearing}</span><span id="wind-speed-text"> ${this.currentWindSpeed}</span><span class="unit"> ${this.getUOM('length')}/h</span></li>` : ``;
+  }
+
+  get windKt() {
+    var windBearing = this.config.entity_wind_bearing ? html`<span id="wind-bearing-kt-text">${this.currentWindBearing}</span>` : ``;
+    var beaufortRatingKt = this.config.entity_wind_speed_kt ? html`<span id="beaufort-kt-text">${this.currentBeaufortkt}</span>` : ``;
+    return this.config.entity_wind_bearing && this.config.entity_wind_speed_kt && this.config.entity_wind_gust_kt ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span>${beaufortRatingKt}</span><span>${windBearing}</span><span id="wind-speed-kt-text"> ${this.currentWindSpeedKt}</span><span class="unit"> kt</span><span id="wind-gust-kt-text"> (Gust ${this.currentWindGustKt}</span><span class="unit"> kt)</span></li>` : this.config.entity_wind_bearing && this.config.entity_wind_speed_kt ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span><span>${beaufortRatingKt}</span><span>${windBearing}</span><span id="wind-speed-kt-text"> ${this.currentWindSpeedKt}</span><span class="unit"> kt</span></li>` : ``;
+  }
+
+  get visibility() {
+    return this.config.alt_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span><span id="alt-visibility">${this._hass.states[this.config.alt_visibility].state}</span></li>` : this.config.entity_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span><span id="visibility-text">${this.currentVisibility}</span><span class="unit"> ${this.getUOM('length')}</span></li>` : ``;
+  }
+
+  get sunNext() {
+    if (this.config.alt_sun_next) {
+      return html`<li><span id="alt-sun-next">${this._hass.states[this.config.alt_sun_next].state}</span></li>`;
+    } else {
+      return this.config.entity_sun ? this.sunSet.next : "";
+    }
+  }
+
+  get sunFollowing() {
+    if (this.config.alt_sun_following) {
+      return html`<li><span id="alt-sun-following">${this._hass.states[this.config.alt_sun_following].state}</span></li>`;
+     } else {
+       return this.config.entity_sun ? this.sunSet.following : "";
+     }
+  }
+
+  get custom1() {
+    var icon = this.config.custom1_icon ? this.config.custom1_icon : 'mdi:help-box';
+    var value = this.config.custom1_value ? this._hass.states[this.config.custom1_value].state : 'unknown';
+    var unit = this.config.custom1_units ? this.config.custom1_units : '';
+    return html`<li><span class="ha-icon"><ha-icon icon=${icon}></ha-icon></span><span id="custom-1">${value}</span><span class="unit"> ${unit}</span></li>`;
+  }
+
+  get custom2() {
+    var icon = this.config.custom2_icon ? this.config.custom2_icon : 'mdi:help-box';
+    var value = this.config.custom2_value ? this._hass.states[this.config.custom2_value].state : 'unknown';
+    var unit = this.config.custom2_units ? this.config.custom2_units : '';
+    return html`<li><span class="ha-icon"><ha-icon icon=${icon}></ha-icon></span><span id="custom-2">${value}</span><span class="unit"> ${unit}</span></li>`;
+  }
 
 // #####
 // ##### windDirections - returns set of possible wind directions by specified language
@@ -447,42 +558,62 @@ class BOMWeatherCard extends Lit {
 // ##### current : Returns current weather information
 // #####
 
-  get current() {
-    var places = this.config.show_decimals ? 1 : 0;
-    var conditions = this._hass.states[this.config.entity_current_conditions].state;
-    var humidity = this.config.entity_humidity ? (Number(this._hass.states[this.config.entity_humidity].state)).toLocaleString() : 0;
-    var pressure = this.config.entity_pressure ? (Number(Math.round(this._hass.states[this.config.entity_pressure].state))).toLocaleString() : 0;
-    var temperature = (Number(Number(this._hass.states[this.config.entity_temperature].state).toFixed(places))).toLocaleString() ;
-    var visibility = this.config.entity_visibility ? (Number(this._hass.states[this.config.entity_visibility].state)).toLocaleString() : 0;
-    var windBearing = this.config.entity_wind_bearing ? isNaN(this._hass.states[this.config.entity_wind_bearing].state) ? this._hass.states[this.config.entity_wind_bearing].state : this.windDirections[(Math.round((this._hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
-    var windBearingKt = this.config.entity_wind_bearing ? isNaN(this._hass.states[this.config.entity_wind_bearing].state) ? this._hass.states[this.config.entity_wind_bearing].state : this.windDirections[(Math.round((this._hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
-    var windSpeed = this.config.entity_wind_speed ? Math.round(this._hass.states[this.config.entity_wind_speed].state) : 0;
-    var windGust = this.config.entity_wind_gust ? Math.round(this._hass.states[this.config.entity_wind_gust].state) : 0;
-    var windSpeedKt = this.config.entity_wind_speed_kt ? Math.round(this._hass.states[this.config.entity_wind_speed_kt].state) : 0;
-    var windGustKt = this.config.entity_wind_gust_kt ? Math.round(this._hass.states[this.config.entity_wind_gust_kt].state) : 0;
-    var apparent = this.config.entity_apparent_temp ? (Number(Number(this._hass.states[this.config.entity_apparent_temp].state).toFixed(places))).toLocaleString() : 0;
-    var beaufort = this.config.show_beaufort ? html`Bft: ${this.beaufortWind} - ` : ``;
-    var beaufortkt = this.config.show_beaufort ? html`Bft: ${this.beaufortWindKt} - ` : ``;
-
-    return {
-      'conditions': conditions,
-      'humidity': humidity,
-      'pressure': pressure,
-      'temperature': temperature,
-      'visibility': visibility,
-      'windBearing': windBearing,
-      'windBearingKt': windBearingKt,
-      'windSpeed': windSpeed,
-      'windGust': windGust,
-      'windSpeedKt': windSpeedKt,
-      'windGustKt': windGustKt,
-      'apparent' : apparent,
-      'beaufort' : beaufort,
-      'beaufortkt' : beaufortkt,
-    }
+  get currentConditions() {
+    return this._hass.states[this.config.entity_current_conditions].state;
   }
 
-// #####
+  get currentHumidity() {
+    return this.config.entity_humidity ? (Number(this._hass.states[this.config.entity_humidity].state)).toLocaleString() : 0;
+  }
+
+  get currentPressure() {
+    var places = this.config.show_decimals_pressure ? Math.max(Math.min(this.config.show_decimals_pressure, 3) ,0) : 0;
+    return this.config.entity_pressure ? (Number(this._hass.states[this.config.entity_pressure].state)).toLocaleString(undefined, {minimumFractionDigits: places, maximumFractionDigits: places}) : 0;
+  }
+
+  get currentTemperature() {
+    var places = this.config.show_decimals ? 1 : 0;
+    return Number(this._hass.states[this.config.entity_temperature].state).toLocaleString(undefined, {minimumFractionDigits: places, maximumFractionDigits: places});
+  }
+
+  get currentVisibility() {
+    return this.config.entity_visibility ? (Number(this._hass.states[this.config.entity_visibility].state)).toLocaleString() : 0;
+  }
+
+  get currentWindBearing() {
+    return this.config.entity_wind_bearing ? isNaN(this._hass.states[this.config.entity_wind_bearing].state) ? this._hass.states[this.config.entity_wind_bearing].state : this.windDirections[(Math.round((this._hass.states[this.config.entity_wind_bearing].state / 360) * 16))] : 0;
+  }
+
+  get currentWindSpeed() {
+    return this.config.entity_wind_speed ? Math.round(this._hass.states[this.config.entity_wind_speed].state) : 0;
+  }
+
+  get currentWindGust() {
+    return this.config.entity_wind_gust ? Math.round(this._hass.states[this.config.entity_wind_gust].state) : 0;
+  }
+
+  get currentWindSpeedKt() {
+    return this.config.entity_wind_speed_kt ? Math.round(this._hass.states[this.config.entity_wind_speed_kt].state) : 0;
+  }
+
+  get currentWindGustKt() {
+    return this.config.entity_wind_gust_kt ? Math.round(this._hass.states[this.config.entity_wind_gust_kt].state) : 0;
+  }
+
+  get currentApparent() {
+    var places = this.config.show_decimals ? 1 : 0;
+    return this.config.entity_apparent_temp ? Number(this._hass.states[this.config.entity_apparent_temp].state).toLocaleString(undefined, {minimumFractionDigits: places, maximumFractionDigits: places}) : 0;
+  }
+
+  get currentBeaufort() {
+    return this.config.show_beaufort ? html`Bft: ${this.beaufortWind} - ` : ``;
+  }
+
+  get currentBeaufortKt() {
+    return this.config.show_beaufort ? html`Bft: ${this.beaufortWindKt} - ` : ``;
+  }
+
+  // #####
 // ##### sunSetAndRise: returns set and rise information
 // #####
 
@@ -492,8 +623,7 @@ get sunSet() {
     if (this.is12Hour) {
       nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: 'numeric', minute: '2-digit', hour12: true});
       nextSunRise = new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: 'numeric', minute: '2-digit', hour12: true});
-    }
-    else {
+    } else {
       nextSunSet = new Date(this._hass.states[this.config.entity_sun].attributes.next_setting).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute: '2-digit', hour12: false});
       nextSunRise = new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).toLocaleTimeString(this.config.locale, {hour: '2-digit', minute: '2-digit', hour12: false});
     }
@@ -502,10 +632,12 @@ get sunSet() {
     if (this._hass.states[this.config.entity_sun].state == "above_horizon" ) {
       nextSunRise = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunRise;
       return {
-      'next': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span><span id="sun-next-text">${nextSunSet}</span></li>`,
-      'following': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-up"></ha-icon></span><span id="sun-following-text">${nextSunRise}</span></li>`,
+      'next': html`<li><span class="ha-icon"><ha-icon id="sun-next-icon" icon="mdi:weather-sunset-down"></ha-icon></span><span id="sun-next-text">${nextSunSet}</span></li>`,
+      'following': html`<li><span class="ha-icon"><ha-icon id="sun-following-icon" icon="mdi:weather-sunset-up"></ha-icon></span><span id="sun-following-text">${nextSunRise}</span></li>`,
       'nextText': nextSunSet,
       'followingText': nextSunRise,
+      'nextIcon': "mdi:weather-sunset-down",
+      'followingIcon': "mdi:weather-sunset-up",
       };
     } else {
       if (new Date().getDate() != new Date(this._hass.states[this.config.entity_sun].attributes.next_rising).getDate()) {
@@ -513,10 +645,12 @@ get sunSet() {
         nextSunSet = nextDate.toLocaleDateString(this.config.locale,{weekday: 'short'}) + " " + nextSunSet;
       }
       return {
-      'next': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-up"></ha-icon></span><span id="sun-next-text">${nextSunRise}</span></li>`,
-      'following': html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-sunset-down"></ha-icon></span><span id="sun-following-text">${nextSunSet}</span></li>`,
+      'next': html`<li><span class="ha-icon"><ha-icon id="sun-next-icon" icon="mdi:weather-sunset-up"></ha-icon></span><span id="sun-next-text">${nextSunRise}</span></li>`,
+      'following': html`<li><span class="ha-icon"><ha-icon id="sun-following-icon" icon="mdi:weather-sunset-down"></ha-icon></span><span id="sun-following-text">${nextSunSet}</span></li>`,
       'nextText': nextSunRise,
       'followingText': nextSunSet,
+      'nextIcon': "mdi:weather-sunset-up",
+      'followingIcon': "mdi:weather-sunset-down",
       };
     }
 }
@@ -733,6 +867,10 @@ style() {
         margin-top: ${currentDataTopMargin};
       }
 
+      .slotlist {
+        flex-grow: 1;
+      }
+
       .unit {
         font-size: 0.8em;
       }
@@ -921,9 +1059,9 @@ style() {
     if (root.childElementCount > 0) {
 
 // Current Conditions
-      root.getElementById("temperature-text").textContent = `${this.current.temperature}`;
-      root.getElementById("icon-bigger").textContent = `${this.current.conditions}`;
-      root.getElementById("icon-bigger").style.backgroundImage = `none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this.current.conditions] + ".svg")})`;
+      root.getElementById("temperature-text").textContent = `${this.currentTemperature}`;
+      root.getElementById("icon-bigger").textContent = `${this.currentConditions}`;
+      root.getElementById("icon-bigger").style.backgroundImage = `none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this.currentConditions] + ".svg")})`;
 
 // Forecast blocks
       this.forecast.forEach((daily) => {
@@ -937,37 +1075,52 @@ style() {
      });
 
 // Optional Entities
-      if (this.config.entity_current_text) try { root.getElementById("current-text").textContent = `${this._hass.states[this.config.entity_current_text].state}` } catch(e) {}
-      if (this.config.entity_apparent_temp) try { root.getElementById("apparent-text").textContent = `${this.current.apparent}` } catch(e) {}
-      if (this.config.entity_wind_bearing && !this.config.alt_wind) try { root.getElementById("wind-bearing-text").textContent = `${this.current.windBearing}` } catch(e) {}
-      if (this.config.entity_wind_bearing && !this.config.alt_wind) try { root.getElementById("wind-bearing-kt-text").textContent = `${this.current.windBearingKt}` } catch(e) {}
-      if (this.config.entity_wind_speed && !this.config.alt_wind) try { root.getElementById("wind-speed-text").textContent = ` ${this.current.windSpeed}` } catch(e) {}
-      if (this.config.entity_wind_gust && !this.config.alt_wind) try { root.getElementById("wind-gust-text").textContent = ` (Gust ${this.current.windGust}` } catch(e) {}
-      if (this.config.entity_wind_speed_kt && !this.config.alt_wind) try { root.getElementById("wind-speed-text-kt").textContent = ` ${this.current.windSpeedKt}` } catch(e) {}
-      if (this.config.entity_wind_gust_kt && !this.config.alt_wind) try { root.getElementById("wind-gust-text-kt").textContent = ` (Gust ${this.current.windGustKt}` } catch(e) {}
-      if (this.config.entity_visibility && !this.config.alt_visibility) try { root.getElementById("visibility-text").textContent = `${this.current.visibility}` } catch(e) {}
-      if (this.config.entity_pop_intensity && !this.config.entity_pop_intensity_rate) try { root.getElementById("intensity-text").textContent = ` - ${(Number(this._hass.states[this.config.entity_pop_intensity].state)).toLocaleString()}` } catch(e) {}
-      if (this.config.entity_pop_intensity_rate && !this.config.entity_pop_intensity) try { root.getElementById("intensity-text").textContent = ` - ${(Number(this._hass.states[this.config.entity_pop_intensity_rate].state)).toLocaleString()}` } catch(e) {}
-      if (this.config.entity_pop && !this.config.alt_pop) try { root.getElementById("pop-text").textContent = `${Math.round(this._hass.states[this.config.entity_pop].state)}` } catch(e) {}
-      if (this.config.entity_pop && this.config.entity_possible_today && !this.config.alt_pop) try { root.getElementById("pop-text-today").textContent = `${this._hass.states[this.config.entity_possible_today].state}` } catch(e) {}
-      if (this.config.entity_daytime_high && !this.config.alt_daytime_high && this.config.show_decimals) try { root.getElementById("daytime-high-text").textContent = `${Number(this._hass.states[this.config.entity_daytime_high].state).toFixed(1)}` } catch(e) {}
-      if (this.config.entity_daytime_high && !this.config.alt_daytime_high && !this.config.show_decimals) try { root.getElementById("daytime-high-text").textContent = `${Number(this._hass.states[this.config.entity_daytime_high].state).toFixed(0)}` } catch(e) {}
-      if (this.config.entity_daytime_low && this.config.show_decimals) try { root.getElementById("daytime-low-text").textContent = `${Number(this._hass.states[this.config.entity_daytime_low].state).toFixed(1)}` } catch(e) {}
-      if (this.config.entity_daytime_low && !this.config.show_decimals) try { root.getElementById("daytime-low-text").textContent = `${Number(this._hass.states[this.config.entity_daytime_low].state).toFixed(0)}` } catch(e) {}
-      if (this.config.entity_sun && !this.config.alt_sun_next) try { root.getElementById("sun-next-text").textContent = `${this.sunSet.nextText}` } catch(e) {}
-      if (this.config.entity_sun && !this.config.alt_sun_following) try { root.getElementById("sun-following-text").textContent = `${this.sunSet.followingText}` } catch(e) {}
-      if (this.config.entity_daily_summary) try {
+      if (this.config.entity_current_text && (root.getElementById("current-text") !== null)) try { root.getElementById("current-text").textContent = `${this._hass.states[this.config.entity_current_text].state}` } catch(e) {}
+      if (this.config.entity_apparent_temp && (root.getElementById("apparent-text") !== null)) try { root.getElementById("apparent-text").textContent = `${this.currentApparent}` } catch(e) {}
+      if (this.config.entity_wind_bearing && !this.config.alt_wind && (root.getElementById("wind-bearing-text") !== null)) try { root.getElementById("wind-bearing-text").textContent = `${this.currentWindBearing}` } catch(e) {}
+      if (this.config.entity_wind_speed && !this.config.alt_wind && (root.getElementById("wind-speed-text") !== null)) try { root.getElementById("wind-speed-text").textContent = ` ${this.currentWindSpeed}` } catch(e) {}
+      if (this.config.entity_wind_gust && !this.config.alt_wind && (root.getElementById("wind-gust-text") !== null)) try { root.getElementById("wind-gust-next").textContent = ` (Gust ${this.currentWindGust}` } catch(e) {}
+      if (this.config.entity_wind_bearing && !this.config.alt_wind && (root.getElementById("wind-bearing-kt-text") !== null)) try { root.getElementById("wind-bearing-kt-text").textContent = `${this.currentWindBearing}` } catch(e) {}
+      if (this.config.entity_wind_speed_kt && !this.config.alt_wind && (root.getElementById("wind-speed-kt-text") !== null)) try { root.getElementById("wind-speed-kt-text").textContent = ` ${this.currentWindSpeedKt}` } catch(e) {}
+      if (this.config.entity_wind_gust_kt && !this.config.alt_wind && (root.getElementById("wind-gust-kt-text") !== null)) try { root.getElementById("wind-gust-kt-text").textContent = ` (Gust ${this.currentWindGustKt}` } catch(e) {}
+      if (this.config.entity_visibility && !this.config.alt_visibility && (root.getElementById("visibility-text") !== null)) try { root.getElementById("visibility-text").textContent = `${this.currentVisibility}` } catch(e) {}
+      if (this.config.entity_pop_intensity && !this.config.entity_pop_intensity_rate && (root.getElementById("intensity-text") !== null)) try { root.getElementById("intensity-text").textContent = ` - ${(Number(this._hass.states[this.config.entity_pop_intensity].state)).toLocaleString()}` } catch(e) {}
+      if (this.config.entity_pop_intensity_rate && !this.config.entity_pop_intensity && (root.getElementById("intensity-text") !== null)) try { root.getElementById("intensity-text").textContent = ` - ${(Number(this._hass.states[this.config.entity_pop_intensity_rate].state)).toLocaleString()}` } catch(e) {}
+      if (this.config.entity_pop && !this.config.alt_pop && (root.getElementById("pop-text") !== null)) try { root.getElementById("pop-text").textContent = `${Math.round(this._hass.states[this.config.entity_pop].state)}` } catch(e) {}
+      if (this.config.entity_pop && this.config.entity_possible_today && !this.config.alt_pop && (root.getElementById("pop-text-today") !== null)) try { root.getElementById("pop-text-today").textContent = `${this._hass.states[this.config.entity_possible_today].state}` } catch(e) {}
+      var places = this.config.show_decimals_today ? 1 : 0;
+      if (this.config.entity_daytime_high && !this.config.alt_daytime_high && (root.getElementById("daytime-high-text") !== null)) try { root.getElementById("daytime-high-text").textContent = `${Number(this._hass.states[this.config.entity_daytime_high].state).toLocaleString(undefined, {minimumFractionDigits: places, maximumFractionDigits: places})}` } catch(e) {}
+      if (this.config.entity_daytime_low && !this.config.alt_daytime_low && (root.getElementById("daytime-low-text") !== null)) try { root.getElementById("daytime-low-text").textContent = `${Number(this._hass.states[this.config.entity_daytime_low].state).toLocaleString(undefined, {minimumFractionDigits: places, maximumFractionDigits: places})}` } catch(e) {}
+      if (this.config.entity_temp_next && (root.getElementById("temp-next-text") !== null)) try { 
+        root.getElementById("temp-next-text").textContent = `${this.tempNext.nextText}`;
+        root.getElementById("temp-next-icon").icon = `${this.tempNext.nextIcon}`;
+      } catch(e) {}
+      if (this.config.entity_temp_following && (root.getElementById("temp-following-text") !== null)) try { 
+        root.getElementById("temp-following-text").textContent = `${this.tempFollowing.followingText}`;
+        root.getElementById("temp-following-icon").icon = `${this.tempFollowing.followingIcon}`;
+      } catch(e) {}
+      if (this.config.entity_sun && !this.config.alt_sun_next && (root.getElementById("sun-next-text") !== null)) try { 
+        root.getElementById("sun-next-text").textContent = `${this.sunSet.nextText}`;
+        root.getElementById("sun-next-icon").icon = `${this.sunSet.nextIcon}`;
+      } catch(e) {}
+      if (this.config.entity_sun && !this.config.alt_sun_following && (root.getElementById("sun-following-text") !== null)) try { 
+        root.getElementById("sun-following-text").textContent = `${this.sunSet.followingText}`;
+        root.getElementById("sun-following-icon").icon = `${this.sunSet.followingIcon}`;
+      } catch(e) {}
+      if (this.config.entity_daily_summary && (root.getElementById("daily-summary-text") !== null)) try {
         root.getElementById("daily-summary-text").textContent = 
           `${this._hass.states[this.config.entity_daily_summary].state} ` + 
           (this.config.entity_uv_alert ?    `${this._hass.states[this.config.entity_uv_alert].state} `    : ``) + 
           (this.config.entity_fire_danger ? `${this._hass.states[this.config.entity_fire_danger].state}` : ``)
-          } catch(e) {}
-      if (this.config.entity_pressure && !this.config.alt_pressure) try { root.getElementById("pressure-text").textContent = `${this.current.pressure}` } catch(e) {}
-      if (this.config.entity_humidity && !this.config.alt_humidity) try { root.getElementById("humidity-text").textContent = `${this.current.humidity}` } catch(e) {}
-      if (this.config.show_beaufort  && !this.config.alt_wind) try { root.getElementById("beaufort-text").textContent =  `Bft: ${this.beaufortWind} - ` } catch(e) {}
-      if (this.config.show_beaufort  && !this.config.alt_wind) try { root.getElementById("beaufort-text-kt").textContent =  `Bft: ${this.beaufortWindKt} - ` } catch(e) {}
-      if (this.config.entity_possible_today) try { root.getElementById("possible_today-text").textContent = `${this._hass.states[this.config.entity_possible_today].state}` } catch(e) {}
-      if (this.config.entity_pos_1) try { root.getElementById("possible_tomorrow-text").textContent = `${this._hass.states[this.config.entity_pos_1].state}` } catch(e) {}
+      } catch(e) {}
+      if (this.config.entity_pressure && !this.config.alt_pressure && (root.getElementById("pressure-text") !== null)) try { root.getElementById("pressure-text").textContent = `${this.currentPressure}` } catch(e) {}
+      if (this.config.entity_humidity && !this.config.alt_humidity && (root.getElementById("humidity-text") !== null)) try { root.getElementById("humidity-text").textContent = `${this.currentHumidity}` } catch(e) {}
+      if (this.config.show_beaufort  && !this.config.alt_wind && (root.getElementById("beaufort-km-text") !== null)) try { root.getElementById("beaufort-km-text").textContent =  `Bft: ${this.beaufortWind} - ` } catch(e) {}
+      if (this.config.show_beaufort  && !this.config.alt_wind && (root.getElementById("beaufort-kt-text") !== null)) try { root.getElementById("beaufort-kt-text").textContent =  `Bft: ${this.beaufortWindKt} - ` } catch(e) {}
+      if (this.config.entity_possible_today && (root.getElementById("possible_today-text") !== null)) try { root.getElementById("possible_today-text").textContent = `${this._hass.states[this.config.entity_possible_today].state}` } catch(e) {}
+      if (this.config.entity_pos_1 && (root.getElementById("possible_tomorrow-text") !== null)) try { root.getElementById("possible_tomorrow-text").textContent = `${this._hass.states[this.config.entity_pos_1].state}` } catch(e) {}
+      if (this.config.custom1_value && (root.getElementById("custom-1") !== null)) try { root.getElementById("custom-1").textContent = `${this._hass.states[this.config.custom1_value].state}` } catch(e) {}
+      if (this.config.custom2_value && (root.getElementById("custom-2") !== null)) try { root.getElementById("custom-2").textContent = `${this._hass.states[this.config.custom2_value].state}` } catch(e) {}
 
 // Alt Text
       if (this.config.alt_sun_next) try { root.getElementById("alt-sun-next").textContent = `${this._hass.states[this.config.alt_sun_next].state}` } catch(e) {}
@@ -978,7 +1131,6 @@ style() {
       if (this.config.alt_humidity) try { root.getElementById("alt-humidity").textContent = `${this._hass.states[this.config.alt_humidity].state}` } catch(e) {}
       if (this.config.alt_daytime_high) try { root.getElementById("alt-daytime-high").textContent = `${this._hass.states[this.config.alt_daytime_high].state}` } catch(e) {}
       if (this.config.alt_visibility) try { root.getElementById("alt-visibility").textContent = `${this._hass.states[this.config.alt_visibility].state}` } catch(e) {}
-
     }
   }
 
