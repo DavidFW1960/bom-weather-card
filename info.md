@@ -2,7 +2,34 @@
 
 # Custom Animated Weather Card for any weather provider
 
-## Latest Changes
+## Latest Changes Version 1.00
+This is a major release with some significant changes and a small breaking change.
+
+Things that have been altered:
+Fix Lit import to gest HA Cast to work
+Changed to have equal width slots
+Fix Temp Next/Following updates
+Adds temp_next and temp_following slots (Lates BOM integration provides these. You can use this instead of the daytime_high and Low slots if you want to.)
+Fix various decimal digits display
+Fix various locale number display
+Fix sunrise.sunset icons not updating
+Error checks for defined but unused entities (whch was generating console errors.)
+
+New Flags:
+show_decimals_today was previously defaulting to true but is now false by default so add this flag if you want decimals.
+Also added is 2 custom slots. Define an entity for the value and define a unit and icon.
+
+show_decimals_today	false / true	Sets card to render todays min and max temperatures to 1 decimal place.
+show_decimals_pressure	0 / 1, 2, 3	Sets card to render pressure with specified decimal places.
+pressure_units	string / null	Override the unit displayed for pressure
+custom1_icon	mdi:help-box / mdi icon	Sets the icon to use for slot custom1
+custom1_value	unknown / sensor	Sets the sensor to use for the value of slot custom1
+custom1_units	"" / string	Sets the string to use for the units of slot custom1
+custom2_icon	mdi:help-box / mdi icon	Sets the icon to use for slot custom2
+custom2_value	unknown / sensor	Sets the sensor to use for the value of slot custom2
+custom2_units	"" / string	Sets the string to use for the units of slot custom2
+
+## Older
 
 So I found when card was set to display decimal points it wasn't doing that correctly in some cases sometimes showing none and sometimes showing 2 decimal places. The min and max also were rounding to whole degrees. If rounding is set not it should consistently display 1 decimal pace for all temperature entities.
 
@@ -12,7 +39,6 @@ Fixed small icon positioning with latest HA
 Slight rebranding so people know it's not a BOM specific card but generic.
 Correctedjs for lit changes and also fixed shadowroot issues
 
-## Older
 This release corrects a bug in the night icon for the sunny condition. It is a breaking change.
 This affects you if you use hybrid icons
 You need to copy the day.png to sunny-day.png and night.png to sunny-night.png or re-download and extract the icons from the zip file again. (Don't rename the old one as that will break installations using old icons.)
