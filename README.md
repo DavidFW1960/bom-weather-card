@@ -350,17 +350,17 @@ show_decimals: false
 | slot_r3                  | **uv_summary**                     | Sets the value used in current conditions slot r3 : See slots for more info |
 | slot_r4                  | **fire_summary**                   | Sets the value used in current conditions slot r4 : See slots for more info |
 | slot_r5                  | **sun_following**                  | Sets the value used in current conditions slot r4 : See slots for more info |
-| old_icon                 | **"true"** / hybrid or false       | Sets card to render old icons. Must use quotes                              |
+| use_old_column_format    | **false** / true                   | Moves the right column to the right edge (not recommended)                  |
+| old_icon                 | **true** / hybrid or false         | Sets card to render old icons. Must use quotes                              |
 | show_decimals            | **false** / true                   | Sets card to render current and apparent temperatures to 1 decimal place.   |
 | show_decimals_today      | **false** / true                   | Sets card to render todays min and max temperatures to 1 decimal place.     |
 | show_decimals_pressure   | **0** / 1, 2, 3                    | Sets card to render pressure with specified decimal places.                 |
-| pressure_units           | string / **null**                  | Override the unit displayed for pressure                                    |
 | custom1_icon             | **mdi:help-box** / mdi icon        | Sets the icon to use for slot custom1                                       |
 | custom1_value            | **unknown** / sensor               | Sets the sensor to use for the value of slot custom1                        |
-| custom1_units            | **""** / string                     | Sets the string to use for the units of slot custom1                        |
+| custom1_units            | **""** / string                    | Sets the string to use for the units of slot custom1                        |
 | custom2_icon             | **mdi:help-box** / mdi icon        | Sets the icon to use for slot custom2                                       |
 | custom2_value            | **unknown** / sensor               | Sets the sensor to use for the value of slot custom2                        |
-| custom2_units            | **""** / string                     | Sets the string to use for the units of slot custom2                        |
+| custom2_units            | **""** / string                    | Sets the string to use for the units of slot custom2                        |
 
 
 **Slots**
