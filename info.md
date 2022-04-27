@@ -4,7 +4,7 @@
 
 ## Latest Changes Version 1.00
 First I need to give gredit and thanks to Simon aka [theRat](https://community.home-assistant.io/u/theRat) on the forum. Simon wrote the BOM Radar Card as well.
-Also thanks to Github user [TheCranston] (https://github.com/TheCranston) for the change to pressure units in v1.01
+Also thanks to Github user [TheCranston](https://github.com/TheCranston) for the change to pressure units in v1.01
 
 version 1.01 minor update
 Adds flag use_old_column_format defaults to false. Some people didn't like the realignment of the right hand slots to be center justified. Setting this flag restores the old right justification.
