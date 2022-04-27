@@ -3,11 +3,17 @@
 # Custom Animated Weather Card for any weather provider
 
 ## Latest Changes Version 1.00
+First I need to give gredit and thanks to Simon aka [theRat](https://community.home-assistant.io/u/theRat) on the forum. Simon wrote the BOM Radar Card as well.
+Also thanks to Github user [TheCranston] (https://github.com/TheCranston) for the change to pressure units in v1.01
+
+version 1.01 minor update
+Adds flag use_old_column_format defaults to false. Some people didn't like the realignment of the right hand slots to be center justified. Setting this flag restores the old right justification.
+We also removed the new flag to override the pressure units and instead we read the units from the entity directly. If the entity isn't supplying a value the old way of using the length unoit to set the unit will be used.
 This is a major release with some significant changes and a small breaking change.
 
 Things that have been altered:
 Fix Lit import to gest HA Cast to work
-Changed to have equal width slots
+Changed to have equal width slots ## See use_old_column_format above to disable
 Fix Temp Next/Following updates
 Adds temp_next and temp_following slots (Lates BOM integration provides these. You can use this instead of the daytime_high and Low slots if you want to.)
 Fix various decimal digits display
@@ -21,7 +27,7 @@ Also added is 2 custom slots. Define an entity for the value and define a unit a
 
 show_decimals_today	false / true	Sets card to render todays min and max temperatures to 1 decimal place.
 show_decimals_pressure	0 / 1, 2, 3	Sets card to render pressure with specified decimal places.
-pressure_units	string / null	Override the unit displayed for pressure
+pressure_units	string / null	Override the unit displayed for pressure # removed in 1.01 in favor of reading units from entity see above.
 custom1_icon	mdi:help-box / mdi icon	Sets the icon to use for slot custom1
 custom1_value	unknown / sensor	Sets the sensor to use for the value of slot custom1
 custom1_units	"" / string	Sets the string to use for the units of slot custom1
