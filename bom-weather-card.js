@@ -175,8 +175,7 @@ class BOMWeatherCard extends LitElement {
     if (this.config.alt_pressure) {
       return html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span><span id="alt-pressure">${this._hass.states[this.config.alt_pressure].state}</span></li>`;
      } else {
-       var unit = this.config.pressure_units ? this.config.pressure_units : this.getUOM('air_pressure');
-       return this.config.entity_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span><span id="pressure-text">${this.currentPressure}</span><span class="unit"> ${unit}</span></li>` : ``;
+       return this.config.entity_pressure ? html`<li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span><span id="pressure-text">${this.currentPressure}</span><span class="unit"> ${this.config.pressure_units ? this.config.pressure_units : this.getUOM('air_pressure')}</span></li>` : ``;
      }
   }
 
@@ -996,7 +995,7 @@ style() {
 
     switch (measure) {
       case 'air_pressure':
-        return this._hass.states[this.config.entity_pressure].attributes.unit_of_measurement !== undefined ? this._hass.states[this.config.entity_pressure].attributes.unit_of_measurement : lengthUnit === 'km' ? 'hPa' : 'mbar';
+        return this._hass.states[this.config.entity_pressure] !== undefined && this._hass.states[this.config.entity_pressure].attributes.unit_of_measurement !== undefined ? this._hass.states[this.config.entity_pressure].attributes.unit_of_measurement : lengthUnit === 'km' ? 'hPa' : 'mbar';
       case 'length':
         return lengthUnit;
       case 'precipitation':
