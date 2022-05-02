@@ -1165,12 +1165,14 @@ style() {
 // Forecast blocks
       this.forecast.forEach((daily) => {
         root.getElementById("fcast-dayName-" + daily.dayIndex).textContent = `${(daily.date).toLocaleDateString(this.config.locale,{weekday: 'short'})}`;
-        root.getElementById("fcast-icon-" + daily.dayIndex).style.backgroundImage = `none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this._hass.states[daily.condition].state] + ".svg").replace("-night", "-day")})`;
-        root.getElementById("fcast-high-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.temphigh].state)}${this.config.tempformat ? "" : this.getUOM("temperature")}`;
-        root.getElementById("fcast-low-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.templow].state)}${this.config.old_daily_format ? this.getUOM("temperature") : this.config.tempformat ? this.getUOM("temperature") : ""}`;
-        if (this.config.entity_pop_1 && this.config.entity_pop_2 && this.config.entity_pop_3 && this.config.entity_pop_4 && this.config.entity_pop_5) root.getElementById("fcast-pop-" + daily.dayIndex).textContent = `${Math.round(this._hass.states[daily.pop].state)} %`;
-        if (this.config.entity_pos_1 && this.config.entity_pos_2 && this.config.entity_pos_3 && this.config.entity_pos_4 && this.config.entity_pos_5) { root.getElementById("fcast-pos-" + daily.dayIndex).textContent = `${this._hass.states[daily.pos].state}`}
-        root.getElementById("fcast-summary-" + daily.dayIndex).textContent = `${this._hass.states[daily.summary].state}`;
+        if (this._hass.states[daily.condition] !== undefined) {
+          root.getElementById("fcast-icon-" + daily.dayIndex).style.backgroundImage = `none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this._hass.states[daily.condition].state] + ".svg").replace("-night", "-day")})`;
+        }
+        root.getElementById("fcast-high-" + daily.dayIndex).textContent = `${this._hass.states[daily.temphigh] !== undefined ? Math.round(this._hass.states[daily.temphigh].state) : "Config Error"}${this.config.tempformat ? "" : this.getUOM("temperature")}`;
+        root.getElementById("fcast-low-" + daily.dayIndex).textContent = `${this._hass.states[daily.templow] !== undefined ? Math.round(this._hass.states[daily.templow].state) : "Config Error"}${this.config.old_daily_format ? this.getUOM("temperature") : this.config.tempformat ? this.getUOM("temperature") : ""}`;
+        if (this.config.entity_pop_1 && this.config.entity_pop_2 && this.config.entity_pop_3 && this.config.entity_pop_4 && this.config.entity_pop_5) root.getElementById("fcast-pop-" + daily.dayIndex).textContent = `${this._hass.states[daily.pop] !== undefined ? Math.round(this._hass.states[daily.pop].state) : "Err"} %`;
+        if (this.config.entity_pos_1 && this.config.entity_pos_2 && this.config.entity_pos_3 && this.config.entity_pos_4 && this.config.entity_pos_5) { root.getElementById("fcast-pos-" + daily.dayIndex).textContent = `${this._hass.states[daily.pos] !== undefined ? this._hass.states[daily.pos].state : "Err"}`}
+        root.getElementById("fcast-summary-" + daily.dayIndex).textContent = `${this._hass.states[daily.summary] !== undefined ? this._hass.states[daily.summary].state : "Err"}`;
      });
 
 // Optional Entities
