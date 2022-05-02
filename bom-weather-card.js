@@ -34,7 +34,7 @@ class BOMWeatherCard extends LitElement {
 //  Handle Configuration Flags
 //    var icons = this.config.static_icons ? "static" : "animated";
     var currentText = this.config.entity_current_text ? html`<span class="currentText" id="current-text">${this._hass.states[this.config.entity_current_text].state}</span>` : ``;
-    var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike} <span id="apparent-text">${this.currentApparent}</span> ${this.getUOM("temperature")}</span>` : ``;
+    var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike} <span id="apparent-text">${this.currentApparent}</span>${this.getUOM("temperature")}</span>` : ``;
     var summary = this.config.entity_daily_summary ? html`${this._hass.states[this.config.entity_daily_summary].state}` : ``;
     var separator = this.config.show_separator ? html`<hr class=line>` : ``;
     var uv_alert = this.config.entity_uv_alert ? html`${this._hass.states[this.config.entity_uv_alert].state}` : ``;
@@ -57,11 +57,20 @@ class BOMWeatherCard extends LitElement {
           ${this.forecast.map(daily => html`
             <div class="day fcasttooltip">
               <span class="dayname" id="fcast-dayName-${daily.dayIndex}">${(daily.date).toLocaleDateString(this.config.locale,{weekday: 'short'})}</span>
-              <br><i class="icon" id="fcast-icon-${daily.dayIndex}" style="background: none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this._hass.states[daily.condition].state] + ".svg").replace("-night", "-day")}) no-repeat; background-size: contain;"></i>
-              ${this.config.old_daily_format ? html`<br><span class="highTemp" id="fcast-high-${daily.dayIndex}">${Math.round(this._hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>
-                                                    <br><span class="lowTemp" id="fcast-low-${daily.dayIndex}">${Math.round(this._hass.states[daily.templow].state)}${this.getUOM("temperature")}</span>` : this.config.tempformat ==="highlow" ? 
-                                                html`<br><span class="highTemp" id="fcast-high-${daily.dayIndex}">${Math.round(this._hass.states[daily.temphigh].state)}</span> / <span class="lowTemp" id="fcast-low-${daily.dayIndex}">${Math.round(this._hass.states[daily.templow].state)}${this.getUOM("temperature")}</span>` :
-                                                html`<br><span class="lowTemp" id="fcast-low-${daily.dayIndex}">${Math.round(this._hass.states[daily.templow].state)}</span> / <span class="highTemp" id="fcast-high-${daily.dayIndex}">${Math.round(this._hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>`}
+              <br>${this._hass.states[daily.condition] !== undefined 
+                ? 
+                  html`<i class="icon" id="fcast-icon-${daily.dayIndex}" style="background: none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this._hass.states[daily.condition].state] + ".svg").replace("-night", "-day")}) no-repeat; background-size: contain;"></i><br>` 
+                : 
+                  html `<div class="eicon"><ha-icon style="top: 50%; margin: 0; -ms-transform: translateY(-50%); transform: translateY(-50%);" icon="mdi:alert"></ha-icon></div>`}
+              ${this.config.old_daily_format 
+                ? 
+                  html`<span class="highTemp" id="fcast-high-${daily.dayIndex}">${this._hass.states[daily.temphigh] !== undefined ? Math.round(this._hass.states[daily.temphigh].state)+this.getUOM("temperature") : 'Config Error'}</span><br><span class="lowTemp" id="fcast-low-${daily.dayIndex}">${this._hass.states[daily.templow] !== undefined ? Math.round(this._hass.states[daily.templow].state)+this.getUOM("temperature") : 'Config Error'}</span>`
+                : 
+                  this.config.tempformat ==="highlow" 
+                    ?
+                      html`<br><span class="highTemp" id="fcast-high-${daily.dayIndex}">${Math.round(this._hass.states[daily.temphigh].state)}</span> / <span class="lowTemp" id="fcast-low-${daily.dayIndex}">${Math.round(this._hass.states[daily.templow].state)}${this.getUOM("temperature")}</span>`
+                    :
+                      html`<br><span class="lowTemp" id="fcast-low-${daily.dayIndex}">${Math.round(this._hass.states[daily.templow].state)}</span> / <span class="highTemp" id="fcast-high-${daily.dayIndex}">${Math.round(this._hass.states[daily.temphigh].state)}${this.getUOM("temperature")}</span>`}
               ${this.config.entity_pop_1 && this.config.entity_pop_2 && this.config.entity_pop_3 && this.config.entity_pop_4 && this.config.entity_pop_5 ? html`<br><span class="pop" id="fcast-pop-${daily.dayIndex}">${Math.round(this._hass.states[daily.pop].state)} %</span>` : ``}
               ${this.config.entity_pos_1 && this.config.entity_pos_2 && this.config.entity_pos_3 && this.config.entity_pos_4 && this.config.entity_pos_5 ? html`<br><span class="pos" id="fcast-pos-${daily.dayIndex}">${this._hass.states[daily.pos].state} </span><span class="unit"> ${this.getUOM('precipitation')}</span>` : ``}
               <div class="fcasttooltiptext" id="fcast-summary-${daily.dayIndex}">${ this.config.tooltips ? this._hass.states[daily.summary].state : ""}</div>
@@ -573,11 +582,10 @@ class BOMWeatherCard extends LitElement {
     var forecastDate5 = new Date();
     forecastDate5.setDate(forecastDate5.getDate()+5);
 
-
     const forecast1 = { date: forecastDate1,
                       dayIndex: '1',
                       condition: this.config.entity_forecast_icon_1,
-                                        temphigh: this.config.entity_forecast_high_temp_1,
+                                        temphigh:  this.config.entity_forecast_high_temp_1,
                                         templow:  this.config.entity_forecast_low_temp_1,
                                         pop: this.config.entity_pop_1,
                                         pos: this.config.entity_pos_1,
@@ -864,6 +872,12 @@ style() {
         color: var(--paper-item-icon-color);
       }
 
+      .ha-icon2 {
+        height: 50px;
+        margin-right: 5px;
+        color: var(--paper-item-icon-color);
+      }
+
       .line {
         margin-top: ${separatorTopMargin};
         margin-left: 1em;
@@ -1012,6 +1026,12 @@ style() {
         background-position: center center;
         background-repeat: no-repeat;
         text-indent: -9999px;
+      }
+
+      .eicon {
+        width: 50px;
+        height: 50px;
+        margin: auto;
       }
 
       .weather {
