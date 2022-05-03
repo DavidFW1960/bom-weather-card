@@ -210,7 +210,7 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 
 ***Also note that the name for tomorrow's possible rainfall has changed!
 
-***Defining BOTH entity_pop_intensity and entity_pop_intensity_rate will give an INVALID message in the pop slot if defined.
+***Defining NEITHER/BOTH entity_pop_intensity and entity_pop_intensity_rate will give an 'Config Error' message in the pop slot if defined.
 
 ~~~~
 # entity_visibility: If provided from a different source
