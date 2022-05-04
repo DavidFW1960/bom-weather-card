@@ -34,7 +34,7 @@ class BOMWeatherCard extends LitElement {
 //  Handle Configuration Flags
 //    var icons = this.config.static_icons ? "static" : "animated";
     var currentText = this.config.entity_current_text ? html`<span class="currentText" id="current-text">${this._hass.states[this.config.entity_current_text] !== undefined ? this._hass.states[this.config.entity_current_text].state : "Config Error"}</span>` : ``;
-    var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike}<span id="apparent-text">${this.currentApparent}</span>${this.getUOM("temperature")}</span>` : ``;
+    var apparentTemp = this.config.entity_apparent_temp ? html`<span class="apparent">${this.localeText.feelsLike} <span id="apparent-text">${this.currentApparent}</span>${this.getUOM("temperature")}</span>` : ``;
     var biggerIcon = this.currentConditions !== undefined ? html`<span class="icon bigger" id="icon-bigger" style="background: none, url(${this._hass.hassUrl("/local/icons/weather_icons/" + (this.config.static_icons ? "static" : "animated") + "/" + this.weatherIcons[this.currentConditions] + ".svg")}) no-repeat; background-size: contain;">${this.currentConditions}</span>` : html`<div class="eicon"><ha-icon style="top: 50%; margin: 0; -ms-transform: translateY(-50%); transform: translateY(-50%);" icon="mdi:alert"></ha-icon></div>`;
     var summary = this.config.entity_daily_summary ? html`${this._hass.states[this.config.entity_daily_summary] !== undefined ? this._hass.states[this.config.entity_daily_summary].state : "Config Error"}` : ``;
     var separator = this.config.show_separator ? html`<hr class=line>` : ``;
