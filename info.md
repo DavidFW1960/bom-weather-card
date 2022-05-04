@@ -6,9 +6,15 @@
 First I need to give gredit and thanks to Simon aka [theRat](https://community.home-assistant.io/u/theRat) on the forum. Simon wrote the BOM Radar Card as well.
 Also thanks to Github user [TheCranston](https://github.com/TheCranston) for the change to pressure units in v1.01
 
+version 1.02 bugfix
+
+We introduced a small bug with the UoM for pressure being read from an entity whereby if a slot was configured for pressure with no entity the card would not display. Previously the slot would just be blank.
+
 version 1.01 minor update
+
 Adds flag use_old_column_format defaults to false. Some people didn't like the realignment of the right hand slots to be center justified. Setting this flag restores the old right justification.
 We also removed the new flag to override the pressure units and instead we read the units from the entity directly. If the entity isn't supplying a value the old way of using the length unoit to set the unit will be used.
+
 This is a major release with some significant changes and a small breaking change.
 
 Things that have been altered:
