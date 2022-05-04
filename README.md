@@ -1,4 +1,4 @@
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs) ![GitHub](https://img.shields.io/github/license/DavidFW1960/bom-weather-card?style=for-the-badge) ![GitHub last commit](https://img.shields.io/github/last-commit/DavidFW1960/bom-weather-card?style=for-the-badge) ![Maintenance](https://img.shields.io/maintenance/yes/2022?style=for-the-badge)
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration) ![GitHub](https://img.shields.io/github/license/DavidFW1960/bom-weather-card?style=for-the-badge) ![GitHub last commit](https://img.shields.io/github/last-commit/DavidFW1960/bom-weather-card?style=for-the-badge) ![Maintenance](https://img.shields.io/maintenance/yes/2022?style=for-the-badge)
 # Custom Animated Weather Card for any weather provider
 
 ## IMPORTANT CHANGES
@@ -210,7 +210,7 @@ Optional entries add components to the card. My BOM area (Gosford) does not incl
 
 ***Also note that the name for tomorrow's possible rainfall has changed!
 
-***Defining BOTH entity_pop_intensity and entity_pop_intensity_rate will give an INVALID message in the pop slot if defined.
+***Defining NEITHER/BOTH entity_pop_intensity and entity_pop_intensity_rate will give an 'Config Error' message in the pop slot if defined.
 
 ~~~~
 # entity_visibility: If provided from a different source
