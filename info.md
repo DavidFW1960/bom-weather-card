@@ -2,9 +2,13 @@
 
 # Custom Animated Weather Card for any weather provider
 
-## Latest Changes Version 1.00
+## Latest Changes Version 1.10
 First I need to give gredit and thanks to Simon aka [theRat](https://community.home-assistant.io/u/theRat) on the forum. Simon wrote the BOM Radar Card as well.
 Also thanks to Github user [TheCranston](https://github.com/TheCranston) for the change to pressure units in v1.01
+
+Version 1.1.0 has the following changes
+- Move to semantic versioning
+- A long time bugbear for some users. This release instead of blanking the card SHOULD instead indicate any configuration errors.
 
 version 1.02 bugfix
 
