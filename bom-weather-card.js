@@ -241,7 +241,7 @@ class BOMWeatherCard extends LitElement {
 
   get tempNext() {
     try {
-      return this.config.entity_temp_next && this.config.entity_temp_next_label ? html`<li><span class="ha-icon"><ha-icon id="temp-next-icon" icon="${this.tempNextIcon}"></ha-icon></span><span id="temp-next-text">${this.tempNextText}</span><span> ('temperature')}</span></li>` : ``;
+      return this.config.entity_temp_next && this.config.entity_temp_next_label ? html`<li><span class="ha-icon"><ha-icon id="temp-next-icon" icon="${this.tempNextIcon}"></ha-icon></span><span id="temp-next-text">${this.tempNextText}</span><span> ${this.getUOM('temperature')}</span></li>` : ``;
     } catch (e) {
       return html`<li><span class="ha-icon"><ha-icon icon="mdi:thermometer"></ha-icon></span><span id="temp-next-text">Config Error</span></li>`;
     }
