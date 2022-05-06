@@ -419,6 +419,11 @@ class BOMWeatherCard extends LitElement {
         return {
           feelsLike: "Voelt als",
           maxToday: "Max vandaag:",
+          minToday: "Min vandaag:",
+          posToday: "Prognose",
+          posTomorrow: "Prog. Morgen",
+          uvRating: "UV",
+          fireDanger: "Brand"
         }
       case "pl" :
         return {
