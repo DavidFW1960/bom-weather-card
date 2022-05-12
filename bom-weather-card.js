@@ -5,7 +5,7 @@ import {
 
 // #### Add card info to console
 console.info(
-  `%cGENERIC-WEATHER-CARD\n%cVersion 1.1.2       `,
+  `%cGENERIC-WEATHER-CARD\n%cVersion 1.1.3       `,
   "color: #043ff6; font-weight: bold; background: white",
   "color: white; font-weight: bold; background: #043ff6"
 );
