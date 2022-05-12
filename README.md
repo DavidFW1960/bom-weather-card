@@ -232,6 +232,7 @@ entity_daily_summary: sensor.kariong_extended_text_0
 entity_pop: sensor.kariong_rain_chance_0
 entity_pop_intensity: sensor.gosford_rain_since_9am
 entity_possible_today: sensor.kariong_rain_amount_range_0
+entity_rain_today: sensor.gosford_rain_since_9am
 entity_pos_1: sensor.kariong_rain_amount_range_1
 entity_pos_2: sensor.kariong_rain_amount_range_2
 entity_pos_3: sensor.kariong_rain_amount_range_3
@@ -384,6 +385,7 @@ slots (designated r1 - r5).  There are currently 10 possible values that can be 
 - fire_summary
 - possible_today (possible rainfall today)
 - possible_tomorrow (possible rainfall tomorrow)
+- rainfall (actual rainfall today)
 - custom1 (populates using config fields custom1_icon, custom1_value and custom1_units)
 - custom2 (populates using config fields custom2_icon, custom2_value and custom2_units)
 - empty (empty slot... the slot below does not rise to fill the space)
