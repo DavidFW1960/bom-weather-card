@@ -116,6 +116,7 @@ class BOMWeatherCard extends LitElement {
       case 'popforecast': return this.popforecast;
       case 'possible_today': return this.possibleToday;
       case 'possible_tomorrow': return this.possibleTomorrow;
+      case 'rainfall' : return this.rainToday;
       case 'humidity': return this.humidity;
       case 'pressure': return this.pressure;
       case 'daytime_high': return this.daytimeHigh;
@@ -188,6 +189,14 @@ class BOMWeatherCard extends LitElement {
       return this.config.entity_pos_1 ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span>${this.localeText.posTomorrow} <span id="possible_tomorrow-text">${this._hass.states[this.config.entity_pos_1].state}</span><span class="unit">${this.getUOM('precipitation')}</span></li>` : ``;
     } catch (e) {
       return html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="possible_tomorrow-text">Config Error</span></li>`;
+    }
+  }
+
+  get rainToday() {
+    try {
+      return this.config.entity_rain_today ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="rain-today-text">${this._hass.states[this.config.entity_rain_today].state}</span><span class="unit">${this.getUOM('precipitation')}</span></li>` : ``;
+    } catch (e) {
+      return html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="rain-today-text">Config Error</span></li>`;
     }
   }
 
@@ -1207,6 +1216,7 @@ style() {
       if (this.config.entity_pop_intensity_rate && !this.config.entity_pop_intensity && (root.getElementById("intensity-text") !== null)) try { root.getElementById("intensity-text").textContent = ` - ${(Number(this._hass.states[this.config.entity_pop_intensity_rate].state)).toLocaleString()}` } catch(e) {}
       if (this.config.entity_pop && !this.config.alt_pop && (root.getElementById("pop-text") !== null)) try { root.getElementById("pop-text").textContent = `${Math.round(this._hass.states[this.config.entity_pop].state)}` } catch(e) {}
       if (this.config.entity_pop && this.config.entity_possible_today && !this.config.alt_pop && (root.getElementById("pop-text-today") !== null)) try { root.getElementById("pop-text-today").textContent = `${this._hass.states[this.config.entity_possible_today].state}` } catch(e) {}
+      if (this.config.entity_rain_today && (root.getElementById("rain-today-text") !== null)) try { root.getElementById("rain-today-text").textContent = `${this._hass.states[this.config.entity_rain_today].state}` } catch(e) {}
       var places = this.config.show_decimals_today ? 1 : 0;
       if (this.config.entity_daytime_high && !this.config.alt_daytime_high && (root.getElementById("daytime-high-text") !== null)) try { root.getElementById("daytime-high-text").textContent = `${Number(this._hass.states[this.config.entity_daytime_high].state).toLocaleString(undefined, {minimumFractionDigits: places, maximumFractionDigits: places})}` } catch(e) {}
       if (this.config.entity_daytime_low && !this.config.alt_daytime_low && (root.getElementById("daytime-low-text") !== null)) try { root.getElementById("daytime-low-text").textContent = `${Number(this._hass.states[this.config.entity_daytime_low].state).toLocaleString(undefined, {minimumFractionDigits: places, maximumFractionDigits: places})}` } catch(e) {}
