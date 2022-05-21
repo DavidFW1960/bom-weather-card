@@ -153,7 +153,7 @@ class BOMWeatherCard extends LitElement {
 
   get pop() {
     try {
-      var intensity = this.config.entity_pop_intensity && !this.config.entity_pop_intensity_rate ? html`<span id="intensity-text"> - ${(Number(this._hass.states[this.config.entity_pop_intensity].state)).toLocaleString()}</span><span class="unit">${this.getUOM('precipitation')}</span>` : this.config.entity_pop_intensity_rate && !this.config.entity_pop_intensity ? html`<span id="intensity-text"> - ${(Number(this._hass.states[this.config.entity_pop_intensity_rate].state)).toLocaleString()}</span><span class="unit">${this.getUOM('intensity')}</span>` : ` COnfig Error`;
+      var intensity = this.config.entity_pop_intensity && !this.config.entity_pop_intensity_rate ? html`<span id="intensity-text"> - ${(Number(this._hass.states[this.config.entity_pop_intensity].state)).toLocaleString()}</span><span class="unit">${this.getUOM('precipitation')}</span>` : this.config.entity_pop_intensity_rate && !this.config.entity_pop_intensity ? html`<span id="intensity-text"> - ${(Number(this._hass.states[this.config.entity_pop_intensity_rate].state)).toLocaleString()}</span><span class="unit">${this.getUOM('intensity')}</span>` : ` Config Error`;
       if (this.config.alt_pop) {
         return html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-rainy"></ha-icon></span><span id="alt-pop">${this._hass.states[this.config.alt_pop].state}</span></li>`;
       } else {
@@ -318,7 +318,7 @@ class BOMWeatherCard extends LitElement {
 
   get visibility() {
     try {
-      return this.config.alt_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span><span id="alt-visibility">${this._hass.states[this.config.alt_visibility].state}</span></li>` : this.config.entity_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span><span id="visibility-text">${this.currentVisibility}</span><span class="unit"> ('length')}</span></li>` : ``;
+      return this.config.alt_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span><span id="alt-visibility">${this._hass.states[this.config.alt_visibility].state}</span></li>` : this.config.entity_visibility ? html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span><span id="visibility-text">${this.currentVisibility}</span><span class="unit"> ${this.getUOM('length')}</span></li>` : ``;
     } catch (e) {
       return html`<li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span><span id="visibility-text">Config Error</span></li>`;
     }
