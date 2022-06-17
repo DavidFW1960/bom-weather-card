@@ -164,7 +164,7 @@ sensor:
 
 #      bom_today_max:
 #        value_template: >
-#          {%- if states('sensor.kariong_temp_max_0') == 'n/a' -%} 
+#          {%- if states('sensor.kariong_temp_max_0') == 'unknown' -%} 
 #            {{ state_attr('sensor.today_temp_bom', 'max_value') }}
 #          {% else %}
 #            {{ states('sensor.kariong_temp_max_0') }}
@@ -178,7 +178,7 @@ sensor:
 
 #      bom_today_min:
 #        value_template: >
-#          {%- if states('sensor.kariong_temp_min_0') == 'n/a' -%} 
+#          {%- if states('sensor.kariong_temp_min_0') == 'unknown' -%} 
 #            {{ state_attr('sensor.today_temp_bom', 'min_value') }}
 #          {% else %}
 #            {{ states('sensor.kariong_temp_min_0') }}
