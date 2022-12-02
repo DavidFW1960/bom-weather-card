@@ -468,7 +468,7 @@ class BOMWeatherCard extends LitElement {
         }
       case "hu" :
         return {
-          feelsLike: "Érzésre",
+          feelsLike: "Hőérzet",
           maxToday: "Mai maximum:",
           minToday: "Mai minimum",
           posToday: "Előrejelzés",
