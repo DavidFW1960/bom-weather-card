@@ -382,6 +382,7 @@ class BOMWeatherCard extends LitElement {
     const windDirections_he = ['צפון','צ-צ-מז','צפון מזרח','מז-צ-מז','מזרח','מז-ד-מז','דרום מזרח','ד-ד-מז','דרום','ד-ד-מע','דרום מערב','מע-ד-מע','מערב','מע-צ-מע','צפון מערב','צ-צ-מע','צפון'];
     const windDirections_da = ['N','NNØ','NØ','ØNØ','Ø','ØSØ','SØ','SSØ','S','SSV','SV','VSV','V','VNV','NV','NNV','N'];
     const windDirections_ru = ['С','ССВ','СВ','ВСВ','В','ВЮВ','ЮВ','ЮЮВ','Ю','ЮЮЗ','ЮЗ','ЗЮЗ','З','ЗСЗ','СЗ','ССЗ','С'];
+    const windDirections_hu = ['É','ÉÉK','ÉK','KÉK','K','KDK','DK','DDK','D','DDNY','DNY','NYDNY','NY','NYÉNY','ÉNY','ÉÉNY','É'];
 
     switch (this.config.locale) {
       case "it" :
@@ -397,6 +398,8 @@ class BOMWeatherCard extends LitElement {
         return windDirections_ru;
       case "da" :
         return windDirections_da;
+      case "hu" :
+        return windDirections_hu;
       default :
         return windDirections_en;
     }
@@ -462,6 +465,16 @@ class BOMWeatherCard extends LitElement {
         return {
           feelsLike: "Відчувається як",
           maxToday: "Максимально сьогодні"
+        }
+      case "hu" :
+        return {
+          feelsLike: "Érzésre",
+          maxToday: "Mai maximum:",
+          minToday: "Mai minimum",
+          posToday: "Előrejelzés",
+          posTomorrow: "Holnapi",
+          uvRating: "UV",
+          fireDanger: "Tűz"
         }
       default :
         return {
