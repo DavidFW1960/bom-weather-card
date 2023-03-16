@@ -2,7 +2,8 @@
 # Custom Animated Weather Card for any weather provider
 
 ## IMPORTANT CHANGES
-This card is essentially deprecated now in favour of [Platinum Weather Card](https://github.com/Makin-Things/platinum-weather-card ) The new card should import the configuration from this card
+This card is essentially deprecated now in favour of [Platinum Weather Card](https://github.com/Makin-Things/platinum-weather-card ) The new card should import the configuration from this card.
+
 I have renamed this card to remove the emphasis on BOM. This is a generic card that works with any provider
 
 NON-Australian Users: This card and docs has always been a generic card with an emphasis on BOM in Australia however it will work with ANY weather provider that can supply the sensors.
